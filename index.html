@@ -258,7 +258,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     <div class="title-line">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
   </div>
   <div class="hr">
-    <p class="hstmt">Searching for a worthy problem. Building systems that solve things that actually matter.</p>
+    <p class="hstmt">Polymath engineer who builds everything from complex industrial automation to a DIY Solo Ironman from scratch.</p>
     <div class="status-box">
       <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
       <div class="ss">Currently @ Dynamic Motion Control Inc.</div>
@@ -277,8 +277,8 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   <div class="sh"><span class="sn">01</span><h2 class="st2">Philosophy &amp; <em>Mission</em></h2></div>
 
   <div class="phil-big">
-    <span class="lbl">Engineering Philosophy</span>
-    <p class="phil-stmt">Are we in discovery, or are we just learning fast? Speed and overhead are always in tension — both have a cost, and getting the balance wrong wastes more than any bug ever will. Great engineering means owning that call: reading the situation, calibrating the approach, and driving to completion. Not a fixed set of beliefs. A practice that's always being refined.</p>
+    <span class="lbl">How I Think</span>
+    <p class="phil-stmt">Are we in discovery, or are we just learning fast? Every project lives somewhere on that axis — and reading it correctly is half the job. I don't have a fixed doctrine. I have a question I keep asking, and a bias toward owning the answer.</p>
   </div>
 
   <div class="two-col">
@@ -728,7 +728,7 @@ window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>10)
 })
 
-// WAVE SPINE — draw SVG bezier through all timeline dots
+// WAVE SPINE — matte ribbon with gradient and 3D depth
 function drawSpine(){
   var tv3=document.querySelector('.tv3')
   if(!tv3)return
@@ -736,17 +736,19 @@ function drawSpine(){
   if(old)old.remove()
   var dots=Array.from(tv3.querySelectorAll('.tv3-dot'))
   if(dots.length<2)return
-  // Get each dot's center relative to .tv3 container (no transform applied to offsetLeft)
   function posOf(el){
     var x=el.offsetLeft,y=el.offsetTop+el.offsetHeight/2,p=el.offsetParent
     while(p&&p!==tv3){x+=p.offsetLeft;y+=p.offsetTop;p=p.offsetParent}
     return{x:x,y:y}
   }
   var pts=dots.map(posOf)
+  // Build path — relaxed tension (0.72) with bumped tension (1.05) on large chapter-gap
+  // segments, which creates 1-2 natural self-intersections at chapter boundaries
   var d='M'+pts[0].x+','+pts[0].y
   for(var i=1;i<pts.length;i++){
-    var a=pts[i-1],b=pts[i],dy=(b.y-a.y)*.55
-    d+=' C'+a.x+','+(a.y+dy)+' '+b.x+','+(b.y-dy)+' '+b.x+','+b.y
+    var a=pts[i-1],b=pts[i],dy=b.y-a.y
+    var t=dy>260?1.05:0.72
+    d+=' C'+a.x+','+(a.y+dy*t)+' '+b.x+','+(b.y-dy*t)+' '+b.x+','+b.y
   }
   var ns='http://www.w3.org/2000/svg'
   var svg=document.createElementNS(ns,'svg')
@@ -754,19 +756,53 @@ function drawSpine(){
   svg.setAttribute('aria-hidden','true')
   svg.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible'
   var defs=document.createElementNS(ns,'defs')
+  // Drop-shadow filter for 3D depth
+  var filt=document.createElementNS(ns,'filter')
+  filt.id='rShadow';filt.setAttribute('x','-40%');filt.setAttribute('y','-10%')
+  filt.setAttribute('width','180%');filt.setAttribute('height','130%')
+  var fb=document.createElementNS(ns,'feGaussianBlur')
+  fb.setAttribute('in','SourceAlpha');fb.setAttribute('stdDeviation','9');fb.setAttribute('result','bl')
+  var fo=document.createElementNS(ns,'feOffset')
+  fo.setAttribute('in','bl');fo.setAttribute('dx','2');fo.setAttribute('dy','9');fo.setAttribute('result','sh')
+  var fc=document.createElementNS(ns,'feComponentTransfer');fc.setAttribute('in','sh')
+  var fa=document.createElementNS(ns,'feFuncA');fa.setAttribute('type','linear');fa.setAttribute('slope','0.18')
+  fc.appendChild(fa)
+  var fm=document.createElementNS(ns,'feMerge')
+  var fm1=document.createElementNS(ns,'feMergeNode')
+  var fm2=document.createElementNS(ns,'feMergeNode');fm2.setAttribute('in','SourceGraphic')
+  fm.appendChild(fm1);fm.appendChild(fm2)
+  filt.appendChild(fb);filt.appendChild(fo);filt.appendChild(fc);filt.appendChild(fm)
+  defs.appendChild(filt)
+  // Multi-stop gradient: soft green → terracotta → sky blue → lavender
   var g=document.createElementNS(ns,'linearGradient')
-  g.id='spineGrad';g.setAttribute('gradientUnits','userSpaceOnUse')
+  g.id='rGrad';g.setAttribute('gradientUnits','userSpaceOnUse')
   g.setAttribute('x1',pts[0].x);g.setAttribute('y1',pts[0].y)
   g.setAttribute('x2',pts[pts.length-1].x);g.setAttribute('y2',pts[pts.length-1].y)
-  ;[['0%','#1c1712'],['100%','#c8bfb2']].forEach(function(s){
+  ;[['0%','#5aad78'],['30%','#d08a5c'],['62%','#78b2cd'],['100%','#9e87c2']].forEach(function(s){
     var st=document.createElementNS(ns,'stop')
     st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);g.appendChild(st)
   })
   defs.appendChild(g)
-  var path=document.createElementNS(ns,'path')
-  path.setAttribute('d',d);path.setAttribute('fill','none')
-  path.setAttribute('stroke','url(#spineGrad)');path.setAttribute('stroke-width','2')
-  svg.appendChild(defs);svg.appendChild(path)
+  svg.appendChild(defs)
+  // Layer 1: wide blurred dark shadow for depth
+  var sh=document.createElementNS(ns,'path')
+  sh.setAttribute('d',d);sh.setAttribute('fill','none')
+  sh.setAttribute('stroke','rgba(18,12,6,0.13)');sh.setAttribute('stroke-width','22')
+  sh.setAttribute('stroke-linecap','round');sh.setAttribute('filter','url(#rShadow)')
+  svg.appendChild(sh)
+  // Layer 2: matte ribbon
+  var rb=document.createElementNS(ns,'path')
+  rb.setAttribute('d',d);rb.setAttribute('fill','none')
+  rb.setAttribute('stroke','url(#rGrad)');rb.setAttribute('stroke-width','14')
+  rb.setAttribute('stroke-linecap','round');rb.setAttribute('stroke-linejoin','round')
+  rb.setAttribute('opacity','0.48')
+  svg.appendChild(rb)
+  // Layer 3: thin highlight down ribbon center for 3D lift
+  var hl=document.createElementNS(ns,'path')
+  hl.setAttribute('d',d);hl.setAttribute('fill','none')
+  hl.setAttribute('stroke','rgba(255,255,255,0.22)');hl.setAttribute('stroke-width','3')
+  hl.setAttribute('stroke-linecap','round')
+  svg.appendChild(hl)
   tv3.insertBefore(svg,tv3.firstChild)
 }
 window.addEventListener('load',drawSpine)
