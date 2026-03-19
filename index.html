@@ -181,6 +181,91 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   footer{padding:1.25rem 1.5rem}
 }
 @media(max-width:560px){.nl{display:none}}
+
+/* ── TIMELINE V2 ── */
+.tl2-wrap{display:flex;flex-direction:column;gap:2.5rem}
+
+/* Featured DMC block */
+.tl2-featured{background:var(--white);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
+.tl2-featured-head{padding:2.5rem 2.5rem 2rem;border-bottom:1px solid var(--rule);display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.tl2-role{font-size:1.8rem;font-weight:400;color:var(--ink);line-height:1.1;margin:.4rem 0 .2rem}
+.tl2-org{font-size:13px;color:var(--accent);font-weight:500;letter-spacing:.04em}
+.tl2-metrics{display:flex;gap:2.5rem;flex-shrink:0;align-items:center}
+.tl2-metric{text-align:center}
+.tl2-metric strong{display:block;font-size:2.2rem;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
+.tl2-metric span{font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.25rem;display:block}
+.tl2-body-pad{padding:1.75rem 2.5rem 0}
+.tl2-proj-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);padding:1.25rem 2.5rem .75rem;border-top:1px solid var(--rule);margin-top:1.75rem}
+
+/* Project cards grid */
+.tl2-proj-grid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--rule)}
+.tl2-proj-card{border-right:1px solid var(--rule);padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;transition:background .15s}
+.tl2-proj-card:last-child{border-right:none}
+.tl2-proj-card:hover{background:var(--bg)}
+.tl2-proj-img{height:90px;border-radius:8px;margin-bottom:.15rem;display:flex;align-items:flex-end;padding:.65rem;overflow:hidden}
+.tl2-proj-img-label{font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.tl2-proj-name{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3}
+.tl2-proj-client{font-size:10px;color:var(--muted);line-height:1.5}
+.tl2-proj-quote{font-size:10.5px;color:var(--muted);line-height:1.65;font-style:italic;border-left:2px solid var(--rule);padding-left:.6rem;flex:1}
+.tl2-proj-more .tl2-proj-name{color:var(--muted);font-size:1.1rem;font-weight:400}
+.tl2-proj-more .tl2-proj-client{line-height:1.7}
+
+/* Cilino pull quote */
+.tl2-pullquote{padding:2rem 2.5rem;border-top:1px solid var(--rule);background:var(--ink);display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
+.tl2-pq-mark{font-size:4.5rem;color:var(--accent);line-height:.65;font-style:italic;font-family:'Playfair Display',serif;flex-shrink:0}
+.tl2-pq-scores{display:flex;gap:1.75rem;flex-wrap:wrap;margin-bottom:.85rem}
+.tl2-pq-score{text-align:center}
+.tl2-pq-score strong{display:block;font-size:1.4rem;font-weight:700;color:var(--accent);line-height:1}
+.tl2-pq-score span{font-size:9px;color:#6a6260;letter-spacing:.07em;text-transform:uppercase;margin-top:.2rem;display:block}
+.tl2-pq-text{font-size:13.5px;color:#d4cec5;line-height:1.85;font-style:italic}
+.tl2-pq-auth{font-size:11px;color:#6a6260;letter-spacing:.04em;margin-top:.6rem;font-style:normal}
+
+/* Two-column card (Sea++) */
+.tl2-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:var(--white)}
+.tl2-card-img{min-height:380px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
+.tl2-card-img-badge{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:.3rem .8rem;border-radius:4px;display:inline-block;margin-bottom:.75rem;width:fit-content}
+.tl2-card-img-title{font-size:2.2rem;font-weight:700;color:#fff;line-height:1;letter-spacing:-.02em}
+.tl2-card-img-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:.4rem;letter-spacing:.04em}
+.tl2-card-body{padding:2.5rem;display:flex;flex-direction:column;gap:1rem;justify-content:center}
+.tl2-card-period{font-size:10px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
+.tl2-card-desc{font-size:13px;color:var(--muted);line-height:1.85}
+.tl2-card-desc strong{color:var(--ink)}
+.tl2-card-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;padding:1rem;background:var(--bg2);border-radius:8px;border:1px solid var(--rule);margin:.25rem 0}
+.tl2-stat{text-align:center;padding:.25rem 0}
+.tl2-stat strong{display:block;font-size:1rem;font-weight:700;color:var(--ink);line-height:1.2}
+.tl2-stat span{font-size:9px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+
+/* Compact cards (Fernware, Rice, BHYC) */
+.tl2-compact{display:grid;grid-template-columns:180px 1fr;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--white)}
+.tl2-compact-img{position:relative;min-height:140px;display:flex;align-items:flex-end;padding:1rem}
+.tl2-compact-img-label{font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.tl2-compact-body{padding:1.4rem 1.75rem;display:flex;flex-direction:column;justify-content:center;gap:.25rem;border-left:1px solid var(--rule)}
+.tl2-compact-period{font-size:9px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.1rem}
+.tl2-compact-title{font-size:14px;font-weight:500;color:var(--ink);line-height:1.3}
+.tl2-compact-org{font-size:11px;color:var(--accent);margin-bottom:.1rem}
+.tl2-compact-desc{font-size:12px;color:var(--muted);line-height:1.7}
+
+/* Responsive */
+@media(max-width:1100px){.tl2-proj-grid{grid-template-columns:repeat(3,1fr)}.tl2-proj-card:nth-child(3){border-right:none}.tl2-proj-card:nth-child(4){border-top:1px solid var(--rule)}.tl2-proj-card:nth-child(5){border-top:1px solid var(--rule);border-right:none}}
+@media(max-width:900px){
+  .tl2-featured-head{flex-direction:column;gap:1.5rem}
+  .tl2-metrics{gap:1.5rem}
+  .tl2-proj-grid{grid-template-columns:repeat(2,1fr)}
+  .tl2-proj-card{border-right:none;border-bottom:1px solid var(--rule)}
+  .tl2-proj-card:last-child{border-bottom:none}
+  .tl2-card{grid-template-columns:1fr}
+  .tl2-card-img{min-height:240px}
+  .tl2-card-stats{grid-template-columns:repeat(4,1fr)}
+  .tl2-pullquote{grid-template-columns:1fr}
+  .tl2-pq-mark{display:none}
+  .tl2-compact{grid-template-columns:130px 1fr}
+  .tl2-body-pad,.tl2-proj-label,.tl2-pullquote,.tl2-featured-head{padding-left:1.5rem;padding-right:1.5rem}
+}
+@media(max-width:560px){
+  .tl2-proj-grid{grid-template-columns:1fr}
+  .tl2-card-stats{grid-template-columns:repeat(2,1fr)}
+  .tl2-compact{grid-template-columns:100px 1fr}
+}
 </style>
 </head>
 <body>
@@ -258,91 +343,147 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <div class="sw" id="done">
   <div class="sh"><span class="sn">02</span><h2 class="st2">What I've <em>done</em></h2></div>
 
-  <div class="timeline">
+  <div class="tl2-wrap">
 
-    <!-- DMC ROLE -->
-    <div class="tl-item">
-      <div class="tl-period">Sep 2024 — Present <span class="tl-badge live">Current Role</span></div>
-      <div class="tl-role">Engineering Consultant</div>
-      <div class="tl-org">Dynamic Motion Control Inc.</div>
-      <p class="tl-body">Client-facing engineer across 30+ engagements in defense, maritime, minerals, and industrial automation — from full ownership on smaller accounts (scoping, client relationship, delivery) to onsite technical lead on major federal programs. <strong>800+ hours · 100% CSAT.</strong> Every domain was new at the start. Authored the company's first OKR framework, coached VPs, drove 100% review adoption. Automated the renaming of <strong>19,000 unnamed variables</strong> across a 6-PLC system using a Python bidirectional XML parser — eliminating thousands of hours of manual work.</p>
-      <div class="tl-quote">"Ethan has been a pleasure to work with. He communicates well, asks good questions, and is reasonably quick to ramp up to new technologies. Most critically, he is able to work fairly independently and inspires confidence from both myself and the client." <span>— Nick Leisle, PM & Senior Engineer</span></div>
-      <div class="tags"><span class="tag">Rockwell</span><span class="tag">LabVIEW</span><span class="tag">Python</span><span class="tag">OPCUA</span><span class="tag">Cisco</span><span class="tag">FAT</span><span class="tag">PLC/LAD</span><span class="tag">OKR</span></div>
-    </div>
-
-    <!-- NAWS CHINA LAKE -->
-    <div class="tl-item proj">
-      <div class="tl-period">Mar 2025 — Present <span class="tl-badge live">Live</span></div>
-      <div class="tl-role sm">NAWS China Lake — CDAS Modernization</div>
-      <div class="tl-org">Navy Air Weapons Station · via DMC</div>
-      <p class="tl-body">Go-to onsite engineer for a multi-year CDAS modernization. Entered at critical FAT milestone to find a disjointed system failing live demonstrations. Managed client expectations in real-time while simultaneously debugging — <strong>pivoted the relationship from skepticism to trust.</strong> Led 16-week commission (Trio) transforming a legacy codebase from "unacceptable" to federally compliant. FAT accepted: Skytop and Trio.</p>
-      <div class="tl-quote">"Ethan handled this extremely well and quickly took ownership of executing the tests. His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." <span>— Natalie Pippolo, Project Engineer — NAWS</span></div>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>16 wks</strong>Trio commission</div>
-        <div class="tl-stat"><strong>2</strong>FAT accepted</div>
-        <div class="tl-stat"><strong>Federal</strong>compliant</div>
+    <!-- ── DMC FEATURED ── -->
+    <div class="tl2-featured">
+      <div class="tl2-featured-head">
+        <div>
+          <div class="tl-period">Sep 2024 — Present <span class="tl-badge live">Current Role</span></div>
+          <div class="tl2-role">Engineering Consultant</div>
+          <div class="tl2-org">Dynamic Motion Control Inc. · San Diego, CA</div>
+        </div>
+        <div class="tl2-metrics">
+          <div class="tl2-metric"><strong>800+</strong><span>Hours</span></div>
+          <div class="tl2-metric"><strong>30+</strong><span>Clients</span></div>
+          <div class="tl2-metric"><strong>100%</strong><span>CSAT</span></div>
+        </div>
       </div>
-      <div class="tags"><span class="tag">CDAS</span><span class="tag">DAQ</span><span class="tag">Sequencer Logic</span><span class="tag">HMI Refactor</span><span class="tag">Defense</span></div>
-    </div>
-
-    <!-- MV KENNICOTT -->
-    <div class="tl-item proj">
-      <div class="tl-period">2024 — 2025</div>
-      <div class="tl-role sm">MV Kennicott — IO Documentation</div>
-      <div class="tl-org">Everett Ship Repair · via DMC</div>
-      <p class="tl-body">Produced IO documentation for <strong>1,500+ control system points</strong> aboard the MV Kennicott — serving as the functional basis for the vessel's control system FDS where no prior documentation existed. Also contributed to PLC code conversion and OPCUA communication implementation between PLCs and Aveva Edge HMI.</p>
-      <div class="tl-quote">"Ethan is like a venturi for internal communication. By modeling — asking questions, stating assumptions — he pulls others into the conversation and the written record. The Kennicott IO list is well organized and usable — it will serve as the basis for the vessel's FDS." <span>— Keith Krotzer, PM & Technical Lead</span></div>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>1,500+</strong>IO points</div>
-        <div class="tl-stat"><strong>0</strong>prior docs</div>
+      <div class="tl2-body-pad">
+        <p class="body-t">Client-facing technical owner across defense, maritime, minerals, and industrial automation — from full project ownership on smaller accounts to onsite execution lead on major federal programs. Every domain was new at the start. Authored the company's first OKR framework, coached VPs, and automated the renaming of <strong>19,000 unnamed variables</strong> across a 6-PLC system via Python XML parser — eliminating thousands of hours of manual engineering work.</p>
       </div>
-      <div class="tags"><span class="tag">OPCUA</span><span class="tag">Aveva</span><span class="tag">IO Documentation</span><span class="tag">FDS</span></div>
-    </div>
-
-    <!-- FERNWARE -->
-    <div class="tl-item proj">
-      <div class="tl-period">Aug 2025 — Present <span class="tl-badge live">Side Project</span></div>
-      <div class="tl-role sm">Fernware — Automatic Plant Watering System</div>
-      <div class="tl-org">Personal Project</div>
-      <p class="tl-body">Roommates killed the plants. Twice. Built a modular automatic watering system: Arduino brain, digital pumps, relay-controlled valves, and a configurable HMI. Moisture sensors calibrated per plant type trigger watering automatically — plants are assigned locations, pumps and valves auto-assigned. 100+ plant profiles, all field-configurable. <strong>Zero casualties since deployment.</strong></p>
-      <div class="tags"><span class="tag">Arduino</span><span class="tag">Moisture Sensors</span><span class="tag">Relay Control</span><span class="tag">Digital Pumps</span><span class="tag">HMI</span></div>
-    </div>
-
-    <!-- SEA++ -->
-    <div class="tl-item proj">
-      <div class="tl-period">Aug 2023 — May 2024</div>
-      <div class="tl-role sm">Sea++ — Autonomous Catamaran</div>
-      <div class="tl-org">Rice University Senior Capstone · Military Research Commission</div>
-      <p class="tl-body">Military-commissioned capstone targeting decentralized naval cargo delivery — mass-manufacturable at under $7,500/unit. Elected by 7 peers to lead design and construction of a 9-foot autonomous trimaran. Implemented modified A* global path planning, ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Designed wing and hull with CFD analysis; built with laser-cut ribs, XPS foam, and fiberglass. Achieved multipoint autonomous navigation in <strong>5-ft seas, 25-mph winds with a 300-lb load.</strong></p>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>$3,750</strong>unit cost</div>
-        <div class="tl-stat"><strong>300 lb</strong>payload tested</div>
-        <div class="tl-stat"><strong>5 ft seas</strong>navigated</div>
-        <div class="tl-stat"><strong>8 months</strong>build time</div>
+      <div class="tl2-proj-label">Notable Engagements</div>
+      <div class="tl2-proj-grid">
+        <div class="tl2-proj-card">
+          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#0a1628 0%,#1a2f4a 50%,#0d3566 100%)">
+            <span class="tl2-proj-img-label">Defense · Federal</span>
+          </div>
+          <div class="tl2-proj-name">NAWS China Lake</div>
+          <div class="tl2-proj-client">Navy Air Weapons Station · CDAS Modernization</div>
+          <p class="tl2-proj-quote">"His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." — Natalie Pippolo</p>
+          <div class="tags"><span class="tag">CDAS</span><span class="tag">FAT</span><span class="tag">Defense</span></div>
+        </div>
+        <div class="tl2-proj-card">
+          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#0d2233 0%,#1a3d5c 50%,#1e5a7a 100%)">
+            <span class="tl2-proj-img-label">Maritime · Alaska</span>
+          </div>
+          <div class="tl2-proj-name">MV Kennicott</div>
+          <div class="tl2-proj-client">Everett Ship Repair · IO Documentation &amp; PLC</div>
+          <p class="tl2-proj-quote">"A monolithic document — well organized and usable. Will serve as the basis for the vessel's FDS." — Keith Krotzer</p>
+          <div class="tags"><span class="tag">OPCUA</span><span class="tag">Aveva</span><span class="tag">1,500+ IO</span></div>
+        </div>
+        <div class="tl2-proj-card">
+          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#1a2e0a 0%,#2d5c14 50%,#3a7a1c 100%)">
+            <span class="tl2-proj-img-label">Agriculture · Food</span>
+          </div>
+          <div class="tl2-proj-name">Watsonville Produce</div>
+          <div class="tl2-proj-client">Watsonville Produce Inc. · Codebase Modernization</div>
+          <p class="tl2-proj-quote">"Ethan has been working directly with our client's technical team... I've largely been hands-off." — Nick Leisle</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">PLC</span><span class="tag">Agriculture</span></div>
+        </div>
+        <div class="tl2-proj-card">
+          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#1c1a0a 0%,#3d3510 50%,#5a4c18 100%)">
+            <span class="tl2-proj-img-label">Energy · Oil &amp; Gas</span>
+          </div>
+          <div class="tl2-proj-name">Occidental Petroleum</div>
+          <div class="tl2-proj-client">Occidental Petroleum Corp. · Controls Integration</div>
+          <p class="tl2-proj-quote">Controls and systems integration across one of North America's largest energy producers.</p>
+          <div class="tags"><span class="tag">Controls</span><span class="tag">Integration</span></div>
+        </div>
+        <div class="tl2-proj-card tl2-proj-more">
+          <div class="tl2-proj-img" style="background:var(--bg3);border:1px dashed var(--faint)">
+            <span class="tl2-proj-img-label" style="color:var(--faint)">And more</span>
+          </div>
+          <div class="tl2-proj-name">+ 26 more engagements</div>
+          <div class="tl2-proj-client">ALTF Simulation · Terra Lithium · Rocket Engine Test Stand · General Dynamics NASSCO · Explosives Mixing Facility · and others across defense, energy, maritime, and industrial sectors.</div>
+          <div class="tags"><span class="tag">Defense</span><span class="tag">Energy</span><span class="tag">Maritime</span></div>
+        </div>
       </div>
-      <div class="tags"><span class="tag">Python</span><span class="tag">ROS</span><span class="tag">CFD</span><span class="tag">Computer Vision</span><span class="tag">PID</span><span class="tag">Fiberglass</span></div>
-    </div>
-
-    <!-- RICE ROBOTICS -->
-    <div class="tl-item">
-      <div class="tl-period">Apr 2023 — May 2024</div>
-      <div class="tl-role sm">President &amp; Manufacturing Lead</div>
-      <div class="tl-org">Rice Robotics Club</div>
-      <p class="tl-body">Grew club <strong>18× from 5 to 90+ active members</strong> through organizational restructuring, project leadership, and strategic outreach. Technical lead for RoboCam — an autonomous robotic cameraman system.</p>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>90+</strong>active members</div>
-        <div class="tl-stat"><strong>18×</strong>growth</div>
+      <div class="tl2-pullquote">
+        <div class="tl2-pq-mark">"</div>
+        <div>
+          <div class="tl2-pq-scores">
+            <div class="tl2-pq-score"><strong>9</strong><span>Communication</span></div>
+            <div class="tl2-pq-score"><strong>8</strong><span>Collaboration</span></div>
+            <div class="tl2-pq-score"><strong>9</strong><span>Ownership</span></div>
+            <div class="tl2-pq-score"><strong>10</strong><span>Big Picture</span></div>
+          </div>
+          <p class="tl2-pq-text">Ethan is a rock star. He is entrepreneurial, focused, value-driven, and brilliant. He doesn't just take an answer at face value — he uncovers and challenges assumptions. His ability to synthesize thoughts into coherent arguments leading to concrete conclusions is exceptional. He should have been a lawyer.</p>
+          <div class="tl2-pq-auth">— Chris Cilino, PM &amp; Senior Engineer II, Mentor · Dynamic Motion Control Inc.</div>
+        </div>
       </div>
-      <div class="tags"><span class="tag">Leadership</span><span class="tag">Robotics</span><span class="tag">Manufacturing</span></div>
     </div>
 
-    <!-- BHYC -->
-    <div class="tl-item">
-      <div class="tl-period">May 2018 — Aug 2022</div>
-      <div class="tl-role sm">C420 Advanced Sailing Instructor</div>
-      <div class="tl-org">Bay Head Yacht Club</div>
-      <p class="tl-body">Coached for 5 seasons. Top pupils placed <strong>3rd and 7th</strong> in the C420 New Jersey State Championship 2022.</p>
-      <div class="tags"><span class="tag">Coaching</span><span class="tag">C420</span><span class="tag">Leadership</span></div>
+    <!-- ── SEA++ ── -->
+    <div class="tl2-card">
+      <div class="tl2-card-img" style="background:linear-gradient(160deg,#071828 0%,#0d3558 50%,#0a4a7a 100%)">
+        <span class="tl2-card-img-badge">Military Research Commission</span>
+        <div class="tl2-card-img-title">Sea++</div>
+        <div class="tl2-card-img-sub">Autonomous Trimaran · Rice University Senior Capstone</div>
+      </div>
+      <div class="tl2-card-body">
+        <div class="tl2-card-period">Aug 2023 — May 2024 · Rice University, Houston TX</div>
+        <p class="tl2-card-desc">Military-commissioned capstone targeting decentralized naval cargo delivery — designed for mass manufacturing at <strong>under $7,500/unit</strong>. Elected by 7 peers to lead design and construction of a 9-foot autonomous trimaran.<br><br>Implemented modified A* global path planning, ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Designed wing and hull with CFD analysis; built with laser-cut ribs, XPS foam, and fiberglass.</p>
+        <div class="tl2-card-stats">
+          <div class="tl2-stat"><strong>$3,750</strong><span>Unit Cost</span></div>
+          <div class="tl2-stat"><strong>300 lb</strong><span>Payload</span></div>
+          <div class="tl2-stat"><strong>5 ft</strong><span>Seas</span></div>
+          <div class="tl2-stat"><strong>8 mo</strong><span>Build</span></div>
+        </div>
+        <div class="tags"><span class="tag">Python</span><span class="tag">ROS</span><span class="tag">CFD</span><span class="tag">Computer Vision</span><span class="tag">PID</span><span class="tag">Fiberglass</span></div>
+      </div>
+    </div>
+
+    <!-- ── FERNWARE ── -->
+    <div class="tl2-compact">
+      <div class="tl2-compact-img" style="background:linear-gradient(135deg,#0d1f0a 0%,#1a3d0f 50%,#2a5c1a 100%)">
+        <span class="tl2-compact-img-label">Personal Project</span>
+      </div>
+      <div class="tl2-compact-body">
+        <div class="tl2-compact-period">Aug 2025 — Present</div>
+        <div class="tl2-compact-title">Fernware — Automatic Plant Watering System</div>
+        <div class="tl2-compact-org">Personal Project</div>
+        <p class="tl2-compact-desc">Arduino controller, digital pumps, relay-controlled valves, configurable HMI. Moisture sensors calibrated per plant type. 100+ plant profiles. Zero casualties since deployment.</p>
+        <div class="tags" style="margin-top:.4rem"><span class="tag">Arduino</span><span class="tag">Relay Control</span><span class="tag">HMI</span><span class="tag">Sensors</span></div>
+      </div>
+    </div>
+
+    <!-- ── RICE ROBOTICS ── -->
+    <div class="tl2-compact">
+      <div class="tl2-compact-img" style="background:linear-gradient(135deg,#00205b 0%,#003087 60%,#004098 100%)">
+        <span class="tl2-compact-img-label">Rice University</span>
+      </div>
+      <div class="tl2-compact-body">
+        <div class="tl2-compact-period">Apr 2023 — May 2024</div>
+        <div class="tl2-compact-title">President &amp; Manufacturing Lead</div>
+        <div class="tl2-compact-org">Rice Robotics Club · Houston, TX</div>
+        <p class="tl2-compact-desc">Grew club 18× from 5 to 90+ active members through organizational restructuring and project leadership. Technical lead for RoboCam — autonomous robotic cameraman system.</p>
+        <div class="tags" style="margin-top:.4rem"><span class="tag">Leadership</span><span class="tag">18× Growth</span><span class="tag">Robotics</span></div>
+      </div>
+    </div>
+
+    <!-- ── BHYC ── -->
+    <div class="tl2-compact">
+      <div class="tl2-compact-img" style="background:linear-gradient(135deg,#041a2e 0%,#0a3050 50%,#0d4a78 100%)">
+        <span class="tl2-compact-img-label">Bay Head, NJ</span>
+      </div>
+      <div class="tl2-compact-body">
+        <div class="tl2-compact-period">May 2018 — Aug 2022</div>
+        <div class="tl2-compact-title">C420 Advanced Sailing Instructor</div>
+        <div class="tl2-compact-org">Bay Head Yacht Club</div>
+        <p class="tl2-compact-desc">Coached for 5 seasons. Top pupils placed 3rd and 7th in the C420 New Jersey State Championship 2022.</p>
+        <div class="tags" style="margin-top:.4rem"><span class="tag">Coaching</span><span class="tag">C420</span><span class="tag">Leadership</span></div>
+      </div>
     </div>
 
   </div>
