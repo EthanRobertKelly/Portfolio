@@ -71,9 +71,8 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .dark-t strong{color:var(--white)}
 .mission-block{background:var(--accent-lt);border:1px solid #b6dfc8;border-radius:10px;padding:1.5rem 2rem;margin-bottom:2.5rem}
 
-/* TIMELINE v3 — CENTRAL SPINE */
+/* TIMELINE v3 — WAVE SPINE */
 .tv3{position:relative;padding-bottom:3rem}
-.tv3::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--ink) 0%,var(--faint) 100%);transform:translateX(-50%);z-index:0}
 .tv3-ch{display:flex;align-items:center;gap:2rem;padding:2rem 3rem;background:var(--ink);margin:4rem -3rem 3.5rem;position:relative;z-index:2;overflow:hidden}
 .tv3-ch:first-child{margin-top:0}
 .tv3-ch::after{content:attr(data-n);position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);font-size:10rem;font-weight:700;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;letter-spacing:-.05em}
@@ -81,14 +80,14 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .tv3-ch-n{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.3rem;display:block}
 .tv3-ch-title{font-size:1.2rem;font-weight:500;color:var(--white);line-height:1.2}
 .tv3-ch-sub{font-size:12px;color:#7a7068;margin-top:.25rem}
-.tv3-row{position:relative;margin-bottom:4.5rem;min-height:2rem}
-.tv3-row.left{padding-right:calc(50% + 2.75rem);padding-left:0}
-.tv3-row.right{padding-left:calc(50% + 2.75rem);padding-right:0}
-.tv3-dot{position:absolute;left:50%;top:1.5rem;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);border:2.5px solid var(--bg);z-index:2;transition:box-shadow .2s}
+.tv3-row{position:relative;margin-bottom:4rem;min-height:2rem}
+.tv3-row.left{--dot-x:25%;padding-left:calc(25% + 2.25rem);padding-right:0}
+.tv3-row.right{--dot-x:75%;padding-right:calc(25% + 2.25rem);padding-left:0}
+.tv3-dot{position:absolute;left:var(--dot-x,50%);top:1.5rem;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);border:2.5px solid var(--bg);z-index:2;transition:box-shadow .2s}
 .tv3-row:not(.personal):hover .tv3-dot{box-shadow:0 0 0 5px var(--accent-lt)}
 .tv3-row.personal .tv3-dot{width:6px;height:6px;background:var(--bg);border-color:var(--faint);top:1.15rem}
-.tv3-row.left:not(.personal)::after{content:'';position:absolute;right:calc(50% - 2.75rem + 13px);top:calc(1.5rem + 4px);width:calc(2.75rem - 13px);height:1px;background:var(--rule)}
-.tv3-row.right:not(.personal)::after{content:'';position:absolute;left:calc(50% + 13px);top:calc(1.5rem + 4px);width:calc(2.75rem - 13px);height:1px;background:var(--rule)}
+.tv3-row.left:not(.personal)::after{content:'';position:absolute;left:calc(var(--dot-x) + 6px);top:calc(1.5rem + 4px);width:calc(2.25rem - 6px);height:1px;background:var(--rule)}
+.tv3-row.right:not(.personal)::after{content:'';position:absolute;right:calc(100% - var(--dot-x) + 6px);top:calc(1.5rem + 4px);width:calc(2.25rem - 6px);height:1px;background:var(--rule)}
 .tv3-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.75rem 2rem;position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s}
 .tv3-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(28,23,18,.1);border-color:var(--faint)}
 .tv3-card.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
@@ -197,10 +196,9 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   .two-col,.bg2col{grid-template-columns:1fr;gap:2rem}
   .wm3{grid-template-columns:1fr}
   .dark-card{grid-template-columns:1fr}
-  .tv3::before{left:1rem;transform:none}
-  .tv3-dot{left:1rem;transform:translateX(-50%)}
-  .tv3-row.left,.tv3-row.right{padding-left:2.75rem;padding-right:0}
+  .tv3-row.left,.tv3-row.right{--dot-x:1.25rem;padding-left:2.75rem;padding-right:0}
   .tv3-row.left:not(.personal)::after,.tv3-row.right:not(.personal)::after{display:none}
+  .tv3-spine-svg{display:none}
   .tv3-ch{margin:3rem -2rem 2.5rem;padding:1.5rem 1.75rem}
   .vert-lbl{writing-mode:horizontal-tb;transform:none}
   footer{padding:1.25rem 1.5rem}
@@ -729,6 +727,50 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>10)
 })
+
+// WAVE SPINE — draw SVG bezier through all timeline dots
+function drawSpine(){
+  var tv3=document.querySelector('.tv3')
+  if(!tv3)return
+  var old=tv3.querySelector('.tv3-spine-svg')
+  if(old)old.remove()
+  var dots=Array.from(tv3.querySelectorAll('.tv3-dot'))
+  if(dots.length<2)return
+  // Get each dot's center relative to .tv3 container (no transform applied to offsetLeft)
+  function posOf(el){
+    var x=el.offsetLeft,y=el.offsetTop+el.offsetHeight/2,p=el.offsetParent
+    while(p&&p!==tv3){x+=p.offsetLeft;y+=p.offsetTop;p=p.offsetParent}
+    return{x:x,y:y}
+  }
+  var pts=dots.map(posOf)
+  var d='M'+pts[0].x+','+pts[0].y
+  for(var i=1;i<pts.length;i++){
+    var a=pts[i-1],b=pts[i],dy=(b.y-a.y)*.55
+    d+=' C'+a.x+','+(a.y+dy)+' '+b.x+','+(b.y-dy)+' '+b.x+','+b.y
+  }
+  var ns='http://www.w3.org/2000/svg'
+  var svg=document.createElementNS(ns,'svg')
+  svg.classList.add('tv3-spine-svg')
+  svg.setAttribute('aria-hidden','true')
+  svg.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible'
+  var defs=document.createElementNS(ns,'defs')
+  var g=document.createElementNS(ns,'linearGradient')
+  g.id='spineGrad';g.setAttribute('gradientUnits','userSpaceOnUse')
+  g.setAttribute('x1',pts[0].x);g.setAttribute('y1',pts[0].y)
+  g.setAttribute('x2',pts[pts.length-1].x);g.setAttribute('y2',pts[pts.length-1].y)
+  ;[['0%','#1c1712'],['100%','#c8bfb2']].forEach(function(s){
+    var st=document.createElementNS(ns,'stop')
+    st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);g.appendChild(st)
+  })
+  defs.appendChild(g)
+  var path=document.createElementNS(ns,'path')
+  path.setAttribute('d',d);path.setAttribute('fill','none')
+  path.setAttribute('stroke','url(#spineGrad)');path.setAttribute('stroke-width','2')
+  svg.appendChild(defs);svg.appendChild(path)
+  tv3.insertBefore(svg,tv3.firstChild)
+}
+window.addEventListener('load',drawSpine)
+window.addEventListener('resize',function(){clearTimeout(window._st);window._st=setTimeout(drawSpine,100)})
 
 // LOGIN SYSTEM
 function openLogin(){
