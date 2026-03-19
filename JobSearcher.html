@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Search HQ — Ethan Kelly</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+:root {
+  --bg:#0c0c0c;--bg2:#141414;--bg3:#1a1a1a;--bg4:#202020;--bg5:#252525;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);--border3:rgba(255,255,255,.22);
+  --text:#e2e2e2;--text2:#878787;--text3:#4a4a4a;--text4:#2e2e2e;
+  --green:#00d084;--green-dim:rgba(0,208,132,.1);--green-mid:rgba(0,208,132,.2);--green-bright:#00ff9d;
+  --purple:#9b7fff;--purple-dim:rgba(155,127,255,.1);
+  --amber:#f5a623;--amber-dim:rgba(245,166,35,.1);
+  --red:#ff5555;--red-dim:rgba(255,85,85,.1);
+  --blue:#4da6ff;--blue-dim:rgba(77,166,255,.1);
+  --cyan:#00bcd4;--cyan-dim:rgba(0,188,212,.1);
+  --orange:#ff8c42;--orange-dim:rgba(255,140,66,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:14px;min-height:100vh;line-height:1.5}
+.mono{font-family:'IBM Plex Mono',monospace}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+
+/* ── HEADER ── */
+.header{border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;position:sticky;top:0;z-index:50;background:rgba(12,12,12,.95);backdrop-filter:blur(12px)}
+.header-l{display:flex;align-items:center;gap:14px}
+.logo{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.12em;background:var(--green-dim);border:1px solid rgba(0,208,132,.25);padding:4px 10px;border-radius:4px;text-transform:uppercase}
+.header-title{font-size:14px;font-weight:600;color:var(--text)}
+.header-sub{font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace;margin-top:2px}
+.header-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+
+/* Scout indicator in header */
+.scout-pill{display:flex;align-items:center;gap:7px;padding:5px 12px;border-radius:20px;font-size:11px;font-family:'IBM Plex Mono',monospace;border:1px solid var(--border2);color:var(--text2);transition:all .3s}
+.scout-pill.active{border-color:rgba(0,208,132,.4);color:var(--green);background:var(--green-dim)}
+.scout-pill.active .scout-dot{background:var(--green);animation:blink 1.2s infinite}
+.scout-dot{width:6px;height:6px;border-radius:50%;background:var(--text3);flex-shrink:0;transition:background .3s}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,208,132,.4)}50%{opacity:.7;box-shadow:0 0 0 4px rgba(0,208,132,0)}}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:'IBM Plex Sans',sans-serif;transition:all .15s;white-space:nowrap}
+.btn:hover{color:var(--text);border-color:var(--border3)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-green{border-color:rgba(0,208,132,.4);color:var(--green);background:var(--green-dim)}
+.btn-green:hover:not(:disabled){background:var(--green-mid);border-color:var(--green)}
+.btn-primary{background:var(--green);color:#000;border-color:var(--green);font-weight:600}
+.btn-primary:hover:not(:disabled){background:#00b874;border-color:#00b874}
+.btn-danger{border-color:rgba(255,85,85,.3);color:var(--red)}
+.btn-danger:hover{background:var(--red-dim);border-color:var(--red)}
+.btn-export{border-color:rgba(0,188,212,.4);color:var(--cyan);background:var(--cyan-dim)}
+.btn-export:hover{background:rgba(0,188,212,.2);border-color:var(--cyan)}
+.btn-orange{border-color:rgba(255,140,66,.4);color:var(--orange);background:var(--orange-dim)}
+.btn-orange:hover{background:rgba(255,140,66,.2);border-color:var(--orange)}
+.btn-sm{padding:4px 10px;font-size:11px}
+.btn-xs{padding:3px 8px;font-size:10px}
+
+/* ── LAYOUT ── */
+.container{max-width:1280px;margin:0 auto;padding:24px 28px}
+
+/* ── STATS BAR ── */
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:24px}
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;transition:border-color .2s;cursor:default}
+.stat:hover{border-color:var(--border2)}
+.stat .n{font-size:24px;font-weight:500;font-family:'IBM Plex Mono',monospace;color:var(--text)}
+.stat .l{font-size:10px;color:var(--text2);margin-top:3px;text-transform:uppercase;letter-spacing:.08em}
+.stat.accent .n{color:var(--green)}
+.stat.amber .n{color:var(--amber)}
+.stat.purple .n{color:var(--purple)}
+.stat.orange .n{color:var(--orange)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px}
+.tab{padding:10px 20px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text2);border:none;border-bottom:2px solid transparent;background:transparent;font-family:'IBM Plex Sans',sans-serif;transition:color .15s;display:flex;align-items:center;gap:7px}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--green);border-bottom-color:var(--green)}
+.tab-badge{font-size:10px;padding:1px 6px;border-radius:99px;background:var(--bg3);color:var(--text2);font-family:'IBM Plex Mono',monospace}
+.tab.on .tab-badge{background:var(--green-dim);color:var(--green)}
+.panel{display:none}.panel.on{display:block}
+
+/* ── FORMS ── */
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.toolbar h2{font-size:14px;font-weight:600}
+.toolbar-r{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.add-form{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:20px;display:none}
+.add-form.on{display:block}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.form-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.form-grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.fg{display:flex;flex-direction:column;gap:4px}
+label{font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:rgba(0,208,132,.4)}
+select option{background:var(--bg3)}
+textarea{resize:vertical;min-height:60px}
+.form-actions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* ── TRACKER TABLE ── */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:10px;font-weight:500;color:var(--text3);padding:8px 12px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.08em;font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.sel-inline{font-size:11px;font-family:'IBM Plex Mono',monospace;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 7px;color:var(--text);cursor:pointer;outline:none}
+.sel-inline:focus{border-color:rgba(0,208,132,.3)}
+.del{cursor:pointer;color:var(--text3);font-size:13px;transition:color .15s;padding:4px 6px;border-radius:4px}
+.del:hover{color:var(--red);background:var(--red-dim)}
+.co-cell{font-weight:500;display:flex;align-items:center;gap:6px}
+.dot-g{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.notes-view{font-size:11px;color:var(--text2);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;padding:2px 5px;border-radius:3px;transition:background .15s}
+.notes-view:hover{background:var(--bg3);color:var(--text)}
+.empty{text-align:center;padding:48px 24px;color:var(--text3);font-size:13px;border:1px dashed var(--border);border-radius:8px;line-height:1.8}
+
+/* ── BADGES ── */
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:99px;font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+.s-applied{background:var(--blue-dim);color:var(--blue)}
+.s-messaging{background:var(--purple-dim);color:var(--purple)}
+.s-interviewing{background:var(--amber-dim);color:var(--amber)}
+.s-offer{background:var(--green-dim);color:var(--green)}
+.s-rejected{background:rgba(255,255,255,.04);color:var(--text3)}
+.s-no-response{background:rgba(255,255,255,.04);color:var(--text3)}
+.p-high{color:var(--green);font-size:11px;font-family:'IBM Plex Mono',monospace}
+.p-med{color:var(--amber);font-size:11px;font-family:'IBM Plex Mono',monospace}
+.p-low{color:var(--text3);font-size:11px;font-family:'IBM Plex Mono',monospace}
+.date-cell{font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace}
+
+/* ── LEADS ── */
+.lead-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.fb{background:transparent;border:1px solid var(--border);border-radius:99px;padding:5px 13px;font-size:11px;cursor:pointer;font-family:'IBM Plex Mono',monospace;color:var(--text2);transition:all .15s}
+.fb:hover{color:var(--text);border-color:var(--border2)}
+.fb.on{background:var(--green-dim);color:var(--green);border-color:rgba(0,208,132,.4)}
+.leads-grid{display:flex;flex-direction:column;gap:8px}
+.lcard{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px;transition:border-color .15s;position:relative}
+.lcard:hover{border-color:var(--border2)}
+.lcard.hot{border-left:2px solid var(--green)}
+.lcard.isnew{border-left:2px solid var(--purple)}
+.lcard.custom-lead{border-left:2px solid var(--cyan)}
+.lcard.scout-lead{border-left:2px solid var(--orange)}
+.lcard-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.lcard-name{font-weight:600;font-size:14px;display:flex;align-items:center;gap:7px}
+.dot-lead{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-hot{background:var(--green)}.dot-new{background:var(--purple)}.dot-custom{background:var(--cyan)}.dot-scout{background:var(--orange);animation:blink 2s infinite}
+.tag-row{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:10px;font-weight:500;padding:2px 7px;border-radius:99px;font-family:'IBM Plex Mono',monospace}
+.tag-loc{background:var(--blue-dim);color:var(--blue)}
+.tag-cat{background:var(--purple-dim);color:var(--purple)}
+.tag-hot{background:var(--green-dim);color:var(--green)}
+.tag-new{background:var(--amber-dim);color:var(--amber)}
+.tag-custom{background:var(--cyan-dim);color:var(--cyan)}
+.tag-scout{background:var(--orange-dim);color:var(--orange)}
+.lcard-pitch{font-size:12px;color:var(--text2);margin-top:8px;line-height:1.65}
+.lcard-why{font-size:11px;color:var(--green);margin-top:5px;font-family:'IBM Plex Mono',monospace}
+.lcard-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.track-btn{font-size:11px;font-weight:500;background:transparent;border:1px solid var(--border2);border-radius:6px;padding:5px 12px;cursor:pointer;font-family:'IBM Plex Mono',monospace;color:var(--text2);white-space:nowrap;transition:all .15s}
+.track-btn:hover{color:var(--green);border-color:rgba(0,208,132,.4);background:var(--green-dim)}
+.track-btn.added{color:var(--green);border-color:rgba(0,208,132,.4);background:var(--green-dim)}
+.edit-lead-btn{font-size:11px;background:transparent;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;font-family:'IBM Plex Mono',monospace;color:var(--text3);transition:all .15s}
+.edit-lead-btn:hover{color:var(--text);border-color:var(--border2)}
+.count-label{font-size:12px;color:var(--text2);font-family:'IBM Plex Mono',monospace}
+
+/* ── LEAD ADD FORM ── */
+.lead-add-form{background:var(--bg2);border:1px solid rgba(0,188,212,.2);border-radius:8px;padding:20px;margin-bottom:20px;display:none}
+.lead-add-form.on{display:block}
+
+/* ─────────────────────────────────────
+   ⚡ SCOUT ENGINE
+───────────────────────────────────── */
+.scout-layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+
+/* Left panel */
+.scout-config{display:flex;flex-direction:column;gap:14px}
+.scout-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.scout-card-hd{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.scout-card-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text2)}
+.scout-card-body{padding:14px 16px}
+
+/* Engine control */
+.engine-status{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.status-dot{width:10px;height:10px;border-radius:50%;background:var(--text3);flex-shrink:0;transition:all .3s}
+.status-dot.running{background:var(--green);animation:blink 1.2s infinite}
+.status-dot.searching{background:var(--amber);animation:blink .6s infinite}
+.status-label{font-size:13px;font-weight:500;color:var(--text)}
+.status-sub{font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace;margin-top:2px}
+.engine-btns{display:flex;gap:8px;margin-bottom:14px}
+.countdown-bar-wrap{margin-bottom:14px}
+.countdown-label{font-size:10px;color:var(--text3);margin-bottom:5px;font-family:'IBM Plex Mono',monospace;display:flex;justify-content:space-between}
+.countdown-track{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.countdown-fill{height:100%;background:var(--green);border-radius:2px;transition:width .9s linear;width:100%}
+.engine-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.estat{background:var(--bg3);border-radius:6px;padding:8px 10px;text-align:center}
+.estat .en{font-size:18px;font-weight:500;font-family:'IBM Plex Mono',monospace;color:var(--text)}
+.estat .el{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+.estat.green .en{color:var(--green)}
+
+/* Query list */
+.query-list{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;max-height:200px;overflow-y:auto}
+.query-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg3);border-radius:6px;border:1px solid var(--border);font-size:12px;color:var(--text2);transition:border-color .15s;cursor:default}
+.query-item.active-query{border-color:rgba(0,208,132,.4);color:var(--green);background:var(--green-dim)}
+.query-item.active-query .qi-num{color:var(--green)}
+.qi-num{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--text3);min-width:18px}
+.qi-text{flex:1;line-height:1.4}
+.qi-del{background:none;border:none;color:var(--text4);cursor:pointer;font-size:12px;padding:1px 4px;border-radius:3px;transition:color .15s}
+.qi-del:hover{color:var(--red)}
+.qi-edit{background:none;border:none;color:var(--text3);cursor:pointer;font-size:11px;padding:1px 5px;border-radius:3px;transition:color .15s;font-family:'IBM Plex Mono',monospace}
+.qi-edit:hover{color:var(--cyan);background:var(--cyan-dim)}
+.query-item.editing{border-color:rgba(0,188,212,.4);background:var(--bg4)}
+.qi-inline-input{flex:1;background:transparent;border:none;outline:none;font-size:12px;color:var(--text);font-family:'IBM Plex Mono',monospace;padding:0;min-width:0}
+.qi-save{background:var(--green);color:#000;border:none;border-radius:3px;padding:2px 8px;font-size:10px;font-weight:600;cursor:pointer;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+.qi-cancel{background:none;border:1px solid var(--border2);color:var(--text3);border-radius:3px;padding:2px 7px;font-size:10px;cursor:pointer;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+.add-query-row{display:flex;gap:6px}
+.add-query-row input{flex:1;padding:7px 10px;font-size:12px}
+
+/* Threshold */
+.threshold-row{display:flex;align-items:center;gap:10px}
+.threshold-row input[type=range]{flex:1;accent-color:var(--green);cursor:pointer}
+.threshold-val{font-size:13px;font-weight:600;color:var(--green);font-family:'IBM Plex Mono',monospace;min-width:24px}
+
+/* Interval */
+.interval-row{display:flex;align-items:center;gap:8px}
+.interval-row select{flex:1}
+
+/* Right panel - feed */
+.scout-feed{display:flex;flex-direction:column;gap:14px}
+.feed-section{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.feed-hd{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.feed-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);display:flex;align-items:center;gap:8px}
+.feed-title .badge-count{font-size:10px;padding:1px 6px;border-radius:99px;background:var(--orange-dim);color:var(--orange);font-family:'IBM Plex Mono',monospace}
+.feed-body{padding:0}
+
+/* Review queue */
+.review-empty{padding:24px;text-align:center;font-size:12px;color:var(--text3);font-style:italic}
+.rq-item{padding:14px 16px;border-bottom:1px solid var(--border);transition:background .15s}
+.rq-item:last-child{border-bottom:none}
+.rq-item:hover{background:var(--bg3)}
+.rq-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.rq-name{font-weight:600;font-size:13px;display:flex;align-items:center;gap:7px}
+.rq-score{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;font-size:12px;font-weight:600;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+.score-9,.score-10{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,208,132,.3)}
+.score-8{background:rgba(0,208,132,.06);color:var(--green);border:1px solid rgba(0,208,132,.2)}
+.score-7{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(245,166,35,.3)}
+.score-6,.score-5{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(77,166,255,.2)}
+.score-low{background:var(--bg4);color:var(--text3);border:1px solid var(--border)}
+.rq-meta{font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace}
+.rq-reason{font-size:12px;color:var(--text2);line-height:1.6;margin-top:4px}
+.rq-actions{display:flex;gap:6px;margin-top:10px}
+.rq-add{background:var(--green);color:#000;border:none;border-radius:5px;padding:4px 12px;font-size:11px;font-weight:600;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:background .15s}
+.rq-add:hover{background:#00b874}
+.rq-dismiss{background:transparent;border:1px solid var(--border2);color:var(--text2);border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:all .15s}
+.rq-dismiss:hover{color:var(--red);border-color:rgba(255,85,85,.4)}
+.rq-url{background:transparent;border:1px solid var(--border);color:var(--blue);border-radius:5px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'IBM Plex Mono',monospace;text-decoration:none;display:inline-block;transition:all .15s}
+.rq-url:hover{border-color:var(--blue)}
+
+/* Activity log */
+.log-list{max-height:280px;overflow-y:auto;padding:0}
+.log-item{display:flex;gap:10px;align-items:flex-start;padding:8px 16px;border-bottom:1px solid var(--border);font-size:11px;font-family:'IBM Plex Mono',monospace}
+.log-item:last-child{border-bottom:none}
+.log-time{color:var(--text3);min-width:54px;flex-shrink:0}
+.log-icon{flex-shrink:0;min-width:14px}
+.log-txt{color:var(--text2);line-height:1.5}
+.log-txt strong{color:var(--text)}
+.log-txt.green strong{color:var(--green)}
+.log-txt.amber strong{color:var(--amber)}
+.log-txt.orange strong{color:var(--orange)}
+
+/* Profile editor */
+.profile-editor textarea{min-height:260px;font-size:12px;font-family:'IBM Plex Mono',monospace;line-height:1.7;background:var(--bg3);border-color:var(--border)}
+.profile-hint{font-size:11px;color:var(--text3);margin-top:6px;line-height:1.6}
+
+/* ── MODALS ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;overflow-y:auto;padding:2rem 1rem;backdrop-filter:blur(4px)}
+.overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:100%;max-width:640px;padding:24px;position:relative;margin:auto}
+.modal-sm{max-width:480px}
+.modal-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.modal-title{font-size:15px;font-weight:600;color:var(--text)}
+.modal-sub{font-size:12px;color:var(--text2);margin-top:3px;font-family:'IBM Plex Mono',monospace}
+.close-btn{background:none;border:1px solid var(--border);font-size:14px;cursor:pointer;color:var(--text2);padding:4px 8px;border-radius:5px;line-height:1;flex-shrink:0;transition:all .15s}
+.close-btn:hover{color:var(--text);border-color:var(--border2)}
+
+.xml-section{margin-bottom:20px}
+.xml-section-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.xml-drop{border:2px dashed var(--border2);border-radius:8px;padding:24px;text-align:center;cursor:pointer;transition:all .15s;margin-bottom:10px}
+.xml-drop:hover,.xml-drop.over{border-color:rgba(0,208,132,.4);background:var(--green-dim)}
+.xml-drop p{font-size:13px;color:var(--text2)}
+.xml-drop strong{display:block;color:var(--text);font-size:14px;margin-bottom:4px}
+.xml-status{font-size:12px;padding:8px 12px;border-radius:6px;margin-bottom:10px;font-family:'IBM Plex Mono',monospace}
+.xml-status.ok{background:rgba(0,208,132,.1);color:var(--green);border:1px solid rgba(0,208,132,.25)}
+.xml-status.err{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,85,85,.25)}
+.xml-status.info{background:var(--bg3);color:var(--text2);border:1px solid var(--border)}
+.merge-row{display:flex;gap:8px;margin-bottom:10px}
+.merge-opt{flex:1;padding:10px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:12px;text-align:center;transition:all .15s;background:var(--bg3);color:var(--text2)}
+.merge-opt:hover{border-color:var(--border2);color:var(--text)}
+.merge-opt.sel{background:var(--green-dim);color:var(--green);border-color:rgba(0,208,132,.4)}
+.merge-opt strong{display:block;font-weight:600;font-size:13px;margin-bottom:2px}
+.export-checklist{max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;background:var(--bg3)}
+.ck-item{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;font-size:13px;color:var(--text);border-bottom:1px solid var(--border)}
+.ck-item:last-child{border-bottom:none}
+.ck-item:hover{background:var(--bg4)}
+.ck-item input{accent-color:var(--green);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+.ck-badge{font-size:10px;padding:1px 7px;border-radius:99px;font-family:'IBM Plex Mono',monospace;margin-left:auto}
+.check-row{display:flex;gap:8px;margin-bottom:8px}
+.check-btn{font-size:11px;background:none;border:none;cursor:pointer;color:var(--text2);text-decoration:underline;padding:0;font-family:'IBM Plex Sans',sans-serif}
+.check-btn:hover{color:var(--text)}
+.claude-hint{background:linear-gradient(135deg,rgba(0,208,132,.06),rgba(155,127,255,.05));border:1px solid rgba(0,208,132,.2);border-radius:8px;padding:14px 16px;margin-bottom:20px}
+.claude-hint-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.claude-hint-body{font-size:12px;color:var(--text2);line-height:1.7}
+.claude-hint-body code{font-family:'IBM Plex Mono',monospace;color:var(--cyan);font-size:11px;background:rgba(0,188,212,.1);padding:1px 5px;border-radius:3px}
+
+/* ── SCOUT SUBNAV ── */
+.scout-subnav{display:flex;align-items:center;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px}
+.scout-stab{display:flex;align-items:center;gap:7px;padding:9px 18px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text2);border:none;border-bottom:2px solid transparent;background:transparent;font-family:'IBM Plex Sans',sans-serif;transition:color .15s;line-height:1}
+.scout-stab:hover{color:var(--text)}
+.scout-stab.on{color:var(--green);border-bottom-color:var(--green)}
+.stab-icon{font-size:13px}
+.scout-subpanel{display:none}.scout-subpanel.on{display:block}
+
+/* ── SETTINGS LAYOUT ── */
+.settings-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.settings-col{display:flex;flex-direction:column;gap:16px}
+
+/* ── SETUP GUIDE ── */
+.setup-steps{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.setup-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--text2);margin-bottom:2px}
+.setup-step{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--text2);line-height:1.65}
+.step-n{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--bg4);color:var(--green);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px;font-family:'IBM Plex Mono',monospace;border:1px solid rgba(0,208,132,.2)}
+.setup-link{color:var(--cyan);text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.setup-link:hover{text-decoration:underline}
+.setup-step code{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--cyan);background:rgba(0,188,212,.1);padding:1px 4px;border-radius:3px}
+.setup-step strong{color:var(--text)}
+
+/* ── CREDENTIAL SUMMARY ── */
+.cred-row{display:flex;align-items:center;gap:8px;font-size:12px;padding:4px 0}
+.cred-dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
+.cred-dot.ok{background:var(--green)}
+.cred-dot.warn{background:var(--amber)}
+.cred-dot.cred-dot-info{background:var(--blue)}
+.cred-label{color:var(--text2);flex:1}
+.cred-val{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3)}
+.cred-val.ok{color:var(--green)}
+.cred-val.warn{color:var(--amber)}
+
+/* ── GEMINI CARD ── */
+#gemini-card{border-top:1px solid rgba(0,208,132,.1)}
+
+/* ── KANBAN BOARD ── */
+.board-topbar{display:flex;align-items:center;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.board-search-wrap{position:relative;flex:1;min-width:160px;max-width:320px}
+.board-search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
+.board-search{width:100%;padding:7px 10px 7px 32px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;font-size:13px;color:var(--text);font-family:'IBM Plex Sans',sans-serif;outline:none;transition:border-color .15s}
+.board-search:focus{border-color:rgba(0,208,132,.4)}
+.board-tag-filters{display:flex;gap:5px;flex-wrap:wrap}
+.btf{background:transparent;border:1px solid var(--border);border-radius:99px;padding:3px 11px;font-size:11px;cursor:pointer;font-family:'IBM Plex Mono',monospace;color:var(--text3);transition:all .15s;white-space:nowrap}
+.btf:hover{color:var(--text);border-color:var(--border2)}
+.btf.on{background:var(--green-dim);color:var(--green);border-color:rgba(0,208,132,.4)}
+.board-scroll{overflow-x:auto;overflow-y:visible;padding-bottom:24px;margin:0 -28px;padding-left:28px}
+.board{display:flex;gap:14px;align-items:flex-start;min-height:500px;width:max-content;padding-right:28px}
+.bcol{width:272px;flex-shrink:0;background:var(--bg2);border:1px solid var(--border);border-radius:10px;display:flex;flex-direction:column;max-height:calc(100vh - 280px)}
+.bcol.drag-over .bcol-body{background:rgba(0,208,132,.04)}
+.bcol-hd{padding:10px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;flex-shrink:0;cursor:grab;user-select:none}
+.bcol-hd:active{cursor:grabbing}
+.bcol-color{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bcol-label-wrap{flex:1;min-width:0}
+.bcol-label{font-size:12px;font-weight:600;color:var(--text);outline:none;background:transparent;border:none;font-family:'IBM Plex Sans',sans-serif;cursor:text;width:100%;padding:0}
+.bcol-label:focus{border-bottom:1px solid var(--border2)}
+.bcol-count{font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--text3);background:var(--bg3);padding:1px 7px;border-radius:99px;flex-shrink:0}
+.bcol-btn{background:none;border:none;cursor:pointer;color:var(--text4);font-size:13px;padding:2px 4px;border-radius:4px;transition:color .15s;line-height:1;flex-shrink:0}
+.bcol-btn:hover{color:var(--text);background:var(--bg3)}
+.bcol-btn.del:hover{color:var(--red)}
+.bcol-body{flex:1;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:6px;min-height:60px}
+.bcol-empty{font-size:11px;color:var(--text4);text-align:center;padding:20px 8px;font-style:italic;border:1px dashed var(--border);border-radius:6px}
+
+/* Kanban cards */
+.kcard{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 11px;cursor:grab;transition:border-color .15s,box-shadow .15s;position:relative}
+.kcard:hover{border-color:var(--border2);box-shadow:0 3px 12px rgba(0,0,0,.25)}
+.kcard:active{cursor:grabbing}
+.kcard.sortable-ghost{opacity:.25;border:1px dashed var(--green);background:var(--green-dim)}
+.kcard.sortable-chosen{box-shadow:0 6px 24px rgba(0,0,0,.5);border-color:var(--border2)}
+.kcard.filtered-out{display:none}
+.kcard-top{display:flex;align-items:flex-start;gap:6px;margin-bottom:5px}
+.kcard-name{flex:1;font-size:13px;font-weight:600;color:var(--text);line-height:1.3;min-width:0}
+.kcard-score{flex-shrink:0;width:22px;height:22px;border-radius:5px;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;justify-content:center}
+.ks-hi{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,208,132,.3)}
+.ks-md{background:var(--amber-dim);color:var(--amber)}
+.ks-lo{background:var(--blue-dim);color:var(--blue)}
+.ks-none{background:var(--bg4);color:var(--text3)}
+.kcard-tags{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:5px}
+.ktag{font-size:9px;font-weight:500;padding:1px 5px;border-radius:99px;font-family:'IBM Plex Mono',monospace}
+.ktag-loc{background:var(--blue-dim);color:var(--blue)}
+.ktag-cat{background:var(--purple-dim);color:var(--purple)}
+.ktag-scout{background:var(--orange-dim);color:var(--orange)}
+.ktag-hot{background:var(--green-dim);color:var(--green)}
+.kcard-pitch{font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.kcard-why{font-size:10px;color:var(--green);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.kcard-footer{display:flex;gap:4px;align-items:center;border-top:1px solid var(--border);padding-top:6px}
+.kact{background:transparent;border:1px solid var(--border);border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;font-family:'IBM Plex Mono',monospace;color:var(--text3);transition:all .12s;line-height:1.5;text-decoration:none;display:inline-flex;align-items:center}
+.kact:hover{color:var(--text);border-color:var(--border2)}
+.kact.track{color:var(--green);border-color:rgba(0,208,132,.3)}
+.kact.track:hover,.kact.track.added{background:var(--green-dim);border-color:rgba(0,208,132,.5)}
+.kact.ni{color:var(--red);border-color:rgba(255,85,85,.2);margin-left:auto}
+.kact.ni:hover{background:var(--red-dim);border-color:var(--red)}
+.kact.del{border-color:transparent}
+.kact.del:hover{color:var(--red);border-color:rgba(255,85,85,.3)}
+
+/* Add column */
+.board-add-col{width:48px;flex-shrink:0;height:52px;background:transparent;border:1px dashed var(--border2);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:18px;transition:all .15s;align-self:flex-start}
+.board-add-col:hover{border-color:var(--green);color:var(--green);background:var(--green-dim)}
+
+/* Not interested archive */
+.ni-archive{background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-top:16px}
+.ni-archive-hd{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none}
+.ni-archive-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--text3);display:flex;align-items:center;gap:6px}
+.ni-archive-body{padding:8px}
+.ni-list{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto}
+.ni-item{display:flex;align-items:center;gap:8px;padding:5px 8px;border-radius:5px;font-size:11px;background:var(--bg3)}
+.ni-item-name{flex:1;font-weight:500;color:var(--text2)}
+.ni-item-cat{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text3)}
+.ni-restore{background:none;border:none;color:var(--text4);cursor:pointer;font-size:11px;padding:2px 5px;border-radius:3px}
+.ni-restore:hover{color:var(--text)}
+
+@media(max-width:900px){.settings-layout{grid-template-columns:1fr}}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.container{padding:16px}.header{padding:12px 16px}.form-grid3,.form-grid4{grid-template-columns:1fr 1fr}.board-scroll{margin:0 -16px;padding-left:16px}.bcol{width:240px}}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════ HEADER ════════════════════════ -->
+<div class="header">
+  <div class="header-l">
+    <div class="logo mono">EK//HQ</div>
+    <div>
+      <div class="header-title">Job Search HQ</div>
+      <div class="header-sub">Ethan Kelly · DMC Inc. · San Diego, CA</div>
+    </div>
+  </div>
+  <div class="header-r">
+    <div class="scout-pill" id="header-scout-pill">
+      <div class="scout-dot"></div>
+      <span id="header-scout-label">Scout idle</span>
+    </div>
+    <button class="btn btn-export" onclick="openExport()">↓ Export XML</button>
+    <button class="btn" onclick="openImport()">↑ Import XML</button>
+    <span class="mono" id="last-saved" style="font-size:10px;color:var(--text3)">—</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ── STATS ── -->
+  <div class="stats">
+    <div class="stat accent"><div class="n mono" id="s-total">0</div><div class="l">Tracked</div></div>
+    <div class="stat"><div class="n mono" id="s-active">0</div><div class="l">Active</div></div>
+    <div class="stat amber"><div class="n mono" id="s-conv">0</div><div class="l">In Convo</div></div>
+    <div class="stat"><div class="n mono" id="s-high">0</div><div class="l">High Pri</div></div>
+    <div class="stat purple"><div class="n mono" id="s-leads">0</div><div class="l">Leads</div></div>
+    <div class="stat orange"><div class="n mono" id="s-review">0</div><div class="l">Review Queue</div></div>
+  </div>
+
+  <!-- ── TABS ── -->
+  <div class="tabs">
+    <button class="tab on" onclick="sw('tracker',this)">Tracker</button>
+    <button class="tab" onclick="sw('leads',this)" id="leads-tab">Lead Board <span class="tab-badge" id="leads-badge">0</span></button>
+    <button class="tab" onclick="sw('scout',this)" id="scout-tab">⚡ Scout <span class="tab-badge" id="scout-badge">0</span></button>
+  </div>
+
+  <!-- ════════════════════════ TRACKER ════════════════════════ -->
+  <div class="panel on" id="panel-tracker">
+    <div class="toolbar">
+      <h2>Applications</h2>
+      <div class="toolbar-r">
+        <button class="btn btn-sm" onclick="togForm('tracker-form')">+ Add manually</button>
+      </div>
+    </div>
+
+    <div class="add-form" id="tracker-form">
+      <div class="form-grid">
+        <div class="fg"><label>Company</label><input type="text" id="f-co" placeholder="Company name"></div>
+        <div class="fg"><label>Role / Category</label><input type="text" id="f-role" placeholder="e.g. Systems Integration Engineer"></div>
+      </div>
+      <div class="form-grid4">
+        <div class="fg"><label>Status</label><select id="f-status">
+          <option value="applied">Applied</option><option value="messaging">Messaging</option>
+          <option value="interviewing">Interviewing</option><option value="offer">Offer</option>
+          <option value="rejected">Rejected</option><option value="no-response">No response</option>
+        </select></div>
+        <div class="fg"><label>Priority</label><select id="f-pri"><option value="high">High</option><option value="med" selected>Medium</option><option value="low">Low</option></select></div>
+        <div class="fg"><label>Date</label><input type="date" id="f-date"></div>
+        <div class="fg"><label>URL</label><input type="text" id="f-url" placeholder="https://…"></div>
+      </div>
+      <div class="fg"><label>Notes / Next Steps</label><textarea id="f-notes" placeholder="Contacts, context, follow-up dates…"></textarea></div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="addManual()">Save Application</button>
+        <button class="btn" onclick="togForm('tracker-form')">Cancel</button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th style="width:17%">Company</th><th style="width:18%">Role</th>
+          <th style="width:12%">Status</th><th style="width:8%">Priority</th>
+          <th style="width:9%">Date</th><th style="width:6%">Link</th>
+          <th style="width:26%">Notes</th><th style="width:4%"></th>
+        </tr></thead>
+        <tbody id="tracker-body"></tbody>
+      </table>
+      <div id="tracker-empty" class="empty">No applications tracked yet.<br>Hit <strong>+ Track</strong> on any lead, or add manually above.</div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ LEADS ════════════════════════ -->
+  <div class="panel" id="panel-leads">
+
+    <div class="stats" style="margin-bottom:16px;grid-template-columns:repeat(4,1fr)">
+      <div class="stat accent"><div class="n mono" id="ls-hot">0</div><div class="l">Strong Fits</div></div>
+      <div class="stat"><div class="n mono" id="ls-sd">0</div><div class="l">San Diego</div></div>
+      <div class="stat"><div class="n mono" id="ls-re">0</div><div class="l">Remote OK</div></div>
+      <div class="stat orange"><div class="n mono" id="ls-scout-added">0</div><div class="l">Scout Added</div></div>
+    </div>
+
+    <!-- Board topbar: search + tag filters + actions -->
+    <div class="board-topbar">
+      <div class="board-search-wrap">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.868-3.833zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg>
+        <input class="board-search" id="board-search" type="search" placeholder="Search companies…" oninput="filterBoard()">
+      </div>
+      <div class="board-tag-filters" id="board-tag-filters"></div>
+      <div style="margin-left:auto;display:flex;gap:6px;align-items:center">
+        <span class="count-label" id="lead-count" style="font-size:11px"></span>
+        <button class="btn btn-sm" style="border-color:rgba(0,188,212,.3);color:var(--cyan);background:var(--cyan-dim)" onclick="togForm('lead-add-form')">+ Add Lead</button>
+      </div>
+    </div>
+
+    <!-- Add lead form -->
+    <div class="lead-add-form" id="lead-add-form">
+      <div class="form-grid">
+        <div class="fg"><label>Company *</label><input type="text" id="la-name" placeholder="Acme Robotics"></div>
+        <div class="fg"><label>Category *</label><input type="text" id="la-cat" placeholder="Maritime / Defense"></div>
+      </div>
+      <div class="form-grid">
+        <div class="fg"><label>Location</label><input type="text" id="la-loc" placeholder="San Diego, CA"></div>
+        <div class="fg"><label>Tags <span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0">(comma-sep: SD,CA,NYC,Defense,Maritime,Robotics,ISW,Remote)</span></label>
+          <input type="text" id="la-tags" placeholder="SD, CA, Defense"></div>
+      </div>
+      <div class="form-grid">
+        <div class="fg"><label>Pitch</label><textarea id="la-pitch" rows="2" style="min-height:52px"></textarea></div>
+        <div class="fg"><label>Why it fits</label><textarea id="la-why" rows="2" style="min-height:52px"></textarea></div>
+      </div>
+      <div class="form-grid4">
+        <div class="fg"><label>Strong Fit?</label><select id="la-hot"><option value="0">No</option><option value="1">Yes ★</option></select></div>
+        <div class="fg"><label>Column</label><select id="la-col"></select></div>
+        <div class="fg"><label>URL</label><input type="text" id="la-url" placeholder="https://…"></div>
+        <div class="fg"><label>Priority</label><select id="la-pri"><option value="high">High</option><option value="med" selected>Med</option><option value="low">Low</option></select></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" onclick="saveLead()">Save Lead</button>
+        <button class="btn" onclick="togForm('lead-add-form')">Cancel</button>
+      </div>
+    </div>
+
+    <!-- The board -->
+    <div class="board-scroll">
+      <div class="board" id="board"></div>
+    </div>
+
+    <!-- Not Interested archive -->
+    <div class="ni-archive" id="ni-archive" style="display:none">
+      <div class="ni-archive-hd" onclick="toggleNiArchive()">
+        <div class="ni-archive-title">
+          <span style="color:var(--red)">✕</span>
+          Not Interested Archive &nbsp;<span id="ni-count" style="font-family:'IBM Plex Mono',monospace">0</span>
+        </div>
+        <span id="ni-chevron" style="font-size:11px;color:var(--text3)">▾ show</span>
+      </div>
+      <div class="ni-archive-body" id="ni-archive-body" style="display:none">
+        <div style="font-size:10px;color:var(--text3);margin-bottom:8px;line-height:1.6">Archived for Scout feedback — these companies + their categories teach the engine what to avoid. Restore any to move back to Inbox.</div>
+        <div class="ni-list" id="ni-list"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════ SCOUT ════════════════════════ -->
+  <div class="panel" id="panel-scout">
+
+    <!-- Scout inner nav -->
+    <div class="scout-subnav">
+      <button class="scout-stab on" id="stab-dashboard" onclick="scoutSw('dashboard',this)">
+        <span class="stab-icon">⚡</span> Dashboard
+      </button>
+      <button class="scout-stab" id="stab-settings" onclick="scoutSw('settings',this)">
+        <span class="stab-icon">⚙</span> Settings
+      </button>
+      <div style="flex:1"></div>
+      <div class="scout-pill" id="inner-scout-pill" style="font-size:11px">
+        <div class="scout-dot" id="inner-dot"></div>
+        <span id="inner-scout-label">Idle</span>
+      </div>
+    </div>
+
+    <!-- ── DASHBOARD ── -->
+    <div class="scout-subpanel on" id="sp-dashboard">
+      <div class="scout-layout">
+
+        <!-- LEFT: Engine -->
+        <div class="scout-config">
+          <div class="scout-card">
+            <div class="scout-card-hd"><div class="scout-card-title">Engine Control</div></div>
+            <div class="scout-card-body">
+              <div class="engine-status">
+                <div class="status-dot" id="eng-dot"></div>
+                <div>
+                  <div class="status-label" id="eng-label">Idle</div>
+                  <div class="status-sub" id="eng-sub">Configure credentials in Settings, then Start</div>
+                </div>
+              </div>
+              <div class="engine-btns">
+                <button class="btn btn-primary" id="start-btn" onclick="startEngine()" style="flex:1">▶ Start Engine</button>
+                <button class="btn btn-danger" id="stop-btn" onclick="stopEngine()" style="flex:1" disabled>■ Stop</button>
+                <button class="btn btn-sm" onclick="runOnce()" id="run-once-btn">↻ Run Now</button>
+              </div>
+              <div class="countdown-bar-wrap">
+                <div class="countdown-label">
+                  <span>Next search</span>
+                  <span id="countdown-txt">—</span>
+                </div>
+                <div class="countdown-track"><div class="countdown-fill" id="countdown-fill"></div></div>
+              </div>
+              <div class="engine-stats">
+                <div class="estat green"><div class="en" id="es-found">0</div><div class="el">Found</div></div>
+                <div class="estat"><div class="en" id="es-added">0</div><div class="el">Auto-added</div></div>
+                <div class="estat"><div class="en" id="es-runs">0</div><div class="el">Runs</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Credential status summary -->
+          <div class="scout-card" id="cred-summary-card">
+            <div class="scout-card-hd"><div class="scout-card-title">Credentials</div><button class="btn btn-xs" onclick="scoutSw('settings',document.getElementById('stab-settings'))" style="font-size:10px">⚙ Edit</button></div>
+            <div class="scout-card-body" style="display:flex;flex-direction:column;gap:8px">
+              <div class="cred-row" id="cs-gemini"><span class="cred-dot"></span><span class="cred-label">Gemini API Key</span><span class="cred-val" id="csv-gemini">not set</span></div>
+              <div class="cred-row" id="cs-mode"><span class="cred-dot cred-dot-info"></span><span class="cred-label">Mode</span><span class="cred-val" id="csv-mode" style="color:var(--text2)">—</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Feed -->
+        <div class="scout-feed">
+          <div class="feed-section">
+            <div class="feed-hd">
+              <div class="feed-title">Review Queue <span class="badge-count" id="rq-count-badge">0</span></div>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-xs btn-green" onclick="acceptAll()">Accept all high-fit</button>
+                <button class="btn btn-xs btn-danger" onclick="dismissAll()">Dismiss all</button>
+              </div>
+            </div>
+            <div id="review-queue-body">
+              <div class="review-empty">No leads pending review. Start the engine or hit Run Now.</div>
+            </div>
+          </div>
+          <div class="feed-section">
+            <div class="feed-hd">
+              <div class="feed-title">Activity Log</div>
+              <button class="btn btn-xs" onclick="clearLog()">Clear</button>
+            </div>
+            <div class="log-list" id="activity-log">
+              <div class="log-item" style="justify-content:center"><span class="log-txt" style="color:var(--text3);font-style:italic">No activity yet</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /sp-dashboard -->
+
+    <!-- ── SETTINGS ── -->
+    <div class="scout-subpanel" id="sp-settings">
+      <div class="settings-layout">
+
+        <div class="settings-col">
+
+          <!-- Gemini — single key, does everything -->
+          <div class="scout-card" id="gemini-card">
+            <div class="scout-card-hd">
+              <div class="scout-card-title">Gemini API Key</div>
+              <span id="gemini-status" style="font-size:10px;font-family:'IBM Plex Mono',monospace;color:var(--text3)">not set</span>
+            </div>
+            <div class="scout-card-body" style="display:flex;flex-direction:column;gap:12px">
+              <div style="font-size:12px;color:var(--text2);line-height:1.65;background:var(--green-dim);border:1px solid rgba(0,208,132,.2);border-radius:6px;padding:10px">
+                <strong style="color:var(--green)">One key. That's it.</strong> Gemini has Google Search built in — it searches the web and scores leads intelligently in a single call. No Cloud Console, no cx ID, no second service. Just get a free key from AI Studio.
+              </div>
+              <div class="fg">
+                <label>Gemini API Key <span style="color:var(--green);text-transform:none;letter-spacing:0;font-size:10px;margin-left:4px">free · 15 req/min · 1,500 req/day</span></label>
+                <input type="password" id="gemini-input" placeholder="AIzaSy…" style="font-family:'IBM Plex Mono',monospace;font-size:12px" onkeydown="if(event.key==='Enter')saveGeminiKey()">
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <button class="btn btn-primary" onclick="saveGeminiKey()">Save key</button>
+                <button class="btn btn-xs" onclick="clearGeminiKey()" style="color:var(--text3)">Clear</button>
+              </div>
+              <div class="setup-steps">
+                <div class="setup-title">Get your free key — 60 seconds</div>
+                <div class="setup-step"><span class="step-n">1</span><div>Go to <a href="https://aistudio.google.com/apikey" target="_blank" class="setup-link">aistudio.google.com/apikey</a></div></div>
+                <div class="setup-step"><span class="step-n">2</span><div>Click <strong>Create API key</strong> → select any project (or create one) → Copy</div></div>
+                <div class="setup-step"><span class="step-n">3</span><div>Paste above → Save. Done. Key is stored in sessionStorage (browser only — re-enter each session or keep it somewhere safe).</div></div>
+              </div>
+            </div>
+          </div>
+
+        <div class="settings-col">
+
+          <!-- Engine Settings -->
+          <div class="scout-card">
+            <div class="scout-card-hd"><div class="scout-card-title">Engine Settings</div></div>
+            <div class="scout-card-body" style="display:flex;flex-direction:column;gap:16px">
+              <div class="fg">
+                <label>Search interval</label>
+                <select id="interval-sel" onchange="updateInterval(this.value)">
+                  <option value="5">Every 5 min</option>
+                  <option value="15" selected>Every 15 min</option>
+                  <option value="30">Every 30 min</option>
+                  <option value="60">Every 60 min</option>
+                </select>
+                <div id="interval-hint" style="font-size:10px;color:var(--text3);margin-top:4px"></div>
+              </div>
+              <div class="fg">
+                <label>Auto-add threshold — score ≥ <span id="thresh-display">8</span> / 10</label>
+                <div class="threshold-row">
+                  <input type="range" min="5" max="10" value="8" id="threshold-range" oninput="updateThreshold(this.value)">
+                  <div class="threshold-val" id="threshold-val">8</div>
+                </div>
+                <div style="font-size:10px;color:var(--text3);margin-top:4px">Below threshold → Review Queue. At or above → auto-added to Lead Board.</div>
+              </div>
+              <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--text2);cursor:pointer;font-weight:400">
+                <input type="checkbox" id="skip-tracked" checked style="accent-color:var(--green);width:14px;height:14px">
+                Skip companies already in tracker
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--text2);cursor:pointer;font-weight:400">
+                <input type="checkbox" id="skip-existing" checked style="accent-color:var(--green);width:14px;height:14px">
+                Skip companies already on Lead Board
+              </label>
+            </div>
+          </div>
+
+          <!-- Search Queries -->
+          <div class="scout-card">
+            <div class="scout-card-hd">
+              <div class="scout-card-title">Search Queries</div>
+              <span style="font-size:10px;color:var(--text3)">Rotates in order</span>
+            </div>
+            <div class="scout-card-body">
+              <div class="query-list" id="query-list"></div>
+              <div class="add-query-row">
+                <input type="text" id="new-query-inp" placeholder="Add a search query…" style="font-size:12px" onkeydown="if(event.key==='Enter')addQuery()">
+                <button class="btn btn-sm btn-green" onclick="addQuery()">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Candidate Profile -->
+          <div class="scout-card">
+            <div class="scout-card-hd">
+              <div class="scout-card-title">Candidate Profile</div>
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-xs" onclick="resetProfile()">Reset</button>
+                <button class="btn btn-xs btn-primary" onclick="saveProfile()">Save</button>
+              </div>
+            </div>
+            <div class="scout-card-body profile-editor">
+              <textarea id="profile-text" spellcheck="false"></textarea>
+              <div class="profile-hint">Sent to Gemini on every search when AI mode is enabled. The more specific, the better — include skills, targets, dealbreakers, comp range.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div><!-- /sp-settings -->
+
+  </div><!-- /panel-scout -->
+
+</div><!-- /container -->
+
+<!-- ════ EXPORT MODAL ════ -->
+<div class="overlay" id="export-overlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <div><div class="modal-title">Export XML</div><div class="modal-sub">Backup your tracker + leads — or hand to Claude for new leads</div></div>
+      <button class="close-btn" onclick="closeOverlay('export-overlay')">✕</button>
+    </div>
+    <div class="claude-hint">
+      <div class="claude-hint-title">⚡ Claude Workflow</div>
+      <div class="claude-hint-body">
+        Export → Copy to clipboard → Paste in Claude with:<br>
+        <code>"Here's my job search state. Add 10 new leads in [space / shipbuilding / etc]. Return the new &lt;Lead&gt; nodes."</code><br>
+        Then import the XML Claude returns.
+      </div>
+    </div>
+    <div class="xml-section">
+      <div class="xml-section-title">Include</div>
+      <div style="display:flex;gap:14px;margin-bottom:12px;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:6px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--text);cursor:pointer"><input type="checkbox" id="exp-apps" checked style="accent-color:var(--green);width:14px;height:14px"> Applications</label>
+        <label style="display:flex;align-items:center;gap:6px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--text);cursor:pointer"><input type="checkbox" id="exp-leads" checked style="accent-color:var(--green);width:14px;height:14px"> All leads</label>
+        <label style="display:flex;align-items:center;gap:6px;text-transform:none;letter-spacing:0;font-size:13px;color:var(--text);cursor:pointer"><input type="checkbox" id="exp-custom-only" style="accent-color:var(--green);width:14px;height:14px"> Custom + Scout leads only</label>
+      </div>
+    </div>
+    <div class="xml-section">
+      <div class="xml-section-title">Select applications</div>
+      <div class="check-row"><button class="check-btn" onclick="setAllChecks('exp-checklist',true)">All</button><button class="check-btn" onclick="setAllChecks('exp-checklist',false)">None</button></div>
+      <div class="export-checklist" id="exp-checklist"></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn" onclick="closeOverlay('export-overlay')">Cancel</button>
+      <button class="btn btn-export" onclick="doExport()">↓ Download XML</button>
+      <button class="btn btn-primary" onclick="copyXML()">⎘ Copy to clipboard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ IMPORT MODAL ════ -->
+<div class="overlay" id="import-overlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <div><div class="modal-title">Import XML</div><div class="modal-sub">Load applications, leads, or Claude-generated additions</div></div>
+      <button class="close-btn" onclick="closeOverlay('import-overlay')">✕</button>
+    </div>
+    <div class="xml-section">
+      <div class="xml-section-title">Drop / browse file</div>
+      <div class="xml-drop" id="xml-drop" onclick="document.getElementById('xml-file-input').click()" ondrop="handleDrop(event)" ondragover="e=>{e.preventDefault();document.getElementById('xml-drop').classList.add('over')}" ondragleave="document.getElementById('xml-drop').classList.remove('over')">
+        <input type="file" id="xml-file-input" accept=".xml,.txt" style="display:none" onchange="handleFileInput(event)">
+        <p><strong>Drop XML file here</strong>or click to browse</p>
+      </div>
+      <div class="fg" style="margin-bottom:10px">
+        <label>Or paste raw XML</label>
+        <textarea id="xml-paste" rows="4" placeholder="&lt;?xml ...&gt;" style="font-family:'IBM Plex Mono',monospace;font-size:11px;min-height:70px" oninput="handlePasteXML(this.value)"></textarea>
+      </div>
+      <div id="import-status"></div>
+    </div>
+    <div id="import-merge-section" style="display:none">
+      <div class="xml-section">
+        <div class="xml-section-title">Import mode</div>
+        <div class="merge-row">
+          <div class="merge-opt sel" id="mo-merge" onclick="selMerge('merge')"><strong>Merge</strong>Add new, skip duplicates</div>
+          <div class="merge-opt" id="mo-replace" onclick="selMerge('replace')"><strong>Replace all</strong>Overwrite everything</div>
+        </div>
+        <div id="import-preview"></div>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn" onclick="closeOverlay('import-overlay')">Cancel</button>
+      <button class="btn btn-primary" id="do-import-btn" onclick="doImport()" disabled>↑ Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ EDIT APP MODAL ════ -->
+<div class="overlay" id="edit-app-overlay">
+  <div class="modal modal-sm">
+    <div class="modal-hd">
+      <div><div class="modal-title">Edit Application</div><div class="modal-sub" id="edit-app-sub">—</div></div>
+      <button class="close-btn" onclick="closeOverlay('edit-app-overlay')">✕</button>
+    </div>
+    <div class="fg" style="margin-bottom:10px"><label>Notes</label><textarea id="ea-notes" rows="4" style="min-height:90px"></textarea></div>
+    <div class="form-grid">
+      <div class="fg"><label>Status</label><select id="ea-status">
+        <option value="applied">Applied</option><option value="messaging">Messaging</option>
+        <option value="interviewing">Interviewing</option><option value="offer">Offer</option>
+        <option value="rejected">Rejected</option><option value="no-response">No response</option>
+      </select></div>
+      <div class="fg"><label>Priority</label><select id="ea-pri"><option value="high">High</option><option value="med">Med</option><option value="low">Low</option></select></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn" onclick="closeOverlay('edit-app-overlay')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveEditApp()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ EDIT LEAD MODAL ════ -->
+<div class="overlay" id="edit-lead-overlay">
+  <div class="modal">
+    <div class="modal-hd">
+      <div><div class="modal-title">Edit Lead</div><div class="modal-sub" id="edit-lead-sub">—</div></div>
+      <button class="close-btn" onclick="closeOverlay('edit-lead-overlay')">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Company</label><input id="el-name" type="text"></div>
+      <div class="fg"><label>Category</label><input id="el-cat" type="text"></div>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Location</label><input id="el-loc" type="text"></div>
+      <div class="fg"><label>Tags (comma-sep)</label><input id="el-tags" type="text"></div>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Pitch</label><textarea id="el-pitch" rows="3" style="min-height:64px"></textarea></div>
+      <div class="fg"><label>Why it fits</label><textarea id="el-why" rows="3" style="min-height:64px"></textarea></div>
+    </div>
+    <div class="form-grid4">
+      <div class="fg"><label>Strong Fit</label><select id="el-hot"><option value="0">No</option><option value="1">Yes ★</option></select></div>
+      <div class="fg"><label>New</label><select id="el-new"><option value="0">No</option><option value="1">Yes ✦</option></select></div>
+      <div class="fg"><label>URL</label><input id="el-url" type="text"></div>
+      <div class="fg"><label>Source</label><span id="el-source-label" style="font-size:11px;color:var(--text3);padding:8px 0;display:block">—</span></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn" onclick="closeOverlay('edit-lead-overlay')">Cancel</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteLead(editLeadId)">Delete</button>
+      <button class="btn btn-primary" onclick="saveEditLead()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// CONSTANTS
+// ══════════════════════════════════════════════════════
+const STATUSES=['applied','messaging','interviewing','offer','rejected','no-response'];
+const SL={applied:'Applied',messaging:'Messaging',interviewing:'Interviewing',offer:'Offer',rejected:'Rejected','no-response':'No response'};
+const PRI_ORDER={high:0,med:1,low:2};
+
+const DEFAULT_PROFILE = `=== ETHAN KELLY — FULL CANDIDATE PROFILE ===
+
+BASICS
+Name: Ethan Kelly | ethanrobertkelly@gmail.com | 646-717-0861
+Location: San Diego, CA. Open to relocate: NYC, San Diego, San Francisco only.
+Current role: Engineering Consultant @ Dynamic Motion Control Inc. (Sep 2024–Present)
+Education: Rice University — B.S. Mechanical Engineering, Thermal Fluids Specialization. GPA 3.7/4.0. Certificate in Engineering Leadership (RCEL). May 2024.
+Clearance: No clearance, but fully eligible (no barriers). Willing to pursue.
+
+COMPENSATION
+Base: $140k+ minimum. Not negotiating down.
+Equity: $30k+ effective equity expectation (options, RSUs, or meaningful early-stage equity).
+Prioritizes mission + ownership + upside over pure cash — but the floor is real.
+
+COMPANY PREFERENCES
+Size: Small to midsize strongly preferred. Well-funded is key — wants to know there's runway.
+Stage: Doesn't care — seed to Series C all valid if mission is real and team is good.
+Culture: No shmucks. Willing to grind hard but needs a good team, real upside, and to know the work matters. Culture can't be brutal without a reason.
+Big companies: Generally no, but will hear out genuinely exceptional opportunities.
+Defense: Not reflexively pro-defense. NOT interested in offensive weapons / assault systems. Interested in non-assault defense, dual-use tech, maritime security, test & measurement, DAQ systems, maritime autonomy. Will hear out interesting defense-adjacent work that isn't weapons.
+
+CORE TECHNICAL SKILLS
+- Controls & Industrial: PLC/LAD (Rockwell, Allen-Bradley), LabVIEW, SCADA, OPCUA, Arduino, MES, Aveva Edge HMI
+- Programming: Python (strong — built production XML parsers, automation tools), C++, C
+- DAQ & Test: High-speed DAQ system design, sequencer logic, sensor integration, FAT/commissioning
+- Mechanical: SolidWorks (CSWP-S certified), CFD analysis, FEA, fiberglass fabrication, 3D printing, laser cutting
+- Networking: OPCUA, TCP/IP, Cisco switch configuration, communication protocol integration
+- PM/Leadership: OKR framework design & coaching, WBS, Agile/sprint, client management, coached VPs, 100% review adoption
+
+KEY PROJECTS & EXPERIENCE (in order of relevance)
+
+1. NAWS China Lake — CDAS Systems Engineer (Mar 2025–Present, via DMC)
+   - Parachuted into failing FAT phase. System was in pieces. Client was skeptical.
+   - Crisis-managed live client demos while debugging in real time.
+   - Led 16-week Trio commissioning — transformed "unacceptable" legacy codebase to federal compliance.
+   - FAT accepted: Skytop and Trio. Pivoted client relationship from skepticism to trust.
+   - Tech: Rockwell architecture, sequencer logic, high-speed DAQ, OEM integration, Cisco networking.
+   - Quote (PM): "Ethan handled this extremely well and quickly took ownership."
+
+2. Sea++ — Autonomous Catamaran Lead Engineer (Aug 2023–May 2024, Rice Capstone)
+   - Military research commission. Goal: decentralized naval cargo delivery at $3,750/unit.
+   - Elected lead by 7 peers. 9-foot autonomous trimaran capable of 1,000 lb cargo.
+   - Full autonomy stack: Modified A* global path planning (integrates wind + map), ALOS local control, dual-rudder PID, computer vision obstacle avoidance.
+   - Hardware: Wood spline + XPS foam hulls fiberglassed, 3D-printed hydrofoils, solar-charged batteries, modular waterproof junction boxes.
+   - Results: Multi-waypoint open-water trials. Stable in 5-ft seas + 25-mph winds with full payload.
+   - Budget: Under $7,500. Delivered in 8 months. Presented at Rice Shapiro Showcase 2024.
+
+3. MV Kennicott — IO Documentation (2024–2025, Everett Ship Repair via DMC)
+   - Documented 1,500+ IO points for vessel control system — from nothing. Now FDS basis.
+   - OPCUA communication implementation between PLCs and Aveva Edge HMI.
+   - PLC code conversion.
+   - Quote (PM): "A monolithic document — well organized and usable."
+
+4. Python XML Automation (DMC, 2024)
+   - Built bidirectional dictionary function that parsed XML exports across 6-PLC system.
+   - Auto-renamed 19,000 unnamed variables. Eliminated thousands of hours of manual work.
+
+5. Rocket Engine & Explosives Facility (NAWS, via DMC)
+   - FAT for Rocket Engine Static Test Fire Stand and Explosives Mixing Facility at Navy Air Weapons Test Facilities.
+   - Programmed NI, Cisco, Rockwell, and OEM hardware using LAD, LabVIEW, Python.
+
+6. OKR Program (DMC, 2024–2025)
+   - Authored company's first OKR framework. Coached VPs. Drove 100% review adoption.
+   - Led company-wide Lunch & Learn. Structural, convincing, concrete.
+
+7. Rice Robotics Club — President & Manufacturing Lead (Apr 2023–May 2024)
+   - Grew club 18x: 5 → 90+ active members. Technical lead for RoboCam (autonomous robotic cameraman).
+
+PEER FEEDBACK SIGNALS (for scoring calibration)
+- "Very insightful, much more so than most people I work with regardless of experience level." (Senior Engineer II)
+- "Rock star. Entrepreneurial, focused, value-driven, brilliant. Challenges assumptions. Should have been a lawyer." (PM/Mentor)
+- "Venturi for internal communication — pulls others into the conversation and the written record." (PM/Technical Lead)
+- "Works fairly independently for his tenure and inspires confidence from me and the client." (PM)
+- "Quickly took ownership in a chaotic situation. Organization and level-headedness allowed us to get through complex scenarios." (Project Engineer, NAWS)
+- Growth areas: Can speak before full context in high-stakes client settings. Works on storytelling vs. sequential point-making. Both noted as polish, not blockers.
+
+WHAT ETHAN IS LOOKING FOR
+- Ownership roles — not ticket-executors. Give him a real problem, a clear outcome, and trust.
+- Small/midsize, well-funded. Real runway. Real upside.
+- Hard tech with physical systems — software is a tool, not the product.
+- Non-assault defense, dual-use, maritime autonomy, space manufacturing, advanced manufacturing, test & measurement, inspection robotics.
+- A team that's serious. High-stakes environments are where he performs best.
+- Cities: San Diego, NYC, San Francisco only. No other relocation.
+
+ABSOLUTE DEALBREAKERS (do NOT recommend these)
+- Assault weapons / direct offensive weapons systems
+- Large bureaucratic corporation with no ownership path
+- Pure software (no hardware component)
+- Companies already on his radar (don't re-suggest): Saronic, Shield AI, Firestorm, SeaSats, Machina Labs, Hadrian, Nominal, Path Robotics, Saildrone, Castelion, Citadel Defense, Aquaai, Blue Water Autonomy, Dirac Inc., Anduril, Brain Corp, Gecko Robotics, Skydio, Allen Control Systems, Overland AI, Aalo Atomics
+
+SCORING GUIDANCE FOR LEADS (fit_score 1-10)
+9-10: Small/midsize, well-funded, NYC/SD/SF, physical systems + software, non-assault defense or hard tech, real ownership, strong team signal
+8: Solid fit with 1-2 minor gaps (slight defense lean, slightly larger company, or partial location match)
+7: Interesting but notable compromise (e.g., bigger company, unclear culture, mismatch on 1 major dimension)
+5-6: Stretch — worth reviewing but not a strong match
+<5: Not relevant, don't return`;
+
+const DEFAULT_QUERIES = [
+  "maritime autonomy startup engineer hiring",
+  "site:wellfound.com systems engineer controls robotics",
+  "defense tech startup systems engineer 2026",
+  "hard tech Series A engineer San Diego SF NYC",
+  "autonomous surface vessel company engineer careers",
+  "site:wellfound.com maritime robotics engineer",
+  "space manufacturing startup engineer careers",
+  "robotics startup engineer San Diego SF NYC",
+  "industrial automation startup engineer careers",
+  "site:greenhouse.io systems integration engineer",
+  "DAQ test measurement startup engineer",
+  "defense tech startup raised million engineer",
+  "underwater robotics company engineer jobs",
+  "maritime autonomy startup Series A hiring",
+  "site:wellfound.com controls automation engineer"
+];
+
+const BUILTIN_LEADS=[
+  {id:'bl-1',n:'Dirac, Inc.',lo:'NYC (Onsite)',ca:'Industrial SW',h:1,nw:0,tg:['ISW'],p:'Model-based manufacturing platform unifying ERP, PLM, MES. Anduril is a live customer.',w:"You're doing their job at DMC. 'Forward-deployed engineer' is literally their term.",url:''},
+  {id:'bl-2',n:'SeaSats',lo:'San Diego, CA',ca:'Maritime Autonomy',h:1,nw:0,tg:['SD','CA','Maritime','Defense'],p:'Autonomous surface vessels for the Navy. $20M Series A + $24M DoD funding.',w:'You built an autonomous catamaran. That ends the interview before it starts.',url:''},
+  {id:'bl-3',n:'Saronic Technologies',lo:'San Diego, CA',ca:'Maritime / Defense',h:1,nw:1,tg:['SD','CA','Maritime','Defense'],p:'Autonomous naval vessels. $600M Series C, $4B valuation. Opening SD facility.',w:'San Diego, maritime autonomy, explosive growth. Career-defining early-scale opportunity.',url:'https://saronic.com/careers'},
+  {id:'bl-4',n:'Firestorm',lo:'San Diego, CA',ca:'Defense / UAS',h:1,nw:0,tg:['SD','CA','Defense'],p:'3D-printed modular drones for DoD. $77M raised, Lockheed Martin Ventures.',w:'San Diego HQ, high-volume mfg, defense.',url:''},
+  {id:'bl-5',n:'Shield AI',lo:'San Diego, CA',ca:'Defense / Autonomy',h:1,nw:0,tg:['SD','CA','Defense'],p:'AI autonomous drones operating GPS-denied. $198M Coast Guard contract. ~$3B valuation.',w:'San Diego, serious defense pedigree, growing fast into systems integration.',url:'https://shield.ai/careers'},
+  {id:'bl-6',n:'Citadel Defense',lo:'San Diego, CA',ca:'Defense / Counter-UAS',h:1,nw:1,tg:['SD','CA','Defense'],p:'ML-powered automated drone defense system. DoD contracts.',w:'San Diego, ML + hardware systems. Counter-UAS is the hottest DoD budget category.',url:''},
+  {id:'bl-7',n:'Aquaai',lo:'San Diego, CA',ca:'Maritime Robotics',h:1,nw:0,tg:['SD','CA','Maritime','Robotics'],p:'Fish-like underwater robots for marine environments.',w:'San Diego, maritime robotics, tiny team.',url:''},
+  {id:'bl-8',n:'Hadrian',lo:'Torrance, CA',ca:'Advanced Mfg',h:1,nw:0,tg:['CA','Defense'],p:'AI-powered CNC factories for aerospace & defense. Founders Fund backed.',w:'2 hrs from SD. OT + controls background maps directly.',url:'https://hadrian.co/careers'},
+  {id:'bl-9',n:'Castelion',lo:'Torrance, CA',ca:'Defense Tech',h:1,nw:0,tg:['CA','Defense'],p:'Hypersonic long-range rockets. a16z American Dynamism. ~30 people.',w:'Small team, high stakes, 2 hrs from SD.',url:''},
+  {id:'bl-10',n:'Machina Labs',lo:'Los Angeles, CA',ca:'AI Mfg',h:1,nw:0,tg:['CA','Defense','Robotics'],p:'AI-powered metal forming for defense. $124M Series C.',w:'Controls + robotics + manufacturing — your exact three-way overlap.',url:''},
+  {id:'bl-11',n:'Nominal',lo:'Los Angeles, CA',ca:'Defense / Systems SW',h:1,nw:0,tg:['CA','Defense'],p:'Platform for test and deployment of autonomous defense systems. $100M+ Sequoia.',w:'LA-based, defense autonomy, systems integration at scale.',url:''},
+  {id:'bl-12',n:'Path Robotics',lo:'Columbus, OH (Remote OK)',ca:'Robotics / Mfg',h:1,nw:1,tg:['Remote','Robotics','Defense','ISW'],p:'Autonomous welding AI for shipbuilding. $300M raised. MOU with HII.',w:'Autonomous manufacturing, naval defense, remote-friendly.',url:''},
+  {id:'bl-13',n:'Saildrone',lo:'Alameda, CA',ca:'Maritime / Defense',h:1,nw:1,tg:['CA','Maritime','Defense'],p:'AI-powered unmanned surface vehicles. Navy, NOAA, Coast Guard customers.',w:'California, maritime autonomy, defense data systems.',url:'https://www.saildrone.com/careers'},
+  {id:'bl-14',n:'Blue Water Autonomy',lo:'Boston (Remote OK)',ca:'Maritime / Defense',h:1,nw:0,tg:['Remote','Maritime','Defense'],p:'Autonomous warships for the US Navy. $14M seed.',w:'Maritime autonomy + defense + early stage.',url:''},
+  {id:'bl-15',n:'Anduril Industries',lo:'Costa Mesa, CA',ca:'Defense / Autonomy',h:0,nw:1,tg:['CA','Defense','Robotics'],p:'Autonomous defense platforms. $3B+ raised. Lattice OS.',w:'The gravitational center of defense tech.',url:'https://www.anduril.com/careers'},
+  {id:'bl-16',n:'Brain Corp',lo:'San Diego, CA',ca:'Robotics / AI',h:0,nw:0,tg:['SD','CA','Robotics'],p:'AI OS for commercial autonomous robots. SoftBank + Qualcomm backed.',w:'San Diego, robotics software, industrial environments.',url:''},
+  {id:'bl-17',n:'SkySafe',lo:'San Diego, CA',ca:'Defense / Counter-UAS',h:0,nw:0,tg:['SD','CA','Defense'],p:'Airspace awareness and drone control for military and commercial.',w:'San Diego, 11-50 people. Counter-drone DoD category.',url:''},
+  {id:'bl-18',n:'Gecko Robotics',lo:'Pittsburgh / Remote',ca:'Inspection Robotics',h:0,nw:0,tg:['Remote','Robotics','Defense'],p:'Robots inspecting industrial infrastructure. Founders Fund + YC.',w:'Heavy industrial, defense contracts.',url:''},
+  {id:'bl-19',n:'Skydio',lo:'San Mateo, CA',ca:'Defense / Drones',h:0,nw:1,tg:['CA','Defense'],p:'Largest US drone manufacturer. Shifted to defense 2023.',w:'California, autonomous systems, serious defense traction.',url:''},
+  {id:'bl-20',n:'Overland AI',lo:'Seattle (Remote OK)',ca:'Defense / Ground Robotics',h:0,nw:1,tg:['Remote','Defense','Robotics'],p:'Autonomous ground vehicles for defense. DARPA + Army contracts.',w:'Defense, ground robotics, early stage.',url:''},
+  {id:'bl-21',n:'Sabrewing Aircraft',lo:'Camarillo, CA',ca:'Aerospace / UAS',h:0,nw:1,tg:['CA','Defense'],p:'Heavy-lift VTOL UAS for commercial and defense cargo.',w:'Hard tech, California, VTOL systems integration.',url:''},
+  {id:'bl-22',n:'Persona AI',lo:'Houston (Remote OK)',ca:'Robotics / Maritime',h:0,nw:0,tg:['Remote','Robotics','Maritime'],p:'Humanoid robots for heavy industry shipyards. $27M pre-seed.',w:'Maritime + robotics + manufacturing.',url:''},
+  {id:'bl-23',n:'Aalo Atomics',lo:'Austin (Remote OK)',ca:'Energy / Hard Tech',h:0,nw:1,tg:['Remote'],p:'Modular nuclear reactors for rapid on-site assembly. Series A.',w:'High-stakes physical systems, early team.',url:''},
+  {id:'bl-24',n:'Allen Control Systems',lo:'Austin (Remote OK)',ca:'Defense / Counter-UAS',h:0,nw:1,tg:['Remote','Defense'],p:'Autonomous counter-drone weapon Bullfrog. $30M Series A.',w:'Series A with real DoD traction.',url:''},
+  {id:'bl-25',n:'Hydronalix',lo:'Tucson, AZ (Remote OK)',ca:'Maritime / Defense',h:0,nw:1,tg:['Remote','Maritime','Defense'],p:'Autonomous unmanned surface vehicles for defense. Navy contracts.',w:'Maritime autonomy, defense, small team.',url:''},
+  // ── UPDATED LEADS (added with full profile context) ──
+  {id:'bl-26',n:'Reliable Robotics',lo:'Mountain View, CA',ca:'Autonomous Aviation',h:1,nw:1,tg:['CA','Robotics','Aerospace'],p:'Remotely operated and autonomous cargo aircraft. Series B. FAA-certified systems. SpaceX + Cessna pedigree.',w:'Physical systems, safety-critical controls, high-stakes delivery. SF area, real equity at Series B stage.',url:'https://reliable.co/careers'},
+  {id:'bl-27',n:'Physical Intelligence (π)',lo:'San Francisco, CA',ca:'Robotics / Foundation AI',h:1,nw:1,tg:['CA','Robotics'],p:'General-purpose robot foundation model. $400M Series A. Former Google DeepMind + Stanford. SF.',w:'The most interesting physical AI company in SF. If they hire systems/integration engineers, this is career-defining.',url:'https://physicalintelligence.company/'},
+  {id:'bl-28',n:'Fathom5',lo:'San Diego, CA',ca:'Maritime / OT Cybersecurity',h:1,nw:1,tg:['SD','CA','Maritime','Defense'],p:'Industrial cybersecurity for maritime OT — protecting vessel control systems. Navy + DoD contracts. SD-based.',w:'San Diego, maritime OT, small specialized team. OPCUA + vessel controls background is a direct unlock.',url:''},
+  {id:'bl-29',n:'Skild AI',lo:'Pittsburgh / Remote',ca:'Robotics / AI',h:1,nw:1,tg:['Remote','Robotics'],p:'Foundation models for robot intelligence — generalizable across physical systems. $300M Series A. CMU pedigree.',w:'AI for physical systems, early stage, serious funding, remote-friendly. Highest equity ceiling on this list.',url:''},
+  {id:'bl-30',n:'Velo AI',lo:'San Francisco, CA',ca:'Robotics / Maritime',h:1,nw:1,tg:['CA','Robotics','Maritime'],p:'Autonomous maritime systems — surface and underwater vehicles for inspection, survey, and security. Early stage, SF.',w:'Maritime autonomy + physical systems. Sea++ is a direct credential. SF, tiny team, early equity.',url:''},
+  {id:'bl-31',n:'Joby Aviation',lo:'Santa Cruz, CA',ca:'Aerospace / eVTOL',h:0,nw:1,tg:['CA','Aerospace'],p:'Electric air taxi — eVTOL aircraft for urban mobility. $2.7B raised. Toyota partnership. FAA cert underway.',w:'SF area, physical systems, advanced mfg + controls. Real upside pre-certification.',url:'https://jobyaviation.com/careers'},
+  {id:'bl-32',n:'Archax',lo:'Remote / NYC',ca:'Industrial Robotics',h:1,nw:1,tg:['Remote','Robotics'],p:'Building a real piloted industrial mech robot. UK-founded, US expansion underway. Early, physical, funded.',w:'Small team, insane physical systems challenge, NYC expansion. Wildcard pick — exactly your wheelhouse.',url:''},
+  {id:'bl-33',n:'Terray Therapeutics',lo:'San Diego, CA',ca:'Hard Tech / Automation',h:0,nw:1,tg:['SD','CA'],p:'Automated high-throughput chemistry for drug discovery. Custom hardware + controls + robotics. San Diego.',w:'San Diego, small team, custom hardware + automation. Rare company where controls is the core product.',url:''},
+  {id:'bl-34',n:'Impossible Aerospace',lo:'San Jose, CA',ca:'Aerospace / UAS',h:0,nw:1,tg:['CA','Aerospace','Defense'],p:'Long-endurance electric UAVs for public safety and defense. SF area, small team, dual-use (not assault).',w:'SF area, physical systems, non-assault dual use. Controls + embedded background applies directly.',url:''},
+  {id:'bl-35',n:'Apptronik',lo:'Austin, TX',ca:'Humanoid Robotics',h:0,nw:1,tg:['Robotics'],p:'General-purpose humanoid robot Apollo. $350M raised. Google partnership. Manufacturing + logistics focus.',w:'Early humanoid play, serious backing, physical systems integration, manufacturing environments. High equity.',url:'https://apptronik.com/careers'},
+  {id:'bl-36',n:'Nuro',lo:'Mountain View, CA',ca:'Autonomous Vehicles / Robotics',h:0,nw:1,tg:['CA','Robotics'],p:'Autonomous delivery robots. $2B+ raised. Physical systems + embedded controls at scale.',w:'SF area, strong equity, physical autonomy. Controls + mechanical background maps to vehicle systems layer.',url:'https://nuro.ai/careers'},
+  {id:'bl-37',n:'Epirus',lo:'Los Angeles, CA',ca:'Electronic Warfare / Hard Tech',h:0,nw:0,tg:['CA','Defense'],p:'High-power microwave counter-drone systems. $595M raised. DoD + Army. LA-based.',w:'Non-assault (counter-drone / defensive EW). LA, well-funded Series C. Physical HW + controls stack.',url:''},
+  {id:'bl-38',n:'Oceaneering',lo:'San Diego, CA',ca:'Maritime / Subsea Robotics',h:0,nw:0,tg:['SD','CA','Maritime','Robotics'],p:'Underwater ROVs and autonomous subsea vehicles. DoD + offshore energy. San Diego office.',w:'San Diego, maritime + robotics, physical systems. Larger but autonomous vehicle engineering tracks exist.',url:'https://www.oceaneering.com/careers/'},
+  {id:'bl-39',n:'SpaceX (Starship Mfg / Controls)',lo:'Boca Chica TX / Hawthorne CA',ca:'Aerospace / Advanced Mfg',h:0,nw:0,tg:['CA','Aerospace'],p:'Starship production + launch infrastructure. Controls, DAQ, manufacturing automation at extreme scale.',w:'Not small — but Starship controls roles have insane ownership and are not bureaucratic. SE background fits perfectly.',url:'https://www.spacex.com/careers'},
+  // ── NEW LEADS: added from full portfolio + preferences context ──
+  {id:'bl-40',n:'Navier',lo:'San Francisco, CA',ca:'Maritime / Electric Hydrofoil',h:1,nw:1,tg:['CA','Maritime'],p:'Electric hydrofoil boats — silent, fast, zero-emission. Seed-stage, SF. Building the next generation of water transport.',w:'You designed and 3D-printed hydrofoils for Sea++, optimized for lift in rough seas. That is literally their core product challenge. This pitch writes itself.',url:'https://naviermarine.com'},
+  {id:'bl-41',n:'Arc Boats',lo:'San Francisco, CA',ca:'Maritime / Electric',h:1,nw:1,tg:['CA','Maritime'],p:'High-performance electric powerboats. $30M Series A. ~30 people. SF-based. Hardware-first, physical systems team.',w:'SF, small team, maritime, physical manufacturing. You built a boat — not many engineers applying to Arc can say that.',url:'https://arcboats.com/careers'},
+  {id:'bl-42',n:'Parallel Systems',lo:'Los Angeles, CA',ca:'Autonomous Rail / Cargo',h:1,nw:1,tg:['CA','Robotics'],p:'Battery-electric autonomous rail freight vehicles. $110M raised. Platoon-capable autonomous cargo delivery at scale.',w:'Decentralized autonomous cargo delivery — the exact mission of Sea++, just on rails. Controls + autonomy + physical systems. Strong fit on every axis.',url:'https://moveparallel.com/careers'},
+  {id:'bl-43',n:'Varda Space Industries',lo:'El Segundo, CA',ca:'Space Manufacturing',h:1,nw:1,tg:['CA','Aerospace'],p:'First company manufacturing products in space and returning them to Earth. $56M raised. Rocket Lab launch customer. ~100 people.',w:'Space-based manufacturing is explicitly on your target list. Physical systems, controls, re-entry vehicle integration. Hard tech that matters.',url:'https://varda.com/careers'},
+  {id:'bl-44',n:'Vast',lo:'Long Beach, CA',ca:'Space Infrastructure',h:1,nw:1,tg:['CA','Aerospace'],p:'Private space station company. $1B+ from Jed McCaleb. SpaceX launch deal signed. Haven-1 station launching 2025. ~200 people.',w:'Space infrastructure / manufacturing, well-funded, building real hardware. The kind of mission that justifies grinding.',url:'https://www.vastspace.com/careers'},
+  {id:'bl-45',n:'Figure AI',lo:'Sunnyvale, CA',ca:'Humanoid Robotics / Mfg',h:0,nw:1,tg:['CA','Robotics'],p:'Humanoid robots for manufacturing environments. $675M raised. BMW, Intel, Nvidia investors. Figure 02 in BMW factories.',w:'SF area, physical deployment in real factory environments, serious equity ceiling. Systems integration + controls maps directly to deployment engineering.',url:'https://figure.ai/careers'},
+  {id:'bl-46',n:'Covariant',lo:'Emeryville, CA',ca:'Robotics / AI',h:0,nw:1,tg:['CA','Robotics'],p:'AI brain for industrial robots — generalizable pick-and-place at warehouse scale. $222M raised. Amazon, DHL customers. UC Berkeley founders.',w:'SF area, physical robotics, deployed at scale, strong team signal (Berkeley AI lab). The no-shmucks check passes easily here.',url:'https://covariant.ai/careers'},
+  {id:'bl-47',n:'Sofar Ocean',lo:'San Francisco, CA',ca:'Maritime / Ocean Tech',h:0,nw:1,tg:['CA','Maritime'],p:'Ocean sensing network — autonomous buoys, vessel wave sensors, maritime data platform. $38M raised. ~100 people. SF.',w:'SF, maritime physical systems, sensor integration + deployment. Your ocean background (Sea++, Kennicott, sailing) is a cultural and technical fit.',url:'https://www.sofarocean.com/careers'},
+  {id:'bl-48',n:'Kairos Power',lo:'Alameda, CA',ca:'Energy / Nuclear',h:0,nw:1,tg:['CA','Energy'],p:'Fluoride salt-cooled nuclear microreactors for clean power. $100M+ raised. DOE contracts. Google offtake agreement. ~300 people.',w:'SF area, hard tech, clean energy, non-defense. Physical systems + DAQ + safety-critical controls maps directly to reactor instrumentation & control.',url:'https://kairospower.com/careers'},
+  {id:'bl-49',n:'Bedrock Ocean Exploration',lo:'San Francisco, CA',ca:'Maritime / Subsea Robotics',h:0,nw:1,tg:['CA','Maritime','Robotics'],p:'Autonomous underwater vehicles for deep-ocean mapping and exploration. ~20 people. $7.5M raised. SF-based.',w:'SF, tiny team, maritime autonomy, physical systems. Sea++ + Kennicott background gives instant credibility. Early enough for real equity.',url:'https://bedrockocean.com'},
+];
+
+// ══════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════
+let apps=[], customLeads=[], leadOverrides={}, reviewQueue=[], activityLog=[];
+let scoutStats={found:0,added:0,runs:0};
+let engineRunning=false, engineInterval=null, countdownInterval=null;
+let intervalMins=15, autoThreshold=8, queryIndex=0;
+let searchQueries=[...DEFAULT_QUERIES];
+let profileText=DEFAULT_PROFILE;
+let cf='all', editAppId=null, editLeadId=null, importData=null, importMode='merge';
+let countdownSecs=0, totalCountdownSecs=0;
+// Board state
+const DEFAULT_COLS=[
+  {id:'inbox',label:'Inbox',color:'#878787'},
+  {id:'watching',label:'Watching',color:'#4da6ff'},
+  {id:'hot',label:'🔥 Hot',color:'#00d084'},
+  {id:'researching',label:'Researching',color:'#9b7fff'},
+  {id:'applied',label:'Applied',color:'#f5a623'},
+];
+let boardColumns=[...DEFAULT_COLS.map(c=>({...c}))];
+let leadBoardStatus={}; // leadId → colId
+let notInterested=[]; // [{id,name,ca,tg,ts}] — archived, feeds Scout
+let boardTagFilter='all';
+let boardSortables=[];
+
+function scoutSw(t,btn){
+  document.querySelectorAll('.scout-stab').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.scout-subpanel').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('sp-'+t).classList.add('on');
+}
+
+function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function ts(){ return new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false}); }
+
+// ── CREDENTIAL MANAGEMENT ──
+function getGeminiKey(){ return sessionStorage.getItem('ek-scout-gemini')||''; }
+
+function saveGeminiKey(){
+  const k=document.getElementById('gemini-input').value.trim();
+  if(k){sessionStorage.setItem('ek-scout-gemini',k);logEntry('🔑','Gemini key saved — engine ready','green');}
+  else{sessionStorage.removeItem('ek-scout-gemini');logEntry('○','Gemini key cleared','');}
+  updateCredUI();
+}
+function clearGeminiKey(){
+  document.getElementById('gemini-input').value='';
+  sessionStorage.removeItem('ek-scout-gemini');
+  updateCredUI(); logEntry('○','Gemini key cleared','');
+}
+function onApiKeyInput(){}
+
+function updateCredUI(){
+  const g=getGeminiKey();
+  const gs=document.getElementById('gemini-status');
+  if(gs){gs.textContent=g?'✓ ready':'not set';gs.style.color=g?'var(--green)':'var(--text3)';}
+  const gc=document.getElementById('gemini-card');
+  if(gc)gc.style.borderColor=g?'rgba(0,208,132,.25)':'var(--border)';
+
+  // Dashboard credential summary
+  const setRow=(dotId,dotCls,valId,valTxt,valCls)=>{
+    const d=document.querySelector(`#${dotId} .cred-dot`);
+    if(d)d.className='cred-dot'+(dotCls?' '+dotCls:'');
+    const v=document.getElementById(valId);
+    if(v){v.textContent=valTxt;v.className='cred-val'+(valCls?' '+valCls:'');}
+  };
+  setRow('cs-gemini',g?'ok':'warn','csv-gemini',g?'✓ ready':'not set',g?'ok':'warn');
+  setRow('cs-mode','cred-dot-info','csv-mode',g?'Gemini Flash + web search':'add key to enable','');
+
+  // Header pill when idle
+  const pill=document.getElementById('header-scout-pill');
+  const lbl=document.getElementById('header-scout-label');
+  if(!engineRunning&&pill&&lbl){
+    pill.classList.remove('active');
+    lbl.textContent=g?'Scout ready':'Scout — needs key';
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const g=getGeminiKey();
+  if(g){const el=document.getElementById('gemini-input');if(el)el.value=g;}
+  updateCredUI();
+});
+
+// ══════════════════════════════════════════════════════
+// PERSISTENCE
+// ══════════════════════════════════════════════════════
+async function load(){
+  try{
+    const r=await window.storage.get('ek-hq-v5');
+    if(r){
+      const d=JSON.parse(r.value);
+      apps=d.apps||[]; customLeads=d.customLeads||[]; leadOverrides=d.leadOverrides||{};
+      reviewQueue=d.reviewQueue||[]; activityLog=d.activityLog||[];
+      scoutStats=d.scoutStats||{found:0,added:0,runs:0};
+      searchQueries=d.searchQueries||[...DEFAULT_QUERIES];
+      profileText=d.profileText||DEFAULT_PROFILE;
+      autoThreshold=d.autoThreshold||8;
+      intervalMins=d.intervalMins||15;
+      boardColumns=d.boardColumns||[...DEFAULT_COLS.map(c=>({...c}))];
+      leadBoardStatus=d.leadBoardStatus||{};
+      notInterested=d.notInterested||[];
+    }
+  }catch(e){ apps=[]; customLeads=[]; leadOverrides={}; reviewQueue=[]; activityLog=[]; }
+  applySettings(); render();
+}
+async function save(){
+  await window.storage.set('ek-hq-v5',JSON.stringify({
+    apps,customLeads,leadOverrides,reviewQueue,activityLog,scoutStats,
+    searchQueries,profileText,autoThreshold,intervalMins,
+    boardColumns,leadBoardStatus,notInterested
+  }));
+  document.getElementById('last-saved').textContent='Saved '+new Date().toLocaleTimeString();
+}
+
+function applySettings(){
+  document.getElementById('threshold-range').value=autoThreshold;
+  document.getElementById('threshold-val').textContent=autoThreshold;
+  document.getElementById('thresh-display').textContent=autoThreshold;
+  document.getElementById('interval-sel').value=intervalMins;
+  document.getElementById('profile-text').value=profileText;
+  renderIntervalHint();
+}
+
+// ══════════════════════════════════════════════════════
+// SCOUT ENGINE — Gemini Flash + built-in Google Search
+// One key from aistudio.google.com. Free. No Cloud Console.
+// ══════════════════════════════════════════════════════
+
+// Retry state — persists across calls
+let _retryTimeout=null;
+let _retryCount=0;
+const RETRY_DELAYS=[65,130,260]; // seconds — doubles each attempt
+
+function scheduleRetry(q){
+  if(_retryCount>=RETRY_DELAYS.length){ logEntry('✕','Max retries hit. Engine paused — will resume on next interval.',''); _retryCount=0; return; }
+  const wait=RETRY_DELAYS[_retryCount++];
+  logEntry('⏳',`Rate limited. Retrying query in <strong>${wait}s</strong> (attempt ${_retryCount}/${RETRY_DELAYS.length})…`,'amber');
+  setEngineState('searching','Rate limited',`Retrying in ${wait}s`);
+  // Live countdown in engine sub
+  let remaining=wait;
+  const tick=setInterval(()=>{
+    remaining--;
+    setEngineState('searching','Rate limited',`Retrying in ${remaining}s`);
+    if(remaining<=0){ clearInterval(tick); runQueryWithRetry(q); }
+  },1000);
+  _retryTimeout=tick;
+}
+
+async function callGemini(prompt, key, model='gemini-2.0-flash'){
+  const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      contents:[{role:'user',parts:[{text:prompt}]}],
+      tools:[{google_search:{}}],
+      generationConfig:{temperature:0.3,maxOutputTokens:2000}
+    })
+  });
+  return res;
+}
+
+async function runQueryWithRetry(q){
+  const geminiKey=getGeminiKey();
+  if(!geminiKey||!engineRunning&&_retryCount===0) return;
+
+  const profile=(document.getElementById('profile-text').value||profileText).slice(0,1800);
+  const existingNames=new Set([...allLeads().map(l=>l.n.toLowerCase()),...reviewQueue.map(l=>(l.name||'').toLowerCase())]);
+  const niNames=notInterested.map(n=>n.name).slice(0,20);
+  const niCats=[...new Set(notInterested.map(n=>n.ca).filter(Boolean))].slice(0,8);
+
+  const prompt=`You are a job lead scout with live Google Search access. Search for real, currently-hiring companies matching this query and candidate profile.
+
+SEARCH QUERY: "${q}"
+
+CANDIDATE PROFILE:
+${profile}
+
+INSTRUCTIONS:
+1. Use your search capability to find 3-5 REAL companies currently hiring or likely to hire for roles matching this candidate
+2. Skip: pure software companies, large defense primes (Lockheed, Raytheon, Northrop, Boeing, L3Harris, Leidos), companies already known: ${[...existingNames].slice(0,15).join(', ')}
+3. EXPLICITLY SKIP these companies the candidate marked NOT INTERESTED: ${niNames.join(', ')||'none yet'}
+4. Learn from rejection signal — avoid companies similar to these categories: ${niCats.join(', ')||'none yet'}
+5. Prioritize: small/midsize, well-funded, hard tech, physical systems, maritime/autonomy/robotics/space/manufacturing
+6. Cities: San Diego, San Francisco, NYC, or Remote only
+7. Compensation must realistically reach $140k+
+
+Return ONLY a valid JSON array — no markdown, no explanation:
+[{"id":"sc-UNIQUE8CHAR","name":"Exact Company Name","location":"City, ST","category":"Industry / Role Type","tags":["SD","CA"],"pitch":"2 sentences on what they do and funding stage.","why":"1 specific sentence referencing THIS candidate's actual background (Sea++, China Lake, Kennicott, PLC/DAQ, etc).","fit_score":8,"url":"https://careers.company.com","hot":1}]
+
+Tags: SD, CA, NYC, Remote, Defense, Maritime, ISW, Robotics, Aerospace, Energy
+fit_score 1-10. hot=1 if score>=8. Return [] if nothing relevant.`;
+
+  try{
+    // Try 2.0 flash first, fall back to 1.5 flash on model-level errors
+    let res=await callGemini(prompt,geminiKey,'gemini-2.0-flash');
+
+    // Model not available — fallback
+    if(res.status===404||res.status===400){
+      logEntry('○','Falling back to gemini-1.5-flash…','');
+      res=await callGemini(prompt,geminiKey,'gemini-1.5-flash');
+    }
+
+    if(res.status===401||res.status===403){
+      const e=await res.json().catch(()=>({}));
+      logEntry('🔑',`<strong>API key invalid.</strong> ${e?.error?.message||'Check Settings.'}`.trim(),'amber');
+      if(engineRunning)stopEngine(); return;
+    }
+    if(res.status===429){
+      // Back off and retry
+      scheduleRetry(q);
+      return;
+    }
+    if(!res.ok){
+      const e=await res.json().catch(()=>({}));
+      throw new Error(`Gemini ${res.status}: ${e?.error?.message||'unknown'}`);
+    }
+
+    // Success — reset retry counter
+    _retryCount=0;
+
+    const data=await res.json();
+    const rawText=data?.candidates?.[0]?.content?.parts?.filter(p=>p.text).map(p=>p.text).join('\n')||'';
+    const cleaned=rawText.replace(/```json[\s\S]*?```|```[\s\S]*?```/g,m=>m.replace(/```json|```/g,'')).trim();
+    const match=cleaned.match(/\[[\s\S]*\]/);
+
+    scoutStats.runs++;
+    let leads=[];
+    if(match){
+      try{ leads=JSON.parse(match[0]); }
+      catch(pe){ logEntry('⚠','Could not parse response — try again','amber'); }
+    } else {
+      logEntry('○','No relevant leads found for this query','');
+    }
+
+    scoutStats.found+=leads.length;
+    if(leads.length){
+      leads.forEach(l=>{l.id=l.id||('sc-'+genId());processScoutLead(l);});
+      const added=leads.filter(l=>l.fit_score>=autoThreshold).length;
+      const queued=leads.length-added;
+      logEntry('✓',`<strong>${leads.length}</strong> leads found — ${added} auto-added, ${queued} in queue`,'green');
+    }
+    renderScoutStats(); save();
+
+  }catch(err){
+    logEntry('✕',`Error: ${err.message}`,'');
+    console.error('Scout error:',err);
+  }
+
+  if(engineRunning)setEngineState('running','Running',`Next in ${intervalMins}m`);
+  else setEngineState('idle','Idle','');
+}
+
+async function runOnce(){
+  const geminiKey=getGeminiKey();
+  if(!geminiKey){
+    logEntry('🔑','<strong>Add your Gemini API key</strong> in Settings → aistudio.google.com','amber');
+    setEngineState('idle','Idle','Add Gemini key in Settings');
+    if(engineRunning)stopEngine();
+    return;
+  }
+  if(!searchQueries.length){logEntry('⚠','No search queries — add some in Settings','amber');return;}
+
+  // Clear any pending retry
+  if(_retryTimeout){clearInterval(_retryTimeout);_retryTimeout=null;}
+
+  const q=searchQueries[queryIndex%searchQueries.length];
+  queryIndex=(queryIndex+1)%searchQueries.length;
+  renderQueryList();
+  setEngineState('searching','Searching…',`"${q.slice(0,55)}"`);
+  logEntry('↻',`Searching: <strong>${q}</strong>`,'');
+
+  await runQueryWithRetry(q);
+}
+
+function processScoutLead(l){
+  // Skip if NI-archived (either by id match or name match in NI list)
+  if(notInterested.some(n=>n.id===l.id||n.name.toLowerCase()===(l.name||'').toLowerCase())) return;
+  const skipTracked=document.getElementById('skip-tracked')?.checked;
+  if(skipTracked && isTracked(l.name)) return;
+  if(document.getElementById('skip-existing')?.checked){
+    const existingNames=new Set(allLeads().map(x=>x.n.toLowerCase()));
+    if(existingNames.has((l.name||'').toLowerCase())) return;
+  }
+  const existingIds=new Set([...customLeads.map(x=>x.id),...BUILTIN_LEADS.map(x=>x.id),...reviewQueue.map(x=>x.id)]);
+  if(existingIds.has(l.id)) return;
+
+  if(l.fit_score>=autoThreshold){
+    const newId=l.id||('sc-'+genId());
+    customLeads.unshift({id:newId,n:l.name,lo:l.location||'',ca:l.category||'',h:l.hot||0,nw:1,tg:l.tags||[],p:l.pitch||'',w:l.why||'',url:l.url||'',source:'scout',priority:l.fit_score>=9?'high':'med',fit_score:l.fit_score});
+    leadBoardStatus[newId]='inbox';
+    scoutStats.added++;
+    logEntry('⚡',`<strong>Auto-added</strong>: ${esc(l.name)} (${l.fit_score}/10) → Inbox`,'orange');
+    renderBoard(); renderStats();
+  } else {
+    reviewQueue.unshift({...l,ts:Date.now()});
+    logEntry('?',`Review queue: ${esc(l.name)} (${l.fit_score}/10)`,'');
+    renderReviewQueue();
+  }
+  renderScoutStats();
+}
+
+function startEngine(){
+  if(engineRunning) return;
+  engineRunning=true;
+  document.getElementById('start-btn').disabled=true;
+  document.getElementById('stop-btn').disabled=false;
+  document.getElementById('header-scout-pill').classList.add('active');
+  document.getElementById('header-scout-label').textContent=getGeminiKey()?'Scout running (AI)':'Scout running';
+  setEngineState('running','Running',`Every ${intervalMins} min`);
+  logEntry('▶','Engine started','green');
+  runOnce(); // immediate first run
+  startCountdown();
+  engineInterval=setInterval(()=>{runOnce();startCountdown();},intervalMins*60*1000);
+}
+
+function stopEngine(){
+  engineRunning=false;
+  clearInterval(engineInterval); engineInterval=null;
+  clearInterval(countdownInterval); countdownInterval=null;
+  if(_retryTimeout){clearInterval(_retryTimeout);_retryTimeout=null;} _retryCount=0;
+  document.getElementById('start-btn').disabled=false;
+  document.getElementById('stop-btn').disabled=true;
+  document.getElementById('header-scout-pill').classList.remove('active');
+  document.getElementById('header-scout-label').textContent='Scout idle';
+  document.getElementById('countdown-txt').textContent='—';
+  document.getElementById('countdown-fill').style.width='100%';
+  setEngineState('idle','Idle','Engine stopped');
+  logEntry('■','Engine stopped','');
+  save();
+}
+
+function startCountdown(){
+  clearInterval(countdownInterval);
+  totalCountdownSecs=intervalMins*60;
+  countdownSecs=totalCountdownSecs;
+  countdownInterval=setInterval(()=>{
+    countdownSecs=Math.max(0,countdownSecs-1);
+    const pct=(countdownSecs/totalCountdownSecs)*100;
+    document.getElementById('countdown-fill').style.width=pct+'%';
+    const m=Math.floor(countdownSecs/60), s=countdownSecs%60;
+    document.getElementById('countdown-txt').textContent=`${m}:${s.toString().padStart(2,'0')}`;
+  },1000);
+}
+
+function setEngineState(state,label,sub){
+  const dot=document.getElementById('eng-dot');
+  const lbl=document.getElementById('eng-label');
+  const sub_el=document.getElementById('eng-sub');
+  dot.className='status-dot'+(state==='running'?' running':state==='searching'?' searching':'');
+  lbl.textContent=label;
+  if(sub) sub_el.textContent=sub;
+}
+
+function updateInterval(v){
+  intervalMins=parseInt(v);
+  if(engineRunning){ clearInterval(engineInterval); engineInterval=setInterval(()=>{runOnce();startCountdown();},intervalMins*60*1000); }
+  save(); renderIntervalHint();
+}
+function updateThreshold(v){
+  autoThreshold=parseInt(v);
+  document.getElementById('threshold-val').textContent=v;
+  document.getElementById('thresh-display').textContent=v;
+  save();
+}
+function saveProfile(){ profileText=document.getElementById('profile-text').value; save(); logEntry('✓','Profile saved','green'); }
+function resetProfile(){ document.getElementById('profile-text').value=DEFAULT_PROFILE; profileText=DEFAULT_PROFILE; save(); }
+
+// ── QUERY LIST ──
+function renderIntervalHint(){
+  const el=document.getElementById('interval-hint'); if(!el)return;
+  const mins=intervalMins, qCount=searchQueries.length||1;
+  const perDay=Math.floor(1440/mins);
+  const FREE_LIMIT=1500; // Gemini 2.0 Flash free tier
+  const cycleMin=qCount*mins;
+  const cycleStr=cycleMin<60?`${cycleMin}m`:`${(cycleMin/60).toFixed(1).replace(/\.0$/,'')}h`;
+  const hitLimit=perDay>FREE_LIMIT;
+  if(hitLimit){
+    const limitMins=FREE_LIMIT*mins, lh=Math.floor(limitMins/60), lm=limitMins%60;
+    el.innerHTML=`<span style="color:var(--amber)">⚠ ${perDay}/day exceeds free limit (${FREE_LIMIT}/day) — hits cap after ${lh?lh+'h ':''}${lm?lm+'m':''}.</span> Cycle: ${cycleStr}.`;
+  } else {
+    const pct=Math.round((perDay/FREE_LIMIT)*100);
+    el.innerHTML=`${perDay} searches/day &nbsp;·&nbsp; ${pct}% of free limit (${FREE_LIMIT}/day) &nbsp;·&nbsp; full cycle: ${cycleStr}`;
+  }
+}
+
+function renderQueryList(){
+  const ql=document.getElementById('query-list'); if(!ql)return;
+  const active=queryIndex%Math.max(searchQueries.length,1);
+  ql.innerHTML=searchQueries.map((q,i)=>`
+    <div class="query-item${i===active&&engineRunning?' active-query':''}" id="qi-${i}">
+      <span class="qi-num">${i+1}</span>
+      <span class="qi-text">${esc(q)}</span>
+      <button class="qi-edit" onclick="editQuery(${i})" title="Edit">✎</button>
+      <button class="qi-del" onclick="removeQuery(${i})" title="Remove">✕</button>
+    </div>`).join('');
+  renderIntervalHint();
+}
+
+function editQuery(i){
+  const row=document.getElementById('qi-'+i); if(!row)return;
+  row.classList.add('editing');
+  row.innerHTML=`
+    <span class="qi-num">${i+1}</span>
+    <input class="qi-inline-input" id="qedit-${i}" value="${esc(searchQueries[i])}"
+      onkeydown="if(event.key==='Enter')saveQuery(${i});else if(event.key==='Escape')renderQueryList()">
+    <button class="qi-save" onclick="saveQuery(${i})">✓</button>
+    <button class="qi-cancel" onclick="renderQueryList()">✕</button>`;
+  const inp=document.getElementById('qedit-'+i);
+  if(inp){inp.focus();const len=inp.value.length;inp.setSelectionRange(len,len);}
+}
+
+function saveQuery(i){
+  const inp=document.getElementById('qedit-'+i); if(!inp)return;
+  const v=inp.value.trim();
+  if(v) searchQueries[i]=v;
+  save(); renderQueryList();
+}
+
+function addQuery(){
+  const inp=document.getElementById('new-query-inp');
+  const v=inp.value.trim(); if(!v)return;
+  searchQueries.push(v); inp.value='';
+  save(); renderQueryList();
+}
+
+function removeQuery(i){ searchQueries.splice(i,1); save(); renderQueryList(); }
+
+// ── REVIEW QUEUE ──
+function renderReviewQueue(){
+  const body=document.getElementById('review-queue-body');
+  document.getElementById('rq-count-badge').textContent=reviewQueue.length;
+  document.getElementById('s-review').textContent=reviewQueue.length;
+  document.getElementById('scout-badge').textContent=reviewQueue.length||'';
+  if(!reviewQueue.length){
+    body.innerHTML='<div class="review-empty">No leads pending review. Run the engine to find new leads.</div>';
+    return;
+  }
+  body.innerHTML=reviewQueue.map(l=>{
+    const scoreClass=l.fit_score>=9?'score-9':l.fit_score>=8?'score-8':l.fit_score>=7?'score-7':l.fit_score>=5?'score-6':'score-low';
+    return `<div class="rq-item" id="rq-${l.id}">
+      <div class="rq-top">
+        <div>
+          <div class="rq-name"><span class="dot-lead dot-orange"></span>${esc(l.name)}</div>
+          <div class="rq-meta">${esc(l.location||'')} · ${esc(l.category||'')} ${l.tags&&l.tags.length?'· '+l.tags.join(', '):''}</div>
+        </div>
+        <div class="rq-score ${scoreClass}">${l.fit_score}</div>
+      </div>
+      ${l.pitch?`<div class="rq-reason">${esc(l.pitch)}</div>`:''}
+      ${l.why?`<div class="lcard-why" style="margin-top:5px">→ ${esc(l.why)}</div>`:''}
+      <div class="rq-actions">
+        <button class="rq-add" onclick="acceptReview('${l.id}')">+ Add to Board</button>
+        <button class="rq-dismiss" onclick="dismissReview('${l.id}')">Dismiss</button>
+        ${l.url?`<a href="${esc(l.url)}" target="_blank" class="rq-url">↗ Link</a>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function acceptReview(id){
+  const l=reviewQueue.find(x=>x.id===id); if(!l) return;
+  reviewQueue=reviewQueue.filter(x=>x.id!==id);
+  const newId=l.id||('sc-'+genId());
+  customLeads.unshift({id:newId,n:l.name,lo:l.location||'',ca:l.category||'',h:l.fit_score>=8?1:0,nw:1,tg:l.tags||[],p:l.pitch||'',w:l.why||'',url:l.url||'',source:'scout',priority:l.fit_score>=9?'high':'med',fit_score:l.fit_score});
+  leadBoardStatus[newId]='inbox';
+  logEntry('✓',`Accepted: <strong>${esc(l.name)}</strong> → Inbox`,'green');
+  save(); renderBoard(); renderReviewQueue(); renderStats();
+}
+function dismissReview(id){
+  reviewQueue=reviewQueue.filter(x=>x.id!==id);
+  save(); renderReviewQueue(); renderStats();
+}
+function acceptAll(){
+  const toAccept=reviewQueue.filter(l=>l.fit_score>=autoThreshold);
+  toAccept.forEach(l=>{
+    const newId=l.id||('sc-'+genId());
+    customLeads.unshift({id:newId,n:l.name,lo:l.location||'',ca:l.category||'',h:l.fit_score>=8?1:0,nw:1,tg:l.tags||[],p:l.pitch||'',w:l.why||'',url:l.url||'',source:'scout',priority:l.fit_score>=9?'high':'med',fit_score:l.fit_score});
+    leadBoardStatus[newId]='inbox';
+  });
+  reviewQueue=reviewQueue.filter(l=>l.fit_score<autoThreshold);
+  logEntry('✓',`Accepted ${toAccept.length} leads → Inbox`,'green');
+  save(); renderBoard(); renderReviewQueue(); renderStats();
+}
+function dismissAll(){ if(!confirm('Dismiss all queued leads?')) return; reviewQueue=[]; save(); renderReviewQueue(); renderStats(); }
+
+// ── LOG ──
+function logEntry(icon,txt,cls){
+  activityLog.unshift({icon,txt,cls,time:ts(),id:genId()});
+  if(activityLog.length>80) activityLog=activityLog.slice(0,80);
+  renderLog();
+}
+function renderLog(){
+  const el=document.getElementById('activity-log');
+  el.innerHTML=activityLog.length?activityLog.map(e=>`
+    <div class="log-item">
+      <span class="log-time">${e.time}</span>
+      <span class="log-icon">${e.icon||''}</span>
+      <span class="log-txt${e.cls?' '+e.cls:''}">${e.txt}</span>
+    </div>`).join('')
+    :'<div class="log-item" style="justify-content:center"><span class="log-txt" style="color:var(--text3);font-style:italic">No activity yet</span></div>';
+}
+function clearLog(){ activityLog=[]; save(); renderLog(); }
+function renderScoutStats(){
+  document.getElementById('es-found').textContent=scoutStats.found;
+  document.getElementById('es-added').textContent=scoutStats.added;
+  document.getElementById('es-runs').textContent=scoutStats.runs;
+}
+
+// ══════════════════════════════════════════════════════
+// TRACKER
+// ══════════════════════════════════════════════════════
+function addManual(){
+  const co=document.getElementById('f-co').value.trim(), role=document.getElementById('f-role').value.trim();
+  if(!co||!role) return;
+  apps.push({id:genId(),company:co,role,status:document.getElementById('f-status').value,priority:document.getElementById('f-pri').value,date:document.getElementById('f-date').value,url:document.getElementById('f-url').value.trim(),notes:document.getElementById('f-notes').value.trim()});
+  ['f-co','f-role','f-notes','f-url'].forEach(id=>document.getElementById(id).value='');
+  save(); render(); togForm('tracker-form');
+}
+function trackLead(name,cat,hot,btn){
+  if(isTracked(name)) return;
+  apps.push({id:genId(),company:name,role:cat,status:'applied',priority:hot?'high':'med',date:new Date().toISOString().split('T')[0],url:'',notes:''});
+  if(btn){btn.textContent='✓ Tracked';btn.classList.add('added');}
+  save(); renderStats(); renderTracker();
+}
+function updateStatus(id,v){ const a=apps.find(x=>x.id===id); if(a){a.status=v;save();renderStats();} }
+function updatePri(id,v){ const a=apps.find(x=>x.id===id); if(a){a.priority=v;save();renderStats();} }
+function openEditApp(id){
+  const a=apps.find(x=>x.id===id); if(!a) return;
+  editAppId=id;
+  document.getElementById('edit-app-sub').textContent=a.company+' · '+(a.role||'');
+  document.getElementById('ea-notes').value=a.notes||'';
+  document.getElementById('ea-status').value=a.status||'applied';
+  document.getElementById('ea-pri').value=a.priority||'med';
+  openOverlay('edit-app-overlay');
+}
+function saveEditApp(){
+  const a=apps.find(x=>x.id===editAppId); if(!a) return;
+  a.notes=document.getElementById('ea-notes').value.trim();
+  a.status=document.getElementById('ea-status').value;
+  a.priority=document.getElementById('ea-pri').value;
+  closeOverlay('edit-app-overlay'); save(); render();
+}
+function delApp(id){ apps=apps.filter(x=>x.id!==id); save(); render(); }
+function renderTracker(){
+  const sorted=[...apps].sort((a,b)=>(PRI_ORDER[a.priority||'med'])-(PRI_ORDER[b.priority||'med']));
+  document.getElementById('tracker-empty').style.display=apps.length?'none':'block';
+  document.getElementById('tracker-body').innerHTML=sorted.map(a=>`
+    <tr>
+      <td><div class="co-cell">${a.priority==='high'?'<span class="dot-g"></span>':''}${esc(a.company)}</div></td>
+      <td style="color:var(--text2);font-size:12px">${esc(a.role||'—')}</td>
+      <td><select class="sel-inline" onchange="updateStatus('${a.id}',this.value)">${STATUSES.map(s=>`<option value="${s}"${a.status===s?' selected':''}>${SL[s]}</option>`).join('')}</select></td>
+      <td><select class="sel-inline" onchange="updatePri('${a.id}',this.value)"><option value="high"${a.priority==='high'?' selected':''}>HIGH</option><option value="med"${a.priority==='med'?' selected':''}>MED</option><option value="low"${a.priority==='low'?' selected':''}>LOW</option></select></td>
+      <td class="date-cell">${a.date||'—'}</td>
+      <td>${a.url?`<a href="${esc(a.url)}" target="_blank" style="color:var(--blue);font-size:11px;font-family:'IBM Plex Mono',monospace;text-decoration:none">↗</a>`:'—'}</td>
+      <td><div class="notes-view" onclick="openEditApp('${a.id}')" title="${esc(a.notes||'')}">${a.notes||'<span style="color:var(--text3);font-style:italic">add notes…</span>'}</div></td>
+      <td><span class="del" onclick="delApp('${a.id}')">✕</span></td>
+    </tr>`).join('');
+}
+
+// ══════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════
+// LEADS — KANBAN BOARD
+// ══════════════════════════════════════════════════════
+function allLeads(){
+  const bi=BUILTIN_LEADS.map(l=>{const ov=leadOverrides[l.id]||{};return{...l,...ov,custom:false};});
+  return[
+    ...customLeads.filter(l=>!l.niArchived).map(l=>({...l,custom:true})),
+    ...bi.filter(l=>!(leadOverrides[l.id]||{}).niArchived)
+  ];
+}
+function isTracked(name){ return apps.some(a=>a.company.toLowerCase()===name.toLowerCase()); }
+function isNI(id){ return notInterested.some(n=>n.id===id); }
+function getColForLead(id){ return leadBoardStatus[id]||'inbox'; }
+
+// ── TAG FILTER BAR ──
+const BOARD_TAGS=['all','SD','CA','NYC','Remote','Defense','Maritime','Robotics','ISW','Aerospace','Energy','Scout'];
+function renderBoardTagFilters(){
+  const el=document.getElementById('board-tag-filters'); if(!el)return;
+  el.innerHTML=BOARD_TAGS.map(t=>`<button class="btf${boardTagFilter===t?' on':''}" onclick="setBoardTag('${t}')">${t==='all'?'All':t}</button>`).join('');
+}
+function setBoardTag(t){ boardTagFilter=t; renderBoardTagFilters(); filterBoard(); }
+
+function filterBoard(){
+  const q=(document.getElementById('board-search')?.value||'').toLowerCase();
+  document.querySelectorAll('.kcard').forEach(card=>{
+    const name=(card.dataset.name||'').toLowerCase();
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const cat=(card.dataset.cat||'').toLowerCase();
+    const src=(card.dataset.src||'');
+    const matchQ=!q||name.includes(q)||cat.includes(q)||tags.includes(q);
+    const matchTag=boardTagFilter==='all'||
+      (boardTagFilter==='Scout'&&src==='scout')||
+      tags.includes(boardTagFilter.toLowerCase());
+    card.classList.toggle('filtered-out',!(matchQ&&matchTag));
+  });
+  // Update per-column counts
+  document.querySelectorAll('.bcol').forEach(col=>{
+    const visible=col.querySelectorAll('.kcard:not(.filtered-out)').length;
+    const total=col.querySelectorAll('.kcard').length;
+    const cnt=col.querySelector('.bcol-count');
+    if(cnt) cnt.textContent=visible===total?total:`${visible}/${total}`;
+  });
+}
+
+// ── BOARD RENDER ──
+function renderBoard(){
+  const board=document.getElementById('board'); if(!board) return;
+  // Destroy existing Sortables
+  boardSortables.forEach(s=>{try{s.destroy();}catch(e){}});
+  boardSortables=[];
+
+  // Populate la-col select
+  const colSel=document.getElementById('la-col');
+  if(colSel) colSel.innerHTML=boardColumns.map(c=>`<option value="${c.id}">${c.label}</option>`).join('');
+
+  const leads=allLeads().filter(l=>!isNI(l.id)&&!(leadOverrides[l.id]||{}).hidden);
+  // Bucket leads into columns
+  const buckets={};
+  boardColumns.forEach(c=>buckets[c.id]=[]);
+  leads.forEach(l=>{
+    const col=getColForLead(l.id);
+    const colExists=boardColumns.find(c=>c.id===col);
+    const target=colExists?col:'inbox';
+    if(!buckets[target]) buckets[target]=[];
+    buckets[target].push(l);
+  });
+
+  board.innerHTML='';
+
+  boardColumns.forEach((col,ci)=>{
+    const cards=buckets[col.id]||[];
+    const colEl=document.createElement('div');
+    colEl.className='bcol';
+    colEl.dataset.colId=col.id;
+    colEl.innerHTML=`
+      <div class="bcol-hd" title="Drag to reorder column">
+        <div class="bcol-color" style="background:${col.color}"></div>
+        <div class="bcol-label-wrap">
+          <input class="bcol-label" value="${esc(col.label)}" onchange="renameColumn('${col.id}',this.value)" onkeydown="if(event.key==='Enter')this.blur()">
+        </div>
+        <span class="bcol-count">${cards.length}</span>
+        <button class="bcol-btn" onclick="pickColColor('${col.id}')" title="Change color">●</button>
+        <button class="bcol-btn del" onclick="deleteColumn('${col.id}')" title="Delete column">×</button>
+      </div>
+      <div class="bcol-body" id="col-body-${col.id}" data-col-id="${col.id}">
+        ${cards.length===0?'<div class="bcol-empty">Drop cards here</div>':cards.map(l=>buildCard(l)).join('')}
+      </div>`;
+    board.appendChild(colEl);
+
+    // Init Sortable on column body
+    const body=colEl.querySelector('.bcol-body');
+    const s=Sortable.create(body,{
+      group:'leads',
+      animation:150,
+      ghostClass:'sortable-ghost',
+      chosenClass:'sortable-chosen',
+      dragClass:'sortable-drag',
+      handle:'.kcard',
+      onEnd(evt){
+        const leadId=evt.item.dataset.leadId;
+        const toColId=evt.to.dataset.colId;
+        if(leadId&&toColId){ leadBoardStatus[leadId]=toColId; save(); updateColCount(); filterBoard(); }
+      }
+    });
+    boardSortables.push(s);
+  });
+
+  // Add column button
+  const addBtn=document.createElement('button');
+  addBtn.className='board-add-col';
+  addBtn.title='Add column';
+  addBtn.innerHTML='+';
+  addBtn.onclick=addColumn;
+  board.appendChild(addBtn);
+
+  // Column drag to reorder
+  Sortable.create(board,{
+    animation:200,
+    filter:'.board-add-col',
+    draggable:'.bcol',
+    ghostClass:'sortable-ghost',
+    onEnd(){
+      const cols=[...board.querySelectorAll('.bcol')].map(el=>el.dataset.colId).filter(Boolean);
+      boardColumns.sort((a,b)=>cols.indexOf(a.id)-cols.indexOf(b.id));
+      save();
+    }
+  });
+
+  renderBoardTagFilters();
+  renderNiArchive();
+  filterBoard();
+  updateColCount();
+
+  // Update lead count
+  const el=document.getElementById('lead-count');
+  if(el) el.textContent=`${leads.length} lead${leads.length!==1?'s':''} · ${notInterested.length} archived`;
+}
+
+function buildCard(l){
+  const tr=isTracked(l.n);
+  const score=l.fit_score||l.h&&9||0;
+  const scoreCls=score>=9?'ks-hi':score>=7?'ks-hi':score>=5?'ks-md':score>0?'ks-lo':'ks-none';
+  const isScout=l.source==='scout';
+  return `<div class="kcard" data-lead-id="${l.id}" data-name="${esc(l.n)}" data-tags="${esc((l.tg||[]).join(','))}" data-cat="${esc(l.ca)}" data-src="${l.source||''}">
+    <div class="kcard-top">
+      <div class="kcard-name">${esc(l.n)}</div>
+      ${score?`<div class="kcard-score ${scoreCls}">${score}</div>`:''}
+    </div>
+    <div class="kcard-tags">
+      ${l.lo?`<span class="ktag ktag-loc">${esc(l.lo.split(',')[0])}</span>`:''}
+      ${l.ca?`<span class="ktag ktag-cat">${esc(l.ca.split('/')[0].trim())}</span>`:''}
+      ${l.h?'<span class="ktag ktag-hot">★</span>':''}
+      ${isScout?'<span class="ktag ktag-scout">⚡</span>':''}
+    </div>
+    ${l.p?`<div class="kcard-pitch">${esc(l.p)}</div>`:''}
+    ${l.w?`<div class="kcard-why">→ ${esc(l.w)}</div>`:''}
+    <div class="kcard-footer">
+      ${l.url?`<a href="${esc(l.url)}" target="_blank" class="kact" onclick="event.stopPropagation()">↗</a>`:''}
+      <button class="kact" onclick="openEditLead('${l.id}');event.stopPropagation()">Edit</button>
+      <button class="kact track${tr?' added':''}" onclick="trackLead('${esc(l.n).replace(/'/g,"\\'")}','${esc(l.ca)}',${l.h?1:0},this);event.stopPropagation()">${tr?'✓':'Track'}</button>
+      <button class="kact ni" onclick="markNotInterested('${l.id}');event.stopPropagation()" title="Not interested">✕ Not interested</button>
+      <button class="kact del" onclick="deleteLead('${l.id}');event.stopPropagation()" title="Delete">🗑</button>
+    </div>
+  </div>`;
+}
+
+function updateColCount(){
+  document.querySelectorAll('.bcol').forEach(col=>{
+    const total=col.querySelectorAll('.kcard').length;
+    const cnt=col.querySelector('.bcol-count');
+    if(cnt) cnt.textContent=total;
+  });
+}
+
+// ── COLUMN MANAGEMENT ──
+function addColumn(){
+  const label=prompt('Column name:','New Column');
+  if(!label) return;
+  const colors=['#4da6ff','#9b7fff','#f5a623','#00bcd4','#ff8c42','#00d084','#ff5555'];
+  boardColumns.push({id:'col-'+genId(),label:label.trim(),color:colors[boardColumns.length%colors.length]});
+  save(); renderBoard();
+}
+function renameColumn(id,label){
+  const col=boardColumns.find(c=>c.id===id); if(col&&label.trim()) col.label=label.trim(); save();
+}
+function deleteColumn(id){
+  if(boardColumns.length<=1){alert('Need at least one column.');return;}
+  const col=boardColumns.find(c=>c.id===id);
+  if(!confirm(`Delete column "${col?.label}"? Cards move to Inbox.`)) return;
+  // Move all cards in this column to inbox
+  Object.keys(leadBoardStatus).forEach(lid=>{ if(leadBoardStatus[lid]===id) leadBoardStatus[lid]='inbox'; });
+  boardColumns=boardColumns.filter(c=>c.id!==id);
+  save(); renderBoard();
+}
+function pickColColor(id){
+  const colors=['#878787','#4da6ff','#9b7fff','#f5a623','#00bcd4','#ff8c42','#00d084','#ff5555','#e8c99a'];
+  const col=boardColumns.find(c=>c.id===id); if(!col)return;
+  const idx=colors.indexOf(col.color);
+  col.color=colors[(idx+1)%colors.length];
+  save(); renderBoard();
+}
+
+// ── NOT INTERESTED ──
+function markNotInterested(id){
+  const l=allLeads().find(x=>x.id===id); if(!l)return;
+  notInterested.unshift({id:l.id,name:l.n,ca:l.ca,tg:l.tg||[],ts:Date.now()});
+  // Hide from board
+  const ci=customLeads.findIndex(x=>x.id===id);
+  if(ci>=0) customLeads[ci].niArchived=true;
+  else leadOverrides[id]={...(leadOverrides[id]||{}),niArchived:true};
+  save(); renderBoard(); renderStats();
+  logEntry('✕',`Marked not interested: <strong>${esc(l.n)}</strong> — archived for Scout feedback`,'');
+}
+function restoreFromNI(id){
+  notInterested=notInterested.filter(n=>n.id!==id);
+  const ci=customLeads.findIndex(x=>x.id===id);
+  if(ci>=0) delete customLeads[ci].niArchived;
+  else { const ov=leadOverrides[id]||{}; delete ov.niArchived; leadOverrides[id]=ov; }
+  leadBoardStatus[id]='inbox';
+  save(); renderBoard(); renderStats(); renderNiArchive();
+}
+function toggleNiArchive(){
+  const body=document.getElementById('ni-archive-body');
+  const chev=document.getElementById('ni-chevron');
+  if(!body||!chev)return;
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  chev.textContent=open?'▾ show':'▴ hide';
+}
+function renderNiArchive(){
+  const arc=document.getElementById('ni-archive');
+  const cnt=document.getElementById('ni-count');
+  const list=document.getElementById('ni-list');
+  if(!arc) return;
+  arc.style.display=notInterested.length?'block':'none';
+  if(cnt) cnt.textContent=notInterested.length;
+  if(list) list.innerHTML=notInterested.map(n=>`
+    <div class="ni-item">
+      <span class="ni-item-name">${esc(n.name)}</span>
+      <span class="ni-item-cat">${esc(n.ca||'')}</span>
+      <button class="ni-restore" onclick="restoreFromNI('${n.id}')" title="Restore to Inbox">↩ restore</button>
+    </div>`).join('')||'<div style="font-size:11px;color:var(--text3);padding:8px">None yet</div>';
+}
+
+// ── LEAD CRUD ──
+function saveLead(){
+  const name=document.getElementById('la-name').value.trim(), cat=document.getElementById('la-cat').value.trim();
+  if(!name||!cat) return;
+  const id='cl-'+genId();
+  const tags=document.getElementById('la-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const targetCol=document.getElementById('la-col')?.value||'inbox';
+  customLeads.unshift({id,n:name,lo:document.getElementById('la-loc').value.trim(),ca:cat,h:parseInt(document.getElementById('la-hot').value),nw:1,tg:tags,p:document.getElementById('la-pitch').value.trim(),w:document.getElementById('la-why').value.trim(),url:document.getElementById('la-url').value.trim(),priority:document.getElementById('la-pri').value,source:'manual'});
+  leadBoardStatus[id]=targetCol;
+  ['la-name','la-cat','la-loc','la-tags','la-pitch','la-why','la-url'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
+  togForm('lead-add-form'); save(); renderBoard(); renderStats();
+}
+
+function openEditLead(id){
+  const l=allLeads().find(x=>x.id===id); if(!l) return;
+  editLeadId=id;
+  document.getElementById('edit-lead-sub').textContent=l.n;
+  document.getElementById('el-name').value=l.n||'';
+  document.getElementById('el-cat').value=l.ca||'';
+  document.getElementById('el-loc').value=l.lo||'';
+  document.getElementById('el-tags').value=(l.tg||[]).join(', ');
+  document.getElementById('el-pitch').value=l.p||'';
+  document.getElementById('el-why').value=l.w||'';
+  document.getElementById('el-hot').value=l.h?'1':'0';
+  document.getElementById('el-new').value=l.nw?'1':'0';
+  document.getElementById('el-url').value=l.url||'';
+  document.getElementById('el-source-label').textContent=l.source?l.source:'built-in';
+  openOverlay('edit-lead-overlay');
+}
+function saveEditLead(){
+  const tags=document.getElementById('el-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const upd={n:document.getElementById('el-name').value.trim(),ca:document.getElementById('el-cat').value.trim(),lo:document.getElementById('el-loc').value.trim(),tg:tags,p:document.getElementById('el-pitch').value.trim(),w:document.getElementById('el-why').value.trim(),h:parseInt(document.getElementById('el-hot').value),nw:parseInt(document.getElementById('el-new').value),url:document.getElementById('el-url').value.trim()};
+  const ci=customLeads.findIndex(x=>x.id===editLeadId);
+  if(ci>=0){customLeads[ci]={...customLeads[ci],...upd};}
+  else{leadOverrides[editLeadId]={...(leadOverrides[editLeadId]||{}),...upd};}
+  closeOverlay('edit-lead-overlay'); save(); renderBoard();
+}
+function deleteLead(id){
+  if(!confirm('Permanently delete this lead?')) return;
+  const ci=customLeads.findIndex(x=>x.id===id);
+  if(ci>=0){customLeads.splice(ci,1);}
+  else{leadOverrides[id]={...(leadOverrides[id]||{}),hidden:true};}
+  delete leadBoardStatus[id];
+  closeOverlay('edit-lead-overlay'); save(); renderBoard(); renderStats();
+}
+
+// Legacy — keep for Scout acceptReview
+function renderLeads(){ renderBoard(); }
+function renderFilters(){ renderBoardTagFilters(); }
+
+// ══════════════════════════════════════════════════════
+// STATS
+// ══════════════════════════════════════════════════════
+function renderStats(){
+  document.getElementById('s-total').textContent=apps.length;
+  document.getElementById('s-active').textContent=apps.filter(a=>a.status!=='rejected'&&a.status!=='no-response').length;
+  document.getElementById('s-conv').textContent=apps.filter(a=>a.status==='messaging'||a.status==='interviewing').length;
+  document.getElementById('s-high').textContent=apps.filter(a=>a.priority==='high').length;
+  const al=allLeads().filter(l=>!(leadOverrides[l.id]||{}).hidden&&!isNI(l.id));
+  document.getElementById('s-leads').textContent=al.length;
+  document.getElementById('s-review').textContent=reviewQueue.length;
+  document.getElementById('ls-hot').textContent=al.filter(l=>l.h).length;
+  document.getElementById('ls-sd').textContent=al.filter(l=>(l.tg||[]).includes('SD')).length;
+  document.getElementById('ls-re').textContent=al.filter(l=>(l.tg||[]).includes('Remote')).length;
+  document.getElementById('ls-scout-added').textContent=customLeads.filter(l=>l.source==='scout'&&!isNI(l.id)).length;
+  document.getElementById('leads-badge').textContent=al.length;
+  document.getElementById('scout-badge').textContent=reviewQueue.length||'';
+  renderScoutStats();
+}
+
+function render(){ renderStats(); renderTracker(); renderBoard(); renderBoardTagFilters(); renderQueryList(); renderReviewQueue(); renderLog(); }
+
+// ══════════════════════════════════════════════════════
+// UI HELPERS
+// ══════════════════════════════════════════════════════
+function sw(t,b){ document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on')); document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on')); b.classList.add('on'); document.getElementById('panel-'+t).classList.add('on'); }
+function togForm(id){ const f=document.getElementById(id); f.classList.toggle('on'); if(f.classList.contains('on')&&id==='tracker-form') document.getElementById('f-date').value=new Date().toISOString().split('T')[0]; }
+function openOverlay(id){ document.getElementById(id).classList.add('open'); }
+function closeOverlay(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); }));
+
+function esc(s){ return(s||'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function unesc(s){ return(s||'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"'); }
+
+// ══════════════════════════════════════════════════════
+// IMPORT / EXPORT
+// ══════════════════════════════════════════════════════
+function buildXML(incApps,incLeads,customOnly){
+  const appIds=incApps?[...document.querySelectorAll('#exp-checklist input:checked')].map(c=>c.value):[];
+  const selApps=apps.filter(a=>appIds.includes(a.id));
+  const al=allLeads().filter(l=>!(leadOverrides[l.id]||{}).hidden);
+  const selLeads=incLeads?(customOnly?al.filter(l=>l.custom):al):[];
+  const am=apps.filter(a=>a.status!=='rejected'&&a.status!=='no-response').length;
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<!-- Job Search HQ — Ethan Kelly | ${new Date().toISOString()} -->
+<!-- stats: apps_total="${apps.length}" apps_active="${am}" apps_in_convo="${apps.filter(a=>a.status==='messaging'||a.status==='interviewing').length}" leads_total="${al.length}" -->
+<!--
+  FOR CLAUDE: Add new <Lead> nodes inside <Leads>. Use id="cl-UNIQUE".
+  Tags: SD, CA, Remote, Defense, Maritime, ISW, Robotics, Aerospace, Energy
+  Return the full <Leads> block or just new <Lead> nodes. Import via merge mode.
+-->
+<JobSearchHQ exported="${new Date().toISOString()}" owner="Ethan Kelly">
+  <Applications>
+${selApps.map(a=>`    <Application id="${esc(a.id)}" company="${esc(a.company)}" role="${esc(a.role)}" status="${esc(a.status)}" priority="${esc(a.priority)}" date="${esc(a.date)}" url="${esc(a.url||'')}" notes="${esc(a.notes||'')}"/>`).join('\n')||'    <!-- none selected -->'}
+  </Applications>
+  <Leads>
+${selLeads.map(l=>`    <Lead id="${esc(l.id)}" name="${esc(l.n)}" location="${esc(l.lo)}" category="${esc(l.ca)}" hot="${l.h?1:0}" new="${l.nw?1:0}" tags="${esc((l.tg||[]).join(','))}" custom="1" url="${esc(l.url||'')}">
+      <Pitch>${esc(l.p)}</Pitch>
+      <Why>${esc(l.w)}</Why>
+    </Lead>`).join('\n')||'    <!-- none selected -->'}
+  </Leads>
+</JobSearchHQ>`;
+}
+
+function openExport(){
+  const cl=document.getElementById('exp-checklist');
+  cl.innerHTML=apps.map(a=>`<label class="ck-item"><input type="checkbox" value="${a.id}" checked><span>${esc(a.company)}</span><span style="font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace;margin-left:4px">${esc(a.role||'')}</span><span class="ck-badge s-${a.status||'applied'}">${SL[a.status||'applied']}</span></label>`).join('')||'<div style="padding:12px;font-size:12px;color:var(--text3)">No applications yet</div>';
+  openOverlay('export-overlay');
+}
+function setAllChecks(id,v){ document.querySelectorAll(`#${id} input[type="checkbox"]`).forEach(c=>c.checked=v); }
+function getExportXML(){ return buildXML(document.getElementById('exp-apps').checked,document.getElementById('exp-leads').checked,document.getElementById('exp-custom-only').checked); }
+function doExport(){ const xml=getExportXML(); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([xml],{type:'text/xml'})); a.download=`ek-jobsearch-${new Date().toISOString().slice(0,10)}.xml`; a.click(); closeOverlay('export-overlay'); }
+async function copyXML(){ const xml=getExportXML(); try{await navigator.clipboard.writeText(xml);}catch(e){prompt('Copy:',xml);} closeOverlay('export-overlay'); }
+
+function openImport(){ importData=null; ['import-status','import-preview'].forEach(id=>document.getElementById(id).innerHTML=''); document.getElementById('import-merge-section').style.display='none'; document.getElementById('do-import-btn').disabled=true; document.getElementById('xml-file-input').value=''; document.getElementById('xml-paste').value=''; openOverlay('import-overlay'); }
+function handleDrop(e){ e.preventDefault(); document.getElementById('xml-drop').classList.remove('over'); const f=e.dataTransfer.files[0]; if(f) readFile(f); }
+function handleFileInput(e){ if(e.target.files[0]) readFile(e.target.files[0]); }
+function handlePasteXML(v){ if(v.trim().startsWith('<')) parseXMLString(v.trim()); }
+function readFile(f){ const r=new FileReader(); r.onload=ev=>parseXMLString(ev.target.result); r.readAsText(f); }
+
+function parseXMLString(str){
+  try{
+    const doc=new DOMParser().parseFromString(str,'text/xml');
+    if(doc.querySelector('parsererror')) throw new Error('Invalid XML.');
+    const pApps=[...doc.querySelectorAll('Application')].map(n=>({id:n.getAttribute('id')||genId(),company:unesc(n.getAttribute('company')||''),role:unesc(n.getAttribute('role')||''),status:n.getAttribute('status')||'applied',priority:n.getAttribute('priority')||'med',date:n.getAttribute('date')||'',url:unesc(n.getAttribute('url')||''),notes:unesc(n.getAttribute('notes')||'')})).filter(a=>a.company);
+    const pLeads=[...doc.querySelectorAll('Lead')].map(n=>({id:n.getAttribute('id')||('cl-'+genId()),n:unesc(n.getAttribute('name')||''),lo:unesc(n.getAttribute('location')||''),ca:unesc(n.getAttribute('category')||''),h:parseInt(n.getAttribute('hot')||0),nw:parseInt(n.getAttribute('new')||0),tg:(n.getAttribute('tags')||'').split(',').map(t=>t.trim()).filter(Boolean),custom:true,url:unesc(n.getAttribute('url')||''),p:unesc(n.querySelector('Pitch')?.textContent||''),w:unesc(n.querySelector('Why')?.textContent||'')})).filter(l=>l.n);
+    importData={apps:pApps,leads:pLeads};
+    const eAi=new Set(apps.map(a=>a.id)), eLi=new Set([...customLeads.map(l=>l.id),...BUILTIN_LEADS.map(l=>l.id)]);
+    const na=pApps.filter(a=>!eAi.has(a.id)).length, nl=pLeads.filter(l=>!eLi.has(l.id)).length;
+    document.getElementById('import-status').innerHTML=`<div class="xml-status ok">${pApps.length} application${pApps.length!==1?'s':''} (${na} new) · ${pLeads.length} lead${pLeads.length!==1?'s':''} (${nl} new)</div>`;
+    if(nl>0){
+      const prev=pLeads.filter(l=>!eLi.has(l.id)).slice(0,6).map(l=>`<div style="display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px"><span class="dot-lead dot-custom"></span>${esc(l.n)} <span style="color:var(--text3)">·</span><span style="color:var(--text2)">${esc(l.ca)}</span></div>`).join('');
+      document.getElementById('import-preview').innerHTML=`<div class="xml-section-title" style="margin-top:12px">New leads preview</div><div style="max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:6px;padding:6px 10px;background:var(--bg3)">${prev}</div>`;
+    }
+    document.getElementById('import-merge-section').style.display='block';
+    document.getElementById('do-import-btn').disabled=false;
+  }catch(err){
+    document.getElementById('import-status').innerHTML=`<div class="xml-status err">${err.message}</div>`;
+    document.getElementById('import-merge-section').style.display='none';
+    document.getElementById('do-import-btn').disabled=true;
+  }
+}
+function selMerge(m){ importMode=m; document.getElementById('mo-merge').classList.toggle('sel',m==='merge'); document.getElementById('mo-replace').classList.toggle('sel',m==='replace'); }
+function doImport(){
+  if(!importData) return;
+  if(importMode==='replace'){ if(!confirm('Replace ALL data?')) return; apps=importData.apps; customLeads=importData.leads; }
+  else{
+    const eAi=new Set(apps.map(a=>a.id)),eLi=new Set(customLeads.map(l=>l.id));
+    apps=[...importData.apps.filter(a=>!eAi.has(a.id)),...apps];
+    customLeads=[...importData.leads.filter(l=>!eLi.has(l.id)),...customLeads];
+  }
+  save(); closeOverlay('import-overlay'); render();
+}
+
+// Bootstrap
+load();
+</script>
+</body>
+</html>
