@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan Kelly — Engineering Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f7f4ef;--bg2:#eee9e0;--bg3:#e6dfd3;
+  --ink:#1c1712;--muted:#7a7068;--faint:#c8bfb2;--rule:#ddd6cb;
+  --accent:#2a5c3a;--accent2:#3d8a5a;--accent-lt:#edf7f1;
+  --white:#fdfbf8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-height:1.65;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--rule);padding:0 3rem;height:60px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .2s}
+nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
+.nav-wm{font-size:19px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.nav-r{display:flex;align-items:center;gap:.15rem}
+.nl{font-size:13px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:.35rem .8rem;border-radius:5px;transition:color .15s,background .15s}
+.nl:hover{color:var(--ink);background:var(--bg2)}
+.nd{width:1px;height:18px;background:var(--rule);margin:0 .5rem}
+.ni{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:6px;color:var(--muted);text-decoration:none;transition:color .15s,background .15s}
+.ni:hover{color:var(--ink);background:var(--bg2)}
+.nr{font-size:11px;font-weight:500;color:var(--accent);border:1px solid var(--accent);padding:.28rem .7rem;border-radius:5px;text-decoration:none;margin-left:.4rem;transition:background .15s,color .15s}
+.nr:hover{background:var(--accent);color:var(--white)}
+
+/* HERO */
+#hero{padding-top:60px;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
+.hl{padding:5rem 3rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between}
+.hr{padding:5rem 3rem 5rem 3.5rem;display:flex;flex-direction:column;justify-content:space-between}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.eyebrow span{color:var(--accent)}
+.hname{font-size:clamp(4rem,8vw,7.5rem);font-weight:700;line-height:.9;letter-spacing:-.03em;color:var(--ink);margin:auto 0;padding:2rem 0}
+.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif}
+.title-line{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hstmt{font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.45;max-width:440px}
+.status-box{padding:1.1rem 1.4rem;background:var(--white);border:1px solid var(--rule);border-radius:10px;display:flex;flex-direction:column;gap:.3rem}
+.dot-row{display:flex;align-items:center;gap:8px}
+.dot{width:6px;height:6px;border-radius:50%;background:#5aad75;flex-shrink:0;animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.st{font-size:13px;font-weight:500;color:var(--ink)}
+.ss{font-size:10px;color:var(--muted);letter-spacing:.04em;padding-left:14px}
+.hlinks{display:flex;flex-direction:column}
+.hlink{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--rule);transition:color .15s}
+.hlink:last-child{border-bottom:none}
+.hlink:hover{color:var(--ink)}
+.hlbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+
+/* SECTIONS */
+.sw{padding:5rem 3rem;border-bottom:1px solid var(--rule)}
+.sh{display:flex;align-items:baseline;gap:1.25rem;margin-bottom:3.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--rule)}
+.sn{font-size:10px;color:var(--accent);letter-spacing:.1em}
+.st2{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:400;color:var(--ink);line-height:1.1}
+.st2 em{font-style:italic;color:var(--accent)}
+.lbl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;display:block}
+.body-t{font-size:13px;color:var(--muted);line-height:1.85}
+.body-t strong{color:var(--ink);font-weight:500}
+
+/* PHILOSOPHY */
+.phil-big{margin-bottom:3.5rem}
+.phil-stmt{font-size:clamp(1.5rem,3.2vw,2.3rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.4;max-width:820px;margin-top:1rem;padding-left:1.75rem;border-left:3px solid var(--accent)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;margin-bottom:2.5rem}
+.dark-card{background:var(--ink);border-radius:12px;padding:2rem 2.5rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:start;margin-top:2.5rem}
+.vert-lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);writing-mode:vertical-lr;transform:rotate(180deg);white-space:nowrap}
+.dark-t{font-size:13px;font-weight:400;line-height:1.85;color:#d4cec5}
+.dark-t strong{color:var(--white)}
+.mission-block{background:var(--accent-lt);border:1px solid #b6dfc8;border-radius:10px;padding:1.5rem 2rem;margin-bottom:2.5rem}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2.25rem}
+.timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:0;width:1px;background:var(--rule)}
+.tl-item{position:relative;padding-bottom:3.5rem}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:'';position:absolute;left:-2.25rem;top:6px;transform:translateX(50%);width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);z-index:1}
+.tl-item.proj::before{background:var(--bg);border-color:var(--accent)}
+.tl-period{font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:.75rem}
+.tl-badge{font-size:10px;padding:2px 8px;border-radius:3px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
+.tl-badge.live{background:var(--accent-lt);color:var(--accent2);border-color:#b6dfc8}
+.tl-role{font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:.2rem}
+.tl-role.sm{font-size:1.15rem}
+.tl-org{font-size:12px;color:var(--accent);font-weight:500;letter-spacing:.04em;margin-bottom:.85rem}
+.tl-body{font-size:13px;color:var(--muted);line-height:1.8;max-width:600px;margin-bottom:1rem}
+.tl-body strong{color:var(--ink)}
+.tl-photo{width:100%;max-width:480px;aspect-ratio:16/9;background:var(--bg2);border:1px dashed var(--faint);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint);letter-spacing:.06em;margin:1rem 0}
+.tl-quote{border-left:2px solid var(--accent);padding:.75rem 1rem;margin:1rem 0;max-width:560px}
+.tl-quote{font-size:12px;color:var(--muted);line-height:1.7;font-style:italic}
+.tl-quote span{display:block;margin-top:.4rem;font-style:normal;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.tl-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.tl-stat{font-size:10px;color:var(--muted)}
+.tl-stat strong{display:block;font-size:13px;font-weight:500;color:var(--ink)}
+.tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.tag{font-size:11px;padding:3px 10px;border-radius:4px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
+
+/* SKILLS */
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
+.sc{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem;transition:border-color .15s,box-shadow .15s}
+.sc:hover{border-color:var(--faint);box-shadow:0 4px 16px rgba(28,23,18,.06)}
+.sc-cat{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+.sr{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink);padding:.3rem 0}
+.bw{width:72px;height:2px;background:var(--bg2);border-radius:1px}
+.b{height:100%;background:var(--accent);border-radius:1px}
+.cert{font-size:10px;color:#6a7a2a;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--rule)}
+
+/* BACKGROUND */
+.bg2col{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
+.edu-box{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.25rem 1.5rem;display:flex;gap:1.25rem;align-items:flex-start;margin-bottom:1.25rem}
+.rice{flex-shrink:0;width:44px;height:44px;border-radius:8px;background:#00205b;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#c9b77a;letter-spacing:.02em;line-height:1.2;text-align:center}
+.edu-school{font-size:13px;font-weight:500;color:var(--ink)}
+.edu-deg{font-size:12px;color:var(--muted)}
+.edu-meta{font-size:10px;color:var(--faint);letter-spacing:.05em;margin-top:.2rem}
+
+/* WORKING WITH ME */
+.wm3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.wm-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem}
+.wm-dark{background:var(--ink);border-color:var(--ink)}
+.wm-title{font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:1rem}
+.wm-title.s{color:var(--accent2)}
+.wm-title.w{color:#c4683a}
+.wm-title.h{color:#4a6fa5}
+.wi{margin-bottom:.9rem}
+.wi:last-child{margin-bottom:0}
+.wi-h{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:.2rem}
+.wm-dark .wi-h{color:var(--white)}
+.wi-b{font-size:12px;color:var(--muted);line-height:1.65}
+.wm-dark .wi-b{color:#9a918a}
+.collab-box{background:var(--bg2);border:1px solid var(--rule);border-radius:10px;padding:1.5rem 1.75rem}
+.collab-items{display:flex;flex-direction:column;gap:1rem}
+.ci{display:flex;gap:1rem;align-items:flex-start}
+.ci-label{flex-shrink:0;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px;min-width:110px}
+.ci-text{font-size:13px;color:var(--muted);line-height:1.65}
+.ci-text strong{color:var(--ink);font-weight:500}
+
+/* BEYOND */
+.hg{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.ht{background:var(--white);padding:1rem 1.2rem;display:flex;align-items:center;gap:.75rem;transition:background .15s}
+.ht:hover{background:var(--bg2)}
+.hi{font-size:1.1rem;flex-shrink:0}
+.ht strong{display:block;font-size:12px;font-weight:500;color:var(--ink)}
+.ht span{font-size:11px;color:var(--muted)}
+
+/* PEER FEEDBACK */
+.qgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem}
+.qcard{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.qmark{font-size:2.5rem;color:var(--faint);line-height:.8;font-style:italic}
+.qtext{font-size:13px;color:var(--ink);line-height:1.75;font-style:italic;flex:1}
+.qauth{border-top:1px solid var(--rule);padding-top:.75rem}
+.qa-name{font-size:12px;font-weight:500;color:var(--ink)}
+.qa-role{font-size:11px;color:var(--muted)}
+
+/* CONTACT */
+.ched{font-size:clamp(2.2rem,5vw,4rem);font-weight:400;color:var(--ink);line-height:1.1;margin-bottom:2.5rem;max-width:540px}
+.ched em{font-style:italic;color:var(--accent)}
+.crow{display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center}
+.cl{font-size:13px;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--faint);padding-bottom:2px;transition:color .15s,border-color .15s}
+.cl:hover{color:var(--ink);border-color:var(--ink)}
+
+/* FOOTER */
+footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl{font-size:11px;color:var(--faint)}
+.fr{display:flex;gap:1.5rem;align-items:center}
+.fr a{font-size:11px;color:var(--muted);text-decoration:none;transition:color .15s}
+.fr a:hover{color:var(--ink)}
+.fr a.sp{color:var(--accent)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  #hero{grid-template-columns:1fr;min-height:auto}
+  .hl{border-right:none;border-bottom:1px solid var(--rule);padding:4rem 2rem 3rem}
+  .hr{padding:3rem 2rem 4rem}
+  .sw{padding:4rem 2rem}
+  .two-col,.bg2col{grid-template-columns:1fr;gap:2rem}
+  .wm3{grid-template-columns:1fr}
+  .dark-card{grid-template-columns:1fr}
+  .vert-lbl{writing-mode:horizontal-tb;transform:none}
+  footer{padding:1.25rem 1.5rem}
+}
+@media(max-width:560px){.nl{display:none}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-wm">Ethan Kelly</a>
+  <div class="nav-r">
+    <a href="#philosophy" class="nl">Philosophy</a>
+    <a href="#done" class="nl">Work</a>
+    <a href="#background" class="nl">Background</a>
+    <a href="#working-with" class="nl">Working With Me</a>
+    <div class="nd"></div>
+    <a href="https://github.com/EthanRobertKelly" target="_blank" class="ni" title="GitHub" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+    <a href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank" class="ni" title="LinkedIn" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    <div class="nd"></div>
+    <a href="job-searcher.html" class="nr" style="margin-right:.3rem">📋 Job HQ</a><a href="recipe-manager.html" class="nr">🍞 Kitchen</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hl">
+    <div class="eyebrow">Engineering Consultant &nbsp;·&nbsp; <span>San Diego, CA</span></div>
+    <h1 class="hname">Ethan<br><em>Kelly</em></h1>
+    <div class="title-line">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
+  </div>
+  <div class="hr">
+    <p class="hstmt">Searching for a worthy problem. Building systems that solve things that actually matter.</p>
+    <div class="status-box">
+      <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
+      <div class="ss">Currently @ Dynamic Motion Control Inc.</div>
+    </div>
+    <div class="hlinks">
+      <a class="hlink" href="/cdn-cgi/l/email-protection#94f1e0fcf5fae6fbf6f1e6e0fff1f8f8edd4f3f9f5fdf8baf7fbf9"><span class="hlbl">Email</span><span class="__cf_email__" data-cfemail="5530213d343b273a373027213e3039392c153238343c397b363a38">[email&#160;protected]</span></a>
+      <a class="hlink" href="tel:6467170861"><span class="hlbl">Phone</span>646-717-0861</a>
+      <a class="hlink" href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank"><span class="hlbl">LinkedIn</span>/in/EthanRobertKelly ↗</a>
+      <a class="hlink" href="#"><span class="hlbl">GitHub</span>github.com/— ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- 01 PHILOSOPHY -->
+<div class="sw" id="philosophy">
+  <div class="sh"><span class="sn">01</span><h2 class="st2">Philosophy &amp; <em>Mission</em></h2></div>
+
+  <div class="phil-big">
+    <span class="lbl">Engineering Philosophy</span>
+    <p class="phil-stmt">Are we in discovery, or are we just learning fast? Speed and overhead are always in tension — both have a cost, and getting the balance wrong wastes more than any bug ever will. Great engineering means owning that call: reading the situation, calibrating the approach, and driving to completion. Not a fixed set of beliefs. A practice that's always being refined.</p>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <span class="lbl">Mission</span>
+      <p class="body-t">To build systems that better humanity at scale — by diagnosing the right problems, defining the change required, and driving it to completion.</p>
+    </div>
+    <div>
+      <span class="lbl">What I'm Focused On</span>
+      <p class="body-t">Hard-tech. Non-assault defense. Aerospace — including space-based manufacturing. Systems that create genuine leverage, not just economic output. The good side of the blade.</p>
+    </div>
+  </div>
+
+  <div class="dark-card">
+    <div class="vert-lbl">Looking For</div>
+    <p class="dark-t">Roles where I'm expected to <strong>own the solution</strong> — not execute a ticket. Give me a big problem, a clear outcome, and the trust to break it down, build the plan, and drive it across the finish line. Best under pressure. Best with a hard problem. Best alongside a team that takes the work seriously. If you need someone to uplevel the work around them — that's the job.</p>
+  </div>
+</div>
+
+<!-- 02 WHAT I'VE DONE -->
+<div class="sw" id="done">
+  <div class="sh"><span class="sn">02</span><h2 class="st2">What I've <em>done</em></h2></div>
+
+  <div class="timeline">
+
+    <!-- DMC ROLE -->
+    <div class="tl-item">
+      <div class="tl-period">Sep 2024 — Present <span class="tl-badge live">Current Role</span></div>
+      <div class="tl-role">Engineering Consultant</div>
+      <div class="tl-org">Dynamic Motion Control Inc.</div>
+      <p class="tl-body">Client-facing engineering consultant across Rare Minerals, Metallurgy, and Defense. <strong>800+ hours · 30+ clients · 100% CSAT.</strong> Authored the company's first OKR framework, coached VPs, drove 100% review adoption. Automated the renaming of <strong>19,000 unnamed variables</strong> across a 6-PLC system using a Python bidirectional XML parser — eliminating thousands of hours of manual work. <a href="xml-tool.html" style="color:var(--accent2);text-decoration:none;border-bottom:1px solid var(--accent-lt)">→ try the XML tool</a></p>
+      <div class="tl-quote">"Ethan has been a pleasure to work with. He communicates well, asks good questions, and is reasonably quick to ramp up to new technologies. Most critically, he is able to work fairly independently and inspires confidence from both myself and the client." <span>— Nick Leisle, PM & Senior Engineer</span></div>
+      <div class="tags"><span class="tag">Rockwell</span><span class="tag">LabVIEW</span><span class="tag">Python</span><span class="tag">OPCUA</span><span class="tag">Cisco</span><span class="tag">FAT</span><span class="tag">PLC/LAD</span><span class="tag">OKR</span></div>
+    </div>
+
+    <!-- NAWS CHINA LAKE -->
+    <div class="tl-item proj">
+      <div class="tl-period">Mar 2025 — Present <span class="tl-badge live">Live</span></div>
+      <div class="tl-role sm">NAWS China Lake — CDAS Modernization</div>
+      <div class="tl-org">Navy Air Weapons Station · via DMC</div>
+      <p class="tl-body">Go-to onsite engineer for a multi-year CDAS modernization. Entered at critical FAT milestone to find a disjointed system failing live demonstrations. Managed client expectations in real-time while simultaneously debugging — <strong>pivoted the relationship from skepticism to trust.</strong> Led 16-week commission (Trio) transforming a legacy codebase from "unacceptable" to federally compliant. FAT accepted: Skytop and Trio.</p>
+      <div class="tl-photo">📷 — add photo</div>
+      <div class="tl-quote">"Ethan handled this extremely well and quickly took ownership of executing the tests. His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." <span>— Natalie Pippolo, Project Engineer — NAWS</span></div>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>16 wks</strong>Trio commission</div>
+        <div class="tl-stat"><strong>2</strong>FAT accepted</div>
+        <div class="tl-stat"><strong>Federal</strong>compliant</div>
+      </div>
+      <div class="tags"><span class="tag">CDAS</span><span class="tag">DAQ</span><span class="tag">Sequencer Logic</span><span class="tag">HMI Refactor</span><span class="tag">Defense</span></div>
+    </div>
+
+    <!-- MV KENNICOTT -->
+    <div class="tl-item proj">
+      <div class="tl-period">2024 — 2025</div>
+      <div class="tl-role sm">MV Kennicott — IO Documentation</div>
+      <div class="tl-org">Everett Ship Repair · via DMC</div>
+      <p class="tl-body">Produced IO documentation for <strong>1,500+ control system points</strong> aboard the MV Kennicott — serving as the functional basis for the vessel's control system FDS where no prior documentation existed. Also contributed to PLC code conversion and OPCUA communication implementation between PLCs and Aveva Edge HMI.</p>
+      <div class="tl-photo">📷 — add photo</div>
+      <div class="tl-quote">"Ethan is like a venturi for internal communication. By modeling — asking questions, stating assumptions — he pulls others into the conversation and the written record. The Kennicott IO list is well organized and usable — it will serve as the basis for the vessel's FDS." <span>— Keith Krotzer, PM & Technical Lead</span></div>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>1,500+</strong>IO points</div>
+        <div class="tl-stat"><strong>0</strong>prior docs</div>
+      </div>
+      <div class="tags"><span class="tag">OPCUA</span><span class="tag">Aveva</span><span class="tag">IO Documentation</span><span class="tag">FDS</span></div>
+    </div>
+
+    <!-- FERNWARE -->
+    <div class="tl-item proj">
+      <div class="tl-period">Aug 2025 — Present <span class="tl-badge live">Side Project</span></div>
+      <div class="tl-role sm">Fernware — Automatic Plant Watering System</div>
+      <div class="tl-org">Personal Project</div>
+      <p class="tl-body">Friends killed the plants. Twice. Built a modular automatic watering system with moisture sensors. Zero casualties since.</p>
+      <div class="tags"><span class="tag">Arduino</span><span class="tag">Sensors</span><span class="tag">GitHub → add link</span></div>
+    </div>
+
+    <!-- SEA++ -->
+    <div class="tl-item proj">
+      <div class="tl-period">Aug 2023 — May 2024</div>
+      <div class="tl-role sm">Sea++ — Autonomous Catamaran</div>
+      <div class="tl-org">Rice University Senior Capstone · Military Research Commission</div>
+      <p class="tl-body">Elected by 7 peers to lead design and construction of a 9-foot autonomous trimaran for decentralized naval cargo delivery. Modified A* path planning, ALOS local control, dual-rudder PID, computer vision obstacle avoidance. Designed wing and hull with CFD analysis. Built with laser-cut ribs, XPS foam, and fiberglass. Achieved multipoint autonomous navigation in <strong>5-ft seas, 25-mph winds with 300-lb load.</strong></p>
+      <div class="tl-photo">📷 — add photo</div>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>$3,750</strong>unit cost</div>
+        <div class="tl-stat"><strong>300 lb</strong>payload tested</div>
+        <div class="tl-stat"><strong>5 ft seas</strong>navigated</div>
+        <div class="tl-stat"><strong>8 months</strong>build time</div>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">ROS</span><span class="tag">CFD</span><span class="tag">Computer Vision</span><span class="tag">PID</span><span class="tag">Fiberglass</span></div>
+    </div>
+
+    <!-- RICE ROBOTICS -->
+    <div class="tl-item">
+      <div class="tl-period">Apr 2023 — May 2024</div>
+      <div class="tl-role sm">President &amp; Manufacturing Lead</div>
+      <div class="tl-org">Rice Robotics Club</div>
+      <p class="tl-body">Grew club <strong>18× from 5 to 90+ active members</strong> through organizational restructuring, project leadership, and strategic outreach. Technical lead for RoboCam — an autonomous robotic cameraman system.</p>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>90+</strong>active members</div>
+        <div class="tl-stat"><strong>18×</strong>growth</div>
+      </div>
+      <div class="tags"><span class="tag">Leadership</span><span class="tag">Robotics</span><span class="tag">Manufacturing</span></div>
+    </div>
+
+    <!-- BHYC -->
+    <div class="tl-item">
+      <div class="tl-period">May 2018 — Aug 2022</div>
+      <div class="tl-role sm">C420 Advanced Sailing Instructor</div>
+      <div class="tl-org">Bay Head Yacht Club</div>
+      <p class="tl-body">Coached for 5 seasons. Top pupils placed <strong>3rd and 7th</strong> in the C420 New Jersey State Championship 2022.</p>
+      <div class="tags"><span class="tag">Coaching</span><span class="tag">C420</span><span class="tag">Leadership</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 03 BACKGROUND + SKILLS -->
+<div class="sw" id="background">
+  <div class="sh"><span class="sn">03</span><h2 class="st2">Background &amp; <em>Skills</em></h2></div>
+  <div class="bg2col" style="margin-bottom:3rem">
+    <div>
+      <span class="lbl">Who I Am</span>
+      <p class="body-t">Mechanical engineer out of Rice University (B.S., Thermal Fluids), operating as an <strong>Engineering Consultant</strong> at Dynamic Motion Control Inc. Background spans manufacturing automation, test and measurement, and embedded development. Specialized in onsite integration — taking systems from theory to reality in high-stakes environments where being wrong in the room is not an option.</p>
+    </div>
+    <div>
+      <span class="lbl">Education</span>
+      <div class="edu-box">
+        <div class="rice">RICE<br>UNIV</div>
+        <div>
+          <div class="edu-school">Rice University</div>
+          <div class="edu-deg">B.S. Mechanical Engineering · Thermal Fluids</div>
+          <div class="edu-meta">GPA 3.7/4.0 &nbsp;·&nbsp; RCEL Certificate &nbsp;·&nbsp; May 2024</div>
+        </div>
+      </div>
+      <p class="body-t" style="font-size:12px">Coursework: PDEs, FEA, CFD, Control System Analysis, LHPT. CSWP-S certified.</p>
+    </div>
+  </div>
+  <div class="sg">
+    <div class="sc"><div class="sc-cat">Languages</div><div class="sr">Python<div class="bw"><div class="b" style="width:90%"></div></div></div><div class="sr">C++<div class="bw"><div class="b" style="width:72%"></div></div></div><div class="sr">C<div class="bw"><div class="b" style="width:65%"></div></div></div></div>
+    <div class="sc"><div class="sc-cat">Controls & Industrial</div><div class="sr">PLC / LAD<div class="bw"><div class="b" style="width:88%"></div></div></div><div class="sr">SCADA<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="sr">LabVIEW<div class="bw"><div class="b" style="width:82%"></div></div></div><div class="sr">Arduino / MES<div class="bw"><div class="b" style="width:68%"></div></div></div></div>
+    <div class="sc"><div class="sc-cat">Mechanical Design</div><div class="sr">SolidWorks<div class="bw"><div class="b" style="width:90%"></div></div></div><div class="sr">CFD / FEA<div class="bw"><div class="b" style="width:75%"></div></div></div><div class="sr">3D Printing<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="cert">✦ CSWP-S Certified</div></div>
+    <div class="sc"><div class="sc-cat">Networking & Comms</div><div class="sr">OPCUA<div class="bw"><div class="b" style="width:78%"></div></div></div><div class="sr">TCP/IP<div class="bw"><div class="b" style="width:72%"></div></div></div><div class="sr">Cisco<div class="bw"><div class="b" style="width:65%"></div></div></div></div>
+    <div class="sc"><div class="sc-cat">Project Management</div><div class="sr">OKR Facilitation<div class="bw"><div class="b" style="width:85%"></div></div></div><div class="sr">WBS<div class="bw"><div class="b" style="width:78%"></div></div></div><div class="sr">Agile / Sprint<div class="bw"><div class="b" style="width:80%"></div></div></div></div>
+    <div class="sc"><div class="sc-cat">Tools & Documentation</div><div class="sr">Git<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="sr">DAQ Systems<div class="bw"><div class="b" style="width:85%"></div></div></div><div class="sr">IO Documentation<div class="bw"><div class="b" style="width:90%"></div></div></div></div>
+  </div>
+</div>
+
+<!-- 04 WORKING WITH ME -->
+<div class="sw" id="working-with">
+  <div class="sh"><span class="sn">04</span><h2 class="st2">Working <em>with me</em></h2></div>
+  <div class="wm3">
+    <div class="wm-card">
+      <div class="wm-title s">Strengths</div>
+      <div class="wi"><div class="wi-h">Grit</div><div class="wi-b">Absorbs more than most. When people are looking for the exit, I'm looking for the fix. Long hours, hard clients, failing systems — without making it a personality trait.</div></div>
+      <div class="wi"><div class="wi-h">Insightful</div><div class="wi-b">Fast at identifying the actual problem — technical, process, or people. Multiple senior engineers have noted this independently, regardless of experience level.</div></div>
+      <div class="wi"><div class="wi-h">PM-Conscious</div><div class="wi-b">Constantly evaluating the strategic "why" behind every task. Not just executing — thinking about what should be executed and whether the framing is right.</div></div>
+      <div class="wi"><div class="wi-h">Versatility</div><div class="wi-b">Switches between deep technical execution and open strategic thinking without friction. Wide toolkit — uses all of it.</div></div>
+      <div class="wi"><div class="wi-h">Fast on My Feet</div><div class="wi-b">Real-time thinking under pressure: live debugging in front of clients, path-finding when the plan breaks, staying useful when the situation changes.</div></div>
+      <div class="wi"><div class="wi-h">Communication</div><div class="wi-b">Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill — a technical advantage on complex projects.</div></div>
+    </div>
+    <div class="wm-card wm-dark">
+      <div class="wm-title w">Watch-Outs</div>
+      <div class="wi"><div class="wi-h">Don't Confuse Confidence With Coverage</div><div class="wi-b">My independence and quality output can make it look like I don't need oversight. I do. Don't let my confidence lull you out of your management responsibilities — you're still responsible for your role. Multiple eyes on big projects matter.</div></div>
+      <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">The closer I am to the critical path, the more narrowly I focus. That's a feature until it's a bug. Hard to maintain perspective when deep in it — this is as true for me as most. Call in the second set of eyes before it's needed.</div></div>
+      <div class="wi"><div class="wi-h">Pushing Past the Signal</div><div class="wi-b">I'll take more pressure than most. That sometimes means ignoring signals to step back and pushing through until stopping is not an option. If you see it coming before I do, say so directly.</div></div>
+      <div class="wi"><div class="wi-h">Eager to Answer, Sometimes Too Early</div><div class="wi-b">My instinct is to engage fast and puzzle things out in real-time. That's usually an asset — but when new to a project, I can speak before I have full context. In high-stakes client settings especially: pull me aside if you see me speculating without the full picture.</div></div>
+    </div>
+    <div class="wm-card">
+      <div class="wm-title h">How to Collaborate</div>
+      <div class="wi"><div class="wi-h">Build in the challenge</div><div class="wi-b">Confidence and quality output can make it look like due diligence isn't needed. It is. I'm often capable of being both confident AND correct — which makes systematic challenge more important, not less. Don't let the results talk you out of your process.</div></div>
+      <div class="wi"><div class="wi-h">Involve me in the full process</div><div class="wi-b">I want to be part of problem definition, solution framing, execution, and iteration — not just handed the execution phase. That's where I use my full skill set and where things don't get missed.</div></div>
+      <div class="wi"><div class="wi-h">Bring me in early</div><div class="wi-b">I'm a thought partner, not a ticket-taker. Let me help define the problem, not just execute the solution that's already been scoped.</div></div>
+      <div class="wi"><div class="wi-h">Pace me</div><div class="wi-b">If you see me prioritizing speed over stability, say so. It's always welcome. I'd rather be told to slow down than discover I needed to.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 05 BEYOND -->
+<div class="sw" id="beyond">
+  <div class="sh"><span class="sn">05</span><h2 class="st2">Beyond <em>the work</em></h2></div>
+  <div class="hg">
+    <div class="ht"><div class="hi">🏊</div><div><strong>Ironman Triathlete</strong><span>Full distance</span></div></div>
+    <div class="ht"><div class="hi">🏄</div><div><strong>Surfer &amp; Shaper</strong><span>Baja → Taghazout</span></div></div>
+    <div class="ht"><div class="hi">🎹</div><div><strong>Classical Piano</strong><span>10+ years</span></div></div>
+    <div class="ht"><div class="hi">🎸</div><div><strong>Electric Guitar</strong><span>Piano wasn't enough</span></div></div>
+    <div class="ht"><div class="hi">🍞</div><div><strong>Bread Baker</strong><span>Sourdough from scratch</span></div></div>
+    <div class="ht"><div class="hi">🧀</div><div><strong>Cheese Maker</strong><span>Yes, actually</span></div></div>
+    <div class="ht"><div class="hi">🍳</div><div><strong>Cook</strong><span>From-scratch everything</span></div></div>
+    <div class="ht"><div class="hi">🪁</div><div><strong>Kiteboarder</strong><span>Self-taught</span></div></div>
+    <div class="ht"><div class="hi">🏐</div><div><strong>Beach Volleyball</strong><span>San Diego has courts</span></div></div>
+    <div class="ht"><div class="hi">♟</div><div><strong>Chess</strong><span>1600 Rapid</span></div></div>
+    <div class="ht"><div class="hi">🎲</div><div><strong>Strategy Games</strong><span>The longer the better</span></div></div>
+    <div class="ht"><div class="hi">📚</div><div><strong>Voracious Reader</strong><span>Non-fiction, history</span></div></div>
+    <div class="ht"><div class="hi">🌎</div><div><strong>World Traveler</strong><span>ES + 中文 (intermediate)</span></div></div>
+  </div>
+</div>
+
+<!-- 06 PEER FEEDBACK -->
+<div class="sw" id="feedback">
+  <div class="sh"><span class="sn">06</span><h2 class="st2">What colleagues <em>say</em></h2></div>
+  <div class="qgrid">
+    <div class="qcard">
+      <div class="qmark">"</div>
+      <p class="qtext">He's very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem — whether it's with him, with processes, or with others.</p>
+      <div class="qauth"><div class="qa-name">Carl Remler</div><div class="qa-role">PM & Senior Engineer II — NAWS China Lake</div></div>
+    </div>
+    <div class="qcard">
+      <div class="qmark">"</div>
+      <p class="qtext">Ethan is a rock star. He is entrepreneurial, focused, value-driven, and brilliant. He doesn't just take an answer at face value — he uncovers and challenges assumptions. He should have been a lawyer.</p>
+      <div class="qauth"><div class="qa-name">Chris Cilino</div><div class="qa-role">PM, Senior Engineer & Mentor</div></div>
+    </div>
+    <div class="qcard">
+      <div class="qmark">"</div>
+      <p class="qtext">Ethan is like a venturi for internal communication. By modeling — asking questions, stating assumptions — he pulls others into the conversation and the written record.</p>
+      <div class="qauth"><div class="qa-name">Keith Krotzer</div><div class="qa-role">PM & Technical Lead — Everett Ship Repair</div></div>
+    </div>
+    <div class="qcard">
+      <div class="qmark">"</div>
+      <p class="qtext">Ethan is able to work fairly independently for his tenure and inspires confidence from both myself and the client. As a PM, it's comforting to have someone I can trust to produce good work and raise flags when needed.</p>
+      <div class="qauth"><div class="qa-name">Nick Leisle</div><div class="qa-role">PM & Senior Engineer — WPI, NASSCO, Occidental</div></div>
+    </div>
+    <div class="qcard">
+      <div class="qmark">"</div>
+      <p class="qtext">Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is a monolithic document — well organized, usable, and will serve as the basis for the vessel's FDS.</p>
+      <div class="qauth"><div class="qa-name">Kyle Bode</div><div class="qa-role">Systems Engineer — Everett Ship Repair</div></div>
+    </div>
+    <div class="qcard">
+      <div class="qmark">"</div>
+      <p class="qtext">Ethan and I were able to push each other's limits when working together, and our communication kept us in the same direction the whole time. I would jump on any opportunity to work with him in the future.</p>
+      <div class="qauth"><div class="qa-name">Aaron Gronsman</div><div class="qa-role">Systems Engineer — NAWS China Lake</div></div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <span class="fl">© 2025 Ethan Kelly — Engineering Consultant</span>
+  <nav class="fr">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#done">Work</a>
+    <a href="#background">Background</a>
+    <a href="#working-with">Working With Me</a>
+    <a href="job-searcher.html">Job HQ</a>
+    <a href="recipe-manager.html">Kitchen</a>
+    <a href="mailto:ethanrobertkelly@gmail.com" class="sp">Contact</a>
+  </nav>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>10)},{ passive:true });
+</script>
+</body>
+</html>
