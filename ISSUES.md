@@ -1,9 +1,44 @@
 # Portfolio — Issue Tracker
 
-> Convert these to GitHub Issues once `gh` CLI is configured.
 > Labels: `priority:high` `priority:medium` `priority:low`
+> Owner: `@ethan` (content/assets you provide) · `@claude` (build tasks)
 
 ---
+
+## Needs From You — @ethan
+
+### Y1 — Gather Photos `priority:high`
+The timeline lives or dies by real images. Needed:
+- China Lake onsite (any — equipment, workspace, the site)
+- Sea++ at any stage (design sketches, CFD screenshots, hull build, water trial)
+- Ironman — race day, training, finish line
+- Surfboard shaping — in progress, finished board
+- Fernware setup — the actual system running
+- Any other moment that mattered
+
+Even rough phone photos are fine. The gradient placeholders swap out instantly.
+
+### Y2 — Write Your Timeline Moments `priority:high`
+20-30 moments that tell your story chronologically. Format doesn't matter — bullet points, notes, voice memo transcript. For each moment: what happened, when, and why it mattered. Professional AND personal. This is the raw material for Timeline v3.
+
+Examples of what I'm looking for:
+- "Sep 2024 — first day at DMC, thrown onto Watsonville immediately"
+- "Mar 2025 — arrived at China Lake, FAT was failing, had to figure it out live"
+- "Nov 2023 — Ironman finish, 11:42, Woodlands TX"
+- "Summer 2024 — shaped my first surfboard in the garage"
+
+### Y3 — Confirm Sea++ IP Before Publishing `priority:medium`
+The capstone was a military research commission. Before publishing the code publicly, worth a quick check with Rice or the commissioning body that there's no IP restriction.
+
+### Y4 — Create Fernware GitHub Repo `priority:medium`
+Build the repo on your end — I'll add the link everywhere once it exists. Even a basic README with a photo and parts list is enough to start.
+
+### Y5 — Headshot / Photo for Hero `priority:low`
+The hero section has no photo of you. A clean headshot or candid (onsite, on the water, working) would make the top of the portfolio dramatically more personal and memorable.
+
+---
+
+## Build Tasks — @claude
 
 ## [priority:high]
 
@@ -20,12 +55,18 @@ The hero statement and philosophy section are rewritten but not final:
 - "What I'm Looking For" block in Philosophy needs review — is it too long? Too direct? Not direct enough?
 - The philosophy pull-quote ("Are we in discovery, or just learning fast?") is strong — make sure it still lands in the new framing
 
-### H3 — Timeline: Reorganize Layout + Add Images
-The timeline is the weakest visual section. Three photo placeholders were removed but the underlying issue remains — the section is text-heavy and linearly structured:
-- Design a centered, visually engaging timeline layout (consider alternating left/right or card-based)
-- Source and add real photos: China Lake onsite, MV Kennicott, Sea++ vessel, Fernware setup
-- Each major entry should have a strong visual anchor
-- Stats rows (tl-stats) are good but get lost — make them more prominent
+### H3 — Timeline v3: Vertical Narrative with Chapters & Moments `@claude`
+Complete redesign as a long vertical narrative — chapters (DMC, Sea++, Rice) with individual moments inside them. Professional and personal woven together. Blocked on Y1 (photos) and Y2 (moments list) from Ethan.
+
+Design direction:
+- Continuous vertical timeline, chapters as headers with a colored bar
+- Individual moments as panels inside each chapter — varying sizes and layouts
+- Photo panels, quote panels, stat panels, mixed panels
+- Personal moments (Ironman, surfboard) sit alongside professional ones at the right point in time
+- Sea++ shown as a design process: brief → elected lead → CFD → build → water trial
+- Fernware, Rice, BHYC as compact moments
+
+**Blocked on: Y1, Y2**
 
 ### H4 — Login Gate for Job Searcher & Recipe Manager
 Both tools are publicly accessible at `/job-searcher.html` and `/recipe-manager.html`. Until a login gate is built:
@@ -110,6 +151,14 @@ The portfolio has responsive CSS but hasn't been audited on mobile:
 
 ---
 
+### C1 — GitHub Profile README `@claude` `priority:medium`
+Write and push a profile README to github.com/EthanRobertKelly that matches the portfolio positioning. Pinned repos (portfolio + Fernware once Y4 is done) with a short bio.
+
+### C2 — Timeline Page: Dedicated `/timeline` vs Embedded `@claude` `priority:medium`
+Decide and build: does the narrative timeline live as a section on the main page (good for SEO, one destination) or a separate `/timeline.html` (less cluttered main page, more room to breathe)? Recommendation: separate page linked from the hero and nav.
+
+---
+
 ## Done ✓
 
 - [x] Fix broken Cloudflare email encoding
@@ -117,7 +166,8 @@ The portfolio has responsive CSS but hasn't been audited on mobile:
 - [x] Remove dead XML tool link
 - [x] Remove photo placeholders
 - [x] Remove "Rice '24" from nav
-- [x] Rewrite hero statement
+- [x] Rewrite + tighten hero statement (3 sharp lines, not a paragraph)
+- [x] Fix redundant title-line in hero (now shows Rice '24 · Mechanical Engineering)
 - [x] Reframe "What I'm Focused On" for mission-driven positioning
 - [x] Reframe DMC role description (accurate scope)
 - [x] Flesh out Fernware with technical detail
