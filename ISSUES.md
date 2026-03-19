@@ -42,12 +42,8 @@ The hero section has no photo of you. A clean headshot or candid (onsite, on the
 
 ## [priority:high]
 
-### H1 — Tune Resume for Hard-Tech Mission Roles
-Resume is structurally solid but needs a final pass:
-- Summary paragraph could be tighter and more direct
-- Keyword density: ensure ATS-critical terms appear in bullet context, not just skills list (systems engineering, embedded systems, commissioning, cross-functional, autonomous systems)
-- Verify every bullet leads with impact, not task
-- Consider whether "Systems Engineer (Consultant)" reads correctly to a hard-tech startup vs. a defense prime
+### ~~H1 — Tune Resume for Hard-Tech Mission Roles~~ ✓
+Done: summary rewritten with ATS keywords in context; title simplified to "Systems Engineer" (consulting context moved to subline); all DMC bullets rewritten to lead with impact; RoboCam, Sea++, Fernware bullets tightened.
 
 ### H2 — Tune Mission & Vision (Hero + Philosophy)
 The hero statement and philosophy section are rewritten but not final:
