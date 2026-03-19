@@ -96,6 +96,20 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .tags{display:flex;gap:.4rem;flex-wrap:wrap}
 .tag{font-size:11px;padding:3px 10px;border-radius:4px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
 
+/* TIMELINE v3 — CHAPTERS */
+.ch-header{display:flex;align-items:flex-start;gap:1.25rem;padding:1.5rem 1.75rem;background:var(--ink);border-radius:8px;margin-bottom:2.5rem}
+.ch-num{font-size:1.75rem;font-weight:700;color:var(--accent2);line-height:1;flex-shrink:0;min-width:38px}
+.ch-name{font-size:1rem;font-weight:500;color:var(--white);margin-bottom:.2rem}
+.ch-meta{font-size:11px;color:#9a918a;line-height:1.5}
+.tl-item.compact{padding-bottom:2rem}
+.tl-item.compact .tl-role{font-size:1.05rem}
+.tl-item.compact .tl-body{margin-bottom:.5rem}
+.tl-item.personal{padding-bottom:1.25rem}
+.tl-item.personal::before{background:var(--bg);border-color:var(--faint);width:7px;height:7px;top:5px}
+.tl-item.personal .tl-period{color:var(--faint)}
+.tl-item.personal .tl-role{font-size:.95rem;color:var(--muted);font-style:italic;margin-bottom:.15rem}
+.tl-item.personal .tl-body{font-size:12px;color:var(--faint);max-width:420px;margin-bottom:0}
+
 /* SKILLS */
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
 .sc{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem;transition:border-color .15s,box-shadow .15s}
@@ -181,91 +195,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   footer{padding:1.25rem 1.5rem}
 }
 @media(max-width:560px){.nl{display:none}}
-
-/* ── TIMELINE V2 ── */
-.tl2-wrap{display:flex;flex-direction:column;gap:2.5rem}
-
-/* Featured DMC block */
-.tl2-featured{background:var(--white);border:1px solid var(--rule);border-radius:16px;overflow:hidden}
-.tl2-featured-head{padding:2.5rem 2.5rem 2rem;border-bottom:1px solid var(--rule);display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-.tl2-role{font-size:1.8rem;font-weight:400;color:var(--ink);line-height:1.1;margin:.4rem 0 .2rem}
-.tl2-org{font-size:13px;color:var(--accent);font-weight:500;letter-spacing:.04em}
-.tl2-metrics{display:flex;gap:2.5rem;flex-shrink:0;align-items:center}
-.tl2-metric{text-align:center}
-.tl2-metric strong{display:block;font-size:2.2rem;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
-.tl2-metric span{font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.25rem;display:block}
-.tl2-body-pad{padding:1.75rem 2.5rem 0}
-.tl2-proj-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);padding:1.25rem 2.5rem .75rem;border-top:1px solid var(--rule);margin-top:1.75rem}
-
-/* Project cards grid */
-.tl2-proj-grid{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--rule)}
-.tl2-proj-card{border-right:1px solid var(--rule);padding:1.5rem;display:flex;flex-direction:column;gap:.6rem;transition:background .15s}
-.tl2-proj-card:last-child{border-right:none}
-.tl2-proj-card:hover{background:var(--bg)}
-.tl2-proj-img{height:90px;border-radius:8px;margin-bottom:.15rem;display:flex;align-items:flex-end;padding:.65rem;overflow:hidden}
-.tl2-proj-img-label{font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.65)}
-.tl2-proj-name{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3}
-.tl2-proj-client{font-size:10px;color:var(--muted);line-height:1.5}
-.tl2-proj-quote{font-size:10.5px;color:var(--muted);line-height:1.65;font-style:italic;border-left:2px solid var(--rule);padding-left:.6rem;flex:1}
-.tl2-proj-more .tl2-proj-name{color:var(--muted);font-size:1.1rem;font-weight:400}
-.tl2-proj-more .tl2-proj-client{line-height:1.7}
-
-/* Cilino pull quote */
-.tl2-pullquote{padding:2rem 2.5rem;border-top:1px solid var(--rule);background:var(--ink);display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
-.tl2-pq-mark{font-size:4.5rem;color:var(--accent);line-height:.65;font-style:italic;font-family:'Playfair Display',serif;flex-shrink:0}
-.tl2-pq-scores{display:flex;gap:1.75rem;flex-wrap:wrap;margin-bottom:.85rem}
-.tl2-pq-score{text-align:center}
-.tl2-pq-score strong{display:block;font-size:1.4rem;font-weight:700;color:var(--accent);line-height:1}
-.tl2-pq-score span{font-size:9px;color:#6a6260;letter-spacing:.07em;text-transform:uppercase;margin-top:.2rem;display:block}
-.tl2-pq-text{font-size:13.5px;color:#d4cec5;line-height:1.85;font-style:italic}
-.tl2-pq-auth{font-size:11px;color:#6a6260;letter-spacing:.04em;margin-top:.6rem;font-style:normal}
-
-/* Two-column card (Sea++) */
-.tl2-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);border-radius:16px;overflow:hidden;background:var(--white)}
-.tl2-card-img{min-height:380px;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
-.tl2-card-img-badge{font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:.3rem .8rem;border-radius:4px;display:inline-block;margin-bottom:.75rem;width:fit-content}
-.tl2-card-img-title{font-size:2.2rem;font-weight:700;color:#fff;line-height:1;letter-spacing:-.02em}
-.tl2-card-img-sub{font-size:11px;color:rgba(255,255,255,.55);margin-top:.4rem;letter-spacing:.04em}
-.tl2-card-body{padding:2.5rem;display:flex;flex-direction:column;gap:1rem;justify-content:center}
-.tl2-card-period{font-size:10px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
-.tl2-card-desc{font-size:13px;color:var(--muted);line-height:1.85}
-.tl2-card-desc strong{color:var(--ink)}
-.tl2-card-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;padding:1rem;background:var(--bg2);border-radius:8px;border:1px solid var(--rule);margin:.25rem 0}
-.tl2-stat{text-align:center;padding:.25rem 0}
-.tl2-stat strong{display:block;font-size:1rem;font-weight:700;color:var(--ink);line-height:1.2}
-.tl2-stat span{font-size:9px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
-
-/* Compact cards (Fernware, Rice, BHYC) */
-.tl2-compact{display:grid;grid-template-columns:180px 1fr;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:var(--white)}
-.tl2-compact-img{position:relative;min-height:140px;display:flex;align-items:flex-end;padding:1rem}
-.tl2-compact-img-label{font-size:9px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.65)}
-.tl2-compact-body{padding:1.4rem 1.75rem;display:flex;flex-direction:column;justify-content:center;gap:.25rem;border-left:1px solid var(--rule)}
-.tl2-compact-period{font-size:9px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.1rem}
-.tl2-compact-title{font-size:14px;font-weight:500;color:var(--ink);line-height:1.3}
-.tl2-compact-org{font-size:11px;color:var(--accent);margin-bottom:.1rem}
-.tl2-compact-desc{font-size:12px;color:var(--muted);line-height:1.7}
-
-/* Responsive */
-@media(max-width:1100px){.tl2-proj-grid{grid-template-columns:repeat(3,1fr)}.tl2-proj-card:nth-child(3){border-right:none}.tl2-proj-card:nth-child(4){border-top:1px solid var(--rule)}.tl2-proj-card:nth-child(5){border-top:1px solid var(--rule);border-right:none}}
-@media(max-width:900px){
-  .tl2-featured-head{flex-direction:column;gap:1.5rem}
-  .tl2-metrics{gap:1.5rem}
-  .tl2-proj-grid{grid-template-columns:repeat(2,1fr)}
-  .tl2-proj-card{border-right:none;border-bottom:1px solid var(--rule)}
-  .tl2-proj-card:last-child{border-bottom:none}
-  .tl2-card{grid-template-columns:1fr}
-  .tl2-card-img{min-height:240px}
-  .tl2-card-stats{grid-template-columns:repeat(4,1fr)}
-  .tl2-pullquote{grid-template-columns:1fr}
-  .tl2-pq-mark{display:none}
-  .tl2-compact{grid-template-columns:130px 1fr}
-  .tl2-body-pad,.tl2-proj-label,.tl2-pullquote,.tl2-featured-head{padding-left:1.5rem;padding-right:1.5rem}
-}
-@media(max-width:560px){
-  .tl2-proj-grid{grid-template-columns:1fr}
-  .tl2-card-stats{grid-template-columns:repeat(2,1fr)}
-  .tl2-compact{grid-template-columns:100px 1fr}
-}
 </style>
 </head>
 <body>
@@ -278,10 +207,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     <a href="#background" class="nl">Background</a>
     <a href="#working-with" class="nl">Working With Me</a>
     <div class="nd"></div>
-    <a href="https://github.com/EthanRobertKelly" target="_blank" class="ni" title="GitHub" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
+    <a href="#" class="ni" title="GitHub" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
     <a href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank" class="ni" title="LinkedIn" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
     <div class="nd"></div>
-    <a href="job-searcher.html" class="nr" style="margin-right:.3rem">📋 Job HQ</a><a href="recipe-manager.html" class="nr">🍞 Kitchen</a>
+    <a href="recipes.html" class="nr">🍞 Kitchen</a>
   </div>
 </nav>
 
@@ -290,19 +219,19 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   <div class="hl">
     <div class="eyebrow">Engineering Consultant &nbsp;·&nbsp; <span>San Diego, CA</span></div>
     <h1 class="hname">Ethan<br><em>Kelly</em></h1>
-    <div class="title-line">Rice University '24 &nbsp;·&nbsp; Mechanical Engineering</div>
+    <div class="title-line">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
   </div>
   <div class="hr">
-    <p class="hstmt">Hard problems in the field. New domain every time — that's the job I know. Looking for a mission worth that energy.</p>
+    <p class="hstmt">Searching for a worthy problem. Building systems that solve things that actually matter.</p>
     <div class="status-box">
       <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
       <div class="ss">Currently @ Dynamic Motion Control Inc.</div>
     </div>
     <div class="hlinks">
-      <a class="hlink" href="mailto:ethanrobertkelly@gmail.com"><span class="hlbl">Email</span>ethanrobertkelly@gmail.com</a>
+      <a class="hlink" href="/cdn-cgi/l/email-protection#94f1e0fcf5fae6fbf6f1e6e0fff1f8f8edd4f3f9f5fdf8baf7fbf9"><span class="hlbl">Email</span><span class="__cf_email__" data-cfemail="5530213d343b273a373027213e3039392c153238343c397b363a38">[email&#160;protected]</span></a>
       <a class="hlink" href="tel:6467170861"><span class="hlbl">Phone</span>646-717-0861</a>
       <a class="hlink" href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank"><span class="hlbl">LinkedIn</span>/in/EthanRobertKelly ↗</a>
-      <a class="hlink" href="https://github.com/EthanRobertKelly" target="_blank"><span class="hlbl">GitHub</span>github.com/EthanRobertKelly ↗</a>
+      <a class="hlink" href="#"><span class="hlbl">GitHub</span>github.com/— ↗</a>
     </div>
   </div>
 </section>
@@ -323,7 +252,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     </div>
     <div>
       <span class="lbl">What I'm Focused On</span>
-      <p class="body-t">Clean energy. Climate infrastructure. Space systems. Biological systems. Food and water. Problems where engineering creates positive leverage at scale — and where the technology has to work in the real world, not just in simulation. The work should leave things better than it found them.</p>
+      <p class="body-t">Hard-tech. Non-assault defense. Aerospace — including space-based manufacturing. Systems that create genuine leverage, not just economic output. The good side of the blade.</p>
     </div>
   </div>
 
@@ -331,162 +260,216 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     <div class="vert-lbl">Looking For</div>
     <p class="dark-t">Roles where I'm expected to <strong>own the solution</strong> — not execute a ticket. Give me a big problem, a clear outcome, and the trust to break it down, build the plan, and drive it across the finish line. Best under pressure. Best with a hard problem. Best alongside a team that takes the work seriously. If you need someone to uplevel the work around them — that's the job.</p>
   </div>
-  <div class="mission-block" style="margin-top:2.5rem">
-    <span class="lbl">What I'm Looking For</span>
-    <p class="body-t">An early-stage team working on a problem with genuine positive consequence — clean energy, climate infrastructure, space manufacturing, biological systems, food and water. Domains where engineering creates real-world leverage that actually helps people. Not a lifestyle company. Not just software. Something that has to work in the field, under pressure, with real stakes. I'm not looking for a role description. I'm looking for a problem worth the effort.</p>
-  </div>
-
-
 </div>
 
 <!-- 02 WHAT I'VE DONE -->
 <div class="sw" id="done">
   <div class="sh"><span class="sn">02</span><h2 class="st2">What I've <em>done</em></h2></div>
 
-  <div class="tl2-wrap">
+  <!-- CHAPTER 01 -->
+  <div class="ch-header">
+    <div class="ch-num">01</div>
+    <div>
+      <div class="ch-name">Dynamic Motion Control Inc.</div>
+      <div class="ch-meta">Engineering Consultant · Sep 2024 – Present · San Diego, CA</div>
+    </div>
+  </div>
 
-    <!-- ── DMC FEATURED ── -->
-    <div class="tl2-featured">
-      <div class="tl2-featured-head">
-        <div>
-          <div class="tl-period">Sep 2024 — Present <span class="tl-badge live">Current Role</span></div>
-          <div class="tl2-role">Engineering Consultant</div>
-          <div class="tl2-org">Dynamic Motion Control Inc. · San Diego, CA</div>
-        </div>
-        <div class="tl2-metrics">
-          <div class="tl2-metric"><strong>800+</strong><span>Hours</span></div>
-          <div class="tl2-metric"><strong>30+</strong><span>Clients</span></div>
-          <div class="tl2-metric"><strong>100%</strong><span>CSAT</span></div>
-        </div>
+  <div class="timeline">
+
+    <!-- CHINA LAKE -->
+    <div class="tl-item proj">
+      <div class="tl-period">Mar 2025 — Present <span class="tl-badge live">Live</span></div>
+      <div class="tl-role sm">NAWS China Lake — CDAS Modernization</div>
+      <div class="tl-org">Navy Air Weapons Station · Defense · via DMC</div>
+      <p class="tl-body">Go-to onsite engineer for a multi-year weapons station modernization. Entered at a critical FAT milestone — system failing live demos in front of the client. Managed expectations in real-time while debugging. <strong>Pivoted the relationship from skepticism to trust.</strong> When the senior technical expert left mid-project, picked up delivery alone: PLCs, Dell servers, Windows imaging, systems I'd never touched. Led 16-week Trio commission — legacy codebase from "unacceptable" to federally compliant. Both FATs accepted.</p>
+      <div class="tl-photo">📷 — add photo</div>
+      <div class="tl-quote">"Ethan handled this extremely well and quickly took ownership of executing the tests. His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." <span>— Natalie Pippolo, Project Engineer — NAWS</span></div>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>600+</strong>hours onsite</div>
+        <div class="tl-stat"><strong>16 wks</strong>Trio commission</div>
+        <div class="tl-stat"><strong>2</strong>FATs accepted</div>
+        <div class="tl-stat"><strong>Federal</strong>compliant</div>
       </div>
-      <div class="tl2-body-pad">
-        <p class="body-t">Client-facing technical owner across defense, maritime, minerals, and industrial automation — from full project ownership on smaller accounts to onsite execution lead on major federal programs. Every domain was new at the start. Authored the company's first OKR framework, coached VPs, and automated the renaming of <strong>19,000 unnamed variables</strong> across a 6-PLC system via Python XML parser — eliminating thousands of hours of manual engineering work.</p>
-      </div>
-      <div class="tl2-proj-label">Notable Engagements</div>
-      <div class="tl2-proj-grid">
-        <div class="tl2-proj-card">
-          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#0a1628 0%,#1a2f4a 50%,#0d3566 100%)">
-            <span class="tl2-proj-img-label">Defense · Federal</span>
-          </div>
-          <div class="tl2-proj-name">NAWS China Lake</div>
-          <div class="tl2-proj-client">Navy Air Weapons Station · CDAS Modernization</div>
-          <p class="tl2-proj-quote">"His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." — Natalie Pippolo</p>
-          <div class="tags"><span class="tag">CDAS</span><span class="tag">FAT</span><span class="tag">Defense</span></div>
-        </div>
-        <div class="tl2-proj-card">
-          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#0d2233 0%,#1a3d5c 50%,#1e5a7a 100%)">
-            <span class="tl2-proj-img-label">Maritime · Alaska</span>
-          </div>
-          <div class="tl2-proj-name">MV Kennicott</div>
-          <div class="tl2-proj-client">Everett Ship Repair · IO Documentation &amp; PLC</div>
-          <p class="tl2-proj-quote">"A monolithic document — well organized and usable. Will serve as the basis for the vessel's FDS." — Keith Krotzer</p>
-          <div class="tags"><span class="tag">OPCUA</span><span class="tag">Aveva</span><span class="tag">1,500+ IO</span></div>
-        </div>
-        <div class="tl2-proj-card">
-          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#1a2e0a 0%,#2d5c14 50%,#3a7a1c 100%)">
-            <span class="tl2-proj-img-label">Agriculture · Food</span>
-          </div>
-          <div class="tl2-proj-name">Watsonville Produce</div>
-          <div class="tl2-proj-client">Watsonville Produce Inc. · Codebase Modernization</div>
-          <p class="tl2-proj-quote">"Ethan has been working directly with our client's technical team... I've largely been hands-off." — Nick Leisle</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">PLC</span><span class="tag">Agriculture</span></div>
-        </div>
-        <div class="tl2-proj-card">
-          <div class="tl2-proj-img" style="background:linear-gradient(135deg,#1c1a0a 0%,#3d3510 50%,#5a4c18 100%)">
-            <span class="tl2-proj-img-label">Energy · Oil &amp; Gas</span>
-          </div>
-          <div class="tl2-proj-name">Occidental Petroleum</div>
-          <div class="tl2-proj-client">Occidental Petroleum Corp. · Controls Integration</div>
-          <p class="tl2-proj-quote">Controls and systems integration across one of North America's largest energy producers.</p>
-          <div class="tags"><span class="tag">Controls</span><span class="tag">Integration</span></div>
-        </div>
-        <div class="tl2-proj-card tl2-proj-more">
-          <div class="tl2-proj-img" style="background:var(--bg3);border:1px dashed var(--faint)">
-            <span class="tl2-proj-img-label" style="color:var(--faint)">And more</span>
-          </div>
-          <div class="tl2-proj-name">+ 26 more engagements</div>
-          <div class="tl2-proj-client">ALTF Simulation · Terra Lithium · Rocket Engine Test Stand · General Dynamics NASSCO · Explosives Mixing Facility · and others across defense, energy, maritime, and industrial sectors.</div>
-          <div class="tags"><span class="tag">Defense</span><span class="tag">Energy</span><span class="tag">Maritime</span></div>
-        </div>
-      </div>
-      <div class="tl2-pullquote">
-        <div class="tl2-pq-mark">"</div>
-        <div>
-          <div class="tl2-pq-scores">
-            <div class="tl2-pq-score"><strong>9</strong><span>Communication</span></div>
-            <div class="tl2-pq-score"><strong>8</strong><span>Collaboration</span></div>
-            <div class="tl2-pq-score"><strong>9</strong><span>Ownership</span></div>
-            <div class="tl2-pq-score"><strong>10</strong><span>Big Picture</span></div>
-          </div>
-          <p class="tl2-pq-text">Ethan is a rock star. He is entrepreneurial, focused, value-driven, and brilliant. He doesn't just take an answer at face value — he uncovers and challenges assumptions. His ability to synthesize thoughts into coherent arguments leading to concrete conclusions is exceptional. He should have been a lawyer.</p>
-          <div class="tl2-pq-auth">— Chris Cilino, PM &amp; Senior Engineer II, Mentor · Dynamic Motion Control Inc.</div>
-        </div>
-      </div>
+      <div class="tags"><span class="tag">CDAS</span><span class="tag">DAQ</span><span class="tag">PLC</span><span class="tag">Defense</span><span class="tag">FAT</span><span class="tag">HMI</span></div>
     </div>
 
-    <!-- ── SEA++ ── -->
-    <div class="tl2-card">
-      <div class="tl2-card-img" style="background:linear-gradient(160deg,#071828 0%,#0d3558 50%,#0a4a7a 100%)">
-        <span class="tl2-card-img-badge">Military Research Commission</span>
-        <div class="tl2-card-img-title">Sea++</div>
-        <div class="tl2-card-img-sub">Autonomous Trimaran · Rice University Senior Capstone</div>
+    <!-- WATSONVILLE -->
+    <div class="tl-item proj">
+      <div class="tl-period">Late 2024</div>
+      <div class="tl-role sm">Watsonville Produce Inc. — PLC System Rewrite</div>
+      <div class="tl-org">Food Manufacturing · Client-Owned · via DMC</div>
+      <p class="tl-body">Full rewrite of 6 PLC programs across a 100-tag facility system — <strong>19,000 unnamed variables, zero documentation, on a live production floor.</strong> Owned the client relationship end-to-end: discovery through commissioning. Sold additional scope after delivery. Built a bidirectional XML parser to rename all 19,000 variables and reorganize to best standards without losing institutional knowledge — client required it, it didn't exist, so I built it.</p>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>19,000</strong>variables renamed</div>
+        <div class="tl-stat"><strong>6</strong>PLCs rewritten</div>
+        <div class="tl-stat"><strong>100%</strong>CSAT</div>
       </div>
-      <div class="tl2-card-body">
-        <div class="tl2-card-period">Aug 2023 — May 2024 · Rice University, Houston TX</div>
-        <p class="tl2-card-desc">Military-commissioned capstone targeting decentralized naval cargo delivery — designed for mass manufacturing at <strong>under $7,500/unit</strong>. Elected by 7 peers to lead design and construction of a 9-foot autonomous trimaran.<br><br>Implemented modified A* global path planning, ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Designed wing and hull with CFD analysis; built with laser-cut ribs, XPS foam, and fiberglass.</p>
-        <div class="tl2-card-stats">
-          <div class="tl2-stat"><strong>$3,750</strong><span>Unit Cost</span></div>
-          <div class="tl2-stat"><strong>300 lb</strong><span>Payload</span></div>
-          <div class="tl2-stat"><strong>5 ft</strong><span>Seas</span></div>
-          <div class="tl2-stat"><strong>8 mo</strong><span>Build</span></div>
-        </div>
-        <div class="tags"><span class="tag">Python</span><span class="tag">ROS</span><span class="tag">CFD</span><span class="tag">Computer Vision</span><span class="tag">PID</span><span class="tag">Fiberglass</span></div>
-      </div>
+      <div class="tags"><span class="tag">Rockwell</span><span class="tag">PLC/LAD</span><span class="tag">Python</span><span class="tag">XML</span><span class="tag">Client Ownership</span></div>
     </div>
 
-    <!-- ── FERNWARE ── -->
-    <div class="tl2-compact">
-      <div class="tl2-compact-img" style="background:linear-gradient(135deg,#0d1f0a 0%,#1a3d0f 50%,#2a5c1a 100%)">
-        <span class="tl2-compact-img-label">Personal Project</span>
+    <!-- KENNICOTT -->
+    <div class="tl-item proj">
+      <div class="tl-period">2024 — 2025</div>
+      <div class="tl-role sm">MV Kennicott — IO Documentation &amp; Controls</div>
+      <div class="tl-org">Everett Ship Repair · Maritime · via DMC</div>
+      <p class="tl-body">One of two ferries connecting remote Alaskan islands — carries cars, cargo, people. No control system documentation existed. Reverse-architected the system, named and organized <strong>1,500+ IO points</strong>, and produced the foundational document the entire FDS was built from. Also contributed to PLC code conversion and OPCUA integration with Aveva Edge HMI.</p>
+      <div class="tl-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable — it will serve as the basis for the vessel's FDS." <span>— Kyle Bode, Systems Engineer — Everett Ship Repair</span></div>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>1,500+</strong>IO points documented</div>
+        <div class="tl-stat"><strong>0</strong>prior documentation</div>
       </div>
-      <div class="tl2-compact-body">
-        <div class="tl2-compact-period">Aug 2025 — Present</div>
-        <div class="tl2-compact-title">Fernware — Automatic Plant Watering System</div>
-        <div class="tl2-compact-org">Personal Project</div>
-        <p class="tl2-compact-desc">Arduino controller, digital pumps, relay-controlled valves, configurable HMI. Moisture sensors calibrated per plant type. 100+ plant profiles. Zero casualties since deployment.</p>
-        <div class="tags" style="margin-top:.4rem"><span class="tag">Arduino</span><span class="tag">Relay Control</span><span class="tag">HMI</span><span class="tag">Sensors</span></div>
-      </div>
+      <div class="tags"><span class="tag">OPCUA</span><span class="tag">Aveva</span><span class="tag">IO Documentation</span><span class="tag">FDS</span><span class="tag">Maritime</span></div>
     </div>
 
-    <!-- ── RICE ROBOTICS ── -->
-    <div class="tl2-compact">
-      <div class="tl2-compact-img" style="background:linear-gradient(135deg,#00205b 0%,#003087 60%,#004098 100%)">
-        <span class="tl2-compact-img-label">Rice University</span>
-      </div>
-      <div class="tl2-compact-body">
-        <div class="tl2-compact-period">Apr 2023 — May 2024</div>
-        <div class="tl2-compact-title">President &amp; Manufacturing Lead</div>
-        <div class="tl2-compact-org">Rice Robotics Club · Houston, TX</div>
-        <p class="tl2-compact-desc">Grew club 18× from 5 to 90+ active members through organizational restructuring and project leadership. Technical lead for RoboCam — autonomous robotic cameraman system.</p>
-        <div class="tags" style="margin-top:.4rem"><span class="tag">Leadership</span><span class="tag">18× Growth</span><span class="tag">Robotics</span></div>
-      </div>
+    <!-- JACOBS -->
+    <div class="tl-item proj">
+      <div class="tl-period">2024 — 2025</div>
+      <div class="tl-role sm">Jacobs Engineering — Submarine Missile Simulation</div>
+      <div class="tl-org">Defense Contractor · via DMC</div>
+      <p class="tl-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Jacobs needed to validate system readiness without live ordinance — simulating pressure profiles, staging launch sequences, and triggering the transfer command against expected values. End-to-end simulation of a system that doesn't get a second chance.</p>
+      <div class="tags"><span class="tag">LabVIEW</span><span class="tag">DAQ</span><span class="tag">Defense</span><span class="tag">Simulation</span></div>
     </div>
 
-    <!-- ── BHYC ── -->
-    <div class="tl2-compact">
-      <div class="tl2-compact-img" style="background:linear-gradient(135deg,#041a2e 0%,#0a3050 50%,#0d4a78 100%)">
-        <span class="tl2-compact-img-label">Bay Head, NJ</span>
-      </div>
-      <div class="tl2-compact-body">
-        <div class="tl2-compact-period">May 2018 — Aug 2022</div>
-        <div class="tl2-compact-title">C420 Advanced Sailing Instructor</div>
-        <div class="tl2-compact-org">Bay Head Yacht Club</div>
-        <p class="tl2-compact-desc">Coached for 5 seasons. Top pupils placed 3rd and 7th in the C420 New Jersey State Championship 2022.</p>
-        <div class="tags" style="margin-top:.4rem"><span class="tag">Coaching</span><span class="tag">C420</span><span class="tag">Leadership</span></div>
-      </div>
+    <!-- PALMER DCS -->
+    <div class="tl-item proj compact">
+      <div class="tl-period">2025 — Present <span class="tl-badge live">Live</span></div>
+      <div class="tl-role sm">Palmer DCS — Network &amp; Controls Integration</div>
+      <div class="tl-org">Food Manufacturing · via DMC</div>
+      <p class="tl-body">Entered mid-project — above engineers, below PM. Cisco switch configuration across multiple tech stacks, while simultaneously reorganizing a communication system that wasn't working. Learning on the fly while accountable for billing, timelines, and a client relationship already in flight.</p>
+      <div class="tags"><span class="tag">Cisco</span><span class="tag">SCADA</span><span class="tag">Networking</span><span class="tag">Subcontractors</span></div>
+    </div>
+
+    <!-- ALS -->
+    <div class="tl-item compact">
+      <div class="tl-period">2024</div>
+      <div class="tl-role sm">ALS — High-Caliber Bullet Manufacturing</div>
+      <div class="tl-org">Defense Manufacturing · via DMC</div>
+      <p class="tl-body">Control engineer left mid-project on a casing assembly machine. Picked up the program, figured out what existed, and built the rest.</p>
+      <div class="tags"><span class="tag">PLC</span><span class="tag">Manufacturing</span><span class="tag">Defense</span></div>
+    </div>
+
+    <!-- OKR -->
+    <div class="tl-item compact">
+      <div class="tl-period">Mar 2025 — Present</div>
+      <div class="tl-role sm">OKR Initiative — Internal Leadership</div>
+      <div class="tl-org">Dynamic Motion Control Inc.</div>
+      <p class="tl-body">Six months in, led the company's first goal-measurement framework presentation to all staff. Followed up with the VP directly — made the case, drafted the OKR framework. Still being rolled out.</p>
+      <div class="tags"><span class="tag">OKR</span><span class="tag">Leadership</span><span class="tag">Strategy</span></div>
+    </div>
+
+    <!-- FERNWARE -->
+    <div class="tl-item compact">
+      <div class="tl-period">Aug 2025 — Present <span class="tl-badge live">Side Project</span></div>
+      <div class="tl-role sm">Fernware — Automatic Plant Watering System</div>
+      <div class="tl-org">Personal Project</div>
+      <p class="tl-body">Friends killed the plants. Twice. Built a modular automatic watering system with moisture sensors. Zero casualties since.</p>
+      <div class="tags"><span class="tag">Arduino</span><span class="tag">Sensors</span></div>
+    </div>
+
+    <!-- PERSONAL: RECIPE MANAGER -->
+    <div class="tl-item personal">
+      <div class="tl-period">Side project</div>
+      <div class="tl-role">Recipe Manager — built to run the dinner parties</div>
+      <p class="tl-body">Hosts 15. Sourdough from scratch. Ginger beer. Pasta. The tool needed to exist.</p>
     </div>
 
   </div>
+
+  <!-- CHAPTER 02 -->
+  <div class="ch-header" style="margin-top:3.5rem">
+    <div class="ch-num">02</div>
+    <div>
+      <div class="ch-name">Rice University</div>
+      <div class="ch-meta">B.S. Mechanical Engineering · Aug 2020 – May 2024 · Houston, TX</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- SEA++ -->
+    <div class="tl-item proj">
+      <div class="tl-period">Aug 2023 — May 2024</div>
+      <div class="tl-role sm">Sea++ — Autonomous Catamaran</div>
+      <div class="tl-org">Rice University Senior Capstone · Military Research Commission</div>
+      <p class="tl-body">Elected by 7 peers to lead design and construction of an autonomous trimaran commissioned for decentralized naval cargo delivery. Led the full arc: commission brief → elected lead → CFD analysis → hull design → construction → water trials. Modified A* path planning for multi-waypoint navigation. Integrated ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Built with laser-cut ribs, XPS foam, and fiberglass. <strong>Achieved autonomous navigation in 5-ft seas, 25-mph winds with 300-lb payload.</strong></p>
+      <div class="tl-photo">📷 — add photo</div>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>$3,750</strong>unit cost</div>
+        <div class="tl-stat"><strong>300 lb</strong>payload tested</div>
+        <div class="tl-stat"><strong>5 ft seas</strong>navigated</div>
+        <div class="tl-stat"><strong>8 months</strong>build to trial</div>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">ROS</span><span class="tag">CFD</span><span class="tag">Computer Vision</span><span class="tag">PID</span><span class="tag">Fiberglass</span><span class="tag">A*</span></div>
+    </div>
+
+    <!-- RICE ROBOTICS / KAM -->
+    <div class="tl-item proj">
+      <div class="tl-period">Apr 2023 — May 2024</div>
+      <div class="tl-role sm">President &amp; Manufacturing Lead — Rice Robotics</div>
+      <div class="tl-org">Rice University</div>
+      <p class="tl-body">Grew the club <strong>18× from 5 to 90+ active members</strong> through organizational restructuring, project leadership, and recruiting. Technical lead for RoboCam — an autonomous robotic cameraman that tracks athletes across a field using GPS and IMU fusion, without human input.</p>
+      <div class="tl-stats">
+        <div class="tl-stat"><strong>90+</strong>active members</div>
+        <div class="tl-stat"><strong>18×</strong>growth</div>
+      </div>
+      <div class="tags"><span class="tag">Leadership</span><span class="tag">GPS/IMU</span><span class="tag">Robotics</span><span class="tag">Manufacturing</span></div>
+    </div>
+
+    <!-- GECKO PROJECT -->
+    <div class="tl-item compact">
+      <div class="tl-period">2022</div>
+      <div class="tl-role sm">Gecko Project — Autonomous AI Mural System</div>
+      <div class="tl-org">Rice University Design Project</div>
+      <p class="tl-body">Gecko robots with vacuum-suction fingers climb building walls and paint AI-generated murals that constantly evolve — each scan cycle, the AI rewrites the painting. Not selected. The team chose a biomimetic cat. Still the better project.</p>
+      <div class="tags"><span class="tag">Robotics</span><span class="tag">Generative AI</span><span class="tag">Mechanical Design</span></div>
+    </div>
+
+    <!-- PERSONAL: IRONMAN -->
+    <div class="tl-item personal">
+      <div class="tl-period">Feb 2024</div>
+      <div class="tl-role">Campus Ironman — planned it, ran it</div>
+      <p class="tl-body">First-ever on-campus Ironman at Rice. GPS-measured the course. Full distance, solo effort.</p>
+    </div>
+
+    <!-- PERSONAL: SURFBOARD -->
+    <div class="tl-item personal">
+      <div class="tl-period">Ongoing</div>
+      <div class="tl-role">Surfboard shaping — multiple boards throughout</div>
+      <p class="tl-body">Hands-on making. Design instinct. Every one different.</p>
+    </div>
+
+  </div>
+
+  <!-- CHAPTER 03 -->
+  <div class="ch-header" style="margin-top:3.5rem">
+    <div class="ch-num">03</div>
+    <div>
+      <div class="ch-name">Before</div>
+      <div class="ch-meta">High School &amp; Earlier</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+
+    <!-- BHYC -->
+    <div class="tl-item compact">
+      <div class="tl-period">May 2018 — Aug 2022</div>
+      <div class="tl-role sm">C420 Advanced Sailing Instructor</div>
+      <div class="tl-org">Bay Head Yacht Club</div>
+      <p class="tl-body">Coached for 5 seasons. Top pupils placed <strong>3rd and 7th</strong> at the C420 NJ State Championship 2022.</p>
+      <div class="tags"><span class="tag">Coaching</span><span class="tag">C420</span><span class="tag">Leadership</span></div>
+    </div>
+
+    <!-- PERSONAL: NATIONAL CHAMPIONSHIP -->
+    <div class="tl-item personal">
+      <div class="tl-period">2020</div>
+      <div class="tl-role">National Championship — Covid year, video submission</div>
+      <p class="tl-body">One touch. Honest submission. The classical music section was the best part and it's not close.</p>
+    </div>
+
+  </div>
+
 </div>
 
 <!-- 03 BACKGROUND + SKILLS -->
@@ -510,7 +493,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <p class="body-t" style="font-size:12px">Coursework: PDEs, FEA, CFD, Control System Analysis, LHPT. CSWP-S certified.</p>
     </div>
   </div>
-  <p class="body-t" style="margin-bottom:1.75rem;max-width:680px"><strong>Every skill listed was learned in context</strong> — for a real client, under real pressure, often while managing that client relationship directly. Rapid technical ramp is not a strength to highlight. It's a requirement that's been met every time.</p>
   <div class="sg">
     <div class="sc"><div class="sc-cat">Languages</div><div class="sr">Python<div class="bw"><div class="b" style="width:90%"></div></div></div><div class="sr">C++<div class="bw"><div class="b" style="width:72%"></div></div></div><div class="sr">C<div class="bw"><div class="b" style="width:65%"></div></div></div></div>
     <div class="sc"><div class="sc-cat">Controls & Industrial</div><div class="sr">PLC / LAD<div class="bw"><div class="b" style="width:88%"></div></div></div><div class="sr">SCADA<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="sr">LabVIEW<div class="bw"><div class="b" style="width:82%"></div></div></div><div class="sr">Arduino / MES<div class="bw"><div class="b" style="width:68%"></div></div></div></div>
@@ -609,35 +591,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 </div>
 
 
-<!-- 07 CONTACT -->
-<div class="sw" id="contact">
-  <div class="sh"><span class="sn">07</span><h2 class="st2">Let's <em>talk</em></h2></div>
-  <p class="ched">If you're working on a problem that <em>actually matters</em> — let's find out if I'm the right person to help solve it.</p>
-  <div class="crow">
-    <a class="cl" href="mailto:ethanrobertkelly@gmail.com">ethanrobertkelly@gmail.com</a>
-    <a class="cl" href="tel:6467170861">646-717-0861</a>
-    <a class="cl" href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank">LinkedIn ↗</a>
-    <a class="cl" href="https://github.com/EthanRobertKelly" target="_blank">GitHub ↗</a>
-    <a class="cl" href="resume.html" target="_blank">Resume ↗</a>
-  </div>
-</div>
-
 <footer>
-  <span class="fl">© 2026 Ethan Kelly — Engineering Consultant</span>
+  <span class="fl">© 2025 Ethan Kelly — Engineering Consultant</span>
   <nav class="fr">
     <a href="#philosophy">Philosophy</a>
     <a href="#done">Work</a>
     <a href="#background">Background</a>
-    <a href="#working-with">Working With Me</a>
-    <a href="job-searcher.html">Job HQ</a>
-    <a href="recipe-manager.html">Kitchen</a>
-    <a href="mailto:ethanrobertkelly@gmail.com" class="sp">Contact</a>
-  </nav>
-</footer>
-
-<script>
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>10)},{ passive:true });
-</script>
-</body>
-</html>
+    <a href="#working-with">Working Wit
