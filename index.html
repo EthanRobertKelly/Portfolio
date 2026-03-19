@@ -247,6 +247,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <!-- EDIT MODE INDICATOR -->
 <div id="edit-bar" style="display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:998;background:var(--accent);color:var(--white);padding:.6rem 1rem;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;box-shadow:0 4px 16px rgba(42,92,58,.4);align-items:center;gap:.6rem">
   <span id="edit-status">Edit mode</span>
+  <button onclick="bakeAndDownload()" style="background:var(--white);color:var(--accent);border:none;font-family:inherit;font-size:11px;font-weight:600;padding:.25rem .65rem;border-radius:5px;cursor:pointer">Bake & Download</button>
   <button onclick="clearEdits()" title="Revert all saved edits" style="background:rgba(255,255,255,.15);border:none;color:var(--white);font-family:inherit;font-size:11px;padding:.25rem .55rem;border-radius:5px;cursor:pointer">Clear</button>
   <button onclick="exitEditMode()" style="background:rgba(255,255,255,.2);border:none;color:var(--white);font-family:inherit;font-size:11px;padding:.25rem .55rem;border-radius:5px;cursor:pointer">Exit</button>
 </div>
@@ -815,6 +816,40 @@ function clearEdits(){
   if(!confirm('Revert all saved edits? This cannot be undone.')) return
   localStorage.removeItem(EDIT_KEY)
   location.reload()
+}
+
+function bakeAndDownload(){
+  // Clone the full document
+  var clone=document.documentElement.cloneNode(true)
+  // Remove edit scaffolding
+  clone.querySelectorAll('[data-eid]').forEach(function(el){
+    el.removeAttribute('data-eid')
+    el.removeAttribute('contenteditable')
+    el.style.outline=''
+    el.style.borderRadius=''
+    el.style.minHeight=''
+  })
+  // Hide the edit bar in the snapshot
+  var bar=clone.querySelector('#edit-bar')
+  if(bar) bar.style.display='none'
+  // Strip the localStorage restore key so the downloaded file has no dependency on it
+  // (edits are baked directly into the HTML — no need to restore from storage)
+  clone.querySelectorAll('script').forEach(function(s){
+    if(s.textContent.indexOf('restoreEdits')>-1){
+      s.textContent=s.textContent
+        .replace(/restoreEdits\(\)/g,'')
+        .replace(/function restoreEdits[\s\S]*?\n\}/,'')
+    }
+  })
+  var html='<!DOCTYPE html>\n'+clone.outerHTML
+  var blob=new Blob([html],{type:'text/html'})
+  var a=document.createElement('a')
+  a.href=URL.createObjectURL(blob)
+  a.download='index.html'
+  a.click()
+  URL.revokeObjectURL(a.href)
+  document.getElementById('edit-status').textContent='Downloaded'
+  setTimeout(function(){document.getElementById('edit-status').textContent='Edit mode'},2000)
 }
 
 var editMode=false
