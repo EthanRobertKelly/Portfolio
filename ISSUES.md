@@ -12,7 +12,7 @@
 - [x] Ironman — `Ironman.png` live
 - [x] Surfboard art — `SURF ART.jpg` / `SURF ART2.jpg` live
 - [x] Headshot — `Headshot.jpeg` live in hero
-- [ ] Sea++ (design sketches, CFD screenshots, hull, water trial) — pending Y3 IP check
+- [ ] Sea++ (design sketches, CFD screenshots, hull, water trial) — do you have more photos beyond SEA++.png?
 - [ ] Fernware — project in progress, on hold
 
 ### ~~Y2 — Write Your Timeline Moments~~ ✓
