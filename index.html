@@ -245,9 +245,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 </div>
 
 <!-- EDIT MODE INDICATOR -->
-<div id="edit-bar" style="display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:998;background:var(--accent);color:var(--white);padding:.55rem 1rem;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;box-shadow:0 4px 16px rgba(42,92,58,.4);display:none;align-items:center;gap:.75rem">
-  <span>Edit mode on</span>
-  <button onclick="exitEditMode()" style="background:rgba(255,255,255,.2);border:none;color:var(--white);font-family:inherit;font-size:11px;padding:.25rem .55rem;border-radius:5px;cursor:pointer;letter-spacing:.03em">Exit</button>
+<div id="edit-bar" style="display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:998;background:var(--accent);color:var(--white);padding:.6rem 1rem;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;box-shadow:0 4px 16px rgba(42,92,58,.4);align-items:center;gap:.6rem">
+  <span id="edit-status">Edit mode</span>
+  <button onclick="clearEdits()" title="Revert all saved edits" style="background:rgba(255,255,255,.15);border:none;color:var(--white);font-family:inherit;font-size:11px;padding:.25rem .55rem;border-radius:5px;cursor:pointer">Clear</button>
+  <button onclick="exitEditMode()" style="background:rgba(255,255,255,.2);border:none;color:var(--white);font-family:inherit;font-size:11px;padding:.25rem .55rem;border-radius:5px;cursor:pointer">Exit</button>
 </div>
 
 <!-- HERO -->
@@ -755,35 +756,86 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape') closeLogin()
 })
 
+var EDIT_KEY='ek-portfolio-edits'
+var EDIT_SELECTORS=[
+  'p','h1','h2','h3','h4','h5',
+  '.tv3-title','.tv3-body','.tv3-org','.tl-period',
+  '.body-t','.phil-stmt','.dark-t','.hstmt',
+  '.qtext','.qa-name','.qa-role',
+  '.tl-badge','.stat-n','.stat-l',
+  '.lbl','.eyebrow','.st','.ss',
+  '.hlink','.hlbl','.tv3-ch-title','.tv3-ch-sub',
+  '.mission-block p','.mission-block strong'
+]
+
+// Assign stable data-eid to every editable element on load
+function assignIds(){
+  var counts={}
+  EDIT_SELECTORS.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el){
+      var k=sel.replace(/[^a-z0-9]/gi,'')
+      counts[k]=(counts[k]||0)
+      el.dataset.eid=k+'-'+counts[k]
+      counts[k]++
+    })
+  })
+}
+
+// Restore saved edits from localStorage on page load
+function restoreEdits(){
+  try{
+    var saved=JSON.parse(localStorage.getItem(EDIT_KEY)||'{}')
+    Object.keys(saved).forEach(function(eid){
+      var el=document.querySelector('[data-eid="'+eid+'"]')
+      if(el) el.innerHTML=saved[eid]
+    })
+  }catch(e){}
+}
+
+// Persist a single element's content
+var saveTimer=null
+function saveEdit(eid,html){
+  try{
+    var saved=JSON.parse(localStorage.getItem(EDIT_KEY)||'{}')
+    saved[eid]=html
+    localStorage.setItem(EDIT_KEY,JSON.stringify(saved))
+    showSaved()
+  }catch(e){}
+}
+
+var savedTimer=null
+function showSaved(){
+  var s=document.getElementById('edit-status')
+  s.textContent='Saved'
+  clearTimeout(savedTimer)
+  savedTimer=setTimeout(function(){s.textContent='Edit mode'},1200)
+}
+
+function clearEdits(){
+  if(!confirm('Revert all saved edits? This cannot be undone.')) return
+  localStorage.removeItem(EDIT_KEY)
+  location.reload()
+}
+
 var editMode=false
 function enterEditMode(){
   editMode=true
-  // Make all text nodes editable
-  var selectors=[
-    'p','h1','h2','h3','h4','h5',
-    '.tv3-title','.tv3-body','.tv3-org','.tl-period',
-    '.body-t','.phil-stmt','.dark-t','.hstmt',
-    '.qtext','.qa-name','.qa-role',
-    '.tl-badge','.stat-n','.stat-l',
-    '.lbl','.eyebrow','.st','.ss',
-    '.hlink','.hlbl','.tv3-ch-title','.tv3-ch-sub',
-    '.mission-block p','.mission-block strong'
-  ]
-  selectors.forEach(function(sel){
+  EDIT_SELECTORS.forEach(function(sel){
     document.querySelectorAll(sel).forEach(function(el){
       el.contentEditable='true'
       el.style.outline='1.5px dashed rgba(42,92,58,.35)'
       el.style.borderRadius='3px'
       el.style.minHeight='1em'
+      el.addEventListener('input',function(){
+        if(el.dataset.eid) saveEdit(el.dataset.eid, el.innerHTML)
+      })
     })
   })
-  // Update login btn
   document.getElementById('login-btn').textContent='Editing'
   document.getElementById('login-btn').style.opacity='0.5'
-  // Show edit bar
-  var bar=document.getElementById('edit-bar')
-  bar.style.display='flex'
+  document.getElementById('edit-bar').style.display='flex'
 }
+
 function exitEditMode(){
   editMode=false
   document.querySelectorAll('[contenteditable]').forEach(function(el){
@@ -796,6 +848,10 @@ function exitEditMode(){
   document.getElementById('login-btn').style.opacity='1'
   document.getElementById('edit-bar').style.display='none'
 }
+
+// Init on page load
+assignIds()
+restoreEdits()
 </script>
 </body>
 </html>
