@@ -18,14 +18,8 @@ The timeline lives or dies by real images. Needed:
 
 Even rough phone photos are fine. The gradient placeholders swap out instantly.
 
-### Y2 — Write Your Timeline Moments `priority:high`
-20-30 moments that tell your story chronologically. Format doesn't matter — bullet points, notes, voice memo transcript. For each moment: what happened, when, and why it mattered. Professional AND personal. This is the raw material for Timeline v3.
-
-Examples of what I'm looking for:
-- "Sep 2024 — first day at DMC, thrown onto Watsonville immediately"
-- "Mar 2025 — arrived at China Lake, FAT was failing, had to figure it out live"
-- "Nov 2023 — Ironman finish, 11:42, Woodlands TX"
-- "Summer 2024 — shaped my first surfboard in the garage"
+### ~~Y2 — Write Your Timeline Moments~~ ✓
+Done: timeline built from resume + provided context. All major moments are live.
 
 ### Y3 — Confirm Sea++ IP Before Publishing `priority:medium`
 The capstone was a military research commission. Before publishing the code publicly, worth a quick check with Rice or the commissioning body that there's no IP restriction.
@@ -51,18 +45,8 @@ The hero statement and philosophy section are rewritten but not final:
 - "What I'm Looking For" block in Philosophy needs review — is it too long? Too direct? Not direct enough?
 - The philosophy pull-quote ("Are we in discovery, or just learning fast?") is strong — make sure it still lands in the new framing
 
-### H3 — Timeline v3: Vertical Narrative with Chapters & Moments `@claude`
-Complete redesign as a long vertical narrative — chapters (DMC, Sea++, Rice) with individual moments inside them. Professional and personal woven together. Blocked on Y1 (photos) and Y2 (moments list) from Ethan.
-
-Design direction:
-- Continuous vertical timeline, chapters as headers with a colored bar
-- Individual moments as panels inside each chapter — varying sizes and layouts
-- Photo panels, quote panels, stat panels, mixed panels
-- Personal moments (Ironman, surfboard) sit alongside professional ones at the right point in time
-- Sea++ shown as a design process: brief → elected lead → CFD → build → water trial
-- Fernware, Rice, BHYC as compact moments
-
-**Blocked on: Y1, Y2**
+### ~~H3 — Timeline v3: Vertical Narrative with Chapters & Moments~~ ✓
+Done: wave-spine timeline live with 3 chapters, all major moments, photos, stats, and quotes. Still adding photos as Ethan provides them (Fernware, China Lake onsite).
 
 ### ~~H4 — Login Gate for Job Searcher & Recipe Manager~~ ✓
 Done: sessionStorage password gate ("ethank") added to both `/job-searcher.html` and `/recipe-manager.html`. Gate clears on tab close. Longer-term OAuth upgrade still possible.
