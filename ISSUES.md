@@ -64,11 +64,8 @@ Design direction:
 
 **Blocked on: Y1, Y2**
 
-### H4 — Login Gate for Job Searcher & Recipe Manager
-Both tools are publicly accessible at `/job-searcher.html` and `/recipe-manager.html`. Until a login gate is built:
-- Anyone visiting the portfolio can see active job search activity
-- Consider at minimum a simple password gate or obscured URL
-- Longer term: proper auth (GitHub OAuth or similar, no backend required with Netlify/Vercel)
+### ~~H4 — Login Gate for Job Searcher & Recipe Manager~~ ✓
+Done: sessionStorage password gate ("ethank") added to both `/job-searcher.html` and `/recipe-manager.html`. Gate clears on tab close. Longer-term OAuth upgrade still possible.
 
 ---
 
@@ -87,8 +84,8 @@ Fernware is mentioned in the portfolio and resume but has no repo link:
 - Add README with system diagram, parts list, wiring
 - Link from portfolio timeline entry and resume
 
-### M3 — Use Full Chris Cilino Quote
-The current portfolio uses a truncated version. The full quote includes the scores (9/10 Communication, 8/10 Collaboration, 9/10 Task Ownership, 10/10 Big Picture) and the "rock star" + "should have been a lawyer" lines. Full version is far more compelling — add scores display to the qcard.
+### ~~M3 — Use Full Chris Cilino Quote~~ ✓
+Done: full quote with scores (Communication 9, Collaboration 8, Task Ownership 9, Big Picture 10) and "rock star" / "should have been a lawyer" lines added to the portfolio qcard.
 
 ### M4 — Add More Peer Feedback to Portfolio
 Currently showing 6 quotes. Full set has 11 reviewers. Strongest unused:
@@ -104,10 +101,8 @@ Consider a "show more" toggle to avoid overwhelming the page.
 - Verify all links render correctly in print mode (they should show as plain text)
 - Consider adding a subtle header with name + page number for multi-page output
 
-### M6 — Nav Consistency Across All Three Pages
-Job Searcher and Recipe Manager have minimal back links but no unified nav experience:
-- Consider a consistent top bar across all three pages
-- Should feel like one site, not three separate apps with a breadcrumb tacked on
+### ~~M6 — Nav Consistency Across All Three Pages~~ ✓
+Done: nav links to Job Hunter HQ and Kitchen Codex added to main portfolio nav; back-links present on both tools.
 
 ---
 
@@ -124,11 +119,8 @@ The Python bidirectional XML parser that renamed 19,000 variables is a genuinely
 - Demonstrates Python, systems thinking, and real engineering problem-solving
 - Rebuild as `xml-tool.html` and re-link from the DMC timeline entry
 
-### L3 — Peer Feedback Page: Link from Portfolio
-`peer-feedback.html` exists but isn't linked from anywhere:
-- Add a subtle link in the "What colleagues say" section header
-- Or link from the footer
-- Should be discoverable but not front-and-center
+### ~~L3 — Peer Feedback Page: Link from Portfolio~~ ✓
+Done: "Full peer feedback transcripts →" link added after the Working With Me section.
 
 ### L4 — Timeline: Sea++ Photo / Build Documentation
 The Sea++ entry would benefit from:
@@ -156,6 +148,14 @@ Decide and build: does the narrative timeline live as a section on the main page
 ---
 
 ## Done ✓
+
+- [x] H4 — Password gate on job-searcher.html and recipe-manager.html (sessionStorage, "ethank")
+- [x] M3 — Full Chris Cilino quote with scores added to portfolio
+- [x] M6 — Nav links to Job HQ and Kitchen added; consistent back-links across tools
+- [x] L3 — Peer feedback page linked from portfolio (after Working With Me section)
+- [x] NAWS China Lake entry expanded ($25B facility, $10M scope, Precision Filters, critical path framing)
+- [x] Gecko project entry removed (theory only, never built)
+- [x] Engineering Philosophy section removed from portfolio
 
 - [x] Fix broken Cloudflare email encoding
 - [x] Fix GitHub hero link placeholder

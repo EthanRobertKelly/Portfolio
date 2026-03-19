@@ -433,6 +433,35 @@ window.storage=window.storage||{get:(k)=>Promise.resolve({value:localStorage.get
 </head>
 <body>
 
+<!-- PASSWORD GATE -->
+<div id="ek-gate" style="display:none;position:fixed;inset:0;z-index:9999;background:#0c0c0c;align-items:center;justify-content:center;flex-direction:column;gap:1rem">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#00d084;letter-spacing:.12em;margin-bottom:.5rem">EK // HQ</div>
+  <input id="ek-gate-pw" type="password" placeholder="Password" autocomplete="off"
+    style="background:#141414;border:1px solid rgba(255,255,255,.13);border-radius:6px;padding:.65rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#e2e2e2;outline:none;width:240px;text-align:center"
+    onkeydown="if(event.key==='Enter')ekGateSubmit()">
+  <div id="ek-gate-err" style="font-size:11px;color:#ff5555;min-height:1em"></div>
+  <button onclick="ekGateSubmit()" style="background:#00d084;color:#000;border:none;border-radius:6px;padding:.55rem 1.5rem;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.05em">Enter</button>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('ek-auth')==='1'){return}
+  var g=document.getElementById('ek-gate')
+  g.style.display='flex'
+  document.body.style.overflow='hidden'
+})()
+function ekGateSubmit(){
+  if(document.getElementById('ek-gate-pw').value==='ethank'){
+    sessionStorage.setItem('ek-auth','1')
+    document.getElementById('ek-gate').style.display='none'
+    document.body.style.overflow=''
+  } else {
+    document.getElementById('ek-gate-err').textContent='Incorrect'
+    document.getElementById('ek-gate-pw').value=''
+    document.getElementById('ek-gate-pw').focus()
+  }
+}
+</script>
+
 <!-- ════════════════════════ HEADER ════════════════════════ -->
 <div class="header">
   <div class="header-l">
