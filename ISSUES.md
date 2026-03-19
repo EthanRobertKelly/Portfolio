@@ -7,16 +7,13 @@
 
 ## Needs From You — @ethan
 
-### Y1 — Gather Photos `priority:high`
-The timeline lives or dies by real images. Needed:
-- China Lake onsite (any — equipment, workspace, the site)
-- Sea++ at any stage (design sketches, CFD screenshots, hull build, water trial)
-- Ironman — race day, training, finish line
-- Surfboard shaping — in progress, finished board
-- Fernware setup — the actual system running
-- Any other moment that mattered
-
-Even rough phone photos are fine. The gradient placeholders swap out instantly.
+### Y1 — Gather Photos
+- [x] China Lake / NAWS — `NAWS.jpeg` live
+- [x] Ironman — `Ironman.png` live
+- [x] Surfboard art — `SURF ART.jpg` / `SURF ART2.jpg` live
+- [x] Headshot — `Headshot.jpeg` live in hero
+- [ ] Sea++ (design sketches, CFD screenshots, hull, water trial) — pending Y3 IP check
+- [ ] Fernware — project in progress, on hold
 
 ### ~~Y2 — Write Your Timeline Moments~~ ✓
 Done: timeline built from resume + provided context. All major moments are live.
@@ -24,8 +21,8 @@ Done: timeline built from resume + provided context. All major moments are live.
 ### Y3 — Confirm Sea++ IP Before Publishing `priority:medium`
 The capstone was a military research commission. Before publishing the code publicly, worth a quick check with Rice or the commissioning body that there's no IP restriction.
 
-### Y4 — Create Fernware GitHub Repo `priority:medium`
-Build the repo on your end — I'll add the link everywhere once it exists. Even a basic README with a photo and parts list is enough to start.
+### Y4 — Create Fernware GitHub Repo
+Project in progress — on hold until ready to publish.
 
 ### Y5 — Headshot / Photo for Hero `priority:low`
 The hero section has no photo of you. A clean headshot or candid (onsite, on the water, working) would make the top of the portfolio dramatically more personal and memorable.
