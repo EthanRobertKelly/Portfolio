@@ -80,7 +80,7 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .tv3-ch-n{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.3rem;display:block}
 .tv3-ch-title{font-size:1.2rem;font-weight:500;color:var(--white);line-height:1.2}
 .tv3-ch-sub{font-size:12px;color:#7a7068;margin-top:.25rem}
-.tv3-row{position:relative;margin-bottom:4rem;min-height:2rem}
+.tv3-row{position:relative;margin-bottom:4rem;min-height:2rem;z-index:1}
 .tv3-row.left{--dot-x:25%;padding-left:calc(25% + 2.25rem);padding-right:0}
 .tv3-row.right{--dot-x:75%;padding-right:calc(25% + 2.25rem);padding-left:0}
 .tv3-dot{position:absolute;left:var(--dot-x,50%);top:1.5rem;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);border:2.5px solid var(--bg);z-index:2;transition:box-shadow .2s}
@@ -728,7 +728,9 @@ window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>10)
 })
 
-// WAVE SPINE — matte ribbon with gradient and 3D depth
+// TWISTED RIBBON — 4 parallel strands that rotate around the spine axis,
+// creating a physical twist effect matching the reference image.
+// Sits at z-index:0, behind all .tv3-row content (z-index:1).
 function drawSpine(){
   var tv3=document.querySelector('.tv3')
   if(!tv3)return
@@ -736,73 +738,122 @@ function drawSpine(){
   if(old)old.remove()
   var dots=Array.from(tv3.querySelectorAll('.tv3-dot'))
   if(dots.length<2)return
+
   function posOf(el){
     var x=el.offsetLeft,y=el.offsetTop+el.offsetHeight/2,p=el.offsetParent
     while(p&&p!==tv3){x+=p.offsetLeft;y+=p.offsetTop;p=p.offsetParent}
     return{x:x,y:y}
   }
-  var pts=dots.map(posOf)
-  // Build path — relaxed tension (0.72) with bumped tension (1.05) on large chapter-gap
-  // segments, which creates 1-2 natural self-intersections at chapter boundaries
-  var d='M'+pts[0].x+','+pts[0].y
-  for(var i=1;i<pts.length;i++){
-    var a=pts[i-1],b=pts[i],dy=b.y-a.y
-    var t=dy>260?1.05:0.72
-    d+=' C'+a.x+','+(a.y+dy*t)+' '+b.x+','+(b.y-dy*t)+' '+b.x+','+b.y
+  var anchors=dots.map(posOf)
+
+  // 1. Sample the bezier spine into dense point array
+  var sampled=[]
+  for(var i=1;i<anchors.length;i++){
+    var a=anchors[i-1],b=anchors[i],dy=b.y-a.y
+    // relaxed tension 0.65; chapter gaps (dy>260) use 1.0 to create organic loop
+    var tf=dy>260?1.0:0.65
+    var steps=Math.max(30,Math.floor(Math.abs(dy)/6))
+    for(var s=(i===1?0:1);s<=steps;s++){
+      var t=s/steps,mt=1-t
+      var cp1x=a.x,cp1y=a.y+dy*tf,cp2x=b.x,cp2y=b.y-dy*tf
+      sampled.push({
+        x:mt*mt*mt*a.x+3*mt*mt*t*cp1x+3*mt*t*t*cp2x+t*t*t*b.x,
+        y:mt*mt*mt*a.y+3*mt*mt*t*cp1y+3*mt*t*t*cp2y+t*t*t*b.y
+      })
+    }
   }
+
+  // 2. Cumulative arc length (uniform parameterisation)
+  var arc=[0]
+  for(var i=1;i<sampled.length;i++){
+    var dx=sampled[i].x-sampled[i-1].x,dy=sampled[i].y-sampled[i-1].y
+    arc.push(arc[i-1]+Math.sqrt(dx*dx+dy*dy))
+  }
+  var L=arc[arc.length-1]
+
+  // 3. Unit normals perpendicular to the tangent at each sample
+  var normals=sampled.map(function(_,i){
+    var p=sampled[Math.max(0,i-1)],n=sampled[Math.min(sampled.length-1,i+1)]
+    var dx=n.x-p.x,dy=n.y-p.y,len=Math.sqrt(dx*dx+dy*dy)||1
+    return{x:-dy/len,y:dx/len}
+  })
+
+  // 4. Four strands — each rotated 90° out of phase.
+  //    Offset = R * cos(twist_angle + strand_phase), so strands physically
+  //    revolve around the spine axis as you travel along the path.
+  //    With TWISTS=2π the ribbon makes one full rotation → ~2 visible crossings.
+  var COLORS=['#3d7a54','#be7235','#6090b4','#7062a2'] // green, terracotta, sky, lavender
+  var R=13        // half-ribbon width in px
+  var TWISTS=2*Math.PI  // one full rotation over full path length
+
+  var strandPts=COLORS.map(function(_,si){
+    return sampled.map(function(pt,i){
+      var angle=arc[i]/L*TWISTS + si*Math.PI/2  // 90° phase shift per strand
+      var off=R*Math.cos(angle)
+      return{x:pt.x+normals[i].x*off, y:pt.y+normals[i].y*off}
+    })
+  })
+
+  // 5. Catmull-Rom → cubic bezier path (smooth, subsampled for perf)
+  function crPath(pts,skip){
+    var sub=[]
+    for(var i=0;i<pts.length;i+=skip)sub.push(pts[i])
+    if(sub[sub.length-1]!==pts[pts.length-1])sub.push(pts[pts.length-1])
+    if(sub.length<2)return''
+    var d='M'+sub[0].x.toFixed(1)+','+sub[0].y.toFixed(1)
+    for(var i=1;i<sub.length-1;i++){
+      var p0=sub[Math.max(0,i-1)],p1=sub[i],p2=sub[i+1],p3=sub[Math.min(sub.length-1,i+2)]
+      var c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6
+      var c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6
+      d+=' C'+c1x.toFixed(1)+','+c1y.toFixed(1)+' '+c2x.toFixed(1)+','+c2y.toFixed(1)+' '+p2.x.toFixed(1)+','+p2.y.toFixed(1)
+    }
+    return d
+  }
+
+  // 6. Build SVG
   var ns='http://www.w3.org/2000/svg'
   var svg=document.createElementNS(ns,'svg')
   svg.classList.add('tv3-spine-svg')
   svg.setAttribute('aria-hidden','true')
-  svg.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible'
+  // z-index:0 — behind .tv3-row (z-index:1) and .tv3-ch (z-index:2)
+  svg.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible'
+
   var defs=document.createElementNS(ns,'defs')
-  // Drop-shadow filter for 3D depth
+  // Soft drop-shadow filter for 3D lift
   var filt=document.createElementNS(ns,'filter')
-  filt.id='rShadow';filt.setAttribute('x','-40%');filt.setAttribute('y','-10%')
-  filt.setAttribute('width','180%');filt.setAttribute('height','130%')
+  filt.id='strandShadow';filt.setAttribute('x','-40%');filt.setAttribute('y','-10%')
+  filt.setAttribute('width','180%');filt.setAttribute('height','120%')
   var fb=document.createElementNS(ns,'feGaussianBlur')
-  fb.setAttribute('in','SourceAlpha');fb.setAttribute('stdDeviation','9');fb.setAttribute('result','bl')
-  var fo=document.createElementNS(ns,'feOffset')
-  fo.setAttribute('in','bl');fo.setAttribute('dx','2');fo.setAttribute('dy','9');fo.setAttribute('result','sh')
-  var fc=document.createElementNS(ns,'feComponentTransfer');fc.setAttribute('in','sh')
-  var fa=document.createElementNS(ns,'feFuncA');fa.setAttribute('type','linear');fa.setAttribute('slope','0.18')
+  fb.setAttribute('in','SourceAlpha');fb.setAttribute('stdDeviation','5');fb.setAttribute('result','b')
+  var fo=document.createElementNS(ns,'feOffset');fo.setAttribute('in','b')
+  fo.setAttribute('dx','1');fo.setAttribute('dy','5');fo.setAttribute('result','s')
+  var fc=document.createElementNS(ns,'feComponentTransfer');fc.setAttribute('in','s')
+  var fa=document.createElementNS(ns,'feFuncA');fa.setAttribute('type','linear');fa.setAttribute('slope','0.13')
   fc.appendChild(fa)
   var fm=document.createElementNS(ns,'feMerge')
-  var fm1=document.createElementNS(ns,'feMergeNode')
-  var fm2=document.createElementNS(ns,'feMergeNode');fm2.setAttribute('in','SourceGraphic')
-  fm.appendChild(fm1);fm.appendChild(fm2)
+  ;[undefined,'SourceGraphic'].forEach(function(src){
+    var mn=document.createElementNS(ns,'feMergeNode')
+    if(src)mn.setAttribute('in',src)
+    fm.appendChild(mn)
+  })
   filt.appendChild(fb);filt.appendChild(fo);filt.appendChild(fc);filt.appendChild(fm)
   defs.appendChild(filt)
-  // Multi-stop gradient: soft green → terracotta → sky blue → lavender
-  var g=document.createElementNS(ns,'linearGradient')
-  g.id='rGrad';g.setAttribute('gradientUnits','userSpaceOnUse')
-  g.setAttribute('x1',pts[0].x);g.setAttribute('y1',pts[0].y)
-  g.setAttribute('x2',pts[pts.length-1].x);g.setAttribute('y2',pts[pts.length-1].y)
-  ;[['0%','#5aad78'],['30%','#d08a5c'],['62%','#78b2cd'],['100%','#9e87c2']].forEach(function(s){
-    var st=document.createElementNS(ns,'stop')
-    st.setAttribute('offset',s[0]);st.setAttribute('stop-color',s[1]);g.appendChild(st)
-  })
-  defs.appendChild(g)
   svg.appendChild(defs)
-  // Layer 1: wide blurred dark shadow for depth
-  var sh=document.createElementNS(ns,'path')
-  sh.setAttribute('d',d);sh.setAttribute('fill','none')
-  sh.setAttribute('stroke','rgba(18,12,6,0.13)');sh.setAttribute('stroke-width','22')
-  sh.setAttribute('stroke-linecap','round');sh.setAttribute('filter','url(#rShadow)')
-  svg.appendChild(sh)
-  // Layer 2: matte ribbon
-  var rb=document.createElementNS(ns,'path')
-  rb.setAttribute('d',d);rb.setAttribute('fill','none')
-  rb.setAttribute('stroke','url(#rGrad)');rb.setAttribute('stroke-width','14')
-  rb.setAttribute('stroke-linecap','round');rb.setAttribute('stroke-linejoin','round')
-  rb.setAttribute('opacity','0.48')
-  svg.appendChild(rb)
-  // Layer 3: thin highlight down ribbon center for 3D lift
-  var hl=document.createElementNS(ns,'path')
-  hl.setAttribute('d',d);hl.setAttribute('fill','none')
-  hl.setAttribute('stroke','rgba(255,255,255,0.22)');hl.setAttribute('stroke-width','3')
-  hl.setAttribute('stroke-linecap','round')
-  svg.appendChild(hl)
+
+  // Render all 4 strands — DOM order acts as painter's algorithm for overlaps
+  COLORS.forEach(function(color,si){
+    var path=document.createElementNS(ns,'path')
+    path.setAttribute('d',crPath(strandPts[si],4))
+    path.setAttribute('fill','none')
+    path.setAttribute('stroke',color)
+    path.setAttribute('stroke-width','5.5')
+    path.setAttribute('stroke-linecap','round')
+    path.setAttribute('stroke-linejoin','round')
+    path.setAttribute('opacity','0.45')
+    path.setAttribute('filter','url(#strandShadow)')
+    svg.appendChild(path)
+  })
+
   tv3.insertBefore(svg,tv3.firstChild)
 }
 window.addEventListener('load',drawSpine)
