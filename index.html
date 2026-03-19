@@ -221,9 +221,34 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     <a href="#" class="ni" title="GitHub" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
     <a href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank" class="ni" title="LinkedIn" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
     <div class="nd"></div>
-    <a href="recipes.html" class="nr">🍞 Kitchen</a>
+    <a href="job-searcher.html" class="nr" style="margin-left:0">Job HQ</a>
+    <a href="recipe-manager.html" class="nr">Kitchen</a>
+    <button id="login-btn" class="nr" style="background:none;cursor:pointer;font-family:inherit" onclick="openLogin()">Login</button>
   </div>
 </nav>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(28,23,18,.6);backdrop-filter:blur(4px);align-items:center;justify-content:center">
+  <div style="background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:2.5rem 3rem;width:340px;box-shadow:0 24px 64px rgba(28,23,18,.18)">
+    <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Portfolio</div>
+    <div style="font-size:1.3rem;font-weight:500;color:var(--ink);margin-bottom:1.75rem">Edit mode</div>
+    <input id="login-user" type="text" placeholder="Username" autocomplete="off"
+      style="width:100%;padding:.65rem .9rem;border:1px solid var(--rule);border-radius:7px;font-family:inherit;font-size:13px;background:var(--bg);color:var(--ink);margin-bottom:.75rem;outline:none">
+    <input id="login-pass" type="password" placeholder="Password"
+      style="width:100%;padding:.65rem .9rem;border:1px solid var(--rule);border-radius:7px;font-family:inherit;font-size:13px;background:var(--bg);color:var(--ink);margin-bottom:.35rem;outline:none">
+    <div id="login-err" style="font-size:11px;color:#c0392b;min-height:1.2em;margin-bottom:.9rem"></div>
+    <button onclick="attemptLogin()"
+      style="width:100%;padding:.7rem;background:var(--accent);color:var(--white);border:none;border-radius:7px;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.03em">Enter edit mode</button>
+    <button onclick="closeLogin()"
+      style="width:100%;padding:.55rem;background:none;border:none;font-family:inherit;font-size:12px;color:var(--muted);cursor:pointer;margin-top:.5rem">Cancel</button>
+  </div>
+</div>
+
+<!-- EDIT MODE INDICATOR -->
+<div id="edit-bar" style="display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:998;background:var(--accent);color:var(--white);padding:.55rem 1rem;border-radius:8px;font-size:12px;font-weight:500;letter-spacing:.04em;box-shadow:0 4px 16px rgba(42,92,58,.4);display:none;align-items:center;gap:.75rem">
+  <span>Edit mode on</span>
+  <button onclick="exitEditMode()" style="background:rgba(255,255,255,.2);border:none;color:var(--white);font-family:inherit;font-size:11px;padding:.25rem .55rem;border-radius:5px;cursor:pointer;letter-spacing:.03em">Exit</button>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -693,4 +718,84 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     <a href="#philosophy">Philosophy</a>
     <a href="#done">Work</a>
     <a href="#background">Background</a>
-    <a href="#working-with">Working Wit
+    <a href="#working-with">Working With Me</a>
+  </nav>
+</footer>
+
+<script>
+// NAV SCROLL SHADOW
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>10)
+})
+
+// LOGIN SYSTEM
+function openLogin(){
+  var m=document.getElementById('login-modal')
+  m.style.display='flex'
+  document.getElementById('login-user').focus()
+  document.getElementById('login-err').textContent=''
+}
+function closeLogin(){
+  document.getElementById('login-modal').style.display='none'
+}
+function attemptLogin(){
+  var u=document.getElementById('login-user').value.trim()
+  var p=document.getElementById('login-pass').value
+  if(u==='ethank'&&p==='ethank'){
+    closeLogin()
+    enterEditMode()
+  } else {
+    document.getElementById('login-err').textContent='Invalid credentials'
+    document.getElementById('login-pass').value=''
+  }
+}
+// Allow Enter key in login form
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('login-modal').style.display==='flex'&&e.key==='Enter') attemptLogin()
+  if(e.key==='Escape') closeLogin()
+})
+
+var editMode=false
+function enterEditMode(){
+  editMode=true
+  // Make all text nodes editable
+  var selectors=[
+    'p','h1','h2','h3','h4','h5',
+    '.tv3-title','.tv3-body','.tv3-org','.tl-period',
+    '.body-t','.phil-stmt','.dark-t','.hstmt',
+    '.qtext','.qa-name','.qa-role',
+    '.tl-badge','.stat-n','.stat-l',
+    '.lbl','.eyebrow','.st','.ss',
+    '.hlink','.hlbl','.tv3-ch-title','.tv3-ch-sub',
+    '.mission-block p','.mission-block strong'
+  ]
+  selectors.forEach(function(sel){
+    document.querySelectorAll(sel).forEach(function(el){
+      el.contentEditable='true'
+      el.style.outline='1.5px dashed rgba(42,92,58,.35)'
+      el.style.borderRadius='3px'
+      el.style.minHeight='1em'
+    })
+  })
+  // Update login btn
+  document.getElementById('login-btn').textContent='Editing'
+  document.getElementById('login-btn').style.opacity='0.5'
+  // Show edit bar
+  var bar=document.getElementById('edit-bar')
+  bar.style.display='flex'
+}
+function exitEditMode(){
+  editMode=false
+  document.querySelectorAll('[contenteditable]').forEach(function(el){
+    el.removeAttribute('contenteditable')
+    el.style.outline=''
+    el.style.borderRadius=''
+    el.style.minHeight=''
+  })
+  document.getElementById('login-btn').textContent='Login'
+  document.getElementById('login-btn').style.opacity='1'
+  document.getElementById('edit-bar').style.display='none'
+}
+</script>
+</body>
+</html>
