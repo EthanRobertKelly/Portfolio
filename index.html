@@ -71,44 +71,44 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .dark-t strong{color:var(--white)}
 .mission-block{background:var(--accent-lt);border:1px solid #b6dfc8;border-radius:10px;padding:1.5rem 2rem;margin-bottom:2.5rem}
 
-/* TIMELINE */
-.timeline{position:relative;padding-left:2.25rem}
-.timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:0;width:1px;background:var(--rule)}
-.tl-item{position:relative;padding-bottom:3.5rem}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:'';position:absolute;left:-2.25rem;top:6px;transform:translateX(50%);width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);z-index:1}
-.tl-item.proj::before{background:var(--bg);border-color:var(--accent)}
-.tl-period{font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:.75rem}
+/* TIMELINE v3 — CENTRAL SPINE */
+.tv3{position:relative;padding-bottom:3rem}
+.tv3::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--ink) 0%,var(--faint) 100%);transform:translateX(-50%);z-index:0}
+.tv3-ch{display:flex;align-items:center;gap:2rem;padding:2rem 3rem;background:var(--ink);margin:4rem -3rem 3.5rem;position:relative;z-index:2;overflow:hidden}
+.tv3-ch:first-child{margin-top:0}
+.tv3-ch::after{content:attr(data-n);position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);font-size:10rem;font-weight:700;color:rgba(255,255,255,.035);line-height:1;pointer-events:none;letter-spacing:-.05em}
+.tv3-ch-bar{width:3px;height:3.5rem;background:linear-gradient(to bottom,var(--accent),var(--accent2));border-radius:2px;flex-shrink:0}
+.tv3-ch-n{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:.3rem;display:block}
+.tv3-ch-title{font-size:1.1rem;font-weight:500;color:var(--white);line-height:1.2}
+.tv3-ch-sub{font-size:11px;color:#7a7068;margin-top:.25rem}
+.tv3-row{position:relative;margin-bottom:4.5rem;min-height:2rem}
+.tv3-row.left{padding-right:calc(50% + 2.75rem);padding-left:0}
+.tv3-row.right{padding-left:calc(50% + 2.75rem);padding-right:0}
+.tv3-dot{position:absolute;left:50%;top:1.5rem;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--accent);border:2.5px solid var(--bg);z-index:2;flex-shrink:0}
+.tv3-row.personal .tv3-dot{width:6px;height:6px;background:var(--bg);border-color:var(--faint);top:1.15rem}
+.tv3-row.left:not(.personal)::after{content:'';position:absolute;right:calc(50% - 2.75rem + 13px);top:calc(1.5rem + 4px);width:calc(2.75rem - 13px);height:1px;background:var(--rule)}
+.tv3-row.right:not(.personal)::after{content:'';position:absolute;left:calc(50% + 13px);top:calc(1.5rem + 4px);width:calc(2.75rem - 13px);height:1px;background:var(--rule)}
+.tv3-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.75rem 2rem;position:relative;overflow:hidden}
+.tv3-card.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.tl-period{font-size:10px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem}
 .tl-badge{font-size:10px;padding:2px 8px;border-radius:3px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
 .tl-badge.live{background:var(--accent-lt);color:var(--accent2);border-color:#b6dfc8}
-.tl-role{font-size:1.4rem;font-weight:400;color:var(--ink);margin-bottom:.2rem}
-.tl-role.sm{font-size:1.15rem}
-.tl-org{font-size:12px;color:var(--accent);font-weight:500;letter-spacing:.04em;margin-bottom:.85rem}
-.tl-body{font-size:13px;color:var(--muted);line-height:1.8;max-width:600px;margin-bottom:1rem}
-.tl-body strong{color:var(--ink)}
-.tl-photo{width:100%;max-width:480px;aspect-ratio:16/9;background:var(--bg2);border:1px dashed var(--faint);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--faint);letter-spacing:.06em;margin:1rem 0}
-.tl-quote{border-left:2px solid var(--accent);padding:.75rem 1rem;margin:1rem 0;max-width:560px}
-.tl-quote{font-size:12px;color:var(--muted);line-height:1.7;font-style:italic}
-.tl-quote span{display:block;margin-top:.4rem;font-style:normal;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
-.tl-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
-.tl-stat{font-size:10px;color:var(--muted)}
-.tl-stat strong{display:block;font-size:13px;font-weight:500;color:var(--ink)}
-.tags{display:flex;gap:.4rem;flex-wrap:wrap}
-.tag{font-size:11px;padding:3px 10px;border-radius:4px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
-
-/* TIMELINE v3 — CHAPTERS */
-.ch-header{display:flex;align-items:flex-start;gap:1.25rem;padding:1.5rem 1.75rem;background:var(--ink);border-radius:8px;margin-bottom:2.5rem}
-.ch-num{font-size:1.75rem;font-weight:700;color:var(--accent2);line-height:1;flex-shrink:0;min-width:38px}
-.ch-name{font-size:1rem;font-weight:500;color:var(--white);margin-bottom:.2rem}
-.ch-meta{font-size:11px;color:#9a918a;line-height:1.5}
-.tl-item.compact{padding-bottom:2rem}
-.tl-item.compact .tl-role{font-size:1.05rem}
-.tl-item.compact .tl-body{margin-bottom:.5rem}
-.tl-item.personal{padding-bottom:1.25rem}
-.tl-item.personal::before{background:var(--bg);border-color:var(--faint);width:7px;height:7px;top:5px}
-.tl-item.personal .tl-period{color:var(--faint)}
-.tl-item.personal .tl-role{font-size:.95rem;color:var(--muted);font-style:italic;margin-bottom:.15rem}
-.tl-item.personal .tl-body{font-size:12px;color:var(--faint);max-width:420px;margin-bottom:0}
+.tv3-title{font-size:1.2rem;font-weight:400;color:var(--ink);margin-bottom:.15rem;line-height:1.25}
+.tv3-org{font-size:11px;color:var(--accent);font-weight:500;letter-spacing:.04em;margin-bottom:.9rem}
+.tv3-body{font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:.75rem}
+.tv3-body strong{color:var(--ink)}
+.tv3-img{width:100%;aspect-ratio:16/6;background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%);border-radius:6px;margin:.25rem 0 1rem;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);border:1px dashed var(--rule)}
+.tv3-stats{display:flex;gap:2rem;flex-wrap:wrap;margin:.5rem 0 1rem;padding:.75rem 0;border-top:1px solid var(--rule)}
+.tv3-stat strong{display:block;font-size:1.5rem;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.tv3-stat span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-top:.15rem}
+.tv3-quote{border-left:2px solid var(--accent);padding:.65rem 1rem;margin:.75rem 0;font-size:12px;color:var(--muted);line-height:1.75;font-style:italic}
+.tv3-quote cite{display:block;margin-top:.4rem;font-style:normal;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.tv3-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.75rem}
+.tv3-tag{font-size:11px;padding:3px 9px;border-radius:4px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
+.tv3-row.personal{margin-bottom:2.5rem}
+.tv3-row.personal .tv3-title{font-size:.95rem;color:var(--muted);font-style:italic;font-weight:400;margin-bottom:.2rem}
+.tv3-row.personal .tl-period{color:var(--faint)}
+.tv3-row.personal .tv3-body{font-size:12px;color:var(--faint);margin:0}
 
 /* SKILLS */
 .sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
@@ -191,6 +191,11 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   .two-col,.bg2col{grid-template-columns:1fr;gap:2rem}
   .wm3{grid-template-columns:1fr}
   .dark-card{grid-template-columns:1fr}
+  .tv3::before{left:1rem;transform:none}
+  .tv3-dot{left:1rem;transform:translateX(-50%)}
+  .tv3-row.left,.tv3-row.right{padding-left:2.75rem;padding-right:0}
+  .tv3-row.left:not(.personal)::after,.tv3-row.right:not(.personal)::after{display:none}
+  .tv3-ch{margin:3rem -2rem 2.5rem;padding:1.5rem 1.75rem}
   .vert-lbl{writing-mode:horizontal-tb;transform:none}
   footer{padding:1.25rem 1.5rem}
 }
@@ -266,206 +271,249 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <div class="sw" id="done">
   <div class="sh"><span class="sn">02</span><h2 class="st2">What I've <em>done</em></h2></div>
 
-  <!-- CHAPTER 01 -->
-  <div class="ch-header">
-    <div class="ch-num">01</div>
-    <div>
-      <div class="ch-name">Dynamic Motion Control Inc.</div>
-      <div class="ch-meta">Engineering Consultant · Sep 2024 – Present · San Diego, CA</div>
-    </div>
-  </div>
+  <div class="tv3">
 
-  <div class="timeline">
-
-    <!-- CHINA LAKE -->
-    <div class="tl-item proj">
-      <div class="tl-period">Mar 2025 — Present <span class="tl-badge live">Live</span></div>
-      <div class="tl-role sm">NAWS China Lake — CDAS Modernization</div>
-      <div class="tl-org">Navy Air Weapons Station · Defense · via DMC</div>
-      <p class="tl-body">Go-to onsite engineer for a multi-year weapons station modernization. Entered at a critical FAT milestone — system failing live demos in front of the client. Managed expectations in real-time while debugging. <strong>Pivoted the relationship from skepticism to trust.</strong> When the senior technical expert left mid-project, picked up delivery alone: PLCs, Dell servers, Windows imaging, systems I'd never touched. Led 16-week Trio commission — legacy codebase from "unacceptable" to federally compliant. Both FATs accepted.</p>
-      <div class="tl-photo">📷 — add photo</div>
-      <div class="tl-quote">"Ethan handled this extremely well and quickly took ownership of executing the tests. His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." <span>— Natalie Pippolo, Project Engineer — NAWS</span></div>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>600+</strong>hours onsite</div>
-        <div class="tl-stat"><strong>16 wks</strong>Trio commission</div>
-        <div class="tl-stat"><strong>2</strong>FATs accepted</div>
-        <div class="tl-stat"><strong>Federal</strong>compliant</div>
+    <!-- ═══ CHAPTER 01 ═══ -->
+    <div class="tv3-ch" data-n="01">
+      <div class="tv3-ch-bar"></div>
+      <div>
+        <span class="tv3-ch-n">Chapter 01</span>
+        <div class="tv3-ch-title">Dynamic Motion Control Inc.</div>
+        <div class="tv3-ch-sub">Engineering Consultant · Sep 2024 – Present · San Diego, CA</div>
       </div>
-      <div class="tags"><span class="tag">CDAS</span><span class="tag">DAQ</span><span class="tag">PLC</span><span class="tag">Defense</span><span class="tag">FAT</span><span class="tag">HMI</span></div>
     </div>
 
-    <!-- WATSONVILLE -->
-    <div class="tl-item proj">
-      <div class="tl-period">Late 2024</div>
-      <div class="tl-role sm">Watsonville Produce Inc. — PLC System Rewrite</div>
-      <div class="tl-org">Food Manufacturing · Client-Owned · via DMC</div>
-      <p class="tl-body">Full rewrite of 6 PLC programs across a 100-tag facility system — <strong>19,000 unnamed variables, zero documentation, on a live production floor.</strong> Owned the client relationship end-to-end: discovery through commissioning. Sold additional scope after delivery. Built a bidirectional XML parser to rename all 19,000 variables and reorganize to best standards without losing institutional knowledge — client required it, it didn't exist, so I built it.</p>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>19,000</strong>variables renamed</div>
-        <div class="tl-stat"><strong>6</strong>PLCs rewritten</div>
-        <div class="tl-stat"><strong>100%</strong>CSAT</div>
+    <!-- China Lake — LEFT, featured -->
+    <div class="tv3-row left">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card feat">
+        <div class="tl-period">Mar 2025 — Present <span class="tl-badge live">Live</span></div>
+        <div class="tv3-title">NAWS China Lake — CDAS Modernization</div>
+        <div class="tv3-org">Navy Air Weapons Station · Defense · via DMC</div>
+        <p class="tv3-body">Go-to onsite engineer for a multi-year weapons station modernization. Entered at a critical FAT milestone — system failing live demos in front of the client. Managed expectations in real-time while debugging. <strong>Pivoted the relationship from skepticism to trust.</strong> When the senior technical expert left mid-project, picked up delivery alone: PLCs, Dell servers, Windows imaging, systems I'd never touched. Led 16-week Trio commission — legacy codebase from "unacceptable" to federally compliant. Both FATs accepted.</p>
+        <div class="tv3-img">add photo — China Lake onsite</div>
+        <div class="tv3-stats">
+          <div class="tv3-stat"><strong>600+</strong><span>hours onsite</span></div>
+          <div class="tv3-stat"><strong>16 wks</strong><span>Trio commission</span></div>
+          <div class="tv3-stat"><strong>2</strong><span>FATs accepted</span></div>
+        </div>
+        <div class="tv3-quote">"Ethan handled this extremely well and quickly took ownership of executing the tests. His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." <cite>— Natalie Pippolo, Project Engineer — NAWS</cite></div>
+        <div class="tv3-tags"><span class="tv3-tag">CDAS</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">PLC</span><span class="tv3-tag">Defense</span><span class="tv3-tag">FAT</span></div>
       </div>
-      <div class="tags"><span class="tag">Rockwell</span><span class="tag">PLC/LAD</span><span class="tag">Python</span><span class="tag">XML</span><span class="tag">Client Ownership</span></div>
     </div>
 
-    <!-- KENNICOTT -->
-    <div class="tl-item proj">
-      <div class="tl-period">2024 — 2025</div>
-      <div class="tl-role sm">MV Kennicott — IO Documentation &amp; Controls</div>
-      <div class="tl-org">Everett Ship Repair · Maritime · via DMC</div>
-      <p class="tl-body">One of two ferries connecting remote Alaskan islands — carries cars, cargo, people. No control system documentation existed. Reverse-architected the system, named and organized <strong>1,500+ IO points</strong>, and produced the foundational document the entire FDS was built from. Also contributed to PLC code conversion and OPCUA integration with Aveva Edge HMI.</p>
-      <div class="tl-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable — it will serve as the basis for the vessel's FDS." <span>— Kyle Bode, Systems Engineer — Everett Ship Repair</span></div>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>1,500+</strong>IO points documented</div>
-        <div class="tl-stat"><strong>0</strong>prior documentation</div>
+    <!-- Watsonville — RIGHT, featured -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card feat">
+        <div class="tl-period">Late 2024</div>
+        <div class="tv3-title">Watsonville Produce Inc. — PLC System Rewrite</div>
+        <div class="tv3-org">Food Manufacturing · Client-Owned · via DMC</div>
+        <p class="tv3-body">Full rewrite of 6 PLC programs across a 100-tag facility system — <strong>19,000 unnamed variables, zero documentation, on a live production floor.</strong> Owned the client relationship end-to-end: discovery through commissioning. Sold additional scope after delivery. Built a bidirectional XML parser to rename all 19,000 variables without losing institutional knowledge — client required it, it didn't exist, so I built it.</p>
+        <div class="tv3-stats">
+          <div class="tv3-stat"><strong>19k</strong><span>variables renamed</span></div>
+          <div class="tv3-stat"><strong>6</strong><span>PLCs rewritten</span></div>
+          <div class="tv3-stat"><strong>100%</strong><span>CSAT</span></div>
+        </div>
+        <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">PLC/LAD</span><span class="tv3-tag">Python</span><span class="tv3-tag">XML</span><span class="tv3-tag">Client Ownership</span></div>
       </div>
-      <div class="tags"><span class="tag">OPCUA</span><span class="tag">Aveva</span><span class="tag">IO Documentation</span><span class="tag">FDS</span><span class="tag">Maritime</span></div>
     </div>
 
-    <!-- JACOBS -->
-    <div class="tl-item proj">
-      <div class="tl-period">2024 — 2025</div>
-      <div class="tl-role sm">Jacobs Engineering — Submarine Missile Simulation</div>
-      <div class="tl-org">Defense Contractor · via DMC</div>
-      <p class="tl-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Jacobs needed to validate system readiness without live ordinance — simulating pressure profiles, staging launch sequences, and triggering the transfer command against expected values. End-to-end simulation of a system that doesn't get a second chance.</p>
-      <div class="tags"><span class="tag">LabVIEW</span><span class="tag">DAQ</span><span class="tag">Defense</span><span class="tag">Simulation</span></div>
-    </div>
-
-    <!-- PALMER DCS -->
-    <div class="tl-item proj compact">
-      <div class="tl-period">2025 — Present <span class="tl-badge live">Live</span></div>
-      <div class="tl-role sm">Palmer DCS — Network &amp; Controls Integration</div>
-      <div class="tl-org">Food Manufacturing · via DMC</div>
-      <p class="tl-body">Entered mid-project — above engineers, below PM. Cisco switch configuration across multiple tech stacks, while simultaneously reorganizing a communication system that wasn't working. Learning on the fly while accountable for billing, timelines, and a client relationship already in flight.</p>
-      <div class="tags"><span class="tag">Cisco</span><span class="tag">SCADA</span><span class="tag">Networking</span><span class="tag">Subcontractors</span></div>
-    </div>
-
-    <!-- ALS -->
-    <div class="tl-item compact">
-      <div class="tl-period">2024</div>
-      <div class="tl-role sm">ALS — High-Caliber Bullet Manufacturing</div>
-      <div class="tl-org">Defense Manufacturing · via DMC</div>
-      <p class="tl-body">Control engineer left mid-project on a casing assembly machine. Picked up the program, figured out what existed, and built the rest.</p>
-      <div class="tags"><span class="tag">PLC</span><span class="tag">Manufacturing</span><span class="tag">Defense</span></div>
-    </div>
-
-    <!-- OKR -->
-    <div class="tl-item compact">
-      <div class="tl-period">Mar 2025 — Present</div>
-      <div class="tl-role sm">OKR Initiative — Internal Leadership</div>
-      <div class="tl-org">Dynamic Motion Control Inc.</div>
-      <p class="tl-body">Six months in, led the company's first goal-measurement framework presentation to all staff. Followed up with the VP directly — made the case, drafted the OKR framework. Still being rolled out.</p>
-      <div class="tags"><span class="tag">OKR</span><span class="tag">Leadership</span><span class="tag">Strategy</span></div>
-    </div>
-
-    <!-- FERNWARE -->
-    <div class="tl-item compact">
-      <div class="tl-period">Aug 2025 — Present <span class="tl-badge live">Side Project</span></div>
-      <div class="tl-role sm">Fernware — Automatic Plant Watering System</div>
-      <div class="tl-org">Personal Project</div>
-      <p class="tl-body">Friends killed the plants. Twice. Built a modular automatic watering system with moisture sensors. Zero casualties since.</p>
-      <div class="tags"><span class="tag">Arduino</span><span class="tag">Sensors</span></div>
-    </div>
-
-    <!-- PERSONAL: RECIPE MANAGER -->
-    <div class="tl-item personal">
-      <div class="tl-period">Side project</div>
-      <div class="tl-role">Recipe Manager — built to run the dinner parties</div>
-      <p class="tl-body">Hosts 15. Sourdough from scratch. Ginger beer. Pasta. The tool needed to exist.</p>
-    </div>
-
-  </div>
-
-  <!-- CHAPTER 02 -->
-  <div class="ch-header" style="margin-top:3.5rem">
-    <div class="ch-num">02</div>
-    <div>
-      <div class="ch-name">Rice University</div>
-      <div class="ch-meta">B.S. Mechanical Engineering · Aug 2020 – May 2024 · Houston, TX</div>
-    </div>
-  </div>
-
-  <div class="timeline">
-
-    <!-- SEA++ -->
-    <div class="tl-item proj">
-      <div class="tl-period">Aug 2023 — May 2024</div>
-      <div class="tl-role sm">Sea++ — Autonomous Catamaran</div>
-      <div class="tl-org">Rice University Senior Capstone · Military Research Commission</div>
-      <p class="tl-body">Elected by 7 peers to lead design and construction of an autonomous trimaran commissioned for decentralized naval cargo delivery. Led the full arc: commission brief → elected lead → CFD analysis → hull design → construction → water trials. Modified A* path planning for multi-waypoint navigation. Integrated ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Built with laser-cut ribs, XPS foam, and fiberglass. <strong>Achieved autonomous navigation in 5-ft seas, 25-mph winds with 300-lb payload.</strong></p>
-      <div class="tl-photo">📷 — add photo</div>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>$3,750</strong>unit cost</div>
-        <div class="tl-stat"><strong>300 lb</strong>payload tested</div>
-        <div class="tl-stat"><strong>5 ft seas</strong>navigated</div>
-        <div class="tl-stat"><strong>8 months</strong>build to trial</div>
+    <!-- Kennicott — LEFT, featured -->
+    <div class="tv3-row left">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card feat">
+        <div class="tl-period">2024 — 2025</div>
+        <div class="tv3-title">MV Kennicott — IO Documentation &amp; Controls</div>
+        <div class="tv3-org">Everett Ship Repair · Maritime · via DMC</div>
+        <p class="tv3-body">One of two ferries connecting remote Alaskan islands — carries cars, cargo, people. No control system documentation existed. Reverse-architected the system, named and organized <strong>1,500+ IO points</strong>, and produced the foundational document the entire FDS was built from.</p>
+        <div class="tv3-img">add photo — MV Kennicott</div>
+        <div class="tv3-stats">
+          <div class="tv3-stat"><strong>1,500+</strong><span>IO points</span></div>
+          <div class="tv3-stat"><strong>0</strong><span>prior docs</span></div>
+        </div>
+        <div class="tv3-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable — it will serve as the basis for the vessel's FDS." <cite>— Kyle Bode, Systems Engineer — Everett Ship Repair</cite></div>
+        <div class="tv3-tags"><span class="tv3-tag">OPCUA</span><span class="tv3-tag">Aveva</span><span class="tv3-tag">IO Documentation</span><span class="tv3-tag">Maritime</span></div>
       </div>
-      <div class="tags"><span class="tag">Python</span><span class="tag">ROS</span><span class="tag">CFD</span><span class="tag">Computer Vision</span><span class="tag">PID</span><span class="tag">Fiberglass</span><span class="tag">A*</span></div>
     </div>
 
-    <!-- RICE ROBOTICS / KAM -->
-    <div class="tl-item proj">
-      <div class="tl-period">Apr 2023 — May 2024</div>
-      <div class="tl-role sm">President &amp; Manufacturing Lead — Rice Robotics</div>
-      <div class="tl-org">Rice University</div>
-      <p class="tl-body">Grew the club <strong>18× from 5 to 90+ active members</strong> through organizational restructuring, project leadership, and recruiting. Technical lead for RoboCam — an autonomous robotic cameraman that tracks athletes across a field using GPS and IMU fusion, without human input.</p>
-      <div class="tl-stats">
-        <div class="tl-stat"><strong>90+</strong>active members</div>
-        <div class="tl-stat"><strong>18×</strong>growth</div>
+    <!-- Jacobs — RIGHT -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">2024 — 2025</div>
+        <div class="tv3-title">Jacobs Engineering — Submarine Missile Simulation</div>
+        <div class="tv3-org">Defense Contractor · via DMC</div>
+        <p class="tv3-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Simulated pressure profiles, staged launch sequences, validated the full transfer command without live ordinance. End-to-end simulation of a system that doesn't get a second chance.</p>
+        <div class="tv3-tags"><span class="tv3-tag">LabVIEW</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">Defense</span><span class="tv3-tag">Simulation</span></div>
       </div>
-      <div class="tags"><span class="tag">Leadership</span><span class="tag">GPS/IMU</span><span class="tag">Robotics</span><span class="tag">Manufacturing</span></div>
     </div>
 
-    <!-- GECKO PROJECT -->
-    <div class="tl-item compact">
-      <div class="tl-period">2022</div>
-      <div class="tl-role sm">Gecko Project — Autonomous AI Mural System</div>
-      <div class="tl-org">Rice University Design Project</div>
-      <p class="tl-body">Gecko robots with vacuum-suction fingers climb building walls and paint AI-generated murals that constantly evolve — each scan cycle, the AI rewrites the painting. Not selected. The team chose a biomimetic cat. Still the better project.</p>
-      <div class="tags"><span class="tag">Robotics</span><span class="tag">Generative AI</span><span class="tag">Mechanical Design</span></div>
+    <!-- Palmer DCS — LEFT -->
+    <div class="tv3-row left">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">2025 — Present <span class="tl-badge live">Live</span></div>
+        <div class="tv3-title">Palmer DCS — Network &amp; Controls Integration</div>
+        <div class="tv3-org">Food Manufacturing · via DMC</div>
+        <p class="tv3-body">Entered mid-project — above engineers, below PM. Cisco switch configuration across multiple tech stacks, while simultaneously reorganizing a communication system that wasn't working. Learning on the fly while accountable for billing, timelines, and a client relationship already in flight.</p>
+        <div class="tv3-tags"><span class="tv3-tag">Cisco</span><span class="tv3-tag">SCADA</span><span class="tv3-tag">Networking</span></div>
+      </div>
     </div>
 
-    <!-- PERSONAL: IRONMAN -->
-    <div class="tl-item personal">
-      <div class="tl-period">Feb 2024</div>
-      <div class="tl-role">Campus Ironman — planned it, ran it</div>
-      <p class="tl-body">First-ever on-campus Ironman at Rice. GPS-measured the course. Full distance, solo effort.</p>
+    <!-- ALS — RIGHT -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">2024</div>
+        <div class="tv3-title">ALS — High-Caliber Bullet Manufacturing</div>
+        <div class="tv3-org">Defense Manufacturing · via DMC</div>
+        <p class="tv3-body">Control engineer left mid-project on a casing assembly machine. Picked up the program, figured out what existed, and built the rest.</p>
+        <div class="tv3-tags"><span class="tv3-tag">PLC</span><span class="tv3-tag">Manufacturing</span><span class="tv3-tag">Defense</span></div>
+      </div>
     </div>
 
-    <!-- PERSONAL: SURFBOARD -->
-    <div class="tl-item personal">
-      <div class="tl-period">Ongoing</div>
-      <div class="tl-role">Surfboard shaping — multiple boards throughout</div>
-      <p class="tl-body">Hands-on making. Design instinct. Every one different.</p>
+    <!-- OKR — LEFT -->
+    <div class="tv3-row left">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">Mar 2025 — Present</div>
+        <div class="tv3-title">OKR Initiative — Internal Leadership</div>
+        <div class="tv3-org">Dynamic Motion Control Inc.</div>
+        <p class="tv3-body">Six months in, led the company's first goal-measurement framework presentation to all staff. Followed up with the VP directly — made the case, drafted the OKR framework. Still being rolled out.</p>
+        <div class="tv3-tags"><span class="tv3-tag">OKR</span><span class="tv3-tag">Leadership</span><span class="tv3-tag">Strategy</span></div>
+      </div>
     </div>
 
-  </div>
-
-  <!-- CHAPTER 03 -->
-  <div class="ch-header" style="margin-top:3.5rem">
-    <div class="ch-num">03</div>
-    <div>
-      <div class="ch-name">Before</div>
-      <div class="ch-meta">High School &amp; Earlier</div>
-    </div>
-  </div>
-
-  <div class="timeline">
-
-    <!-- BHYC -->
-    <div class="tl-item compact">
-      <div class="tl-period">May 2018 — Aug 2022</div>
-      <div class="tl-role sm">C420 Advanced Sailing Instructor</div>
-      <div class="tl-org">Bay Head Yacht Club</div>
-      <p class="tl-body">Coached for 5 seasons. Top pupils placed <strong>3rd and 7th</strong> at the C420 NJ State Championship 2022.</p>
-      <div class="tags"><span class="tag">Coaching</span><span class="tag">C420</span><span class="tag">Leadership</span></div>
+    <!-- Fernware — RIGHT -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">Aug 2025 — Present <span class="tl-badge live">Side Project</span></div>
+        <div class="tv3-title">Fernware — Automatic Plant Watering System</div>
+        <div class="tv3-org">Personal Project</div>
+        <p class="tv3-body">Friends killed the plants. Twice. Built a modular automatic watering system with moisture sensors. Zero casualties since.</p>
+        <div class="tv3-tags"><span class="tv3-tag">Arduino</span><span class="tv3-tag">Sensors</span></div>
+      </div>
     </div>
 
-    <!-- PERSONAL: NATIONAL CHAMPIONSHIP -->
-    <div class="tl-item personal">
-      <div class="tl-period">2020</div>
-      <div class="tl-role">National Championship — Covid year, video submission</div>
-      <p class="tl-body">One touch. Honest submission. The classical music section was the best part and it's not close.</p>
+    <!-- Recipe Manager — personal, LEFT -->
+    <div class="tv3-row left personal">
+      <div class="tv3-dot"></div>
+      <div>
+        <div class="tl-period">Side project</div>
+        <div class="tv3-title">Recipe Manager — built to run the dinner parties</div>
+        <p class="tv3-body">Hosts 15. Sourdough from scratch. Ginger beer. Pasta. The tool needed to exist.</p>
+      </div>
+    </div>
+
+    <!-- ═══ CHAPTER 02 ═══ -->
+    <div class="tv3-ch" data-n="02">
+      <div class="tv3-ch-bar"></div>
+      <div>
+        <span class="tv3-ch-n">Chapter 02</span>
+        <div class="tv3-ch-title">Rice University</div>
+        <div class="tv3-ch-sub">B.S. Mechanical Engineering · Aug 2020 – May 2024 · Houston, TX</div>
+      </div>
+    </div>
+
+    <!-- Sea++ — RIGHT, featured -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card feat">
+        <div class="tl-period">Aug 2023 — May 2024</div>
+        <div class="tv3-title">Sea++ — Autonomous Catamaran</div>
+        <div class="tv3-org">Rice University Senior Capstone · Military Research Commission</div>
+        <p class="tv3-body">Elected by 7 peers to lead design and construction of an autonomous trimaran commissioned for decentralized naval cargo delivery. Led the full arc: commission brief → elected lead → CFD analysis → hull design → construction → water trials. Modified A* path planning, ALOS local control, dual-rudder PID, computer vision obstacle avoidance. Built with laser-cut ribs, XPS foam, and fiberglass. <strong>Achieved autonomous navigation in 5-ft seas, 25-mph winds with 300-lb payload.</strong></p>
+        <div class="tv3-img">add photo — Sea++ water trials</div>
+        <div class="tv3-stats">
+          <div class="tv3-stat"><strong>$3,750</strong><span>unit cost</span></div>
+          <div class="tv3-stat"><strong>300 lb</strong><span>payload tested</span></div>
+          <div class="tv3-stat"><strong>5 ft</strong><span>seas navigated</span></div>
+          <div class="tv3-stat"><strong>8 mo</strong><span>build to trial</span></div>
+        </div>
+        <div class="tv3-tags"><span class="tv3-tag">Python</span><span class="tv3-tag">ROS</span><span class="tv3-tag">CFD</span><span class="tv3-tag">Computer Vision</span><span class="tv3-tag">PID</span><span class="tv3-tag">Fiberglass</span><span class="tv3-tag">A*</span></div>
+      </div>
+    </div>
+
+    <!-- Rice Robotics — LEFT -->
+    <div class="tv3-row left">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">Apr 2023 — May 2024</div>
+        <div class="tv3-title">President &amp; Manufacturing Lead — Rice Robotics</div>
+        <div class="tv3-org">Rice University</div>
+        <p class="tv3-body">Grew the club <strong>18× from 5 to 90+ active members</strong> through organizational restructuring, project leadership, and recruiting. Technical lead for RoboCam — an autonomous robotic cameraman that tracks athletes across a field using GPS and IMU fusion, without human input.</p>
+        <div class="tv3-stats">
+          <div class="tv3-stat"><strong>90+</strong><span>active members</span></div>
+          <div class="tv3-stat"><strong>18×</strong><span>growth</span></div>
+        </div>
+        <div class="tv3-tags"><span class="tv3-tag">Leadership</span><span class="tv3-tag">GPS/IMU</span><span class="tv3-tag">Robotics</span></div>
+      </div>
+    </div>
+
+    <!-- Gecko — RIGHT -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">2022</div>
+        <div class="tv3-title">Gecko Project — Autonomous AI Mural System</div>
+        <div class="tv3-org">Rice University Design Project</div>
+        <p class="tv3-body">Gecko robots with vacuum-suction fingers climb building walls and paint AI-generated murals that constantly evolve — each scan cycle, the AI rewrites the painting. Not selected. The team chose a biomimetic cat. Still the better project.</p>
+        <div class="tv3-tags"><span class="tv3-tag">Robotics</span><span class="tv3-tag">Generative AI</span><span class="tv3-tag">Mechanical Design</span></div>
+      </div>
+    </div>
+
+    <!-- Ironman — personal, LEFT -->
+    <div class="tv3-row left personal">
+      <div class="tv3-dot"></div>
+      <div>
+        <div class="tl-period">Feb 2024</div>
+        <div class="tv3-title">Campus Ironman — planned it, ran it</div>
+        <p class="tv3-body">First-ever on-campus Ironman at Rice. GPS-measured the course. Full distance, solo effort.</p>
+      </div>
+    </div>
+
+    <!-- Surfboard — personal, RIGHT -->
+    <div class="tv3-row right personal">
+      <div class="tv3-dot"></div>
+      <div>
+        <div class="tl-period">Ongoing</div>
+        <div class="tv3-title">Surfboard shaping — multiple boards throughout</div>
+        <p class="tv3-body">Hands-on making. Design instinct. Every one different.</p>
+      </div>
+    </div>
+
+    <!-- ═══ CHAPTER 03 ═══ -->
+    <div class="tv3-ch" data-n="03">
+      <div class="tv3-ch-bar"></div>
+      <div>
+        <span class="tv3-ch-n">Chapter 03</span>
+        <div class="tv3-ch-title">Before</div>
+        <div class="tv3-ch-sub">High School &amp; Earlier</div>
+      </div>
+    </div>
+
+    <!-- BHYC — RIGHT -->
+    <div class="tv3-row right">
+      <div class="tv3-dot"></div>
+      <div class="tv3-card">
+        <div class="tl-period">May 2018 — Aug 2022</div>
+        <div class="tv3-title">C420 Advanced Sailing Instructor</div>
+        <div class="tv3-org">Bay Head Yacht Club</div>
+        <p class="tv3-body">Coached for 5 seasons. Top pupils placed <strong>3rd and 7th</strong> at the C420 NJ State Championship 2022.</p>
+        <div class="tv3-tags"><span class="tv3-tag">Coaching</span><span class="tv3-tag">C420</span><span class="tv3-tag">Leadership</span></div>
+      </div>
+    </div>
+
+    <!-- National Championship — personal, LEFT -->
+    <div class="tv3-row left personal">
+      <div class="tv3-dot"></div>
+      <div>
+        <div class="tl-period">2020</div>
+        <div class="tv3-title">National Championship — Covid year, video submission</div>
+        <p class="tv3-body">One touch. Honest submission. The classical music section was the best part and it's not close.</p>
+      </div>
     </div>
 
   </div>
