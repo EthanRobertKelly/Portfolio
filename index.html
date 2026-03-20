@@ -1000,6 +1000,10 @@ function drawSpine(){
 }
 window.addEventListener('load',drawSpine)
 window.addEventListener('resize',function(){clearTimeout(window._st);window._st=setTimeout(drawSpine,100)})
+// Animate spine continuously during panel open/close transitions
+var _spineRafId=null,_spineRafEnd=0;
+function animateSpine(){drawSpine();if(Date.now()<_spineRafEnd)_spineRafId=requestAnimationFrame(animateSpine);else _spineRafId=null;}
+function triggerSpineAnim(ms){_spineRafEnd=Date.now()+(ms||600);if(!_spineRafId)_spineRafId=requestAnimationFrame(animateSpine);}
 
 // COLLAPSIBLE TIMELINE CARDS
 document.querySelectorAll('.tv3-card').forEach(function(card){
@@ -1039,13 +1043,10 @@ document.querySelectorAll('.tv3-card').forEach(function(card){
   card.addEventListener('click',function(){
     card.classList.toggle('expanded')
     hint.textContent=card.classList.contains('expanded')?'▴ pinned':'▾ expand'
-    setTimeout(drawSpine,500)
+    triggerSpineAnim(600)
   })
-
-  // Redraw spine after hover-triggered expand/collapse transitions
-  details.addEventListener('transitionend',function(e){
-    if(e.propertyName==='max-height') drawSpine()
-  })
+  card.addEventListener('mouseenter',function(){triggerSpineAnim(600)})
+  card.addEventListener('mouseleave',function(){triggerSpineAnim(600)})
 })
 
 // LOGIN SYSTEM
