@@ -433,18 +433,31 @@ window.storage=window.storage||{get:(k)=>Promise.resolve({value:localStorage.get
 </head>
 <body>
 
+<!-- nice try :) you found the source. ethan's real data lives in his browser's localStorage, not here. -->
+
+<!-- PRIVATE DATA SEED (gitignored — only present on Ethan's local machine) -->
+<script src="ek-private-data.js" onerror="/* no local seed — expected on live site */"></script>
+
 <!-- PASSWORD GATE -->
-<div id="ek-gate" style="display:none;position:fixed;inset:0;z-index:9999;background:#0c0c0c;align-items:center;justify-content:center;flex-direction:column;gap:1rem">
-  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#00d084;letter-spacing:.12em;margin-bottom:.5rem">EK // HQ</div>
+<div id="ek-gate" style="display:none;position:fixed;inset:0;z-index:9999;background:#0c0c0c;align-items:center;justify-content:center;flex-direction:column;gap:1.25rem">
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#00d084;letter-spacing:.12em">EK // HQ</div>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:rgba(255,255,255,.55);text-align:center;max-width:280px;line-height:1.6">Ethan's job search command center.</div>
   <input id="ek-gate-pw" type="password" placeholder="Password" autocomplete="off"
     style="background:#141414;border:1px solid rgba(255,255,255,.13);border-radius:6px;padding:.65rem 1rem;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#e2e2e2;outline:none;width:240px;text-align:center"
     onkeydown="if(event.key==='Enter')ekGateSubmit()">
-  <div id="ek-gate-err" style="font-size:11px;color:#ff5555;min-height:1em"></div>
+  <div id="ek-gate-err" style="font-size:11px;color:#ff5555;min-height:1em;margin-top:-.5rem"></div>
   <button onclick="ekGateSubmit()" style="background:#00d084;color:#000;border:none;border-radius:6px;padding:.55rem 1.5rem;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.05em">Enter</button>
+  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.25);margin:-.25rem 0">or</div>
+  <button onclick="ekGuestMode()" style="background:transparent;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:.5rem 1.25rem;font-family:'IBM Plex Mono',monospace;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:color .15s,border-color .15s" onmouseover="this.style.color='rgba(255,255,255,.8)';this.style.borderColor='rgba(255,255,255,.35)'" onmouseout="this.style.color='rgba(255,255,255,.45)';this.style.borderColor='rgba(255,255,255,.15)'">See how it works →</button>
+</div>
+<div id="ek-guest-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:8888;background:#1a1200;border-top:1px solid rgba(245,166,35,.25);padding:.6rem 1.5rem;font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(245,166,35,.8);text-align:center;letter-spacing:.04em">
+  Guest mode · Unfortunately this one's Ethan's eyes only — you're seeing demo data. The real job list lives in his browser.
+  <button onclick="document.getElementById('ek-guest-banner').style.display='none'" style="background:transparent;border:none;color:rgba(245,166,35,.5);cursor:pointer;margin-left:1rem;font-size:13px;line-height:1">×</button>
 </div>
 <script>
 (function(){
   if(sessionStorage.getItem('ek-auth')==='1'){return}
+  if(sessionStorage.getItem('ek-guest')==='1'){ekActivateGuest();return}
   var g=document.getElementById('ek-gate')
   g.style.display='flex'
   document.body.style.overflow='hidden'
@@ -459,6 +472,36 @@ function ekGateSubmit(){
     document.getElementById('ek-gate-pw').value=''
     document.getElementById('ek-gate-pw').focus()
   }
+}
+var EK_DEMO_DATA={
+  apps:[
+    {id:'demo-1',company:'Acme Robotics',role:'Automation Engineer',status:'interviewing',priority:'high',date:'2025-11-12',url:'',notes:'Second round scheduled. Strong culture fit.'},
+    {id:'demo-2',company:'Meridian Systems',role:'Controls Engineer',status:'applied',priority:'med',date:'2025-11-20',url:'',notes:'Applied via LinkedIn. Good match on PLC experience.'},
+    {id:'demo-3',company:'Vantage Aerospace',role:'Test Engineer',status:'applied',priority:'med',date:'2025-11-22',url:'',notes:'Referred by college contact. NI/LabVIEW role.'},
+    {id:'demo-4',company:'Ironclad Manufacturing',role:'Mechanical Systems Engineer',status:'watching',priority:'low',date:'2025-11-18',url:'',notes:'Role just posted. Monitoring for updates.'},
+    {id:'demo-5',company:'Helix Dynamics',role:'Embedded Systems Engineer',status:'messaging',priority:'high',date:'2025-11-10',url:'',notes:'Recruiter reached out. C++ embedded role, San Diego.'}
+  ],
+  customLeads:[],leadOverrides:{},reviewQueue:[],activityLog:[],
+  scoutStats:{found:12,added:5,runs:8},
+  boardColumns:[{id:'inbox',label:'Inbox',color:'#878787'},{id:'watching',label:'Watching',color:'#4da6ff'},{id:'hot',label:'🔥 Hot',color:'#00d084'},{id:'researching',label:'Researching',color:'#9b7fff'},{id:'applied',label:'Applied',color:'#f5a623'}],
+  leadBoardStatus:{},notInterested:[],
+  autoThreshold:8,intervalMins:15,searchQueries:[],profileText:''
+};
+function ekGuestMode(){
+  sessionStorage.setItem('ek-guest','1')
+  ekActivateGuest()
+}
+function ekActivateGuest(){
+  // Inject demo data into storage without touching any real saved data
+  var realGet=window.storage.get;
+  window.storage.get=function(k){
+    if(k==='ek-hq-v5') return Promise.resolve({value:JSON.stringify(EK_DEMO_DATA)});
+    return realGet(k);
+  };
+  window.storage.set=function(){ return Promise.resolve(); }; // no-op in guest mode
+  document.getElementById('ek-gate').style.display='none'
+  document.getElementById('ek-guest-banner').style.display='block'
+  document.body.style.overflow=''
 }
 </script>
 
