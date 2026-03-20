@@ -87,7 +87,7 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .tv3-row.left:not(.personal)::after{content:'';position:absolute;left:calc(var(--dot-x) + 6px);top:calc(1.5rem + 4px);width:calc(2.25rem - 6px);height:1px;background:var(--rule)}
 .tv3-row.right:not(.personal)::after{content:'';position:absolute;right:calc(100% - var(--dot-x) + 6px);top:calc(1.5rem + 4px);width:calc(2.25rem - 6px);height:1px;background:var(--rule)}
 .tv3-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.75rem 2rem;position:relative;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s}
-.tv3-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(28,23,18,.1);border-color:var(--faint)}
+.tv3-card:hover{box-shadow:0 8px 28px rgba(28,23,18,.1);border-color:var(--faint)}
 .tv3-card.feat::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 .tl-period{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem}
 .tl-badge{font-size:11px;padding:2px 8px;border-radius:3px;background:var(--bg2);color:var(--muted);border:1px solid var(--rule)}
@@ -161,9 +161,10 @@ nav.scrolled{box-shadow:0 2px 18px rgba(28,23,18,.07)}
 .ht span{font-size:11px;color:var(--muted)}
 
 /* COLLAPSIBLE TIMELINE CARDS */
-.tv3-details{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(0,1,.5,1),opacity .3s ease;opacity:0}
-.tv3-card:hover .tv3-details,.tv3-card.expanded .tv3-details{max-height:2000px;opacity:1}
-.tv3-expand-hint{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);opacity:.5;margin-top:.6rem;transition:opacity .15s,height .15s;pointer-events:none}
+.tv3-details{max-height:0;overflow:hidden;transition:max-height .48s ease,opacity .3s ease;opacity:0;transition-delay:.12s}
+.tv3-card:hover .tv3-details,.tv3-card.expanded .tv3-details{max-height:2500px;opacity:1;transition-delay:0s}
+.tv3-preview{font-size:12px;color:var(--muted);margin-top:.35rem;line-height:1.5}
+.tv3-expand-hint{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);opacity:.5;margin-top:.55rem;transition:opacity .15s;pointer-events:none}
 .tv3-card:hover .tv3-expand-hint,.tv3-card.expanded .tv3-expand-hint{opacity:0}
 .tv3-card{cursor:pointer}
 
@@ -318,8 +319,9 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
           <div class="tv3-stat"><strong>16 wks</strong><span>commissioning lead</span></div>
           <div class="tv3-stat"><strong>2</strong><span>FATs accepted</span></div>
         </div>
-        <div class="tv3-quote">"Ethan handled this extremely well and quickly took ownership of executing the tests. His organization and level-headedness allowed us to get through many of the more complex test scenarios and keep the end customer happy." <cite>Natalie Pippolo, Project Engineer at NAWS</cite></div>
-        <div class="tv3-quote">"He's very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people." <cite>Carl Remler, PM and Senior Engineer at NAWS China Lake</cite></div>
+        <div class="tv3-quote">"He's very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people." <cite>Carl Remler, PM and Senior Engineer</cite></div>
+        <div class="tv3-quote">"Ethan was thrown into a pretty chaotic situation his first weeks onsite. FAT was delayed unexpectedly, requiring him and one other engineer to run through remaining test scenarios and troubleshoot issues on a system neither had familiarity with, relying on remote help while already onsite. He handled this extremely well, quickly took ownership, and his organization and level-headedness got us through the complex test scenarios and kept the end customer happy." <cite>Natalie Pippolo, Project Engineer</cite></div>
+        <div class="tv3-quote">"Ethan and I were able to push each other's limits when working together, and our communication kept us in the same direction the whole time. I would jump on any opportunity to work with him in the future." <cite>Aaron Gronsman, Systems Engineer</cite></div>
         <div class="tv3-tags"><span class="tv3-tag">CDAS</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">PLC</span><span class="tv3-tag">Defense</span><span class="tv3-tag">FAT</span></div>
       </div>
     </div>
@@ -372,7 +374,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
           <div class="tv3-stat"><strong>1,500+</strong><span>IO points</span></div>
           <div class="tv3-stat"><strong>0</strong><span>prior docs</span></div>
         </div>
-        <div class="tv3-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable. It will serve as the basis for the vessel's FDS." <cite>Kyle Bode, Systems Engineer at Everett Ship Repair</cite></div>
+        <div class="tv3-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable. It will serve as the basis for the vessel's FDS." <cite>Kyle Bode, Systems Engineer  · [Client]</cite></div>
         <div class="tv3-quote">"Ethan is like a venturi for internal communication. By modeling — asking questions, stating assumptions — he pulls others into the conversation and the written record." <cite>Keith Krotzer, PM and Technical Lead</cite></div>
         <div class="tv3-tags"><span class="tv3-tag">OPCUA</span><span class="tv3-tag">Aveva</span><span class="tv3-tag">IO Documentation</span><span class="tv3-tag">Maritime</span></div>
       </div>
@@ -478,7 +480,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2023.08 – 2024.05</div>
         <div class="tv3-title">Sea++: Autonomous Catamaran for Decentralized Transportation of Goods</div>
         <div class="tv3-org">Rice University Senior Capstone · Military Research Commission</div>
-        <div style="display:grid;grid-template-columns:1fr 220px;gap:1.5rem;align-items:start;margin-bottom:.75rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Elected by 7 peers to lead design and construction of an autonomous catamaran commissioned for decentralized transportation of goods for the Navy. Led the full arc from commission brief to water trials. Modified A* path planning, ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Built with laser-cut ribs, XPS foam, and fiberglass. Achieved autonomous navigation in 5-ft seas, 25-mph winds with 300-lb payload.</p>
           <div class="tv3-img-wrap" style="margin:0"><img src="/images/SEA++.png" alt="Sea++ autonomous trimaran" style="max-height:none;object-fit:contain"></div>
         </div>
@@ -499,7 +501,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2021.08 – 2024.05</div>
         <div class="tv3-title">President &amp; Manufacturing Lead, Rice Robotics</div>
         <div class="tv3-org">Rice University</div>
-        <div style="display:grid;grid-template-columns:1fr 200px;gap:1.5rem;align-items:start;margin-bottom:.75rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Grew the club 18x from 5 to 90+ active members through organizational restructuring, new project tracks, and a recruiting strategy that made engineering projects accessible to students across majors. Led manufacturing for multiple projects. Technical lead for RoboCam, an autonomous robotic cameraman that tracks athletes across a field using GPS and IMU fusion without human input. Designed mechanical systems and managed build logistics throughout.</p>
           <div class="tv3-img-wrap" style="margin:0"><img src="/images/RoboCam.png" alt="RoboCam autonomous robotic cameraman" style="max-height:none;object-fit:contain"></div>
         </div>
@@ -519,7 +521,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2024.02</div>
         <div class="tv3-title">Inaugural Rice Ironman: First and Only Competitor</div>
         <div class="tv3-org">Rice University · Personal</div>
-        <div style="display:grid;grid-template-columns:1fr 200px;gap:1.5rem;align-items:start;margin-bottom:.75rem">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Planned and completed the first full-distance Ironman triathlon in Rice University history. GPS-measured and designed the entire course from scratch. Completed solo in senior year, mid-capstone. Deeply grateful for the support of friends and the Women's Varsity Swim coach for technique guidance along the way.</p>
           <div class="tv3-img-wrap" style="margin:0"><img src="/images/Ironman.png" alt="Inaugural Rice Ironman" style="max-height:none;object-fit:contain"></div>
         </div>
@@ -539,10 +541,11 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="tv3-card">
         <div class="tl-period">Ongoing</div>
         <div class="tv3-title">Surfboard shaping: multiple boards throughout</div>
+        <div class="tv3-org">Personal</div>
         <p class="tv3-body">Hands-on making. Design instinct. Every one different.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin:.5rem 0 .25rem">
-          <div class="tv3-img-wrap" style="margin:0"><img src="/images/SURF ART.jpg" alt="Surfboard art" style="max-height:none;object-fit:contain"></div>
-          <div class="tv3-img-wrap" style="margin:0"><img src="/images/SURF ART2.jpg" alt="Surfboard art" style="max-height:none;object-fit:contain"></div>
+        <div style="display:flex;gap:.5rem;margin:.5rem 0 .25rem">
+          <div class="tv3-img-wrap" style="margin:0;width:140px;flex-shrink:0"><img src="/images/SURF ART.jpg" alt="Surfboard art" style="max-height:none;object-fit:contain;width:100%"></div>
+          <div class="tv3-img-wrap" style="margin:0;width:140px;flex-shrink:0"><img src="/images/SURF ART2.jpg" alt="Surfboard art" style="max-height:none;object-fit:contain;width:100%"></div>
         </div>
       </div>
     </div>
@@ -999,23 +1002,43 @@ window.addEventListener('resize',function(){clearTimeout(window._st);window._st=
 
 // COLLAPSIBLE TIMELINE CARDS
 document.querySelectorAll('.tv3-card').forEach(function(card){
-  var orgEl=card.querySelector('.tv3-org')
-  var startEl=orgEl?orgEl.nextElementSibling:null
-  if(!startEl)return
+  var anchorEl=card.querySelector('.tv3-org')||card.querySelector('.tv3-title')
+  if(!anchorEl)return
+
+  // Auto-generate preview from first sentence of body paragraph
+  var bodyEl=card.querySelector('.tv3-body')
+  if(bodyEl){
+    var m=bodyEl.textContent.trim().match(/^[^.!?]+[.!?]/)
+    if(m){
+      var prev=document.createElement('p')
+      prev.className='tv3-preview'
+      prev.textContent=m[0]
+      anchorEl.insertAdjacentElement('afterend',prev)
+    }
+  }
+
+  // Wrap everything after anchor (except preview) into details
   var details=document.createElement('div')
   details.className='tv3-details'
   var toMove=[]
-  var el=startEl
-  while(el){toMove.push(el);el=el.nextElementSibling}
+  var el=anchorEl.nextElementSibling
+  while(el){
+    if(!el.classList||!el.classList.contains('tv3-preview')) toMove.push(el)
+    el=el.nextElementSibling
+  }
+  if(!toMove.length)return
   toMove.forEach(function(s){details.appendChild(s)})
   card.appendChild(details)
+
   var hint=document.createElement('div')
   hint.className='tv3-expand-hint'
   hint.textContent='▾ expand'
   card.appendChild(hint)
+
   card.addEventListener('click',function(){
     card.classList.toggle('expanded')
-    hint.textContent=card.classList.contains('expanded')?'▴ collapse':'▾ expand'
+    hint.textContent=card.classList.contains('expanded')?'▴ pinned':'▾ expand'
+    setTimeout(drawSpine,500)
   })
 })
 
