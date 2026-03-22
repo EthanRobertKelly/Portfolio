@@ -275,6 +275,7 @@ const FIREBASE_CONFIG = {
   try {
     firebase.initializeApp(FIREBASE_CONFIG);
     const db  = firebase.firestore();
+    window.db = db;
     const REF = db.collection('kitchen').doc('recipes');
 
     window.storage = {
@@ -320,44 +321,27 @@ const FIREBASE_CONFIG = {
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div id="ek-gate" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(28,23,18,.97);align-items:center;justify-content:center;flex-direction:column;gap:1rem">
-  <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem">Kitchen Codex</div>
-  <input id="ek-gate-pw" type="password" placeholder="Password" autocomplete="off"
-    style="padding:.65rem 1rem;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;background:var(--cream);color:var(--ink);outline:none;width:220px;text-align:center"
-    onkeydown="if(event.key==='Enter')ekGateSubmit()">
-  <div id="ek-gate-err" style="font-size:11px;color:#c0392b;min-height:1em"></div>
-  <button onclick="ekGateSubmit()" style="background:var(--accent);color:#fff;border:none;border-radius:7px;padding:.6rem 1.5rem;font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">Enter</button>
-</div>
-<script>
-(function(){
-  if(sessionStorage.getItem('ek-auth')==='1'){return}
-  var g=document.getElementById('ek-gate')
-  g.style.display='flex'; document.body.style.overflow='hidden'
-})()
-function ekGateSubmit(){
-  if(document.getElementById('ek-gate-pw').value==='ethank'){
-    sessionStorage.setItem('ek-auth','1')
-    document.getElementById('ek-gate').style.display='none'
-    document.body.style.overflow=''
-  } else {
-    document.getElementById('ek-gate-err').textContent='Incorrect'
-    document.getElementById('ek-gate-pw').value=''
-  }
-}
-</script>
-
 <header>
   <a href="index.html" style="position:absolute;left:2rem;top:50%;transform:translateY(-50%);font-size:12px;color:var(--tan);text-decoration:none;opacity:0.7;transition:opacity .15s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">← Ethan Kelly</a><p class="subtitle">Ethan's Personal</p>
   <h1><em>Kitchen</em> Codex</h1>
-  <div class="header-actions">
-    <button class="btn btn-ghost" onclick="openImport()" style="margin-right:0.4rem">↑ Import</button>
-    <button class="btn btn-ghost" onclick="openExport()" style="margin-right:0.4rem">↓ Export</button>
-    <button class="btn btn-primary" onclick="openAdd()">+ Add Recipe</button>
+  <div class="header-actions" style="display:flex;align-items:center;gap:0.4rem">
+    <span id="ownerIndicator" style="display:none;font-size:11px;color:var(--tan);letter-spacing:0.06em;opacity:0.8">Owner mode</span>
+    <button id="ownerLogoutBtn" class="btn btn-ghost" style="display:none;font-size:12px;padding:0.35rem 0.7rem" onclick="ownerLogout()">Logout</button>
+    <button id="btnImport" class="btn btn-ghost" onclick="openImport()" style="display:none">↑ Import</button>
+    <button id="btnExport" class="btn btn-ghost" onclick="openExport()" style="display:none">↓ Export</button>
+    <button id="btnAddRecipe" class="btn btn-primary" onclick="openAdd()" style="display:none">+ Add Recipe</button>
+    <button id="btnSuggest" class="btn btn-ghost" onclick="openSuggest()" style="display:none">✦ Suggest a Recipe</button>
+    <button class="btn btn-ghost" style="font-size:12px;padding:0.35rem 0.7rem" onclick="openOwnerModal()">Owner</button>
   </div>
 </header>
 
 <main>
+
+  <!-- SUGGESTIONS PANEL (owner only) -->
+  <div id="suggestionsPanel" style="display:none;margin-bottom:2rem">
+    <div class="section-label">✦ Pending Suggestions</div>
+    <div id="suggestionsList" style="display:flex;flex-direction:column;gap:0.75rem"></div>
+  </div>
 
   <!-- FAVORITES -->
   <div class="fav-section">
@@ -395,6 +379,60 @@ function ekGateSubmit(){
 
   <div id="recipeGrid" class="recipe-grid"></div>
 </main>
+
+<!-- OWNER PASSWORD MODAL -->
+<div class="overlay" id="ownerOverlay">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-header">
+      <div class="modal-title">Owner Login</div>
+      <button class="close-btn" onclick="closeOwnerModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input class="form-input" id="ownerPwInput" type="password" placeholder="Enter password" autocomplete="off"
+        onkeydown="if(event.key==='Enter')submitOwnerLogin()">
+      <div id="ownerPwErr" style="font-size:11px;color:#c0392b;min-height:1em;margin-top:0.25rem"></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-outline" onclick="closeOwnerModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitOwnerLogin()">Login</button>
+    </div>
+  </div>
+</div>
+
+<!-- SUGGEST A RECIPE MODAL -->
+<div class="overlay" id="suggestOverlay">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Suggest a Recipe</div>
+        <div class="modal-subtitle">Have a recipe Ethan should try?</div>
+      </div>
+      <button class="close-btn" onclick="closeSuggest()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Recipe Name <span style="color:var(--accent)">*</span></label>
+      <input class="form-input" id="sgName" placeholder="e.g. Shakshuka">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Source URL <span class="hint">— optional</span></label>
+      <input class="form-input" id="sgUrl" placeholder="e.g. seriouseats.com/...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Notes <span class="hint">— optional</span></label>
+      <textarea class="form-textarea" id="sgNotes" placeholder="Any context, why you like it…"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Your Name <span class="hint">— optional</span></label>
+      <input class="form-input" id="sgSubmitter" placeholder="e.g. Alex">
+    </div>
+    <div id="sgStatus" style="font-size:12px;min-height:1em;margin-bottom:0.5rem"></div>
+    <div class="form-actions">
+      <button class="btn btn-outline" onclick="closeSuggest()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitSuggestion()">Submit Suggestion</button>
+    </div>
+  </div>
+</div>
 
 <!-- ADD / EDIT MODAL -->
 <div class="overlay" id="addOverlay">
@@ -571,6 +609,7 @@ async function loadData() {
   try { const r = await window.storage.get('recipes'); if (r?.value) recipes = JSON.parse(r.value); }
   catch(e) { recipes = []; }
   renderFavorites(); renderFilters(); renderGrid();
+  loadSuggestions();
 }
 async function saveData() { await window.storage.set('recipes', JSON.stringify(recipes)); }
 function genId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
@@ -678,7 +717,7 @@ function renderGrid() {
 }
 
 // ── FORM ──
-function openAdd(id) {
+function openAdd(id, prefill) {
   editingId = id||null;
   const r = id ? recipes.find(x=>x.id===id) : null;
   document.getElementById('modalTitle').textContent = r ? 'Edit Recipe' : 'New Recipe';
@@ -691,6 +730,10 @@ function openAdd(id) {
   document.getElementById('rServings').value = r?.servings||'';
   document.getElementById('rDiff').value = r?.difficulty||'Medium';
   document.getElementById('rNotes').value = r?.notes||'';
+  if (prefill) {
+    if (prefill.name) document.getElementById('rName').value = prefill.name;
+    if (prefill.notes) document.getElementById('rNotes').value = prefill.notes;
+  }
   renderEmojiPicker(r?.emoji||'🍞');
 
   // restore photo
@@ -891,9 +934,9 @@ function openDetail(id) {
 
     <div class="detail-actions">
       <button id="detailFavBtn" class="detail-fav-btn ${r.favorite?'starred':''}" onclick="toggleFav('${r.id}')">${r.favorite?'★ Unfavorite':'☆ Favorite'}</button>
-      <button class="btn btn-outline" onclick="closeDetail();openAdd('${r.id}')">✏ Edit</button>
+      ${isOwner() ? `<button class="btn btn-outline" onclick="closeDetail();openAdd('${r.id}')">✏ Edit</button>` : ''}
       <button class="btn btn-outline" onclick="exportSingle('${r.id}')" style="font-size:12px">↓ Export</button>
-      <button class="btn btn-danger" onclick="deleteRecipe('${r.id}')">Delete</button>
+      ${isOwner() ? `<button class="btn btn-danger" onclick="deleteRecipe('${r.id}')">Delete</button>` : ''}
     </div>
 
     <hr class="reviews-divider">
@@ -1162,6 +1205,151 @@ document.getElementById('addOverlay').addEventListener('click', e=>{ if(e.target
 document.getElementById('detailOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeDetail(); });
 document.getElementById('exportOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeExport(); });
 document.getElementById('importOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeImport(); });
+document.getElementById('ownerOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeOwnerModal(); });
+document.getElementById('suggestOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeSuggest(); });
+
+// ── OWNER MODE ──
+function isOwner() { return sessionStorage.getItem('ek-owner') === '1'; }
+
+function applyOwnerMode() {
+  const owner = isOwner();
+  document.getElementById('btnImport').style.display = owner ? '' : 'none';
+  document.getElementById('btnExport').style.display = owner ? '' : 'none';
+  document.getElementById('btnAddRecipe').style.display = owner ? '' : 'none';
+  document.getElementById('btnSuggest').style.display = owner ? 'none' : '';
+  document.getElementById('ownerIndicator').style.display = owner ? '' : 'none';
+  document.getElementById('ownerLogoutBtn').style.display = owner ? '' : 'none';
+  document.getElementById('suggestionsPanel').style.display = owner ? '' : 'none';
+}
+
+function openOwnerModal() {
+  document.getElementById('ownerPwInput').value = '';
+  document.getElementById('ownerPwErr').textContent = '';
+  document.getElementById('ownerOverlay').classList.add('open');
+  requestAnimationFrame(() => document.getElementById('ownerPwInput').focus());
+}
+function closeOwnerModal() { document.getElementById('ownerOverlay').classList.remove('open'); }
+
+function submitOwnerLogin() {
+  if (document.getElementById('ownerPwInput').value === 'ethank') {
+    sessionStorage.setItem('ek-owner', '1');
+    closeOwnerModal();
+    applyOwnerMode();
+    loadSuggestions();
+  } else {
+    document.getElementById('ownerPwErr').textContent = 'Incorrect password';
+    document.getElementById('ownerPwInput').value = '';
+    document.getElementById('ownerPwInput').focus();
+  }
+}
+
+function ownerLogout() {
+  sessionStorage.removeItem('ek-owner');
+  applyOwnerMode();
+}
+
+// ── SUGGEST A RECIPE ──
+function openSuggest() {
+  document.getElementById('sgName').value = '';
+  document.getElementById('sgUrl').value = '';
+  document.getElementById('sgNotes').value = '';
+  document.getElementById('sgSubmitter').value = '';
+  document.getElementById('sgStatus').textContent = '';
+  document.getElementById('suggestOverlay').classList.add('open');
+}
+function closeSuggest() { document.getElementById('suggestOverlay').classList.remove('open'); }
+
+async function submitSuggestion() {
+  const name = document.getElementById('sgName').value.trim();
+  if (!name) { document.getElementById('sgName').focus(); return; }
+  const data = {
+    name,
+    url: document.getElementById('sgUrl').value.trim(),
+    notes: document.getElementById('sgNotes').value.trim(),
+    submitter: document.getElementById('sgSubmitter').value.trim(),
+    created: Date.now(),
+    status: 'pending'
+  };
+  try {
+    if (window.db) {
+      await window.db.collection('suggestions').add(data);
+    }
+    const statusEl = document.getElementById('sgStatus');
+    statusEl.style.color = 'var(--green)';
+    statusEl.textContent = 'Thanks! Your suggestion was submitted.';
+    setTimeout(closeSuggest, 1500);
+  } catch(e) {
+    console.warn('Suggestion save failed', e);
+    const statusEl = document.getElementById('sgStatus');
+    statusEl.style.color = '#c0392b';
+    statusEl.textContent = 'Could not save suggestion — please try again.';
+  }
+}
+
+// ── SUGGESTIONS REVIEW (owner) ──
+async function loadSuggestions() {
+  if (!isOwner() || !window.db) return;
+  try {
+    const snap = await window.db.collection('suggestions').where('status', '==', 'pending').get();
+    const list = document.getElementById('suggestionsList');
+    if (snap.empty) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--muted);font-style:italic">No pending suggestions.</p>';
+      return;
+    }
+    list.innerHTML = snap.docs.map(doc => {
+      const s = doc.data();
+      const urlHtml = s.url ? `<a href="${s.url}" target="_blank" rel="noopener" style="font-size:12px;color:var(--brown);word-break:break-all">${s.url}</a>` : '';
+      const notesHtml = s.notes ? `<p style="font-size:13px;color:var(--ink);margin-top:0.3rem;font-style:italic">${s.notes}</p>` : '';
+      const submitterHtml = s.submitter ? `<span style="font-size:11px;color:var(--muted)">from ${s.submitter}</span>` : '';
+      return `<div style="background:var(--warm-white);border:1px solid var(--border);border-radius:10px;padding:0.85rem 1rem" data-sg-id="${doc.id}">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
+          <div style="flex:1">
+            <strong style="font-family:'Lora',serif;font-size:1rem;color:var(--ink)">${s.name}</strong>
+            ${submitterHtml}
+            ${urlHtml}
+            ${notesHtml}
+          </div>
+          <div style="display:flex;gap:0.5rem;flex-shrink:0;margin-top:0.1rem">
+            <button class="btn btn-primary" style="font-size:12px;padding:0.35rem 0.75rem"
+              onclick="addSuggestionToCodex('${doc.id}','${encodeURIComponent(s.name)}','${encodeURIComponent(s.notes||'')}')">Add to Codex</button>
+            <button class="btn btn-outline" style="font-size:12px;padding:0.35rem 0.75rem"
+              onclick="dismissSuggestion('${doc.id}',this)">Dismiss</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    console.warn('Failed to load suggestions', e);
+  }
+}
+
+async function dismissSuggestion(docId, btn) {
+  try {
+    if (window.db) await window.db.collection('suggestions').doc(docId).update({ status: 'reviewed' });
+    const card = document.querySelector(`[data-sg-id="${docId}"]`);
+    if (card) card.remove();
+    const list = document.getElementById('suggestionsList');
+    if (list && !list.children.length) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--muted);font-style:italic">No pending suggestions.</p>';
+    }
+  } catch(e) { console.warn('Dismiss failed', e); }
+}
+
+async function addSuggestionToCodex(docId, encodedName, encodedNotes) {
+  try {
+    if (window.db) await window.db.collection('suggestions').doc(docId).update({ status: 'reviewed' });
+    const card = document.querySelector(`[data-sg-id="${docId}"]`);
+    if (card) card.remove();
+    const list = document.getElementById('suggestionsList');
+    if (list && !list.children.length) {
+      list.innerHTML = '<p style="font-size:13px;color:var(--muted);font-style:italic">No pending suggestions.</p>';
+    }
+  } catch(e) { console.warn('Could not mark suggestion reviewed', e); }
+  openAdd(null, { name: decodeURIComponent(encodedName), notes: decodeURIComponent(encodedNotes) });
+}
+
+// Apply owner state on load (before loadData)
+applyOwnerMode();
 
 loadData();
 </script>
