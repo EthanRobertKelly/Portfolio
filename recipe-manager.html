@@ -117,6 +117,16 @@ main { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem; }
 .emoji-opt { width: 33px; height: 33px; border-radius: 6px; border: 2px solid transparent; background: var(--parchment); font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.1s; }
 .emoji-opt:hover, .emoji-opt.selected { border-color: var(--brown); background: var(--accent-light); }
 
+/* PHOTO DROP ZONE */
+.photo-drop { border: 2px dashed var(--border); border-radius: 10px; height: 120px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.15s, background 0.15s; overflow: hidden; position: relative; background: var(--parchment); }
+.photo-drop:hover, .photo-drop.drag-over { border-color: var(--brown); background: var(--accent-light); }
+.photo-drop.has-image { border-style: solid; border-color: var(--border); }
+.photo-drop img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-drop-label { font-size: 12px; color: var(--muted); text-align: center; pointer-events: none; }
+.photo-drop-label span { display: block; font-size: 1.5rem; margin-bottom: 0.3rem; }
+.photo-clear { position: absolute; top: 6px; right: 6px; background: rgba(255,255,255,0.88); border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.photo-clear:hover { color: #c0392b; background: #fff; }
+
 /* DRAG LISTS */
 .drag-list { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 0.5rem; }
 .drag-handle { cursor: grab; color: var(--tan); font-size: 15px; display: flex; align-items: center; justify-content: center; user-select: none; padding: 4px 3px; border-radius: 4px; flex-shrink: 0; transition: color 0.1s; }
@@ -336,9 +346,18 @@ function ekGateSubmit(){
       </div>
     </div>
 
-    <div class="form-group">
-      <label class="form-label">Emoji</label>
-      <div class="emoji-row" id="emojiRow"></div>
+    <div class="form-row" style="align-items:flex-start">
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Emoji</label>
+        <div class="emoji-row" id="emojiRow"></div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Cover Photo <span class="hint">— drag & drop or click</span></label>
+        <div class="photo-drop" id="photoDrop" onclick="document.getElementById('photoInput').click()" ondragover="photoDragOver(event)" ondragleave="photoDragLeave(event)" ondrop="photoDrop(event)">
+          <div class="photo-drop-label" id="photoDropLabel"><span>🖼️</span>Drop image here</div>
+        </div>
+        <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="photoFileChosen(this)">
+      </div>
     </div>
 
     <div class="form-row-3">
@@ -495,7 +514,10 @@ function renderFavorites() {
   if (!favs.length) { strip.innerHTML = '<span class="fav-empty">Star a recipe to pin it here.</span>'; return; }
   strip.innerHTML = favs.map(r => `
     <div class="fav-card" onclick="openDetail('${r.id}')">
-      <div class="fav-thumb">${r.emoji||'🍳'}<span class="fav-star-badge">⭐</span></div>
+      <div class="fav-thumb" style="${r.photo?'background:none;overflow:hidden':''}">
+        ${r.photo?`<img src="${r.photo}" alt="${r.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">`:r.emoji||'🍳'}
+        <span class="fav-star-badge">⭐</span>
+      </div>
       <div class="fav-body">
         <div class="fav-name">${r.name}</div>
         <div class="fav-meta">${r.cook||r.prep||''}</div>
@@ -558,8 +580,8 @@ function renderGrid() {
 
   grid.innerHTML = list.map(r => `
     <div class="recipe-card" onclick="openDetail('${r.id}')">
-      <div class="card-thumb">
-        ${r.emoji||'🍳'}
+      <div class="card-thumb" style="${r.photo?'background:none':''}">
+        ${r.photo?`<img src="${r.photo}" alt="${r.name}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">`:r.emoji||'🍳'}
         <button class="fav-btn ${r.favorite?'starred':''}" onclick="toggleFav('${r.id}',event)" title="${r.favorite?'Remove favorite':'Add to favorites'}">${r.favorite?'★':'☆'}</button>
       </div>
       <div class="card-body">
@@ -593,6 +615,13 @@ function openAdd(id) {
   document.getElementById('rNotes').value = r?.notes||'';
   renderEmojiPicker(r?.emoji||'🍞');
 
+  // restore photo
+  pendingPhoto = null;
+  const photoDrop = document.getElementById('photoDrop');
+  photoDrop.classList.remove('has-image');
+  photoDrop.innerHTML = `<div class="photo-drop-label" id="photoDropLabel"><span>🖼️</span>Drop image here</div>`;
+  if (r?.photo) setPhotoPreview(r.photo);
+
   const iList = document.getElementById('ingredientList');
   iList.innerHTML = '';
   if (r?.ingredients?.length) r.ingredients.forEach(i => addIngredientRow(i)); else addIngredientRow();
@@ -623,6 +652,41 @@ function renderEmojiPicker(sel) {
 }
 function pickEmoji(btn) { document.querySelectorAll('.emoji-opt').forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); }
 function getEmoji() { const s=document.querySelector('.emoji-opt.selected'); return s?s.textContent.trim():'🍳'; }
+
+// ── PHOTO UPLOAD ──
+let pendingPhoto = null;
+function setPhotoPreview(dataUrl) {
+  pendingPhoto = dataUrl;
+  const drop = document.getElementById('photoDrop');
+  const lbl = document.getElementById('photoDropLabel');
+  drop.classList.add('has-image');
+  drop.innerHTML = `<img src="${dataUrl}" alt="Cover"><button class="photo-clear" title="Remove photo" onclick="clearPhoto(event)">✕</button>`;
+}
+function clearPhoto(e) {
+  e.stopPropagation();
+  pendingPhoto = null;
+  const drop = document.getElementById('photoDrop');
+  drop.classList.remove('has-image');
+  drop.innerHTML = `<div class="photo-drop-label" id="photoDropLabel"><span>🖼️</span>Drop image here</div>`;
+}
+function photoFileChosen(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => setPhotoPreview(e.target.result);
+  reader.readAsDataURL(file);
+  input.value = '';
+}
+function photoDragOver(e) { e.preventDefault(); document.getElementById('photoDrop').classList.add('drag-over'); }
+function photoDragLeave(e) { document.getElementById('photoDrop').classList.remove('drag-over'); }
+function photoDrop(e) {
+  e.preventDefault();
+  document.getElementById('photoDrop').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (!file || !file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = ev => setPhotoPreview(ev.target.result);
+  reader.readAsDataURL(file);
+}
 
 function addIngredientRow(val) {
   const row = document.createElement('div');
@@ -675,6 +739,7 @@ function saveRecipe() {
     servings: document.getElementById('rServings').value.trim(),
     difficulty: document.getElementById('rDiff').value,
     notes: document.getElementById('rNotes').value.trim(),
+    photo: pendingPhoto || existing?.photo || null,
     ingredients, steps,
     favorite: existing?.favorite||false,
     reviews: existing?.reviews||[],
