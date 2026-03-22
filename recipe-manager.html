@@ -471,7 +471,7 @@ let importedRecipes = [];
 let importMergeMode = 'merge';
 
 async function loadData() {
-  try { const r = await window.storage.get('recipes'); if (r) recipes = JSON.parse(r.value); }
+  try { const r = await window.storage.get('recipes'); if (r?.value) recipes = JSON.parse(r.value); }
   catch(e) { recipes = []; }
   renderFavorites(); renderFilters(); renderGrid();
 }
