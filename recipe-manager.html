@@ -236,8 +236,79 @@ main { max-width: 980px; margin: 0 auto; padding: 2rem 1.5rem; }
   .ingredient-row { grid-template-columns: 22px 60px 55px 1fr 24px; }
 }
 </style>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
-window.storage=window.storage||{get:(k)=>Promise.resolve({value:localStorage.getItem(k)}),set:(k,v)=>{localStorage.setItem(k,v);return Promise.resolve();}};
+// ── PASTE YOUR FIREBASE CONFIG HERE ─────────────────────────────────────────
+// 1. Go to https://console.firebase.google.com → New project
+// 2. Add a web app → copy the firebaseConfig object → paste it below
+// 3. In the Firebase console: Firestore Database → Create database → Start in test mode
+// ─────────────────────────────────────────────────────────────────────────────
+const FIREBASE_CONFIG = null; // replace null with your config object, e.g. { apiKey: "...", ... }
+// ─────────────────────────────────────────────────────────────────────────────
+
+(function () {
+  const PHOTO_PREFIX = 'ek-photo-';
+  const LS_FALLBACK  = 'recipes';
+
+  function lsFallback() {
+    return {
+      get: (k) => Promise.resolve({ value: localStorage.getItem(k) }),
+      set: (k, v) => { localStorage.setItem(k, v); return Promise.resolve(); }
+    };
+  }
+
+  if (!FIREBASE_CONFIG) {
+    // Config not set yet — use localStorage until Firebase is configured
+    window.storage = lsFallback();
+    return;
+  }
+
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    const db  = firebase.firestore();
+    const REF = db.collection('kitchen').doc('recipes');
+
+    window.storage = {
+      get: async (k) => {
+        try {
+          const snap = await REF.get();
+          if (!snap.exists) return { value: null };
+          const recipes = JSON.parse(snap.data().value || '[]');
+          // Merge in locally-cached photos (photos don't sync — too large for Firestore)
+          recipes.forEach(r => {
+            const p = localStorage.getItem(PHOTO_PREFIX + r.id);
+            if (p) r.photo = p;
+          });
+          return { value: JSON.stringify(recipes) };
+        } catch (e) {
+          console.warn('Firestore read failed, using localStorage', e);
+          return { value: localStorage.getItem(LS_FALLBACK) };
+        }
+      },
+      set: async (k, v) => {
+        try {
+          const recipes = JSON.parse(v);
+          // Strip photos from Firestore payload; cache them locally by recipe id
+          const clean = recipes.map(r => {
+            if (r.photo) localStorage.setItem(PHOTO_PREFIX + r.id, r.photo);
+            const { photo, ...rest } = r;
+            return rest;
+          });
+          await REF.set({ value: JSON.stringify(clean) });
+          localStorage.setItem(LS_FALLBACK, v); // local fallback copy
+        } catch (e) {
+          console.warn('Firestore write failed, saving to localStorage only', e);
+          localStorage.setItem(LS_FALLBACK, v);
+        }
+      }
+    };
+  } catch (e) {
+    console.warn('Firebase init failed, using localStorage', e);
+    window.storage = lsFallback();
+  }
+})();
 </script>
 </head>
 <body>
