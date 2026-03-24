@@ -331,7 +331,7 @@ const FIREBASE_CONFIG = {
     <button id="btnExport" class="btn btn-ghost" onclick="openExport()" style="display:none">↓ Export</button>
     <button id="btnAddRecipe" class="btn btn-primary" onclick="openAdd()" style="display:none">+ Add Recipe</button>
     <button id="btnSuggest" class="btn btn-ghost" onclick="openSuggest()" style="display:none">✦ Suggest a Recipe</button>
-    <button class="btn btn-ghost" style="font-size:12px;padding:0.35rem 0.7rem" onclick="openOwnerModal()">Owner</button>
+    <button class="btn btn-ghost" style="font-size:12px;padding:0.35rem 0.7rem" onclick="openOwnerModal()">Login</button>
   </div>
 </header>
 
@@ -384,8 +384,13 @@ const FIREBASE_CONFIG = {
 <div class="overlay" id="ownerOverlay">
   <div class="modal" style="max-width:360px">
     <div class="modal-header">
-      <div class="modal-title">Owner Login</div>
+      <div class="modal-title">Login</div>
       <button class="close-btn" onclick="closeOwnerModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Username</label>
+      <input class="form-input" id="ownerUserInput" type="text" placeholder="Enter username" autocomplete="off"
+        onkeydown="if(event.key==='Enter')document.getElementById('ownerPwInput').focus()">
     </div>
     <div class="form-group">
       <label class="form-label">Password</label>
@@ -1223,23 +1228,25 @@ function applyOwnerMode() {
 }
 
 function openOwnerModal() {
+  document.getElementById('ownerUserInput').value = '';
   document.getElementById('ownerPwInput').value = '';
   document.getElementById('ownerPwErr').textContent = '';
   document.getElementById('ownerOverlay').classList.add('open');
-  requestAnimationFrame(() => document.getElementById('ownerPwInput').focus());
+  requestAnimationFrame(() => document.getElementById('ownerUserInput').focus());
 }
 function closeOwnerModal() { document.getElementById('ownerOverlay').classList.remove('open'); }
 
 function submitOwnerLogin() {
-  if (document.getElementById('ownerPwInput').value === 'ethank') {
+  const username = document.getElementById('ownerUserInput').value.trim();
+  if (username === 'ethank' && document.getElementById('ownerPwInput').value === 'password') {
     sessionStorage.setItem('ek-owner', '1');
     closeOwnerModal();
     applyOwnerMode();
     loadSuggestions();
   } else {
-    document.getElementById('ownerPwErr').textContent = 'Incorrect password';
+    document.getElementById('ownerPwErr').textContent = 'Incorrect username or password';
     document.getElementById('ownerPwInput').value = '';
-    document.getElementById('ownerPwInput').focus();
+    document.getElementById('ownerUserInput').focus();
   }
 }
 
