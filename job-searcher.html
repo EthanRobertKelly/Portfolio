@@ -424,6 +424,24 @@ tr:hover td{background:var(--bg2)}
 .ni-restore{background:none;border:none;color:var(--text4);cursor:pointer;font-size:11px;padding:2px 5px;border-radius:3px}
 .ni-restore:hover{color:var(--text)}
 
+/* ── TRACKER LIST VIEW ── */
+.tl-group{margin-bottom:20px}
+.tl-group-hd{display:flex;align-items:center;gap:8px;padding:6px 0;margin-bottom:6px;border-bottom:1px solid var(--border)}
+.tl-group-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tl-group-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--text2)}
+.tl-group-count{font-size:10px;color:var(--text3);font-family:'IBM Plex Mono',monospace;background:var(--bg3);padding:1px 7px;border-radius:99px}
+.tl-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--border);border-radius:7px;background:var(--bg2);margin-bottom:5px;cursor:pointer;transition:border-color .15s;flex-wrap:wrap}
+.tl-row:hover{border-color:var(--border2)}
+.tl-row-name{font-weight:600;font-size:13px;min-width:130px}
+.tl-row-cat{font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+.tl-row-loc{font-size:11px;color:var(--text3);white-space:nowrap}
+.tl-row-status{font-size:10px;color:var(--amber);font-family:'IBM Plex Mono',monospace;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-row-contact{font-size:10px;color:var(--purple);font-family:'IBM Plex Mono',monospace;white-space:nowrap;max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.tl-row-date{font-size:10px;color:var(--text3);font-family:'IBM Plex Mono',monospace;white-space:nowrap}
+.tl-row-link{font-size:10px;color:var(--blue);font-family:'IBM Plex Mono',monospace;text-decoration:none;padding:2px 6px;border:1px solid var(--border);border-radius:4px;transition:border-color .15s;flex-shrink:0}
+.tl-row-link:hover{border-color:var(--blue)}
+.tl-tracked{font-size:10px;color:var(--green);font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+
 @media(max-width:900px){.settings-layout{grid-template-columns:1fr}}
 @media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}.container{padding:16px}.header{padding:12px 16px}.form-grid3,.form-grid4{grid-template-columns:1fr 1fr}.board-scroll{margin:0 -16px;padding-left:16px}.bcol{width:240px}}
 </style>
@@ -539,58 +557,24 @@ function ekActivateGuest(){
 
   <!-- ── TABS ── -->
   <div class="tabs">
-    <button class="tab on" onclick="sw('tracker',this)">Tracker</button>
-    <button class="tab" onclick="sw('leads',this)" id="leads-tab">Lead Board <span class="tab-badge" id="leads-badge">0</span></button>
+    <button class="tab on" onclick="sw('leads',this)" id="leads-tab">Lead Board <span class="tab-badge" id="leads-badge">0</span></button>
+    <button class="tab" onclick="sw('tracker',this)">Pipeline</button>
     <button class="tab" onclick="sw('scout',this)" id="scout-tab">⚡ Scout <span class="tab-badge" id="scout-badge">0</span></button>
   </div>
 
   <!-- ════════════════════════ TRACKER ════════════════════════ -->
-  <div class="panel on" id="panel-tracker">
+  <div class="panel" id="panel-tracker">
     <div class="toolbar">
-      <h2>Applications</h2>
+      <h2>Pipeline</h2>
       <div class="toolbar-r">
-        <button class="btn btn-sm" onclick="togForm('tracker-form')">+ Add manually</button>
+        <span style="font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace">List view · click any row to edit</span>
       </div>
     </div>
-
-    <div class="add-form" id="tracker-form">
-      <div class="form-grid">
-        <div class="fg"><label>Company</label><input type="text" id="f-co" placeholder="Company name"></div>
-        <div class="fg"><label>Role / Category</label><input type="text" id="f-role" placeholder="e.g. Systems Integration Engineer"></div>
-      </div>
-      <div class="form-grid4">
-        <div class="fg"><label>Status</label><select id="f-status">
-          <option value="applied">Applied</option><option value="messaging">Messaging</option>
-          <option value="interviewing">Interviewing</option><option value="offer">Offer</option>
-          <option value="rejected">Rejected</option><option value="no-response">No response</option>
-        </select></div>
-        <div class="fg"><label>Priority</label><select id="f-pri"><option value="high">High</option><option value="med" selected>Medium</option><option value="low">Low</option></select></div>
-        <div class="fg"><label>Date</label><input type="date" id="f-date"></div>
-        <div class="fg"><label>URL</label><input type="text" id="f-url" placeholder="https://…"></div>
-      </div>
-      <div class="fg"><label>Notes / Next Steps</label><textarea id="f-notes" placeholder="Contacts, context, follow-up dates…"></textarea></div>
-      <div class="form-actions">
-        <button class="btn btn-primary" onclick="addManual()">Save Application</button>
-        <button class="btn" onclick="togForm('tracker-form')">Cancel</button>
-      </div>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead><tr>
-          <th style="width:17%">Company</th><th style="width:18%">Role</th>
-          <th style="width:12%">Status</th><th style="width:8%">Priority</th>
-          <th style="width:9%">Date</th><th style="width:6%">Link</th>
-          <th style="width:26%">Notes</th><th style="width:4%"></th>
-        </tr></thead>
-        <tbody id="tracker-body"></tbody>
-      </table>
-      <div id="tracker-empty" class="empty">No applications tracked yet.<br>Hit <strong>+ Track</strong> on any lead, or add manually above.</div>
-    </div>
+    <div id="tracker-list"></div>
   </div>
 
   <!-- ════════════════════════ LEADS ════════════════════════ -->
-  <div class="panel" id="panel-leads">
+  <div class="panel on" id="panel-leads">
 
     <div class="stats" style="margin-bottom:16px;grid-template-columns:repeat(4,1fr)">
       <div class="stat accent"><div class="n mono" id="ls-hot">0</div><div class="l">Strong Fits</div></div>
@@ -979,6 +963,13 @@ function ekActivateGuest(){
       <div class="fg"><label>URL</label><input id="el-url" type="text"></div>
       <div class="fg"><label>Source</label><span id="el-source-label" style="font-size:11px;color:var(--text3);padding:8px 0;display:block">—</span></div>
     </div>
+    <div style="height:1px;background:var(--border);margin:14px 0 12px"></div>
+    <div class="fg" style="margin-bottom:10px"><label>Interview Status Note</label><input id="el-status-note" type="text" placeholder="e.g. In line to interview when applications open…"></div>
+    <div class="fg" style="margin-bottom:10px"><label>Contacts</label><textarea id="el-contacts" rows="3" style="min-height:64px" placeholder="Name, role — conversation notes…"></textarea></div>
+    <div class="form-grid" style="margin-bottom:10px">
+      <div class="fg"><label>Next Steps</label><textarea id="el-next-steps" rows="2" style="min-height:52px" placeholder="What to do next…"></textarea></div>
+      <div class="fg"><label>Last Contact</label><input id="el-last-contact" type="date"></div>
+    </div>
     <div class="form-actions">
       <button class="btn" onclick="closeOverlay('edit-lead-overlay')">Cancel</button>
       <button class="btn btn-danger btn-sm" onclick="deleteLead(editLeadId)">Delete</button>
@@ -1112,7 +1103,7 @@ const DEFAULT_QUERIES = [
 
 const BUILTIN_LEADS=[
   {id:'bl-1',n:'Dirac, Inc.',lo:'NYC (Onsite)',ca:'Industrial SW',h:1,nw:0,tg:['ISW'],p:'Model-based manufacturing platform unifying ERP, PLM, MES. Anduril is a live customer.',w:"You're doing their job at DMC. 'Forward-deployed engineer' is literally their term.",url:''},
-  {id:'bl-2',n:'SeaSats',lo:'San Diego, CA',ca:'Maritime Autonomy',h:1,nw:0,tg:['SD','CA','Maritime','Defense'],p:'Autonomous surface vessels for the Navy. $20M Series A + $24M DoD funding.',w:'You built an autonomous catamaran. That ends the interview before it starts.',url:''},
+  {id:'bl-2',n:'SeaSats',lo:'San Diego, CA',ca:'Maritime Autonomy',h:1,nw:0,tg:['SD','CA','Maritime','Defense'],p:'Autonomous surface vessels for the Navy. $20M Series A + $24M DoD funding.',w:'You built an autonomous catamaran. That ends the interview before it starts.',url:'',status_note:'In line to interview when applications open',contacts:'Payload Engineer — conversation had (Mar 2026). Positive. Will reach out to more engineers.',next_steps:'Reach out to additional engineers to build more internal relationships',last_contact:'2026-03-24'},
   {id:'bl-3',n:'Saronic Technologies',lo:'San Diego, CA',ca:'Maritime / Defense',h:1,nw:1,tg:['SD','CA','Maritime','Defense'],p:'Autonomous naval vessels. $600M Series C, $4B valuation. Opening SD facility.',w:'San Diego, maritime autonomy, explosive growth. Career-defining early-scale opportunity.',url:'https://saronic.com/careers'},
   {id:'bl-4',n:'Firestorm',lo:'San Diego, CA',ca:'Defense / UAS',h:1,nw:0,tg:['SD','CA','Defense'],p:'3D-printed modular drones for DoD. $77M raised, Lockheed Martin Ventures.',w:'San Diego HQ, high-volume mfg, defense.',url:''},
   {id:'bl-5',n:'Shield AI',lo:'San Diego, CA',ca:'Defense / Autonomy',h:1,nw:0,tg:['SD','CA','Defense'],p:'AI autonomous drones operating GPS-denied. $198M Coast Guard contract. ~$3B valuation.',w:'San Diego, serious defense pedigree, growing fast into systems integration.',url:'https://shield.ai/careers'},
@@ -1707,19 +1698,38 @@ function saveEditApp(){
 }
 function delApp(id){ apps=apps.filter(x=>x.id!==id); save(); render(); }
 function renderTracker(){
-  const sorted=[...apps].sort((a,b)=>(PRI_ORDER[a.priority||'med'])-(PRI_ORDER[b.priority||'med']));
-  document.getElementById('tracker-empty').style.display=apps.length?'none':'block';
-  document.getElementById('tracker-body').innerHTML=sorted.map(a=>`
-    <tr>
-      <td><div class="co-cell">${a.priority==='high'?'<span class="dot-g"></span>':''}${esc(a.company)}</div></td>
-      <td style="color:var(--text2);font-size:12px">${esc(a.role||'—')}</td>
-      <td><select class="sel-inline" onchange="updateStatus('${a.id}',this.value)">${STATUSES.map(s=>`<option value="${s}"${a.status===s?' selected':''}>${SL[s]}</option>`).join('')}</select></td>
-      <td><select class="sel-inline" onchange="updatePri('${a.id}',this.value)"><option value="high"${a.priority==='high'?' selected':''}>HIGH</option><option value="med"${a.priority==='med'?' selected':''}>MED</option><option value="low"${a.priority==='low'?' selected':''}>LOW</option></select></td>
-      <td class="date-cell">${a.date||'—'}</td>
-      <td>${a.url?`<a href="${esc(a.url)}" target="_blank" style="color:var(--blue);font-size:11px;font-family:'IBM Plex Mono',monospace;text-decoration:none">↗</a>`:'—'}</td>
-      <td><div class="notes-view" onclick="openEditApp('${a.id}')" title="${esc(a.notes||'')}">${a.notes||'<span style="color:var(--text3);font-style:italic">add notes…</span>'}</div></td>
-      <td><span class="del" onclick="delApp('${a.id}')">✕</span></td>
-    </tr>`).join('');
+  const el=document.getElementById('tracker-list'); if(!el) return;
+  const leads=allLeads().filter(l=>!isNI(l.id)&&!(leadOverrides[l.id]||{}).hidden);
+  if(!leads.length){
+    el.innerHTML='<div class="empty">No leads on the board yet.<br>Add leads from the Lead Board to see them here.</div>';
+    return;
+  }
+  const groups=boardColumns.map(col=>({col,leads:leads.filter(l=>getColForLead(l.id)===col.id)})).filter(g=>g.leads.length>0);
+  el.innerHTML=groups.map(g=>`
+    <div class="tl-group">
+      <div class="tl-group-hd">
+        <div class="tl-group-dot" style="background:${g.col.color}"></div>
+        <span class="tl-group-label">${esc(g.col.label)}</span>
+        <span class="tl-group-count">${g.leads.length}</span>
+      </div>
+      ${g.leads.map(l=>{
+        const tr=isTracked(l.n);
+        const statusNote=l.status_note||'';
+        const contacts=l.contacts||'';
+        const lastContact=l.last_contact||'';
+        const firstContact=contacts?contacts.split('\n')[0].slice(0,35):'';
+        return `<div class="tl-row" onclick="openEditLead('${l.id}')">
+          <div class="tl-row-name">${esc(l.n)}</div>
+          <div class="tl-row-cat">${esc(l.ca)}</div>
+          ${l.lo?`<div class="tl-row-loc">${esc(l.lo.split(',')[0])}</div>`:''}
+          ${statusNote?`<div class="tl-row-status" title="${esc(statusNote)}">↳ ${esc(statusNote)}</div>`:''}
+          ${firstContact?`<div class="tl-row-contact" title="${esc(contacts)}">● ${esc(firstContact)}</div>`:''}
+          ${lastContact?`<div class="tl-row-date">${lastContact}</div>`:''}
+          ${l.url?`<a href="${esc(l.url)}" target="_blank" class="tl-row-link" onclick="event.stopPropagation()">↗</a>`:''}
+          ${tr?'<span class="tl-tracked">✓ tracked</span>':''}
+        </div>`;
+      }).join('')}
+    </div>`).join('');
 }
 
 // ══════════════════════════════════════════════════════
@@ -1879,6 +1889,7 @@ function buildCard(l){
     </div>
     ${l.p?`<div class="kcard-pitch">${esc(l.p)}</div>`:''}
     ${l.w?`<div class="kcard-why">→ ${esc(l.w)}</div>`:''}
+    ${l.status_note?`<div style="font-size:10px;color:var(--amber);font-family:'IBM Plex Mono',monospace;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">⚡ ${esc(l.status_note)}</div>`:''}
     <div class="kcard-footer">
       ${l.url?`<a href="${esc(l.url)}" target="_blank" class="kact" onclick="event.stopPropagation()">↗</a>`:''}
       <button class="kact" onclick="openEditLead('${l.id}');event.stopPropagation()">Edit</button>
@@ -1994,15 +2005,19 @@ function openEditLead(id){
   document.getElementById('el-new').value=l.nw?'1':'0';
   document.getElementById('el-url').value=l.url||'';
   document.getElementById('el-source-label').textContent=l.source?l.source:'built-in';
+  document.getElementById('el-status-note').value=l.status_note||'';
+  document.getElementById('el-contacts').value=l.contacts||'';
+  document.getElementById('el-next-steps').value=l.next_steps||'';
+  document.getElementById('el-last-contact').value=l.last_contact||'';
   openOverlay('edit-lead-overlay');
 }
 function saveEditLead(){
   const tags=document.getElementById('el-tags').value.split(',').map(t=>t.trim()).filter(Boolean);
-  const upd={n:document.getElementById('el-name').value.trim(),ca:document.getElementById('el-cat').value.trim(),lo:document.getElementById('el-loc').value.trim(),tg:tags,p:document.getElementById('el-pitch').value.trim(),w:document.getElementById('el-why').value.trim(),h:parseInt(document.getElementById('el-hot').value),nw:parseInt(document.getElementById('el-new').value),url:document.getElementById('el-url').value.trim()};
+  const upd={n:document.getElementById('el-name').value.trim(),ca:document.getElementById('el-cat').value.trim(),lo:document.getElementById('el-loc').value.trim(),tg:tags,p:document.getElementById('el-pitch').value.trim(),w:document.getElementById('el-why').value.trim(),h:parseInt(document.getElementById('el-hot').value),nw:parseInt(document.getElementById('el-new').value),url:document.getElementById('el-url').value.trim(),status_note:document.getElementById('el-status-note').value.trim(),contacts:document.getElementById('el-contacts').value.trim(),next_steps:document.getElementById('el-next-steps').value.trim(),last_contact:document.getElementById('el-last-contact').value};
   const ci=customLeads.findIndex(x=>x.id===editLeadId);
   if(ci>=0){customLeads[ci]={...customLeads[ci],...upd};}
   else{leadOverrides[editLeadId]={...(leadOverrides[editLeadId]||{}),...upd};}
-  closeOverlay('edit-lead-overlay'); save(); renderBoard();
+  closeOverlay('edit-lead-overlay'); save(); renderBoard(); renderTracker();
 }
 function deleteLead(id){
   if(!confirm('Permanently delete this lead?')) return;
