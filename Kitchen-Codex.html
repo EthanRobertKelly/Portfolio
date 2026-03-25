@@ -1201,8 +1201,7 @@ function doImport() {
   renderFavorites(); renderFilters(); renderGrid();
 }
 
-document.getElementById('addOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeAdd(); });
-document.getElementById('detailOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeDetail(); });
+// addOverlay and detailOverlay intentionally have no backdrop-click-to-close — prevent accidental dismissal while editing
 document.getElementById('exportOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeExport(); });
 document.getElementById('importOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeImport(); });
 document.getElementById('ownerOverlay').addEventListener('click', e=>{ if(e.target===e.currentTarget) closeOwnerModal(); });
