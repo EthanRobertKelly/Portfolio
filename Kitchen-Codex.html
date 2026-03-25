@@ -322,7 +322,7 @@ const FIREBASE_CONFIG = {
 <body>
 
 <header>
-  <a href="index.html" style="position:absolute;left:2rem;top:50%;transform:translateY(-50%);font-size:12px;color:var(--tan);text-decoration:none;opacity:0.7;transition:opacity .15s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">← Ethan Kelly</a><p class="subtitle">Ethan's Personal</p>
+  <a href="index.html" style="position:absolute;left:2rem;top:50%;transform:translateY(-50%);font-size:12px;color:var(--tan);text-decoration:none;opacity:0.7;transition:opacity .15s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">← Ethan Kelly</a>
   <h1><em>Kitchen</em> Codex</h1>
   <div class="header-actions" style="display:flex;align-items:center;gap:0.4rem">
     <span id="ownerIndicator" style="display:none;font-size:11px;color:var(--tan);letter-spacing:0.06em;opacity:0.8">Owner mode</span>
@@ -357,7 +357,7 @@ const FIREBASE_CONFIG = {
     <div class="filter-bar-bottom">
       <div class="search-wrap">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.868-3.833zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg>
-        <input class="search-input" type="search" id="searchInput" placeholder="Search recipes…" oninput="renderGrid()">
+        <input class="search-input" type="search" id="searchInput" placeholder="Search recipes…" oninput="renderGrid()" autocomplete="off">
       </div>
       <select class="filter-select" id="ttcFilter" onchange="setFilter('ttc',this.value)">
         <option value="all">Any time</option>
@@ -388,13 +388,8 @@ const FIREBASE_CONFIG = {
       <button class="close-btn" onclick="closeOwnerModal()">✕</button>
     </div>
     <div class="form-group">
-      <label class="form-label">Username</label>
-      <input class="form-input" id="ownerUserInput" type="text" placeholder="Enter username" autocomplete="off"
-        onkeydown="if(event.key==='Enter')document.getElementById('ownerPwInput').focus()">
-    </div>
-    <div class="form-group">
       <label class="form-label">Password</label>
-      <input class="form-input" id="ownerPwInput" type="password" placeholder="Enter password" autocomplete="off"
+      <input class="form-input" id="ownerPwInput" type="password" placeholder="Enter password" autocomplete="new-password"
         onkeydown="if(event.key==='Enter')submitOwnerLogin()">
       <div id="ownerPwErr" style="font-size:11px;color:#c0392b;min-height:1em;margin-top:0.25rem"></div>
     </div>
@@ -1232,21 +1227,20 @@ function openOwnerModal() {
   document.getElementById('ownerPwInput').value = '';
   document.getElementById('ownerPwErr').textContent = '';
   document.getElementById('ownerOverlay').classList.add('open');
-  requestAnimationFrame(() => document.getElementById('ownerUserInput').focus());
+  requestAnimationFrame(() => document.getElementById('ownerPwInput').focus());
 }
 function closeOwnerModal() { document.getElementById('ownerOverlay').classList.remove('open'); }
 
 function submitOwnerLogin() {
-  const username = document.getElementById('ownerUserInput').value.trim();
-  if (username === 'ethank' && document.getElementById('ownerPwInput').value === 'password') {
+  if (document.getElementById('ownerPwInput').value === 'ethank') {
     sessionStorage.setItem('ek-owner', '1');
     closeOwnerModal();
     applyOwnerMode();
     loadSuggestions();
   } else {
-    document.getElementById('ownerPwErr').textContent = 'Incorrect username or password';
+    document.getElementById('ownerPwErr').textContent = 'Incorrect password';
     document.getElementById('ownerPwInput').value = '';
-    document.getElementById('ownerUserInput').focus();
+    document.getElementById('ownerPwInput').focus();
   }
 }
 
