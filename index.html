@@ -40,8 +40,8 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-tw{font-size:clamp(1.15rem,2vw,1.7rem);font-weight:400;color:var(--ink);line-height:1.65}
 .tw-cursor{display:inline-block;color:var(--accent);font-weight:300;animation:blink .75s step-end infinite;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-/* Contact panel — no box, clean vertical stack */
-.hero-card{display:flex;flex-direction:column;gap:0;padding-top:.15rem}
+/* Contact panel — anchored with left border */
+.hero-card{display:flex;flex-direction:column;gap:0;padding-top:.15rem;padding-left:2rem;border-left:1px solid var(--rule)}
 .hero-card-top{display:flex;align-items:center;gap:.9rem;padding-bottom:1.1rem}
 .hero-photo{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);flex-shrink:0;box-shadow:0 2px 10px rgba(28,23,18,.12)}
 .hero-card-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.2}
@@ -106,9 +106,9 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 
 /* TIMELINE v3 — WAVE SPINE */
 .tv3{position:relative;padding-bottom:3rem}
-.tv3-ch{display:flex;align-items:center;gap:2rem;padding:2rem 3rem;background:var(--ink);margin:4rem -3rem 3.5rem;position:relative;z-index:2;overflow:hidden}
+.tv3-ch{display:flex;align-items:center;gap:2rem;padding:1.75rem 3rem;background:#2d241a;margin:4rem -3rem 3.5rem;position:relative;z-index:2;overflow:hidden}
 .tv3-ch:first-child{margin-top:0}
-.tv3-ch::after{content:attr(data-n);position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);font-size:10rem;font-weight:700;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;letter-spacing:-.05em}
+.tv3-ch::after{content:attr(data-n);position:absolute;right:2.5rem;top:50%;transform:translateY(-50%);font-size:10rem;font-weight:700;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;letter-spacing:-.05em}
 .tv3-ch-bar{width:3px;height:3.5rem;background:linear-gradient(to bottom,var(--accent),var(--accent2));border-radius:2px;flex-shrink:0}.tv3-ch-title{font-size:1.2rem;font-weight:500;color:var(--white);line-height:1.2}
 .tv3-ch-sub{font-size:12px;color:#7a7068;margin-top:.25rem}
 .tv3-row{position:relative;margin-bottom:4rem;min-height:2rem;z-index:1}
@@ -365,11 +365,11 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     </a>
     <a href="#done" class="hero-proj">
       <div class="hero-proj-header">
-        <div class="hero-proj-name">Full Ironman</div>
+        <div class="hero-proj-name">Geothermal Lithium Extraction</div>
       </div>
-      <img class="hero-proj-thumb" src="/images/Ironman.png" alt="Ironman">
+      <div class="hero-proj-thumb hero-proj-thumb-ph" aria-hidden="true"></div>
       <div class="hero-proj-body">
-        <p class="hero-proj-desc">Completed a full 140.6-mile Ironman triathlon and multiple marathons — the same grit in training that shows up on the job.</p>
+        <p class="hero-proj-desc">Programming and commissioning the controls system for a Direct Lithium Extraction R&amp;D Pilot Plant — pulling lithium from geothermal brine via electrolysis.</p>
       </div>
     </a>
   </div>
