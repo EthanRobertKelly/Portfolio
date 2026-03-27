@@ -21,7 +21,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 #nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--rule);height:54px;display:flex;align-items:center;padding:0 2rem;gap:0;transition:box-shadow .2s}
 #nav.scrolled{box-shadow:0 2px 16px rgba(28,23,18,.07)}
 .n-logo{font-size:15px;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.02em;margin-right:.6rem;white-space:nowrap}
-.n-sub{font-size:11px;color:var(--faint);letter-spacing:.01em;margin-right:1.5rem;white-space:nowrap}
+.n-sub{font-size:11px;color:var(--muted);letter-spacing:.01em;margin-right:1.5rem;white-space:nowrap}
 .n-sep{width:1px;height:16px;background:var(--rule);margin:0 .75rem;flex-shrink:0}
 .n-link{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border-radius:4px;transition:color .15s,background .15s;white-space:nowrap}
 .n-link:hover{color:var(--ink);background:var(--bg2)}
@@ -35,8 +35,8 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 
 /* HERO */
 #hero{padding:calc(54px + 3rem) 4rem 3.5rem;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid var(--rule);gap:2.5rem}
-/* Split: typewriter left 2/3, contact card right 1/3 */
-.hero-split{display:grid;grid-template-columns:1fr 260px;gap:3rem;align-items:start}
+/* Split: typewriter left, contact card right */
+.hero-split{display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start}
 .hero-tw{font-size:clamp(1.15rem,2vw,1.7rem);font-weight:400;color:var(--ink);line-height:1.65}
 .tw-cursor{display:inline-block;color:var(--accent);font-weight:300;animation:blink .75s step-end infinite;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
@@ -65,17 +65,17 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-proj{background:var(--white);display:flex;flex-direction:column;text-decoration:none;border-right:1px solid var(--rule);transition:background .15s;overflow:hidden}
 .hero-proj:last-child{border-right:none}
 .hero-proj:hover{background:var(--bg2)}
-.hero-proj-thumb{width:100%;height:160px;object-fit:cover;object-position:center;display:block;border-bottom:1px solid var(--rule)}
+.hero-proj-thumb{width:100%;height:220px;object-fit:cover;object-position:center;display:block;border-bottom:1px solid var(--rule)}
 .hero-proj-thumb-ph{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%)}
 .hero-proj-header{padding:.9rem 1.2rem .75rem;border-bottom:1px solid var(--rule)}
 .hero-proj-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.02em}
 .hero-proj-body{padding:1rem 1.2rem 1.25rem;flex:1}
 .hero-proj-desc{font-size:12px;color:var(--muted);line-height:1.65}
 /* Quotes — full width, 2 columns */
-.hero-quotes{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.hero-qcard{background:var(--white);border:1px solid var(--rule);border-radius:8px;border-left:3px solid var(--accent);padding:1.1rem 1.25rem}
-.hero-qcard p{font-size:13px;color:var(--muted);font-style:italic;line-height:1.75;margin-bottom:.55rem}
-.hero-qcard cite{font-size:10px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;font-style:normal}
+.hero-quotes{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.hero-qcard{background:var(--white);border:1px solid var(--rule);border-radius:10px;border-left:4px solid var(--accent);padding:1.75rem 2rem}
+.hero-qcard p{font-size:15px;color:var(--ink);font-style:italic;line-height:1.8;margin-bottom:.85rem;font-family:'Playfair Display',serif}
+.hero-qcard cite{font-size:11px;color:var(--muted);letter-spacing:.05em;font-style:normal}
 /* Scroll CTA */
 .hero-scroll-wrap{text-align:center;padding:.5rem 0 0}
 .hero-scroll-cta{display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;animation:bob 2.5s 1.5s ease-in-out infinite}
@@ -167,13 +167,14 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .edu-meta{font-size:10px;color:var(--faint);letter-spacing:.05em;margin-top:.2rem}
 
 /* WORKING WITH ME */
-.wm3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
+.wm3{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.5rem}
 .wm-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem}
-.wm-dark{background:var(--ink);border-color:var(--ink)}
+.wm-dark{background:#2d241a;border-color:#2d241a}
 .wm-title{font-size:10px;letter-spacing:.13em;text-transform:uppercase;margin-bottom:1rem}
 .wm-title.s{color:var(--accent2)}
 .wm-title.w{color:#c4683a}
 .wm-title.h{color:#4a6fa5}
+.wm-title.g{color:#7a6a5a}
 .wi{margin-bottom:.9rem}
 .wi:last-child{margin-bottom:0}
 .wi-h{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:.2rem}
@@ -186,6 +187,10 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .ci-label{flex-shrink:0;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);padding-top:2px;min-width:110px}
 .ci-text{font-size:13px;color:var(--muted);line-height:1.65}
 .ci-text strong{color:var(--ink);font-weight:500}
+.wm-dl-row{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.wm-dl-lbl{font-size:12px;color:var(--muted)}
+.wm-dl-btn{padding:.6rem 1.25rem;background:var(--accent);color:var(--white);border:none;border-radius:7px;font-size:12px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s;white-space:nowrap}
+.wm-dl-btn:hover{background:var(--accent2)}
 
 /* BEYOND */
 .hg{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
@@ -341,7 +346,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="hero-proj-header">
         <div class="hero-proj-name">NAWS China Lake</div>
       </div>
-      <img class="hero-proj-thumb" src="/images/NAWS.jpeg" alt="China Lake">
+      <div style="position:relative">
+        <img class="hero-proj-thumb" src="/images/NAWS.jpeg" alt="China Lake">
+        <span style="position:absolute;bottom:6px;right:8px;font-size:9px;color:rgba(255,255,255,.65);letter-spacing:.04em">representative imagery*</span>
+      </div>
       <div class="hero-proj-body">
         <p class="hero-proj-desc">Onsite technical lead for a $25B Navy weapons test facility modernization — walked into a failing FAT and delivered both accepted.</p>
       </div>
@@ -802,47 +810,37 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="wi"><div class="wi-h">Grit</div><div class="wi-b">Absorbs more than most. When people are looking for the exit, looking for the fix. Long hours, hard clients, failing systems — without making it a personality trait.</div></div>
       <div class="wi"><div class="wi-h">Insightful</div><div class="wi-b">Fast at identifying the actual problem — technical, process, or people. Multiple senior engineers have noted this independently, regardless of experience level.</div></div>
       <div class="wi"><div class="wi-h">PM-Conscious</div><div class="wi-b">Constantly evaluating the strategic "why" behind every task. Not just executing — thinking about what should be executed and whether the framing is right.</div></div>
-      <div class="wi"><div class="wi-h">Versatility</div><div class="wi-b">Switches tactfully between deep technical execution and open strategic thinking without friction. Wide toolkit, all of it gets used.</div></div>
+      <div class="wi"><div class="wi-h">Versatility</div><div class="wi-b">Switches between deep technical execution and open strategic thinking without friction. Wide toolkit, all of it gets used.</div></div>
       <div class="wi"><div class="wi-h">Fast on Feet</div><div class="wi-b">Real-time thinking under pressure: live debugging in front of clients, path-finding when the plan breaks, staying useful when the situation changes.</div></div>
       <div class="wi"><div class="wi-h">Communication</div><div class="wi-b">Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill — a technical advantage on complex projects.</div></div>
     </div>
     <div class="wm-card wm-dark">
       <div class="wm-title w">Watch-Outs</div>
-      <div class="wi"><div class="wi-h">Don't Let Confidence Lull You Out of Your Own Responsibilities</div><div class="wi-b">Independence and output can make it look like oversight isn't needed. It is — everyone needs it. Don't let confidence lull you out of your own responsibilities. Multiple eyes on big projects matter.</div></div>
-      <div class="wi"><div class="wi-h">Going at it Alone</div><div class="wi-b">Confident that with time and resources anything is achievable. That doesn't mean it'll be done right first, or in time, or at the quality the constraints require. The work is building systems that force mode switching and bring other perspectives to the problem.</div></div>
-      <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">The closer to the critical path, the more narrowly the focus narrows. Feature until it's a bug. Hard to maintain full perspective when deep in it. On the critical path: stepping back and discussing is necessary overhead, not optional — and it tends to get neglected.</div></div>
-      <div class="wi"><div class="wi-h">Pushing Past the Signal</div><div class="wi-b">Takes more pressure than most. Willing to work harder than most. That sometimes means ignoring signals to step back and pushing through until stopping isn't an option. If you see it coming first, say so directly.</div></div>
+      <div class="wi"><div class="wi-h">Confidence Lull</div><div class="wi-b">Independence and output can make it look like oversight isn't needed. It is — everyone needs it. Multiple eyes on big projects matter.</div></div>
+      <div class="wi"><div class="wi-h">Going at it Alone</div><div class="wi-b">Confident that with time and resources anything is achievable. Doesn't mean it'll be done right first, in time, or at the quality the constraints require.</div></div>
+      <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">The closer to the critical path, the more narrowly the focus narrows. Stepping back and discussing is necessary overhead, not optional — and it tends to get neglected.</div></div>
+      <div class="wi"><div class="wi-h">Pushing Past the Signal</div><div class="wi-b">Takes more pressure than most. That sometimes means ignoring signals to step back. If you see it coming first, say so directly.</div></div>
     </div>
     <div class="wm-card">
       <div class="wm-title h">How to Collaborate</div>
-      <div class="wi"><div class="wi-h">Build in the challenge</div><div class="wi-b">Confidence and quality output can make it look like due diligence isn't needed. It is. Often capable of being both confident AND correct — which makes systematic challenge more important, not less. Don't let the results talk you out of your process.</div></div>
-      <div class="wi"><div class="wi-h">Involve in the full process</div><div class="wi-b">Full contribution comes from problem definition through iteration — not just the execution phase. That's where the full skill set gets used and where things don't get missed.</div></div>
+      <div class="wi"><div class="wi-h">Build in the challenge</div><div class="wi-b">Confidence and quality output can make it look like due diligence isn't needed. It is. Don't let the results talk you out of your process.</div></div>
+      <div class="wi"><div class="wi-h">Involve in the full process</div><div class="wi-b">Full contribution comes from problem definition through iteration — not just the execution phase. That's where the full skill set gets used.</div></div>
       <div class="wi"><div class="wi-h">Bring in early</div><div class="wi-b">A thought partner, not a ticket-taker. Define the problem first, then execute — not the reverse.</div></div>
-      <div class="wi"><div class="wi-h">State your priorities</div><div class="wi-b">The clearer the priorities — speed, stability, quality, cost — the better the output. If there's drift from what matters, say so directly. Early correction beats late discovery.</div></div>
+      <div class="wi"><div class="wi-h">State your priorities</div><div class="wi-b">The clearer the priorities — speed, stability, quality, cost — the better the output. Early correction beats late discovery.</div></div>
+    </div>
+    <div class="wm-card">
+      <div class="wm-title g">How I'm Working On It</div>
+      <div class="wi"><div class="wi-h">Confidence Lull</div><div class="wi-b">Scheduled check-ins, made known to relevant peers. Systems catch what human intuition misses.</div></div>
+      <div class="wi"><div class="wi-h">Going at it Alone</div><div class="wi-b">Scheduled support even when it doesn't feel needed, used religiously. Trusted peers in PM, engineering, and sales as standing references.</div></div>
+      <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">A 30-minute step back every 4 hours on deep work — just enough to keep the full system in view.</div></div>
+      <div class="wi"><div class="wi-h">Pushing Past the Signal</div><div class="wi-b">Ruthless self-awareness. Systemic mode-switching. Built into the schedule, not left to willpower.</div></div>
     </div>
   </div>
-  <div style="margin-top:1.75rem">
-    <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem">How I'm working on it</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem">
-      <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
-        <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Confidence Lull</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">I schedule my own check-ins and make these known weaknesses explicit to relevant peers. Systems catch what human intuition misses.</p>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
-        <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Going at it Alone</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">I schedule support even when I don't think I need it, and use it religiously. Trusted peers in PM, engineering, and sales as standing references.</p>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
-        <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Tunnel Vision</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">A 30-minute step back every 4 hours on deep work. Not Pomodoro-level interruption — just enough to keep the full system in view.</p>
-      </div>
-      <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
-        <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Pushing Past the Signal</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">Ruthless self-awareness. Systemic mode-switching. Built into the schedule, not left to willpower.</p>
-      </div>
-    </div>
+  <div class="wm-dl-row">
+    <span class="wm-dl-lbl">Download a copy to share or keep on file</span>
+    <button onclick="downloadWorkingWithMe()" class="wm-dl-btn">Working With Me ↓</button>
   </div>
-  <div style="margin-top:2rem;text-align:right">
+  <div style="margin-top:1.5rem;text-align:right">
     <a href="#feedback" style="font-size:11px;color:var(--accent);text-decoration:none;letter-spacing:.05em;border-bottom:1px solid var(--accent-lt)">Full peer feedback below ↓</a>
   </div>
 </div>
@@ -1443,7 +1441,7 @@ function downloadWorkingWithMe(){
   URL.revokeObjectURL(a.href)
 }
 
-// TIMELINE — mouse proximity + scroll auto-open, always one card expanded
+// TIMELINE — click accordion, always one open
 ;(function(){
   var cards = Array.from(document.querySelectorAll('#done .tv3-card'))
   if(!cards.length) return
@@ -1457,7 +1455,7 @@ function downloadWorkingWithMe(){
       if(!keep){ wrapFrom=i; break }
     }
 
-    // Build preview from first body paragraph
+    // Preview line
     var bodyEl = card.querySelector('.tv3-body')
     if(bodyEl && wrapFrom < snap.length){
       var prev = document.createElement('div')
@@ -1477,6 +1475,10 @@ function downloadWorkingWithMe(){
     wrap.style.cssText='max-height:none;opacity:1;overflow:visible'
     card.style.setProperty('--dh', wrap.scrollHeight+'px')
     wrap.style.cssText=''
+
+    // Click to open (always keep one open)
+    card.style.cursor='pointer'
+    card.addEventListener('click', function(){ openCard(card) })
   })
 
   var current = null
@@ -1484,40 +1486,9 @@ function downloadWorkingWithMe(){
     if(card===current) return
     if(current) current.classList.remove('expanded')
     current = card
-    if(card) card.classList.add('expanded')
+    card.classList.add('expanded')
   }
   openCard(cards[0])
-
-  var section = document.getElementById('done')
-  if(!section) return
-  var inSection = false, leaveTimer = null
-
-  section.addEventListener('mouseenter', function(){ inSection=true; clearTimeout(leaveTimer) })
-  section.addEventListener('mouseleave', function(){
-    leaveTimer = setTimeout(function(){ inSection=false; checkScroll() }, 400)
-  })
-  section.addEventListener('mousemove', function(e){
-    var best=null, bestD=Infinity
-    cards.forEach(function(card){
-      var r=card.getBoundingClientRect()
-      var d=Math.abs(e.clientY-(r.top+r.height*0.5))
-      if(d<bestD){ bestD=d; best=card }
-    })
-    if(best) openCard(best)
-  })
-
-  function checkScroll(){
-    if(inSection) return
-    var best=null, bestV=-Infinity, vh=window.innerHeight
-    cards.forEach(function(card){
-      var r=card.getBoundingClientRect()
-      var v=Math.min(r.bottom,vh)-Math.max(r.top,0)
-      if(v>bestV){ bestV=v; best=card }
-    })
-    if(best) openCard(best)
-  }
-  window.addEventListener('scroll', checkScroll, {passive:true})
-  checkScroll()
 })()
 
 // Init on page load
