@@ -216,7 +216,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 /* FEEDBACK TOGGLE */
 .fb-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
 .fb-toggle-lbl{font-size:13px;color:var(--muted)}
-.fb-toggle-btn{padding:.55rem 1.25rem;background:none;border:1px solid var(--rule);border-radius:7px;font-size:12px;font-weight:500;color:var(--ink);font-family:inherit;cursor:pointer;letter-spacing:.03em;transition:background .15s,border-color .15s}
+.fb-toggle-btn{padding:.7rem 1.75rem;background:none;border:1px solid var(--rule);border-radius:7px;font-size:15px;font-weight:500;color:var(--ink);font-family:inherit;cursor:pointer;letter-spacing:.03em;transition:background .15s,border-color .15s}
 .fb-toggle-btn:hover{background:var(--bg2);border-color:var(--faint)}
 .fbgrid.hidden{display:none}
 /* FULL FEEDBACK CARDS */
@@ -884,7 +884,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <div class="sw" id="feedback">
   <div class="sh"><span class="sn">05</span><h2 class="st2">What colleagues <em>say</em></h2></div>
   <div class="fb-toggle-row">
-    <span class="fb-toggle-lbl">10 colleagues · 4 projects · collected through DMC's formal review process</span>
     <button class="fb-toggle-btn" id="fb-toggle-btn" onclick="toggleFeedback()">Read all feedback ↓</button>
   </div>
   <div class="fbgrid hidden" id="fbgrid">
