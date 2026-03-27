@@ -1484,6 +1484,7 @@ function toggleFeedback(){
     if(current) current.classList.remove('expanded')
     current = card
     card.classList.add('expanded')
+    setTimeout(drawSpine, 500)
   }
   openCard(cards[0])
 })()
