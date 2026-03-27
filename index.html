@@ -40,19 +40,19 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-tw{font-size:clamp(1.15rem,2vw,1.7rem);font-weight:400;color:var(--ink);line-height:1.65}
 .tw-cursor{display:inline-block;color:var(--accent);font-weight:300;animation:blink .75s step-end infinite;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-/* Contact card */
-.hero-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem;display:flex;flex-direction:column;gap:1.1rem}
-.hero-card-top{display:flex;align-items:center;gap:.9rem}
+/* Contact panel — no box, clean vertical stack */
+.hero-card{display:flex;flex-direction:column;gap:0;padding-top:.15rem}
+.hero-card-top{display:flex;align-items:center;gap:.9rem;padding-bottom:1.1rem}
 .hero-photo{width:56px;height:56px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);flex-shrink:0;box-shadow:0 2px 10px rgba(28,23,18,.12)}
 .hero-card-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.2}
-.hero-card-meta{font-size:11px;color:var(--faint);margin-top:.15rem}
-.hero-card-div{height:1px;background:var(--rule)}
-.hero-contact{display:flex;flex-direction:column;gap:.5rem}
+.hero-card-meta{font-size:11px;color:var(--muted);margin-top:.2rem}
+.hero-card-div{height:1px;background:var(--rule);margin-bottom:1.1rem}
+.hero-contact{display:flex;flex-direction:column;gap:.55rem;padding-bottom:1.1rem}
 .hero-clink{display:flex;align-items:baseline;gap:.6rem;text-decoration:none;color:var(--ink);transition:color .15s}
 .hero-clink-lbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);flex-shrink:0;width:52px}
 .hero-clink-val{font-size:11px;color:var(--muted);transition:color .15s;line-height:1.4}
 .hero-clink:hover .hero-clink-val{color:var(--ink)}
-.hero-cta-group{display:flex;flex-direction:column;gap:.5rem}
+.hero-cta-group{display:flex;flex-direction:column;gap:.5rem;padding-bottom:1.1rem}
 .hero-resume-btn{padding:.55rem 1rem;background:var(--accent);color:var(--white);text-decoration:none;border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;transition:background .15s;white-space:nowrap;text-align:center}
 .hero-resume-btn:hover{background:var(--accent2)}
 .hero-wwm-btn{padding:.55rem 1rem;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s;white-space:nowrap;text-align:center}
