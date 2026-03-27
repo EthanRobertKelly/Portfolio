@@ -34,7 +34,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .n-login:hover{background:var(--accent);color:var(--white)}
 
 /* HERO */
-#hero{padding:calc(54px + 3rem) 4rem 3.5rem;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid var(--rule);gap:2.5rem}
+#hero{padding:calc(54px + 4rem) 4rem 5rem;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid var(--rule);gap:4rem}
 /* Split: typewriter left, contact card right */
 .hero-split{display:grid;grid-template-columns:1fr 300px;gap:3rem;align-items:start}
 .hero-tw{font-size:clamp(1.15rem,2vw,1.7rem);font-weight:400;color:var(--ink);line-height:1.65}
@@ -65,7 +65,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-proj{background:var(--white);display:flex;flex-direction:column;text-decoration:none;border-right:1px solid var(--rule);transition:background .15s;overflow:hidden}
 .hero-proj:last-child{border-right:none}
 .hero-proj:hover{background:var(--bg2)}
-.hero-proj-thumb{width:100%;height:220px;object-fit:cover;object-position:center;display:block;border-bottom:1px solid var(--rule)}
+.hero-proj-thumb{width:100%;height:190px;object-fit:cover;object-position:center;display:block;border-bottom:1px solid var(--rule)}
 .hero-proj-thumb-ph{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%)}
 .hero-proj-header{padding:.9rem 1.2rem .75rem;border-bottom:1px solid var(--rule)}
 .hero-proj-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.02em}
@@ -213,6 +213,12 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .tv3-card.expanded{box-shadow:0 8px 28px rgba(28,23,18,.1);border-color:var(--faint)}
 .tv3-card{cursor:default;transition:box-shadow .3s ease,border-color .3s ease}
 
+/* FEEDBACK TOGGLE */
+.fb-toggle-row{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
+.fb-toggle-lbl{font-size:13px;color:var(--muted)}
+.fb-toggle-btn{padding:.55rem 1.25rem;background:none;border:1px solid var(--rule);border-radius:7px;font-size:12px;font-weight:500;color:var(--ink);font-family:inherit;cursor:pointer;letter-spacing:.03em;transition:background .15s,border-color .15s}
+.fb-toggle-btn:hover{background:var(--bg2);border-color:var(--faint)}
+.fbgrid.hidden{display:none}
 /* FULL FEEDBACK CARDS */
 .fbgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
 .fbcard{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.75rem 2rem}
@@ -676,38 +682,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
     </div>
 
-    <!-- BHYC — RIGHT -->
-    <div class="tv3-row right">
-      <div class="tv3-dot"></div>
-      <div class="tv3-card">
-        <div class="tl-period">2018.05 – 2022.08</div>
-        <div class="tv3-title">C420 Advanced Sailing Instructor</div>
-        <div class="tv3-org">Bay Head Yacht Club</div>
-        <p class="tv3-body">Coached for 5 seasons. Top pupils placed 3rd and 7th at the C420 NJ State Championship 2022.</p>
-        <div class="tv3-img-wrap placeholder">
-          <span class="tv3-img-lbl">Sailing · Bay Head Yacht Club</span>
-        </div>
-        <div class="tv3-tags"><span class="tv3-tag">Coaching</span><span class="tv3-tag">C420</span><span class="tv3-tag">Leadership</span></div>
-      </div>
-    </div>
-
-    <!-- Rube Goldberg — LEFT -->
-    <div class="tv3-row left">
-      <div class="tv3-dot"></div>
-      <div class="tv3-card">
-        <div class="tl-period">2016 – 2020</div>
-        <div class="tv3-title">Rube Goldberg – High School Nationals Runner-Up &amp; 4× NY Champions</div>
-        <div class="tv3-org">Pre-College · All Four Years of High School</div>
-        <p class="tv3-body">Competed at the Rube Goldberg National Championship all four years of high school, placing runner-up senior year. 4× New York State Champions. A machine competition where elaborately engineered mechanisms accomplish a simple task in the most complex way possible.</p>
-        <div class="tv3-img-wrap" style="margin:.5rem 0 1rem">
-          <video controls style="width:100%;display:block;border-radius:6px;background:#000">
-            <source src="/images/RubeGoldberg.MOV" type="video/mp4">
-            Your browser does not support this video format.
-          </video>
-        </div>
-        <div class="tv3-tags"><span class="tv3-tag">Mechanical Design</span><span class="tv3-tag">Teamwork</span><span class="tv3-tag">Competition</span></div>
-      </div>
-    </div>
 
   </div>
   <p style="font-size:10px;color:var(--faint);text-align:right;margin-top:-1rem;padding-bottom:.25rem">* Representative imagery shown for context. Not photos of actual client sites.</p>
@@ -898,7 +872,11 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <!-- 06 PEER FEEDBACK -->
 <div class="sw" id="feedback">
   <div class="sh"><span class="sn">06</span><h2 class="st2">What colleagues <em>say</em></h2></div>
-  <div class="fbgrid">
+  <div class="fb-toggle-row">
+    <span class="fb-toggle-lbl">10 colleagues · 4 projects · collected through DMC's formal review process</span>
+    <button class="fb-toggle-btn" id="fb-toggle-btn" onclick="toggleFeedback()">Read all feedback ↓</button>
+  </div>
+  <div class="fbgrid hidden" id="fbgrid">
 
     <!-- Carl Remler -->
     <div class="fbcard">
@@ -1356,7 +1334,7 @@ function exitEditMode(){
     { pre:"",         text:"Hi.",                                                                                     pause:1400 },
     { pre:" ",        text:"I\u2019m Ethan Kelly.",                                                                  pause:1100 },
     { pre:"<br><br>", text:"My degree says I\u2019m a Mechanical Engineer.",                                          pause:350  },
-    { pre:" ",        text:"My job title says I\u2019m an Engineering Consultant.",                                   pause:350  },
+    { pre:" ",        text:"My job says I\u2019m an Engineering Consultant.",                                        pause:350  },
     { pre:" ",        text:"My calendar says I\u2019m at a Navy weapons facility debugging PLCs at 11pm.",            pause:0    },
   ]
   var el = document.getElementById('tw-text')
@@ -1426,6 +1404,14 @@ function downloadWorkingWithMe(){
   a.download='Working With Ethan Kelly.doc'
   a.click()
   URL.revokeObjectURL(a.href)
+}
+
+// PEER FEEDBACK TOGGLE
+function toggleFeedback(){
+  var grid=document.getElementById('fbgrid')
+  var btn=document.getElementById('fb-toggle-btn')
+  var hidden=grid.classList.toggle('hidden')
+  btn.textContent=hidden?'Read all feedback ↓':'Collapse ↑'
 }
 
 // TIMELINE — click accordion, always one open
