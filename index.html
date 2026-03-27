@@ -38,16 +38,18 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hr{padding:5rem 3rem 5rem 3.5rem;display:flex;flex-direction:column;justify-content:space-between}
 .eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .eyebrow span{color:var(--accent)}
-.hname{font-size:clamp(4rem,8vw,7.5rem);font-weight:700;line-height:.9;letter-spacing:-.03em;color:var(--ink);margin:auto 0;padding:2rem 0}
-.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif}
+.hname{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;line-height:1.2;letter-spacing:.01em;color:var(--ink);margin:auto 0;padding:2rem 0}
+.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,4.5rem);line-height:1;letter-spacing:-.02em;margin-top:.15rem}
 .title-line{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.hstmt{font-size:clamp(1.3rem,2.6vw,1.75rem);font-weight:400;font-style:italic;color:var(--ink);line-height:1.45;max-width:440px}
 .status-box{padding:1.1rem 1.4rem;background:var(--white);border:1px solid var(--rule);border-radius:10px;display:flex;flex-direction:column;gap:.3rem}
 .dot-row{display:flex;align-items:center;gap:8px}
 .dot{width:6px;height:6px;border-radius:50%;background:#5aad75;flex-shrink:0;animation:pulse 2.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .st{font-size:13px;font-weight:500;color:var(--ink)}
 .ss{font-size:10px;color:var(--muted);letter-spacing:.04em;padding-left:14px}
+.hero-scroll-cta{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-top:1.5rem;transition:color .2s;animation:bob 2s ease-in-out infinite}
+.hero-scroll-cta:hover{color:var(--ink)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 .hlinks{display:flex;flex-direction:column}
 .hlink{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--rule);transition:color .15s}
 .hlink:last-child{border-bottom:none}
@@ -117,13 +119,19 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .tv3-row.personal .tv3-body{font-size:13px;color:var(--faint);margin:0}
 
 /* SKILLS */
-.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
-.sc{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem;transition:border-color .15s,box-shadow .15s}
+.sg{display:flex;flex-direction:column;gap:2rem}
+.sc{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem 1.75rem;transition:border-color .15s,box-shadow .15s}
 .sc:hover{border-color:var(--faint);box-shadow:0 4px 16px rgba(28,23,18,.06)}
 .sc-cat{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-.sr{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:var(--ink);padding:.3rem 0}
-.bw{width:72px;height:2px;background:var(--bg2);border-radius:1px}
-.b{height:100%;background:var(--accent);border-radius:1px}
+.sk-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.sk{display:inline-flex;align-items:center;gap:.45rem;font-size:12px;color:var(--ink);padding:.3rem .75rem;border-radius:20px;border:1px solid var(--rule);background:var(--bg2)}
+.sk-tier{font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:.15rem .45rem;border-radius:10px;font-weight:600;white-space:nowrap}
+.sk-tier.expert{background:#2a5c3a;color:#fff}
+.sk-tier.advanced{background:#3d8a5a;color:#fff}
+.sk-tier.capable{background:#c8bfb2;color:#1c1712}
+.sk-tier.learning{background:var(--bg);color:var(--muted);border:1px solid var(--rule)}
+.sk-legend{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:.75rem 1rem;background:var(--bg2);border-radius:8px;border:1px solid var(--rule)}
+.sk-legend-item{display:flex;align-items:center;gap:.4rem;font-size:11px;color:var(--muted)}
 .cert{font-size:10px;color:#6a7a2a;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--rule)}
 
 /* BACKGROUND */
@@ -166,7 +174,8 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 /* COLLAPSIBLE TIMELINE CARDS */
 .tv3-details{max-height:0;overflow:hidden;transition:max-height .48s ease,opacity .3s ease;opacity:0;transition-delay:.12s}
 .tv3-card:hover .tv3-details,.tv3-card.expanded .tv3-details{max-height:2500px;opacity:1;transition-delay:0s}
-.tv3-preview{font-size:12px;color:var(--muted);margin-top:.35rem;line-height:1.5}
+.tv3-preview{font-size:12px;color:var(--muted);margin-top:.35rem;line-height:1.5;transition:opacity .2s,max-height .3s}
+.tv3-card:hover .tv3-preview,.tv3-card.expanded .tv3-preview{opacity:0;max-height:0;overflow:hidden;margin:0}
 .tv3-expand-hint{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);opacity:.5;margin-top:.55rem;transition:opacity .15s;pointer-events:none}
 .tv3-card:hover .tv3-expand-hint,.tv3-card.expanded .tv3-expand-hint{opacity:0}
 .tv3-card{cursor:pointer}
@@ -275,7 +284,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     <div class="title-line">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
   </div>
   <div class="hr">
-    <p class="hstmt">Engineer by trade, polymath by compulsion; from factory automation to a DIY Ironman.</p>
     <div class="status-box">
       <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
       <div class="ss">Currently @ Dynamic Motion Control Inc.</div>
@@ -287,6 +295,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <a class="hlink" href="#"><span class="hlbl">GitHub</span>github.com/— ↗</a>
       <a class="hlink" href="/Ethan Kelly.pdf" download="Ethan Kelly Resume.pdf"><span class="hlbl">Resume</span>Download PDF ↓</a>
     </div>
+    <a href="#done" class="hero-scroll-cta" title="See the work">↓ see the work</a>
   </div>
 </section>
 
@@ -312,7 +321,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">Mar 2025 – Present <span class="tl-badge live">Live</span></div>
         <div class="tv3-title">NAWS China Lake: CDAS Modernization</div>
         <div class="tv3-org">Federal Defense · End User: NAWS China Lake · via DMC</div>
-        <p class="tv3-body">One of two primary onsite engineers for a $25B weapons test facility modernization at Navy Air Weapons Station China Lake, managing a $10M programming scope on the critical path of the entire federal asset. Rocket engine static fire stands and explosives mixing facilities, backed by remote specialized engineering. Entered during a failing FAT milestone: managed high-stakes client expectations in real time while deep-dive debugging across LabVIEW, NI hardware, and Precision Filters. Served as onsite technical lead for 16 weeks of intensive commissioning, overhauling a legacy codebase rated "unacceptable" to meet rigorous federal compliance standards. Both FATs accepted, unblocking the facility's operational readiness and transitioning the program from failure to full delivery.</p>
+        <p class="tv3-body">One of two primary onsite engineers for a $25B weapons test facility modernization at Navy Air Weapons Station China Lake, managing a $10M programming scope on the critical path of the entire federal asset. Rocket engine static fire stands and explosives mixing facilities, backed by remote engineering team offsite. Entered in the middle of a failing FAT milestone: managed high-stakes client expectations in real time while deep-dive debugging across LabVIEW, NI hardware, Precision Filters, PLCs, and custom DAQ applications coded in Python and C. Served as onsite technical lead for 16 critical weeks — the period when CDAS was at the center of everything — overhauling a legacy codebase rated "unacceptable" to meet rigorous federal compliance standards. A FAT is the first time software, hardware, and clients all meet; we worked through it twice under pressure without knowing the system. Both FATs accepted, putting the program on the critical path and transitioning it from failure to full delivery.</p>
         <div class="tv3-img-wrap">
           <img src="/images/NAWS.jpeg" alt="Representative: rocket test stand at a military weapons facility">
           <span class="tv3-img-note">representative imagery*</span>
@@ -323,10 +332,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
           <div class="tv3-stat"><strong>16 wks</strong><span>commissioning lead</span></div>
           <div class="tv3-stat"><strong>2</strong><span>FATs accepted</span></div>
         </div>
-        <div class="tv3-quote">"He's very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people." <cite>Carl Remler, PM and Senior Engineer</cite></div>
+        <div class="tv3-quote">"He's very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people." <cite>Carl Remler, PM and Senior Engineer II</cite></div>
         <div class="tv3-quote">"Ethan was thrown into a pretty chaotic situation his first weeks onsite. FAT was delayed unexpectedly, requiring him and one other engineer to run through remaining test scenarios and troubleshoot issues on a system neither had familiarity with, relying on remote help while already onsite. He handled this extremely well, quickly took ownership, and his organization and level-headedness got us through the complex test scenarios and kept the end customer happy." <cite>Natalie Pippolo, Project Engineer</cite></div>
         <div class="tv3-quote">"Ethan and I were able to push each other's limits when working together, and our communication kept us in the same direction the whole time. I would jump on any opportunity to work with him in the future." <cite>Aaron Gronsman, Systems Engineer</cite></div>
-        <div class="tv3-tags"><span class="tv3-tag">CDAS</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">PLC</span><span class="tv3-tag">Defense</span><span class="tv3-tag">FAT</span></div>
+        <div class="tv3-tags"><span class="tv3-tag">LabVIEW</span><span class="tv3-tag">NI Hardware</span><span class="tv3-tag">CDAS</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">PLC</span><span class="tv3-tag">Python</span><span class="tv3-tag">C</span><span class="tv3-tag">Defense</span><span class="tv3-tag">FAT</span><span class="tv3-tag">Commissioning</span></div>
       </div>
     </div>
 
@@ -357,7 +366,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
           </span>
         </div>
         <div class="tv3-quote">"Ethan is able to work fairly independently for his tenure and inspires confidence from both myself and the client. As a PM, it's comforting to have a team I can trust to produce good work and raise flags when needed."
-          <cite>Nick Leisle, PM and Senior Engineer</cite>
+          <cite>Nick Leisle, PM and Senior Engineer II</cite>
         </div>
         <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">PLC/LAD</span><span class="tv3-tag">Python</span><span class="tv3-tag">XML</span><span class="tv3-tag">Client Ownership</span></div>
       </div>
@@ -370,7 +379,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2024 – 2025</div>
         <div class="tv3-title">MV Kennicott: IO Documentation &amp; Controls</div>
         <div class="tv3-org">Everett Ship Repair · Maritime · via DMC</div>
-        <p class="tv3-body">One of two ferries connecting remote Alaskan islands, carrying cars, cargo, and people to communities with no other road access. The project came with dated schematics and a legacy codebase using direct memory addressing with no variable names. No organized control system documentation existed. Reverse-architected the entire system from the ground up, named and organized 1,500+ IO points, and produced the foundational document the full FDS was built from.</p>
+        <p class="tv3-body">One of two ferries connecting remote Alaskan islands, the MV Kennicott carries cars, cargo, and people to communities with no other road access. The vessel came with dated, incorrect schematics and a legacy codebase using direct memory addressing with no variable names. No organized control system documentation existed. Reverse-architected the entire system from the ground up — named and organized 1,500+ IO points, translating a legacy codebase from illegible to a foundational document in natural language from which the FDS and AMCS was built.</p>
         <div class="tv3-img-wrap">
           <img src="/images/Kennicott.jpg" alt="MV Kennicott, Alaska Marine Highway ferry">
         </div>
@@ -378,7 +387,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
           <div class="tv3-stat"><strong>1,500+</strong><span>IO points</span></div>
           <div class="tv3-stat"><strong>0</strong><span>prior docs</span></div>
         </div>
-        <div class="tv3-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable. It will serve as the basis for the vessel's FDS." <cite>Kyle Bode, Systems Engineer  · [Client]</cite></div>
+        <div class="tv3-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable. It will serve as the basis for the vessel's FDS." <cite>Keith Krotzer, PM and Technical Lead</cite></div>
         <div class="tv3-quote">"Ethan is like a venturi for internal communication. By modeling — asking questions, stating assumptions — he pulls others into the conversation and the written record." <cite>Keith Krotzer, PM and Technical Lead</cite></div>
         <div class="tv3-tags"><span class="tv3-tag">OPCUA</span><span class="tv3-tag">Aveva</span><span class="tv3-tag">IO Documentation</span><span class="tv3-tag">Maritime</span></div>
       </div>
@@ -391,7 +400,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2024 – 2025</div>
         <div class="tv3-title">Ballistic Missile Launch Simulation</div>
         <div class="tv3-org">Defense Contractor · via DMC</div>
-        <p class="tv3-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Simulated pressure profiles, staged launch sequences, and validated the full transfer command without live ordnance. End-to-end simulation of a system that does not get a second chance.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
+          <p class="tv3-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Simulated pressure profiles, staged launch sequences, and validated the full transfer command without live ordnance. End-to-end simulation of a system that does not get a second chance.</p>
+          <div class="tv3-img-wrap placeholder" style="margin:0;min-height:120px"><span class="tv3-img-lbl">Image pending</span></div>
+        </div>
         <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">Defense</span><span class="tv3-tag">Simulation</span></div>
       </div>
     </div>
@@ -403,13 +415,13 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2025 – Present <span class="tl-badge live">Live</span></div>
         <div class="tv3-title">SD Water Treatment Facility: Network &amp; Controls Integration</div>
         <div class="tv3-org">Water Treatment · PM and Engineer · via DMC</div>
-        <p class="tv3-body">Serving as both PM and engineer on a water treatment facility integration, directly managing one engineer. Cisco switch configuration across multiple technology stacks while reorganizing a communication architecture that was not working. Responsible for client relationship, billing, and delivery timeline simultaneously.</p>
+        <p class="tv3-body">Served as PM and engineering lead on a water treatment facility integration, directly managing one engineer and a complex client relationship with multiple 3rd party contractors. Owned client relationship, billing, and delivery timeline simultaneously. Technology stack: Cisco switch configuration, PLC programming, VFD parameterization, live system integration, partner management.</p>
         <div class="tv3-img-wrap">
           <img src="/images/Palmer.png" alt="Representative: water treatment and purification facility">
           <span class="tv3-img-note">representative imagery*</span>
         </div>
-        <div class="tv3-quote">"Ethan is able to work fairly independently for his tenure and inspires confidence from both myself and the client. As a PM, it's comforting to have someone I can trust to produce good work and raise flags when needed." <cite>Nick Leisle, PM and Senior Engineer</cite></div>
-        <div class="tv3-tags"><span class="tv3-tag">Cisco</span><span class="tv3-tag">SCADA</span><span class="tv3-tag">Networking</span><span class="tv3-tag">PM</span></div>
+        <div class="tv3-quote">"Ethan is able to work fairly independently for his tenure and inspires confidence from both myself and the client. As a PM, it's comforting to have someone I can trust to produce good work and raise flags when needed." <cite>Nick Leisle, PM and Senior Engineer II</cite></div>
+        <div class="tv3-tags"><span class="tv3-tag">Cisco</span><span class="tv3-tag">PLC</span><span class="tv3-tag">VFD</span><span class="tv3-tag">SCADA</span><span class="tv3-tag">Networking</span><span class="tv3-tag">PM</span><span class="tv3-tag">Partner Management</span></div>
       </div>
     </div>
 
@@ -420,12 +432,12 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2024.07 – 2025.02</div>
         <div class="tv3-title">ALS: High-Caliber Bullet Manufacturing</div>
         <div class="tv3-org">Defense Manufacturing · via DMC</div>
-        <p class="tv3-body">Control engineer left mid-project on a casing assembly machine. Picked up the program, figured out what existed, and built the rest.</p>
+        <p class="tv3-body">Extensively modified an existing PLC program, migrating to a new technology stack with minimal vendor support — effectively doing so without technical backup. Successfully translated the program and led the client relationship, meeting directly with their technical team on a recurring basis to identify best practices for an evolving codebase. Owned the technical handoff and client communication simultaneously.</p>
         <div class="tv3-img-wrap">
           <img src="/images/ALS.webp" alt="Representative: industrial ammunition assembly equipment">
           <span class="tv3-img-note">representative imagery*</span>
         </div>
-        <div class="tv3-tags"><span class="tv3-tag">PLC</span><span class="tv3-tag">Manufacturing</span><span class="tv3-tag">Defense</span></div>
+        <div class="tv3-tags"><span class="tv3-tag">PLC</span><span class="tv3-tag">Migration</span><span class="tv3-tag">Client Management</span><span class="tv3-tag">Manufacturing</span><span class="tv3-tag">Defense</span></div>
       </div>
     </div>
 
@@ -448,7 +460,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2025 – In Progress <span class="tl-badge">Building</span></div>
         <div class="tv3-title">Fernware: Automatic Plant Watering System</div>
         <div class="tv3-org">Personal Project</div>
-        <p class="tv3-body">Friends killed the plants. Twice. Building a modular automatic watering system with moisture sensors. In progress.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
+          <p class="tv3-body">Friends killed the plants. Twice. Building a modular automatic watering system with moisture sensors. In progress.</p>
+          <div class="tv3-img-wrap placeholder" style="margin:0;min-height:120px"><span class="tv3-img-lbl">Image pending</span></div>
+        </div>
         <div class="tv3-tags"><span class="tv3-tag">Arduino</span><span class="tv3-tag">Sensors</span><span class="tv3-tag">In Progress</span></div>
       </div>
     </div>
@@ -460,11 +475,11 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">Side project <span class="tl-badge live">Live</span></div>
         <div class="tv3-title"><a href="/Kitchen-Codex.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)">Recipe Manager</a></div>
         <div class="tv3-org">Personal Project</div>
-        <p class="tv3-body">A personal recipe management app built to run dinner parties. Browse, filter, and scale recipes by category and favorites. Clean cooking view built for a kitchen counter across a crowded room. Sourdough, ginger beer, pasta from scratch, the tool needed to exist so I built it. Live at the Kitchen tab in the nav.</p>
-        <div class="tv3-img-wrap placeholder">
-          <span class="tv3-img-lbl">Recipe Manager App</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
+          <p class="tv3-body">A recipe management app built on Firebase to run dinner parties. Browse, filter, and scale by category and favorites. Clean cooking view for a kitchen counter across a crowded room. The tool needed to exist so I built it.</p>
+          <div class="tv3-img-wrap" style="margin:0"><img src="/images/SOURDOUGH.jpg" alt="Sourdough bread" style="max-height:160px;object-fit:cover;width:100%"></div>
         </div>
-        <div class="tv3-tags"><span class="tv3-tag">Vanilla JS</span><span class="tv3-tag">SortableJS</span><span class="tv3-tag">Single-file App</span></div>
+        <div class="tv3-tags"><span class="tv3-tag">Firebase</span><span class="tv3-tag">Vanilla JS</span><span class="tv3-tag">SortableJS</span><span class="tv3-tag">Single-file App</span></div>
       </div>
     </div>
 
@@ -486,7 +501,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tv3-org">Rice University Senior Capstone · Military Research Commission</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Elected by 7 peers to lead design and construction of an autonomous catamaran commissioned for decentralized transportation of goods for the Navy. Led the full arc from commission brief to water trials. Modified A* path planning, ALOS local control, dual-rudder PID, and computer vision obstacle avoidance. Built with laser-cut ribs, XPS foam, and fiberglass. Achieved autonomous navigation in 5-ft seas, 25-mph winds with 300-lb payload.</p>
-          <div class="tv3-img-wrap" style="margin:0"><img src="/images/SEA++.png" alt="Sea++ autonomous trimaran" style="max-height:180px;object-fit:cover"></div>
+          <div class="tv3-img-wrap" style="margin:0"><img src="/images/SEA++.png" alt="Sea++ autonomous trimaran" style="object-fit:contain;width:100%;background:var(--bg2)"></div>
         </div>
         <div class="tv3-stats">
           <div class="tv3-stat"><strong>$3,750</strong><span>unit cost</span></div>
@@ -507,7 +522,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tv3-org">Rice University</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Grew the club 18x from 5 to 90+ active members through organizational restructuring, new project tracks, and a recruiting strategy that made engineering projects accessible to students across majors. Led manufacturing for multiple projects. Technical lead for RoboCam, an autonomous robotic cameraman that tracks athletes across a field using GPS and IMU fusion without human input. Designed mechanical systems and managed build logistics throughout.</p>
-          <div class="tv3-img-wrap" style="margin:0"><img src="/images/RoboCam.png" alt="RoboCam autonomous robotic cameraman" style="max-height:180px;object-fit:cover"></div>
+          <div class="tv3-img-wrap" style="margin:0"><img src="/images/RoboCam.png" alt="RoboCam autonomous robotic cameraman" style="object-fit:contain;width:100%;background:var(--bg2)"></div>
         </div>
         <div class="tv3-stats">
           <div class="tv3-stat"><strong>90+</strong><span>active members</span></div>
@@ -523,7 +538,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="tv3-dot"></div>
       <div class="tv3-card">
         <div class="tl-period">2024.02</div>
-        <div class="tv3-title">Inaugural Rice Ironman: First and Only Competitor</div>
+        <div class="tv3-title">Inaugural Rice Ironman</div>
         <div class="tv3-org">Rice University · Personal</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Planned and completed the first full-distance Ironman triathlon in Rice University history. GPS-measured and designed the entire course from scratch. Completed solo in senior year, mid-capstone. Deeply grateful for the support of friends and the Women's Varsity Swim coach for technique guidance along the way.</p>
@@ -583,11 +598,14 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="tv3-dot"></div>
       <div class="tv3-card">
         <div class="tl-period">2016 – 2020</div>
-        <div class="tv3-title">Rube Goldberg National Championship Runner-Up</div>
+        <div class="tv3-title">Rube Goldberg – High School Nationals Runner-Up &amp; 4× NY Champions</div>
         <div class="tv3-org">Pre-College · All Four Years of High School</div>
-        <p class="tv3-body">Competed at the Rube Goldberg National Championship all four years of high school, placing runner-up. A machine competition where elaborately engineered mechanisms accomplish a simple task in the most complex way possible.</p>
-        <div class="tv3-img-wrap placeholder">
-          <span class="tv3-img-lbl">Video coming</span>
+        <p class="tv3-body">Competed at the Rube Goldberg National Championship all four years of high school, placing runner-up senior year. 4× New York State Champions. A machine competition where elaborately engineered mechanisms accomplish a simple task in the most complex way possible.</p>
+        <div class="tv3-img-wrap" style="margin:.5rem 0 1rem">
+          <video controls style="width:100%;display:block;border-radius:6px;background:#000">
+            <source src="/images/RubeGoldberg.MOV" type="video/mp4">
+            Your browser does not support this video format.
+          </video>
         </div>
         <div class="tv3-tags"><span class="tv3-tag">Mechanical Design</span><span class="tv3-tag">Teamwork</span><span class="tv3-tag">Competition</span></div>
       </div>
@@ -605,7 +623,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   <div class="bg2col" style="margin-bottom:3rem">
     <div>
       <span class="lbl">Who I Am</span>
-      <p class="body-t">Mechanical engineer out of Rice University (B.S., Thermal Fluids), operating as an Engineering Consultant at Dynamic Motion Control Inc. Background spans manufacturing automation, test and measurement, and embedded development. Specialized in onsite integration, taking systems from theory to reality in high-stakes environments where being wrong in the room is not an option.</p>
+      <p class="body-t">Operating as a Full Stack Industrial Software Engineering Consultant at Dynamic Motion Control Inc. Technical background spans manufacturing automation, test and measurement, embedded development, application development, and mechanical engineering (B.S., Rice University). Specialized in onsite integration — taking systems from theory to reality in high-stakes environments where being wrong in the room is not an option.</p>
     </div>
     <div>
       <span class="lbl">Education</span>
@@ -613,20 +631,78 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="rice"><img src="images/Rice.png" alt="Rice University" style="width:100%;height:100%;object-fit:cover"></div>
         <div>
           <div class="edu-school">Rice University</div>
-          <div class="edu-deg">B.S. Mechanical Engineering · Thermal Fluids</div>
+          <div class="edu-deg">BSME · Specialization in Thermal Fluids</div>
           <div class="edu-meta">GPA 3.7/4.0 &nbsp;·&nbsp; RCEL Certificate &nbsp;·&nbsp; May 2024</div>
         </div>
       </div>
       <p class="body-t" style="font-size:12px">Coursework: PDEs, FEA, CFD, Control System Analysis, LHPT. CSWP-S certified.</p>
     </div>
   </div>
+  <div class="sk-legend">
+    <div class="sk-legend-item"><span class="sk-tier expert">Expert</span> Would start a company on it</div>
+    <div class="sk-legend-item"><span class="sk-tier advanced">Advanced</span> Confident solving most problems with minimal overhead</div>
+    <div class="sk-legend-item"><span class="sk-tier capable">Capable</span> Solid working knowledge, can get it done</div>
+    <div class="sk-legend-item"><span class="sk-tier learning">Learning</span> Working on it</div>
+  </div>
   <div class="sg">
-    <div class="sc"><div class="sc-cat">Languages</div><div class="sr">Python<div class="bw"><div class="b" style="width:90%"></div></div></div><div class="sr">C++<div class="bw"><div class="b" style="width:72%"></div></div></div><div class="sr">C<div class="bw"><div class="b" style="width:65%"></div></div></div></div>
-    <div class="sc"><div class="sc-cat">Automation & Controls</div><div class="sr">PLC / LAD<div class="bw"><div class="b" style="width:88%"></div></div></div><div class="sr">LabVIEW<div class="bw"><div class="b" style="width:82%"></div></div></div><div class="sr">SCADA / HMI<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="sr">NI Hardware / DAQ<div class="bw"><div class="b" style="width:78%"></div></div></div></div>
-    <div class="sc"><div class="sc-cat">Mechanical Design</div><div class="sr">SolidWorks<div class="bw"><div class="b" style="width:90%"></div></div></div><div class="sr">CFD / FEA<div class="bw"><div class="b" style="width:75%"></div></div></div><div class="sr">Fabrication<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="cert">✦ CSWP-S Certified</div></div>
-    <div class="sc"><div class="sc-cat">Networking & Comms</div><div class="sr">OPCUA<div class="bw"><div class="b" style="width:78%"></div></div></div><div class="sr">TCP/IP<div class="bw"><div class="b" style="width:72%"></div></div></div><div class="sr">Cisco<div class="bw"><div class="b" style="width:65%"></div></div></div></div>
-    <div class="sc"><div class="sc-cat">Project Management</div><div class="sr">Client Management<div class="bw"><div class="b" style="width:85%"></div></div></div><div class="sr">Discovery & Scoping<div class="bw"><div class="b" style="width:82%"></div></div></div><div class="sr">OKR Facilitation<div class="bw"><div class="b" style="width:80%"></div></div></div></div>
-    <div class="sc"><div class="sc-cat">Engineering Tools</div><div class="sr">IO Documentation<div class="bw"><div class="b" style="width:90%"></div></div></div><div class="sr">Git<div class="bw"><div class="b" style="width:80%"></div></div></div><div class="sr">XML / Data Processing<div class="bw"><div class="b" style="width:82%"></div></div></div></div>
+    <div class="sc">
+      <div class="sc-cat">Automation &amp; Controls</div>
+      <div class="sk-row">
+        <span class="sk">PLC / Ladder Logic <span class="sk-tier expert">Expert</span></span>
+        <span class="sk">LabVIEW <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">SCADA / HMI <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">NI Hardware / DAQ <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">Precision Filters <span class="sk-tier capable">Capable</span></span>
+      </div>
+    </div>
+    <div class="sc">
+      <div class="sc-cat">Languages</div>
+      <div class="sk-row">
+        <span class="sk">Python <span class="sk-tier expert">Expert</span></span>
+        <span class="sk">C <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">C++ <span class="sk-tier capable">Capable</span></span>
+        <span class="sk">XML / Data Processing <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">JavaScript <span class="sk-tier capable">Capable</span></span>
+      </div>
+    </div>
+    <div class="sc">
+      <div class="sc-cat">Project &amp; Client Management</div>
+      <div class="sk-row">
+        <span class="sk">Client Ownership <span class="sk-tier expert">Expert</span></span>
+        <span class="sk">IO Documentation <span class="sk-tier expert">Expert</span></span>
+        <span class="sk">Discovery &amp; Scoping <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">OKR Facilitation <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">Billing &amp; Delivery <span class="sk-tier capable">Capable</span></span>
+      </div>
+    </div>
+    <div class="sc">
+      <div class="sc-cat">Networking &amp; Comms</div>
+      <div class="sk-row">
+        <span class="sk">OPCUA <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">Cisco / Switch Config <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">TCP/IP <span class="sk-tier capable">Capable</span></span>
+        <span class="sk">Aveva / HMI Comms <span class="sk-tier capable">Capable</span></span>
+      </div>
+    </div>
+    <div class="sc">
+      <div class="sc-cat">Mechanical Design</div>
+      <div class="sk-row">
+        <span class="sk">SolidWorks <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">Fabrication <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">CFD / FEA <span class="sk-tier capable">Capable</span></span>
+      </div>
+      <div class="cert">✦ CSWP-S Certified</div>
+    </div>
+    <div class="sc">
+      <div class="sc-cat">Engineering Tools</div>
+      <div class="sk-row">
+        <span class="sk">Git <span class="sk-tier advanced">Advanced</span></span>
+        <span class="sk">Firebase <span class="sk-tier capable">Capable</span></span>
+        <span class="sk">ROS <span class="sk-tier capable">Capable</span></span>
+        <span class="sk">SortableJS / Vanilla JS <span class="sk-tier capable">Capable</span></span>
+        <span class="sk">Docker <span class="sk-tier learning">Learning</span></span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -636,50 +712,46 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   <div class="wm3">
     <div class="wm-card">
       <div class="wm-title s">Strengths</div>
-      <div class="wi"><div class="wi-h">Grit</div><div class="wi-b">Absorbs more than most. When people are looking for the exit, I'm looking for the fix. Long hours, hard clients, failing systems, without making it a personality trait.</div></div>
-      <div class="wi"><div class="wi-h">Insightful</div><div class="wi-b">Fast at identifying the actual problem, technical, process, or people. Multiple senior engineers have noted this independently, regardless of experience level.</div></div>
-      <div class="wi"><div class="wi-h">PM-Conscious</div><div class="wi-b">Constantly evaluating the strategic "why" behind every task. Not just executing, thinking about what should be executed and whether the framing is right.</div></div>
-      <div class="wi"><div class="wi-h">Versatility</div><div class="wi-b">Switches between deep technical execution and open strategic thinking without friction. Wide toolkit, uses all of it.</div></div>
-      <div class="wi"><div class="wi-h">Fast on My Feet</div><div class="wi-b">Real-time thinking under pressure: live debugging in front of clients, path-finding when the plan breaks, staying useful when the situation changes.</div></div>
-      <div class="wi"><div class="wi-h">Communication</div><div class="wi-b">Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill, a technical advantage on complex projects.</div></div>
+      <div class="wi"><div class="wi-h">Grit</div><div class="wi-b">Absorbs more than most. When people are looking for the exit, looking for the fix. Long hours, hard clients, failing systems — without making it a personality trait.</div></div>
+      <div class="wi"><div class="wi-h">Insightful</div><div class="wi-b">Fast at identifying the actual problem — technical, process, or people. Multiple senior engineers have noted this independently, regardless of experience level.</div></div>
+      <div class="wi"><div class="wi-h">PM-Conscious</div><div class="wi-b">Constantly evaluating the strategic "why" behind every task. Not just executing — thinking about what should be executed and whether the framing is right.</div></div>
+      <div class="wi"><div class="wi-h">Versatility</div><div class="wi-b">Switches tactfully between deep technical execution and open strategic thinking without friction. Wide toolkit, all of it gets used.</div></div>
+      <div class="wi"><div class="wi-h">Fast on Feet</div><div class="wi-b">Real-time thinking under pressure: live debugging in front of clients, path-finding when the plan breaks, staying useful when the situation changes.</div></div>
+      <div class="wi"><div class="wi-h">Communication</div><div class="wi-b">Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill — a technical advantage on complex projects.</div></div>
     </div>
     <div class="wm-card wm-dark">
       <div class="wm-title w">Watch-Outs</div>
-      <div class="wi"><div class="wi-h">Don't Let Confidence Lull You Out of Your Own Responsibilities</div><div class="wi-b">My independence and output can make it look like I don't need oversight. I do, everyone does. Don't let my confidence lull you out of your responsibilities. Multiple eyes on big projects matter.</div></div>
-      <div class="wi"><div class="wi-h">Going at it Alone</div><div class="wi-b">I'm confident with time and resources I can do anything. But that doesn't mean I'll do it right first, or in time, or at the quality necessarily required given the constraints. I need to work on surrounding myself with experts, systems, and roles that force mode switching and bring other perspectives to the problem.</div></div>
-      <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">The closer I am to the critical path, the more narrowly I focus. That's a feature until it's a bug. Hard to maintain perspective when deep in it. On the critical path be conscious of necessary overhead. Yes it's crunch time but stepping back and discussing is important and I skew towards neglecting this.</div></div>
-      <div class="wi"><div class="wi-h">Pushing Past the Signal</div><div class="wi-b">I'll take more pressure than most. I'm willing to work harder than most. That sometimes means ignoring signals to step back and pushing through until stopping is not an option. If you see it coming before I do, say so directly.</div></div>
+      <div class="wi"><div class="wi-h">Don't Let Confidence Lull You Out of Your Own Responsibilities</div><div class="wi-b">Independence and output can make it look like oversight isn't needed. It is — everyone needs it. Don't let confidence lull you out of your own responsibilities. Multiple eyes on big projects matter.</div></div>
+      <div class="wi"><div class="wi-h">Going at it Alone</div><div class="wi-b">Confident that with time and resources anything is achievable. That doesn't mean it'll be done right first, or in time, or at the quality the constraints require. The work is building systems that force mode switching and bring other perspectives to the problem.</div></div>
+      <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">The closer to the critical path, the more narrowly the focus narrows. Feature until it's a bug. Hard to maintain full perspective when deep in it. On the critical path: stepping back and discussing is necessary overhead, not optional — and it tends to get neglected.</div></div>
+      <div class="wi"><div class="wi-h">Pushing Past the Signal</div><div class="wi-b">Takes more pressure than most. Willing to work harder than most. That sometimes means ignoring signals to step back and pushing through until stopping isn't an option. If you see it coming first, say so directly.</div></div>
     </div>
     <div class="wm-card">
       <div class="wm-title h">How to Collaborate</div>
-      <div class="wi"><div class="wi-h">Build in the challenge</div><div class="wi-b">Confidence and quality output can make it look like due diligence isn't needed. It is. I'm often capable of being both confident AND correct, which makes systematic challenge more important, not less. Don't let the results talk you out of your process.</div></div>
-      <div class="wi"><div class="wi-h">Involve me in the full process</div><div class="wi-b">I want to be part of problem definition, solution framing, execution, and iteration, not just handed the execution phase. That's where I use my full skill set and where things don't get missed.</div></div>
-      <div class="wi"><div class="wi-h">Bring me in early</div><div class="wi-b">I'm a thought partner, not a ticket-taker. Let me help define the problem, not just execute the solution that's already been scoped.</div></div>
-      <div class="wi"><div class="wi-h">Pace me</div><div class="wi-b">If you see me prioritizing speed over stability, say so. It's always welcome. I'd rather be told to slow down than discover I needed to.</div></div>
+      <div class="wi"><div class="wi-h">Build in the challenge</div><div class="wi-b">Confidence and quality output can make it look like due diligence isn't needed. It is. Often capable of being both confident AND correct — which makes systematic challenge more important, not less. Don't let the results talk you out of your process.</div></div>
+      <div class="wi"><div class="wi-h">Involve in the full process</div><div class="wi-b">Full contribution comes from problem definition through iteration — not just the execution phase. That's where the full skill set gets used and where things don't get missed.</div></div>
+      <div class="wi"><div class="wi-h">Bring in early</div><div class="wi-b">A thought partner, not a ticket-taker. Define the problem first, then execute — not the reverse.</div></div>
+      <div class="wi"><div class="wi-h">State your priorities</div><div class="wi-b">The clearer the priorities — speed, stability, quality, cost — the better the output. If there's drift from what matters, say so directly. Early correction beats late discovery.</div></div>
     </div>
   </div>
-  <div style="margin-top:2.5rem;padding:1.75rem 2rem;background:var(--ink);border-radius:10px">
-    <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin-bottom:.75rem">Stepping Back</div>
-    <p style="font-size:13px;color:#d4cec5;line-height:1.85">These are all realizations that only surface when you put yourself on the critical path and stretch your ability to deliver independently. I would not expect anyone in their first true professional engineering role to navigate the critical path while effortlessly managing the inherent challenges it presents. Commissioning and intense projects are great experiences precisely because they stretch and break you in ways a comfortable role never would. If you're open to the lessons gleaning out of the cracks, you're only the better for it.</p>
-  </div>
   <div style="margin-top:1.75rem">
-    <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem">Next Steps</div>
+    <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem">How I'm working on it</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1rem">
       <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
         <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Confidence Lull</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">Systems can be lulled but not as easily as humans. Schedule your own checks and make these known weaknesses clear to relevant peers.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.7">I schedule my own check-ins and make these known weaknesses explicit to relevant peers. Systems catch what human intuition misses.</p>
       </div>
       <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
         <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Going at it Alone</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">Schedule support even if it's 15 minutes and use it religiously. Have peers you respect in all relevant domains as regular references: PM, sales, engineering.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.7">I schedule support even when I don't think I need it, and use it religiously. Trusted peers in PM, engineering, and sales as standing references.</p>
       </div>
       <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
         <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Tunnel Vision</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">Pomodoro goes too far. But a 30-minute break every 4 hours on deep work is probably the right call.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.7">A 30-minute step back every 4 hours on deep work. Not Pomodoro-level interruption — just enough to keep the full system in view.</p>
       </div>
       <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem 1.5rem">
         <div style="font-size:11px;font-weight:500;color:var(--ink);margin-bottom:.5rem">Pushing Past the Signal</div>
-        <p style="font-size:12px;color:var(--muted);line-height:1.7">Ruthless self-awareness. Build it into the system.</p>
+        <p style="font-size:12px;color:var(--muted);line-height:1.7">Ruthless self-awareness. Systemic mode-switching. Built into the schedule, not left to willpower.</p>
       </div>
     </div>
   </div>
