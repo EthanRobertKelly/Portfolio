@@ -33,45 +33,48 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .n-login:hover{background:var(--accent);color:var(--white)}
 
 /* HERO */
-#hero{padding-top:54px;min-height:100vh;display:grid;grid-template-columns:1fr 380px;border-bottom:1px solid var(--rule)}
-.hl{padding:4rem 3.5rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
-.hr{padding:4rem 2.5rem;background:var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:1.75rem}
-.hero-top{display:flex;align-items:center;gap:1.25rem}
-.hero-photo{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);flex-shrink:0}
+#hero{padding-top:54px;min-height:100vh;display:grid;grid-template-columns:1fr 400px;border-bottom:1px solid var(--rule)}
+.hl{padding:3.5rem 4rem 3.5rem 3.5rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between}
+.hr{padding:3.5rem 2.75rem;background:var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+.hero-top{display:flex;align-items:center;gap:1rem;margin-bottom:2.5rem}
+.hero-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid rgba(28,23,18,.15);flex-shrink:0}
 .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .eyebrow span{color:var(--accent)}
-/* Name: first-name as label, last-name as typographic anchor */
-.hname{font-size:clamp(.85rem,1.4vw,1.05rem);font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1;margin:0}
-.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:clamp(4rem,8vw,6.5rem);line-height:.9;letter-spacing:-.03em;margin-top:.2em;text-transform:none}
-.hero-role{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:1.25rem}
-.hero-bio{font-size:15px;color:var(--ink);line-height:1.7;max-width:520px;margin-top:1rem}
-/* Big stat proof points */
-.hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:1.75rem}
-.hproof{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:.9rem 1.1rem}
-.hproof strong{display:block;font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.03em}
-.hproof span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.25rem;line-height:1.3}
-.title-line{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.title-line{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:.2rem}
+/* Name block */
+.hname{font-size:clamp(.8rem,1.2vw,1rem);font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);line-height:1;margin:0;animation:heroFadeUp .6s ease both}
+.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:clamp(5.5rem,10.5vw,9rem);line-height:.88;letter-spacing:-.03em;margin-top:.15em;text-transform:none}
+/* Thesis — the one line that does the work */
+.hero-thesis{font-size:clamp(1.05rem,1.7vw,1.3rem);font-style:italic;font-family:'Playfair Display',serif;color:var(--ink);line-height:1.45;margin-top:1.75rem;max-width:480px;animation:heroFadeUp .6s .18s ease both;opacity:0;animation-fill-mode:both}
+.hero-role{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:.85rem;animation:heroFadeUp .6s .1s ease both;opacity:0;animation-fill-mode:both}
+/* Stat strip — 4 in a row */
+.hero-proof{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:2.5rem;border:1px solid var(--rule);border-radius:10px;overflow:hidden;animation:heroFadeUp .6s .35s ease both;opacity:0;animation-fill-mode:both}
+.hproof{padding:1rem 1.1rem;background:var(--white);border-right:1px solid var(--rule);position:relative}
+.hproof:last-child{border-right:none}
+.hproof strong{display:block;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hproof span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:.3rem;line-height:1.35}
+/* Scroll CTA */
+.hero-scroll-cta{display:inline-flex;align-items:center;gap:.5rem;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;margin-top:1.75rem;animation:bob 2.5s 1s ease-in-out infinite}
+.hero-scroll-cta:hover{color:var(--ink)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 /* Right panel — dark */
-.hr .dot{background:#5aad75}
-.hr .st{color:var(--white)}
-.hr .ss{color:#7a7068}
-.hero-quote-block{border-left:2px solid var(--accent);padding:.75rem 1.1rem}
-.hero-quote-block p{font-size:13px;color:#d4cec5;line-height:1.8;font-style:italic}
-.hero-quote-block cite{display:block;font-size:10px;color:#5a5248;letter-spacing:.06em;text-transform:uppercase;margin-top:.45rem;font-style:normal}
+.hr .dot{background:#5aad75;animation:pulse 2.5s infinite}
+.hr .st{font-size:12px;font-weight:500;color:var(--white)}
+.hero-quote-block{flex:1;display:flex;flex-direction:column;justify-content:center;border-left:2px solid var(--accent);padding:.9rem 1.25rem}
+.hero-quote-block p{font-size:14px;color:#d4cec5;line-height:1.85;font-style:italic}
+.hero-quote-block cite{display:block;font-size:10px;color:#4a4540;letter-spacing:.07em;text-transform:uppercase;margin-top:.6rem;font-style:normal}
 .hlinks{display:flex;flex-direction:column}
-.hlink{font-size:13px;color:#7a7068;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color .15s}
+.hlink{font-size:12px;color:#6a6258;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06);transition:color .15s}
 .hlink:last-child{border-bottom:none}
 .hlink:hover{color:var(--white)}
-.hlbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#3a3530}
-.hero-scroll-cta{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;animation:bob 2s ease-in-out infinite;align-self:flex-start}
-.hero-scroll-cta:hover{color:var(--ink)}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-.hero-dl-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.hlbl{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#333028}
+.hero-dl-row{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
 .hero-resume-btn{display:block;text-align:center;padding:.65rem .75rem;background:var(--accent);color:var(--white);text-decoration:none;border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;transition:background .15s}
 .hero-resume-btn:hover{background:var(--accent2)}
-.hero-wwm-btn{display:block;width:100%;text-align:center;padding:.65rem .75rem;background:none;color:var(--white);border:1px solid rgba(255,255,255,.2);border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
-.hero-wwm-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-wwm-btn{display:block;width:100%;text-align:center;padding:.65rem .75rem;background:none;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.18);border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s,color .15s}
+.hero-wwm-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.35);color:var(--white)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
 /* SECTIONS */
 .sw{padding:5rem 3rem;border-bottom:1px solid var(--rule)}
@@ -230,6 +233,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   .hl{border-right:none;border-bottom:1px solid var(--rule);padding:3rem 2rem}
   .hr{padding:2.5rem 2rem 3rem}
   .hero-proof{grid-template-columns:1fr 1fr}
+  .hname em{font-size:clamp(4rem,14vw,6rem)}
   .sw{padding:4rem 2rem}
   .two-col,.bg2col{grid-template-columns:1fr;gap:2rem}
   .wm3{grid-template-columns:1fr}
@@ -294,27 +298,29 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <img src="/images/Headshot.jpeg" alt="Ethan Kelly" class="hero-photo">
       <div>
         <div class="eyebrow">Engineering Consultant &nbsp;·&nbsp; <span>San Diego, CA</span></div>
-        <div class="title-line" style="margin-top:.3rem">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
+        <div class="title-line">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
       </div>
     </div>
     <div>
       <h1 class="hname">Ethan<br><em>Kelly</em></h1>
       <div class="hero-role">Control Systems &nbsp;·&nbsp; Industrial Software &nbsp;·&nbsp; Test &amp; Measurement</div>
-      <p class="hero-bio">Builds and fixes control systems for environments that don't get second chances. Onsite commissioning across federal defense, maritime, and industrial manufacturing — from the critical path of a $25B facility to the control room of a remote Alaskan ferry.</p>
-      <div class="hero-proof">
-        <div class="hproof"><strong>$25B</strong><span>facility on the critical path</span></div>
-        <div class="hproof"><strong>2 FATs</strong><span>accepted under pressure</span></div>
-        <div class="hproof"><strong>1,500+</strong><span>IO points from zero</span></div>
-        <div class="hproof"><strong>19k</strong><span>variables renamed across 6 PLCs</span></div>
-      </div>
+      <p class="hero-thesis">Builds control systems for environments<br>that don't get second chances.</p>
     </div>
-    <a href="#done" class="hero-scroll-cta">↓ see the work</a>
+    <div>
+      <div class="hero-proof">
+        <div class="hproof"><strong>$25B</strong><span>facility on the<br>critical path</span></div>
+        <div class="hproof"><strong>2 FATs</strong><span>accepted<br>under pressure</span></div>
+        <div class="hproof"><strong>1,500+</strong><span>IO points<br>from zero</span></div>
+        <div class="hproof"><strong>19k</strong><span>variables renamed<br>across 6 PLCs</span></div>
+      </div>
+      <a href="#done" class="hero-scroll-cta">↓ see the work</a>
+    </div>
   </div>
   <div class="hr">
     <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
     <div class="hero-quote-block">
       <p>"Very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people."</p>
-      <cite>Carl Remler — PM &amp; Senior Engineer II, NAWS China Lake</cite>
+      <cite>Carl Remler &mdash; PM &amp; Senior Engineer II, NAWS China Lake</cite>
     </div>
     <div class="hlinks">
       <a class="hlink" href="mailto:ethanrobertkelly@gmail.com"><span class="hlbl">Email</span>ethanrobertkelly@gmail.com</a>
