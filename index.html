@@ -33,21 +33,28 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .n-login:hover{background:var(--accent);color:var(--white)}
 
 /* HERO */
-#hero{padding-top:54px;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule)}
-.hl{padding:5rem 3rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between}
-.hr{padding:5rem 3rem 5rem 3.5rem;display:flex;flex-direction:column;justify-content:space-between}
-.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#hero{padding-top:54px;min-height:100vh;display:grid;grid-template-columns:1fr 360px;border-bottom:1px solid var(--rule)}
+.hl{padding:4rem 3rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem}
+.hr{padding:4rem 2.5rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem}
+.hero-top{display:flex;align-items:center;gap:1.25rem}
+.hero-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);flex-shrink:0}
+.eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .eyebrow span{color:var(--accent)}
-.hname{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;line-height:1.2;letter-spacing:.01em;color:var(--ink);margin:auto 0;padding:2rem 0}
-.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5.5vw,4.5rem);line-height:1;letter-spacing:-.02em;margin-top:.15rem}
-.title-line{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hname{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:400;line-height:1.05;letter-spacing:-.01em;color:var(--ink)}
+.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:1em;letter-spacing:-.02em}
+.hero-role{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:.85rem}
+.hero-bio{font-size:15px;color:var(--ink);line-height:1.7;max-width:500px;margin-top:1.25rem}
+.hero-proof{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
+.hproof{font-size:12px;color:var(--muted);padding:.35rem .85rem;background:var(--white);border:1px solid var(--rule);border-radius:5px;white-space:nowrap}
+.hproof strong{color:var(--ink);font-weight:600}
+.title-line{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .status-box{padding:1.1rem 1.4rem;background:var(--white);border:1px solid var(--rule);border-radius:10px;display:flex;flex-direction:column;gap:.3rem}
 .dot-row{display:flex;align-items:center;gap:8px}
 .dot{width:6px;height:6px;border-radius:50%;background:#5aad75;flex-shrink:0;animation:pulse 2.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .st{font-size:13px;font-weight:500;color:var(--ink)}
 .ss{font-size:10px;color:var(--muted);letter-spacing:.04em;padding-left:14px}
-.hero-scroll-cta{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;margin-top:1.5rem;transition:color .2s;animation:bob 2s ease-in-out infinite}
+.hero-scroll-cta{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;animation:bob 2s ease-in-out infinite;align-self:flex-start}
 .hero-scroll-cta:hover{color:var(--ink)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 .hlinks{display:flex;flex-direction:column}
@@ -55,6 +62,11 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hlink:last-child{border-bottom:none}
 .hlink:hover{color:var(--ink)}
 .hlbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.hero-dl-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.hero-resume-btn{display:block;text-align:center;padding:.65rem .75rem;background:var(--accent);color:var(--white);text-decoration:none;border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;transition:background .15s}
+.hero-resume-btn:hover{background:var(--accent2)}
+.hero-wwm-btn{display:block;width:100%;text-align:center;padding:.65rem .75rem;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
+.hero-wwm-btn:hover{background:var(--bg2);border-color:var(--faint)}
 
 /* SECTIONS */
 .sw{padding:5rem 3rem;border-bottom:1px solid var(--rule)}
@@ -119,19 +131,15 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .tv3-row.personal .tv3-body{font-size:13px;color:var(--faint);margin:0}
 
 /* SKILLS */
-.sg{display:flex;flex-direction:column;gap:2rem}
-.sc{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.5rem 1.75rem;transition:border-color .15s,box-shadow .15s}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.sc{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:1.75rem 2rem;transition:border-color .15s,box-shadow .15s}
 .sc:hover{border-color:var(--faint);box-shadow:0 4px 16px rgba(28,23,18,.06)}
-.sc-cat{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
-.sk-row{display:flex;flex-wrap:wrap;gap:.5rem}
-.sk{display:inline-flex;align-items:center;gap:.45rem;font-size:12px;color:var(--ink);padding:.3rem .75rem;border-radius:20px;border:1px solid var(--rule);background:var(--bg2)}
-.sk-tier{font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:.15rem .45rem;border-radius:10px;font-weight:600;white-space:nowrap}
-.sk-tier.expert{background:#2a5c3a;color:#fff}
-.sk-tier.advanced{background:#3d8a5a;color:#fff}
-.sk-tier.capable{background:#c8bfb2;color:#1c1712}
-.sk-tier.learning{background:var(--bg);color:var(--muted);border:1px solid var(--rule)}
-.sk-legend{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem;padding:.75rem 1rem;background:var(--bg2);border-radius:8px;border:1px solid var(--rule)}
-.sk-legend-item{display:flex;align-items:center;gap:.4rem;font-size:11px;color:var(--muted)}
+.sc-cat{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.sc-ctx{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:1.1rem;padding-bottom:1rem;border-bottom:1px solid var(--rule)}
+.sk-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
+.sk-row:last-child{margin-bottom:0}
+.sk{display:inline-block;font-size:11px;color:var(--ink);padding:.28rem .7rem;border-radius:4px;border:1px solid var(--rule);background:var(--bg3);white-space:nowrap}
+.sk.core{background:var(--ink);color:var(--white);border-color:var(--ink)}
 .cert{font-size:10px;color:#6a7a2a;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--rule)}
 
 /* BACKGROUND */
@@ -214,8 +222,8 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 @media(max-width:900px){
   nav{padding:0 1.5rem}
   #hero{grid-template-columns:1fr;min-height:auto}
-  .hl{border-right:none;border-bottom:1px solid var(--rule);padding:4rem 2rem 3rem}
-  .hr{padding:3rem 2rem 4rem}
+  .hl{border-right:none;border-bottom:1px solid var(--rule);padding:3rem 2rem}
+  .hr{padding:2.5rem 2rem 3rem}
   .sw{padding:4rem 2rem}
   .two-col,.bg2col{grid-template-columns:1fr;gap:2rem}
   .wm3{grid-template-columns:1fr}
@@ -276,12 +284,25 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <!-- HERO -->
 <section id="hero">
   <div class="hl">
-    <div>
-      <img src="/images/Headshot.jpeg" alt="Ethan Kelly" style="width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);margin-bottom:1.25rem;display:block">
-      <div class="eyebrow">Engineering Consultant &nbsp;·&nbsp; <span>San Diego, CA</span></div>
+    <div class="hero-top">
+      <img src="/images/Headshot.jpeg" alt="Ethan Kelly" class="hero-photo">
+      <div>
+        <div class="eyebrow">Engineering Consultant &nbsp;·&nbsp; <span>San Diego, CA</span></div>
+        <div class="title-line" style="margin-top:.3rem">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
+      </div>
     </div>
-    <h1 class="hname">Ethan<br><em>Kelly</em></h1>
-    <div class="title-line">Dynamic Motion Control Inc. &nbsp;·&nbsp; Rice '24</div>
+    <div>
+      <h1 class="hname">Ethan<br><em>Kelly</em></h1>
+      <div class="hero-role">Control Systems &nbsp;·&nbsp; Industrial Software &nbsp;·&nbsp; Test &amp; Measurement</div>
+      <p class="hero-bio">Builds and fixes control systems for environments that don't get second chances. Onsite commissioning across federal defense, maritime, and industrial manufacturing — from the critical path of a $25B facility to the control room of a remote Alaskan ferry.</p>
+      <div class="hero-proof">
+        <span class="hproof"><strong>$25B</strong> facility on the critical path</span>
+        <span class="hproof"><strong>2 FATs</strong> accepted under pressure</span>
+        <span class="hproof"><strong>1,500+</strong> IO points from zero</span>
+        <span class="hproof"><strong>19k</strong> variables renamed across 6 PLCs</span>
+      </div>
+    </div>
+    <a href="#done" class="hero-scroll-cta">↓ see the work</a>
   </div>
   <div class="hr">
     <div class="status-box">
@@ -292,10 +313,12 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <a class="hlink" href="mailto:ethanrobertkelly@gmail.com"><span class="hlbl">Email</span>ethanrobertkelly@gmail.com</a>
       <a class="hlink" href="tel:6467170861"><span class="hlbl">Phone</span>646-717-0861</a>
       <a class="hlink" href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank"><span class="hlbl">LinkedIn</span>/in/EthanRobertKelly ↗</a>
-      <a class="hlink" href="#"><span class="hlbl">GitHub</span>github.com/— ↗</a>
-      <a class="hlink" href="/Ethan Kelly.pdf" download="Ethan Kelly Resume.pdf"><span class="hlbl">Resume</span>Download PDF ↓</a>
+      <a class="hlink" href="https://github.com/EthanRobertKelly" target="_blank"><span class="hlbl">GitHub</span>EthanRobertKelly ↗</a>
     </div>
-    <a href="#done" class="hero-scroll-cta" title="See the work">↓ see the work</a>
+    <div class="hero-dl-row">
+      <a href="/Ethan Kelly.pdf" download="Ethan Kelly Resume.pdf" class="hero-resume-btn">Resume ↓</a>
+      <button onclick="downloadWorkingWithMe()" class="hero-wwm-btn">Working With Me ↓</button>
+    </div>
   </div>
 </section>
 
@@ -638,70 +661,66 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <p class="body-t" style="font-size:12px">Coursework: PDEs, FEA, CFD, Control System Analysis, LHPT. CSWP-S certified.</p>
     </div>
   </div>
-  <div class="sk-legend">
-    <div class="sk-legend-item"><span class="sk-tier expert">Expert</span> Would start a company on it</div>
-    <div class="sk-legend-item"><span class="sk-tier advanced">Advanced</span> Confident solving most problems with minimal overhead</div>
-    <div class="sk-legend-item"><span class="sk-tier capable">Capable</span> Solid working knowledge, can get it done</div>
-    <div class="sk-legend-item"><span class="sk-tier learning">Learning</span> Working on it</div>
-  </div>
   <div class="sg">
     <div class="sc">
-      <div class="sc-cat">Automation &amp; Controls</div>
+      <div class="sc-cat">Control Systems &amp; Automation</div>
+      <div class="sc-ctx">PLC programming, LabVIEW, DAQ, and SCADA across defense, maritime, and manufacturing. The core of the work.</div>
       <div class="sk-row">
-        <span class="sk">PLC / Ladder Logic <span class="sk-tier expert">Expert</span></span>
-        <span class="sk">LabVIEW <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">SCADA / HMI <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">NI Hardware / DAQ <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">Precision Filters <span class="sk-tier capable">Capable</span></span>
+        <span class="sk core">PLC / Ladder Logic</span>
+        <span class="sk core">LabVIEW</span>
+        <span class="sk core">SCADA / HMI</span>
+        <span class="sk core">NI Hardware / DAQ</span>
+        <span class="sk core">OPC-UA</span>
+      </div>
+      <div class="sk-row">
+        <span class="sk">Precision Filters</span>
+        <span class="sk">Aveva</span>
+        <span class="sk">VFD Parameterization</span>
       </div>
     </div>
     <div class="sc">
-      <div class="sc-cat">Languages</div>
+      <div class="sc-cat">Software &amp; Scripting</div>
+      <div class="sc-ctx">Embedded C for hardware-level DAQ, Python for tooling and data pipelines, XML processing at industrial scale.</div>
       <div class="sk-row">
-        <span class="sk">Python <span class="sk-tier expert">Expert</span></span>
-        <span class="sk">C <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">C++ <span class="sk-tier capable">Capable</span></span>
-        <span class="sk">XML / Data Processing <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">JavaScript <span class="sk-tier capable">Capable</span></span>
+        <span class="sk core">Python</span>
+        <span class="sk core">C</span>
+        <span class="sk core">XML / Data Processing</span>
+        <span class="sk core">Git</span>
+      </div>
+      <div class="sk-row">
+        <span class="sk">C++</span>
+        <span class="sk">JavaScript</span>
+        <span class="sk">Firebase</span>
+        <span class="sk">ROS</span>
       </div>
     </div>
     <div class="sc">
-      <div class="sc-cat">Project &amp; Client Management</div>
+      <div class="sc-cat">Integration, PM &amp; Client Ownership</div>
+      <div class="sc-ctx">End-to-end delivery — client relationship, billing, subs, technical lead, and written record simultaneously.</div>
       <div class="sk-row">
-        <span class="sk">Client Ownership <span class="sk-tier expert">Expert</span></span>
-        <span class="sk">IO Documentation <span class="sk-tier expert">Expert</span></span>
-        <span class="sk">Discovery &amp; Scoping <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">OKR Facilitation <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">Billing &amp; Delivery <span class="sk-tier capable">Capable</span></span>
+        <span class="sk core">Client Management</span>
+        <span class="sk core">IO Documentation</span>
+        <span class="sk core">Discovery &amp; Scoping</span>
+      </div>
+      <div class="sk-row">
+        <span class="sk">Cisco / Switch Config</span>
+        <span class="sk">OKR Facilitation</span>
+        <span class="sk">Partner Management</span>
       </div>
     </div>
     <div class="sc">
-      <div class="sc-cat">Networking &amp; Comms</div>
+      <div class="sc-cat">Mechanical Engineering</div>
+      <div class="sc-ctx">BSME, Thermal Fluids. Design, analysis, and fabrication from raw material to water trials.</div>
       <div class="sk-row">
-        <span class="sk">OPCUA <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">Cisco / Switch Config <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">TCP/IP <span class="sk-tier capable">Capable</span></span>
-        <span class="sk">Aveva / HMI Comms <span class="sk-tier capable">Capable</span></span>
+        <span class="sk core">SolidWorks</span>
+        <span class="sk core">Fabrication</span>
+        <span class="sk core">CFD / FEA</span>
       </div>
-    </div>
-    <div class="sc">
-      <div class="sc-cat">Mechanical Design</div>
       <div class="sk-row">
-        <span class="sk">SolidWorks <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">Fabrication <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">CFD / FEA <span class="sk-tier capable">Capable</span></span>
+        <span class="sk">Composites / Fiberglass</span>
+        <span class="sk">Autonomous Systems</span>
       </div>
       <div class="cert">✦ CSWP-S Certified</div>
-    </div>
-    <div class="sc">
-      <div class="sc-cat">Engineering Tools</div>
-      <div class="sk-row">
-        <span class="sk">Git <span class="sk-tier advanced">Advanced</span></span>
-        <span class="sk">Firebase <span class="sk-tier capable">Capable</span></span>
-        <span class="sk">ROS <span class="sk-tier capable">Capable</span></span>
-        <span class="sk">SortableJS / Vanilla JS <span class="sk-tier capable">Capable</span></span>
-        <span class="sk">Docker <span class="sk-tier learning">Learning</span></span>
-      </div>
     </div>
   </div>
 </div>
@@ -1276,6 +1295,49 @@ function exitEditMode(){
   document.getElementById('login-btn').textContent='Login'
   document.getElementById('login-btn').style.opacity='1'
   document.getElementById('edit-bar').style.display='none'
+}
+
+// WORKING WITH ME — downloadable Word doc
+function downloadWorkingWithMe(){
+  var html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Working With Ethan Kelly</title><style>body{font-family:Calibri,sans-serif;font-size:11pt;color:#1c1712;margin:1in;line-height:1.5}h1{font-size:18pt;font-weight:400;margin:0 0 4pt}h2{font-size:10pt;letter-spacing:.08em;text-transform:uppercase;color:#7a7068;font-weight:400;margin:0 0 16pt;border-bottom:1pt solid #ddd6cb;padding-bottom:4pt}h3{font-size:11pt;font-weight:600;margin:14pt 0 3pt}p{margin:0 0 8pt;font-size:11pt;color:#3a3530}.section{margin-bottom:18pt}.tag{display:inline-block;font-size:9pt;color:#2a5c3a;background:#edf7f1;padding:1pt 5pt;border-radius:3pt;margin-right:4pt}.divider{border:none;border-top:1pt solid #ddd6cb;margin:16pt 0}.meta{font-size:9pt;color:#7a7068}.two-col{display:table;width:100%}.col{display:table-cell;width:50%;vertical-align:top;padding-right:16pt}</style></head><body>'
+  +'<h1>Ethan <i>Kelly</i></h1>'
+  +'<h2>Control Systems · Industrial Software · Test &amp; Measurement</h2>'
+  +'<p class="meta">Engineering Consultant · Dynamic Motion Control Inc. · Rice BSME · San Diego, CA</p>'
+  +'<p class="meta">ethanrobertkelly@gmail.com &nbsp;·&nbsp; 646-717-0861 &nbsp;·&nbsp; linkedin.com/in/EthanRobertKelly</p>'
+  +'<hr class="divider">'
+  +'<div class="section"><h3>What gets done</h3><p>Control systems engineer specializing in onsite commissioning — federal defense facilities, maritime vessels, and industrial manufacturing. Builds and fixes systems in environments that don\'t get second chances. Full technical delivery from discovery through commissioning, client relationship owned end-to-end.</p></div>'
+  +'<hr class="divider">'
+  +'<div class="section"><h3 style="color:#2a5c3a">Strengths</h3>'
+  +'<p><b>Grit.</b> Absorbs more than most. When people are looking for the exit, looking for the fix. Long hours, hard clients, failing systems — without making it a personality trait.</p>'
+  +'<p><b>Insightful.</b> Fast at identifying the actual problem — technical, process, or people. Multiple senior engineers have noted this independently, regardless of experience level.</p>'
+  +'<p><b>PM-Conscious.</b> Constantly evaluating the strategic "why" behind every task. Not just executing — thinking about what should be executed and whether the framing is right.</p>'
+  +'<p><b>Versatility.</b> Switches between deep technical execution and open strategic thinking without friction. Wide toolkit, all of it gets used.</p>'
+  +'<p><b>Fast on Feet.</b> Real-time thinking under pressure: live debugging in front of clients, path-finding when the plan breaks, staying useful when the situation changes.</p>'
+  +'<p><b>Communication.</b> Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill — a technical advantage on complex projects.</p>'
+  +'</div>'
+  +'<hr class="divider">'
+  +'<div class="section"><h3 style="color:#c4683a">Watch-Outs</h3>'
+  +'<p><b>Don\'t let confidence lull you out of your own responsibilities.</b> Independence and output can make it look like oversight isn\'t needed. It is — everyone needs it. Multiple eyes on big projects matter.</p>'
+  +'<p><b>Going at it alone.</b> Confident that with time and resources anything is achievable. Doesn\'t mean it\'ll be done right first, in time, or at the quality the constraints require. Building systems that force mode switching matters.</p>'
+  +'<p><b>Tunnel vision.</b> The closer to the critical path, the more narrowly the focus narrows. Feature until it\'s a bug. Stepping back and discussing is necessary overhead, not optional.</p>'
+  +'<p><b>Pushing past the signal.</b> Takes more pressure than most. Sometimes means ignoring signals to step back. If you see it coming first, say so directly.</p>'
+  +'</div>'
+  +'<hr class="divider">'
+  +'<div class="section"><h3 style="color:#4a6fa5">How to Collaborate</h3>'
+  +'<p><b>Build in the challenge.</b> Confidence and quality output can make it look like due diligence isn\'t needed. It is. Don\'t let the results talk you out of your process.</p>'
+  +'<p><b>Involve in the full process.</b> Full contribution comes from problem definition through iteration — not just the execution phase.</p>'
+  +'<p><b>Bring in early.</b> A thought partner, not a ticket-taker. Define the problem first, then execute — not the reverse.</p>'
+  +'<p><b>State your priorities.</b> The clearer the priorities — speed, stability, quality, cost — the better the output. Early correction beats late discovery.</p>'
+  +'</div>'
+  +'<hr class="divider">'
+  +'<p class="meta" style="font-style:italic">"He\'s very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it\'s technical, process, or people." — Carl Remler, PM &amp; Senior Engineer II</p>'
+  +'</body></html>'
+  var blob=new Blob(['\ufeff',html],{type:'application/msword'})
+  var a=document.createElement('a')
+  a.href=URL.createObjectURL(blob)
+  a.download='Working With Ethan Kelly.doc'
+  a.click()
+  URL.revokeObjectURL(a.href)
 }
 
 // Init on page load
