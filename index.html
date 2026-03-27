@@ -54,6 +54,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-proj:last-child{border-right:none}
 .hero-proj:hover{background:var(--bg2)}
 .hero-proj-thumb{width:100%;height:160px;object-fit:cover;object-position:center;display:block;border-bottom:1px solid var(--rule)}
+.hero-proj-thumb-ph{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%)}
 .hero-proj-header{padding:.9rem 1.2rem .75rem;border-bottom:1px solid var(--rule)}
 .hero-proj-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.02em}
 .hero-proj-body{padding:1rem 1.2rem 1.25rem;flex:1}
@@ -315,11 +316,12 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   <div class="hero-proj-grid">
     <a href="#done" class="hero-proj">
       <div class="hero-proj-header">
-        <div class="hero-proj-name">NAWS China Lake</div>
+        <div class="hero-proj-name">Geothermal Lithium Extraction</div>
       </div>
-      <img class="hero-proj-thumb" src="/images/NAWS.jpeg" alt="China Lake">
+      <!-- swap src when site photo is ready -->
+      <div class="hero-proj-thumb hero-proj-thumb-ph" aria-hidden="true"></div>
       <div class="hero-proj-body">
-        <p class="hero-proj-desc">Onsite technical lead for a $25B Navy weapons test facility modernization — walked into a failing FAT and delivered both accepted.</p>
+        <p class="hero-proj-desc">Programming and commissioning the controls system for direct lithium extraction from geothermal brine via electrolysis at a major energy company's R&amp;D facility.</p>
       </div>
     </a>
     <a href="#done" class="hero-proj">
