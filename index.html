@@ -33,40 +33,45 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .n-login:hover{background:var(--accent);color:var(--white)}
 
 /* HERO */
-#hero{padding-top:54px;min-height:100vh;display:grid;grid-template-columns:1fr 360px;border-bottom:1px solid var(--rule)}
-.hl{padding:4rem 3rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;gap:2.5rem}
-.hr{padding:4rem 2.5rem;display:flex;flex-direction:column;justify-content:space-between;gap:1.5rem}
+#hero{padding-top:54px;min-height:100vh;display:grid;grid-template-columns:1fr 380px;border-bottom:1px solid var(--rule)}
+.hl{padding:4rem 3.5rem;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+.hr{padding:4rem 2.5rem;background:var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:1.75rem}
 .hero-top{display:flex;align-items:center;gap:1.25rem}
-.hero-photo{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);flex-shrink:0}
+.hero-photo{width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:top center;border:2px solid var(--rule);flex-shrink:0}
 .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .eyebrow span{color:var(--accent)}
-.hname{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:400;line-height:1.05;letter-spacing:-.01em;color:var(--ink)}
-.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:1em;letter-spacing:-.02em}
-.hero-role{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:.85rem}
-.hero-bio{font-size:15px;color:var(--ink);line-height:1.7;max-width:500px;margin-top:1.25rem}
-.hero-proof{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.5rem}
-.hproof{font-size:12px;color:var(--muted);padding:.35rem .85rem;background:var(--white);border:1px solid var(--rule);border-radius:5px;white-space:nowrap}
-.hproof strong{color:var(--ink);font-weight:600}
+/* Name: first-name as label, last-name as typographic anchor */
+.hname{font-size:clamp(.85rem,1.4vw,1.05rem);font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);line-height:1;margin:0}
+.hname em{display:block;font-style:italic;font-weight:400;color:var(--accent);font-family:'Playfair Display',serif;font-size:clamp(4rem,8vw,6.5rem);line-height:.9;letter-spacing:-.03em;margin-top:.2em;text-transform:none}
+.hero-role{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-top:1.25rem}
+.hero-bio{font-size:15px;color:var(--ink);line-height:1.7;max-width:520px;margin-top:1rem}
+/* Big stat proof points */
+.hero-proof{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-top:1.75rem}
+.hproof{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:.9rem 1.1rem}
+.hproof strong{display:block;font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.03em}
+.hproof span{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.25rem;line-height:1.3}
 .title-line{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.status-box{padding:1.1rem 1.4rem;background:var(--white);border:1px solid var(--rule);border-radius:10px;display:flex;flex-direction:column;gap:.3rem}
-.dot-row{display:flex;align-items:center;gap:8px}
-.dot{width:6px;height:6px;border-radius:50%;background:#5aad75;flex-shrink:0;animation:pulse 2.5s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.st{font-size:13px;font-weight:500;color:var(--ink)}
-.ss{font-size:10px;color:var(--muted);letter-spacing:.04em;padding-left:14px}
+/* Right panel — dark */
+.hr .dot{background:#5aad75}
+.hr .st{color:var(--white)}
+.hr .ss{color:#7a7068}
+.hero-quote-block{border-left:2px solid var(--accent);padding:.75rem 1.1rem}
+.hero-quote-block p{font-size:13px;color:#d4cec5;line-height:1.8;font-style:italic}
+.hero-quote-block cite{display:block;font-size:10px;color:#5a5248;letter-spacing:.06em;text-transform:uppercase;margin-top:.45rem;font-style:normal}
+.hlinks{display:flex;flex-direction:column}
+.hlink{font-size:13px;color:#7a7068;text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color .15s}
+.hlink:last-child{border-bottom:none}
+.hlink:hover{color:var(--white)}
+.hlbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#3a3530}
 .hero-scroll-cta{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;animation:bob 2s ease-in-out infinite;align-self:flex-start}
 .hero-scroll-cta:hover{color:var(--ink)}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-.hlinks{display:flex;flex-direction:column}
-.hlink{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--rule);transition:color .15s}
-.hlink:last-child{border-bottom:none}
-.hlink:hover{color:var(--ink)}
-.hlbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
 .hero-dl-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
 .hero-resume-btn{display:block;text-align:center;padding:.65rem .75rem;background:var(--accent);color:var(--white);text-decoration:none;border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;transition:background .15s}
 .hero-resume-btn:hover{background:var(--accent2)}
-.hero-wwm-btn{display:block;width:100%;text-align:center;padding:.65rem .75rem;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
-.hero-wwm-btn:hover{background:var(--bg2);border-color:var(--faint)}
+.hero-wwm-btn{display:block;width:100%;text-align:center;padding:.65rem .75rem;background:none;color:var(--white);border:1px solid rgba(255,255,255,.2);border-radius:7px;font-size:11px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s}
+.hero-wwm-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.4)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* SECTIONS */
 .sw{padding:5rem 3rem;border-bottom:1px solid var(--rule)}
@@ -224,6 +229,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   #hero{grid-template-columns:1fr;min-height:auto}
   .hl{border-right:none;border-bottom:1px solid var(--rule);padding:3rem 2rem}
   .hr{padding:2.5rem 2rem 3rem}
+  .hero-proof{grid-template-columns:1fr 1fr}
   .sw{padding:4rem 2rem}
   .two-col,.bg2col{grid-template-columns:1fr;gap:2rem}
   .wm3{grid-template-columns:1fr}
@@ -296,18 +302,19 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="hero-role">Control Systems &nbsp;·&nbsp; Industrial Software &nbsp;·&nbsp; Test &amp; Measurement</div>
       <p class="hero-bio">Builds and fixes control systems for environments that don't get second chances. Onsite commissioning across federal defense, maritime, and industrial manufacturing — from the critical path of a $25B facility to the control room of a remote Alaskan ferry.</p>
       <div class="hero-proof">
-        <span class="hproof"><strong>$25B</strong> facility on the critical path</span>
-        <span class="hproof"><strong>2 FATs</strong> accepted under pressure</span>
-        <span class="hproof"><strong>1,500+</strong> IO points from zero</span>
-        <span class="hproof"><strong>19k</strong> variables renamed across 6 PLCs</span>
+        <div class="hproof"><strong>$25B</strong><span>facility on the critical path</span></div>
+        <div class="hproof"><strong>2 FATs</strong><span>accepted under pressure</span></div>
+        <div class="hproof"><strong>1,500+</strong><span>IO points from zero</span></div>
+        <div class="hproof"><strong>19k</strong><span>variables renamed across 6 PLCs</span></div>
       </div>
     </div>
     <a href="#done" class="hero-scroll-cta">↓ see the work</a>
   </div>
   <div class="hr">
-    <div class="status-box">
-      <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
-      <div class="ss">Currently @ Dynamic Motion Control Inc.</div>
+    <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
+    <div class="hero-quote-block">
+      <p>"Very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people."</p>
+      <cite>Carl Remler — PM &amp; Senior Engineer II, NAWS China Lake</cite>
     </div>
     <div class="hlinks">
       <a class="hlink" href="mailto:ethanrobertkelly@gmail.com"><span class="hlbl">Email</span>ethanrobertkelly@gmail.com</a>
@@ -673,6 +680,9 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <span class="sk core">OPC-UA</span>
       </div>
       <div class="sk-row">
+        <span class="sk">FAT / SAT</span>
+        <span class="sk">Commissioning</span>
+        <span class="sk">Industrial Networking</span>
         <span class="sk">Precision Filters</span>
         <span class="sk">Aveva</span>
         <span class="sk">VFD Parameterization</span>
@@ -703,8 +713,10 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <span class="sk core">Discovery &amp; Scoping</span>
       </div>
       <div class="sk-row">
-        <span class="sk">Cisco / Switch Config</span>
+        <span class="sk">Agile</span>
+        <span class="sk">Retrospectives</span>
         <span class="sk">OKR Facilitation</span>
+        <span class="sk">Cisco / Switch Config</span>
         <span class="sk">Partner Management</span>
       </div>
     </div>
