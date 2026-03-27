@@ -45,7 +45,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .dot{width:6px;height:6px;border-radius:50%;background:#5aad75;flex-shrink:0;animation:pulse 2.5s infinite}
 .st{font-size:12px;font-weight:500;color:var(--accent2)}
 /* Q2: WHAT THEY DO — typewriter */
-.hero-tw{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:400;color:var(--ink);line-height:1.25;min-height:3.5em}
+.hero-tw{font-size:clamp(1.6rem,3vw,2.5rem);font-weight:400;color:var(--ink);line-height:1.5}
 .tw-cursor{display:inline-block;color:var(--accent);font-weight:300;animation:blink .75s step-end infinite;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 /* Q3: WHAT THEY'VE DONE */
@@ -61,20 +61,22 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-proj-stat{display:flex;flex-direction:column;gap:.1rem}
 .hero-proj-stat strong{font-size:clamp(1.3rem,2.2vw,1.75rem);font-weight:700;color:var(--ink);letter-spacing:-.03em;line-height:1}
 .hero-proj-stat span{font-size:10px;color:var(--muted);line-height:1.3}
-/* Q4: WHAT OTHERS THINK */
-.hero-quote-strip{display:flex;align-items:center;gap:1rem;padding:.9rem 1.25rem;background:var(--white);border:1px solid var(--rule);border-radius:8px;border-left:3px solid var(--accent)}
-.hero-quote-text{font-size:13px;color:var(--muted);font-style:italic;line-height:1.65;flex:1}
-.hero-quote-cite{font-size:10px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex-shrink:0}
-/* Q5 + Q6: HOW TO REACH / LEARN MORE */
-.hero-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.25rem}
-.hero-cta-group{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+/* Q4+Q5+Q6: LOWER — quotes left, contact right */
+.hero-lower{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start}
+.hero-quotes{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.hero-qcard{background:var(--white);border:1px solid var(--rule);border-radius:8px;border-left:3px solid var(--accent);padding:.9rem 1.1rem}
+.hero-qcard p{font-size:12px;color:var(--muted);font-style:italic;line-height:1.7;margin-bottom:.5rem}
+.hero-qcard cite{font-size:10px;color:var(--faint);letter-spacing:.06em;text-transform:uppercase;font-style:normal}
+.hero-contact{display:flex;flex-direction:column;gap:.55rem;min-width:270px}
+.hero-clink{display:flex;align-items:baseline;gap:.7rem;text-decoration:none;color:var(--ink);transition:color .15s}
+.hero-clink:hover .hero-clink-val{color:var(--ink)}
+.hero-clink-lbl{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);flex-shrink:0;width:58px}
+.hero-clink-val{font-size:12px;color:var(--muted);transition:color .15s}
+.hero-cta-group{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-top:.4rem}
 .hero-resume-btn{padding:.6rem 1.25rem;background:var(--accent);color:var(--white);text-decoration:none;border-radius:7px;font-size:12px;font-weight:500;letter-spacing:.04em;transition:background .15s;white-space:nowrap}
 .hero-resume-btn:hover{background:var(--accent2)}
 .hero-wwm-btn{padding:.6rem 1.25rem;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:7px;font-size:12px;font-weight:500;letter-spacing:.04em;cursor:pointer;font-family:inherit;transition:background .15s,border-color .15s;white-space:nowrap}
 .hero-wwm-btn:hover{background:var(--bg2);border-color:var(--faint)}
-.hero-links-group{display:flex;align-items:center;gap:1.5rem}
-.hero-cl{font-size:12px;color:var(--muted);text-decoration:none;transition:color .15s}
-.hero-cl:hover{color:var(--ink)}
 /* Scroll CTA — big, centered below bottom row */
 .hero-scroll-wrap{text-align:center;padding:1.5rem 0 0}
 .hero-scroll-cta{display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;animation:bob 2.5s 1.5s ease-in-out infinite}
@@ -348,21 +350,35 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
     </a>
   </div>
-  <!-- Q4: WHAT OTHERS THINK -->
-  <div class="hero-quote-strip">
-    <span class="hero-quote-text">"Very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it's technical, process, or people."</span>
-    <span class="hero-quote-cite">Carl Remler &mdash; PM &amp; SE II</span>
-  </div>
-  <!-- Q5 + Q6: HOW TO REACH / LEARN MORE -->
-  <div class="hero-bottom">
-    <div class="hero-cta-group">
-      <a href="/Ethan Kelly.pdf" download="Ethan Kelly Resume.pdf" class="hero-resume-btn">Resume ↓</a>
-      <button onclick="downloadWorkingWithMe()" class="hero-wwm-btn">Working With Me ↓</button>
+  <!-- Q4 THINK + Q5/Q6 REACH/LEARN -->
+  <div class="hero-lower">
+    <div class="hero-quotes">
+      <div class="hero-qcard">
+        <p>"Very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it&rsquo;s technical, process, or people."</p>
+        <cite>Carl Remler &mdash; PM &amp; SE II, NAWS China Lake</cite>
+      </div>
+      <div class="hero-qcard">
+        <p>"A rock star. Entrepreneurial, focused, value-driven, and brilliant. Doesn&rsquo;t just take an answer at face value &mdash; uncovers and challenges assumptions. He should have been a lawyer."</p>
+        <cite>Chris Cilino &mdash; PM &amp; SE, Mentor at DMC</cite>
+      </div>
     </div>
-    <div class="hero-links-group">
-      <a href="mailto:ethanrobertkelly@gmail.com" class="hero-cl">ethanrobertkelly@gmail.com</a>
-      <a href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank" class="hero-cl">linkedin.com/in/EthanRobertKelly ↗</a>
-      <a href="https://github.com/EthanRobertKelly" target="_blank" class="hero-cl">github.com/EthanRobertKelly ↗</a>
+    <div class="hero-contact">
+      <a href="mailto:ethanrobertkelly@gmail.com" class="hero-clink">
+        <span class="hero-clink-lbl">Email</span>
+        <span class="hero-clink-val">ethanrobertkelly@gmail.com</span>
+      </a>
+      <a href="https://www.linkedin.com/in/EthanRobertKelly" target="_blank" class="hero-clink">
+        <span class="hero-clink-lbl">LinkedIn</span>
+        <span class="hero-clink-val">linkedin.com/in/EthanRobertKelly ↗</span>
+      </a>
+      <a href="https://github.com/EthanRobertKelly" target="_blank" class="hero-clink">
+        <span class="hero-clink-lbl">GitHub</span>
+        <span class="hero-clink-val">github.com/EthanRobertKelly ↗</span>
+      </a>
+      <div class="hero-cta-group">
+        <a href="/Ethan Kelly.pdf" download="Ethan Kelly Resume.pdf" class="hero-resume-btn">Resume ↓</a>
+        <button onclick="downloadWorkingWithMe()" class="hero-wwm-btn">Working With Me ↓</button>
+      </div>
     </div>
   </div>
   <!-- Scroll CTA -->
@@ -1354,16 +1370,31 @@ function exitEditMode(){
   document.getElementById('edit-bar').style.display='none'
 }
 
-// TYPEWRITER — hero thesis animation
+// TYPEWRITER — hero intro with cadenced pauses
 ;(function(){
-  var text = "My degree says Mechanical Engineer. My job title says Consultant. My calendar says I\u2019m at a Navy weapons facility debugging PLCs at 11pm."
+  var parts = [
+    { pre:"",         text:"Hi.",                                                                                              pause:950 },
+    { pre:" ",        text:"I\u2019m Ethan Kelly.",                                                                           pause:800 },
+    { pre:"<br><br>", text:"My degree says Mechanical Engineer.",                                                              pause:320 },
+    { pre:" ",        text:"My job title says Engineering Consultant.",                                                        pause:320 },
+    { pre:" ",        text:"My calendar says I\u2019m at a Navy Weapons Facility debugging CDAS applications at 11pm.",        pause:0   },
+  ]
   var el = document.getElementById('tw-text')
   if(!el) return
-  var i = 0
-  function type(){
-    if(i < text.length){ el.textContent += text[i++]; setTimeout(type, 42) }
+  var built = ""
+  function render(){ el.innerHTML = built }
+  function typeSegment(si, ci){
+    if(si >= parts.length) return
+    var p = parts[si]
+    if(ci === 0){ built += p.pre; render() }
+    if(ci < p.text.length){
+      built += p.text[ci]; render()
+      setTimeout(function(){ typeSegment(si, ci+1) }, 40)
+    } else {
+      if(si+1 < parts.length) setTimeout(function(){ typeSegment(si+1,0) }, p.pause)
+    }
   }
-  setTimeout(type, 600)
+  setTimeout(function(){ typeSegment(0,0) }, 500)
 })()
 
 // WORKING WITH ME — downloadable Word doc
