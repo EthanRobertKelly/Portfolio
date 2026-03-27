@@ -71,10 +71,11 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-proj-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.02em}
 .hero-proj-body{padding:1rem 1.2rem 1.25rem;flex:1}
 .hero-proj-desc{font-size:12px;color:var(--muted);line-height:1.65}
+.hero-proj-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
 /* Quotes — full width, 2 columns */
 .hero-quotes{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
 .hero-qcard{background:var(--white);border:1px solid var(--rule);border-radius:10px;border-left:4px solid var(--accent);padding:1.75rem 2rem}
-.hero-qcard p{font-size:15px;color:var(--ink);font-style:italic;line-height:1.8;margin-bottom:.85rem;font-family:'Playfair Display',serif}
+.hero-qcard p{font-size:17px;color:var(--ink);font-style:italic;line-height:1.8;margin-bottom:.85rem}
 .hero-qcard cite{font-size:11px;color:var(--muted);letter-spacing:.05em;font-style:normal}
 /* Scroll CTA */
 .hero-scroll-wrap{text-align:center;padding:.5rem 0 0}
@@ -193,12 +194,16 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .wm-dl-btn:hover{background:var(--accent2)}
 
 /* BEYOND */
-.hg{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
-.ht{background:var(--white);padding:1rem 1.2rem;display:flex;align-items:center;gap:.75rem;transition:background .15s}
-.ht:hover{background:var(--bg2)}
-.hi{font-size:1.1rem;flex-shrink:0}
-.ht strong{display:block;font-size:12px;font-weight:500;color:var(--ink)}
-.ht span{font-size:11px;color:var(--muted)}
+.beyond-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 240px;gap:10px}
+.bt{position:relative;overflow:hidden;border-radius:10px;cursor:default}
+.bt-tall{grid-row:span 2}
+.bt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.bt:hover img{transform:scale(1.04)}
+.bt-overlay{position:absolute;inset:0;padding:1.4rem 1.5rem;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(to top,rgba(10,8,5,.78) 0%,rgba(10,8,5,.1) 55%,transparent 100%)}
+.bt-color .bt-overlay{background:none;justify-content:flex-end}
+.bt-tag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:.35rem}
+.bt-title{font-size:16px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:.25rem}
+.bt-sub{font-size:12px;color:rgba(255,255,255,.65);line-height:1.45}
 
 /* COLLAPSIBLE TIMELINE CARDS */
 .tv3-details{max-height:0;overflow:hidden;opacity:0;transition:max-height .48s cubic-bezier(.4,0,.2,1),opacity .3s ease}
@@ -264,7 +269,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 
 <nav id="nav">
   <a href="index.html" class="n-logo">Ethan Kelly</a>
-  <span class="n-sub">San Diego &nbsp;·&nbsp; DMC &nbsp;·&nbsp; Rice '24</span>
   <div class="n-sep"></div>
   <a href="#done" class="n-link">Work</a>
   <a href="#background" class="n-link">Background</a>
@@ -314,7 +318,6 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <img class="hero-photo" src="/images/Headshot.jpeg" alt="Ethan Kelly">
         <div>
           <div class="hero-card-name">Ethan Kelly</div>
-          <div class="hero-card-meta">San Diego &nbsp;·&nbsp; DMC &nbsp;·&nbsp; Rice '24</div>
         </div>
       </div>
       <div class="hero-card-div"></div>
@@ -341,6 +344,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
     </div>
   </div>
   <!-- Project cards -->
+  <div class="hero-proj-label">Highlight Projects</div>
   <div class="hero-proj-grid">
     <a href="#done" class="hero-proj">
       <div class="hero-proj-header">
@@ -848,20 +852,50 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
 <!-- 05 BEYOND -->
 <div class="sw" id="beyond">
   <div class="sh"><span class="sn">05</span><h2 class="st2">Beyond <em>the work</em></h2></div>
-  <div class="hg">
-    <div class="ht"><div class="hi">🏊</div><div><strong>Ironman Triathlete</strong><span>Full distance</span></div></div>
-    <div class="ht"><div class="hi">🏄</div><div><strong>Surfer &amp; Shaper</strong><span>Baja → Taghazout</span></div></div>
-    <div class="ht"><div class="hi">🎹</div><div><strong>Classical Piano</strong><span>10+ years</span></div></div>
-    <div class="ht"><div class="hi">🎸</div><div><strong>Electric Guitar</strong><span>Piano wasn't enough</span></div></div>
-    <div class="ht"><div class="hi">🍞</div><div><strong>Bread Baker</strong><span>Sourdough from scratch</span></div></div>
-    <div class="ht"><div class="hi">🧀</div><div><strong>Cheese Maker</strong><span>Yes, actually</span></div></div>
-    <div class="ht"><div class="hi">🍳</div><div><strong>Cook</strong><span>From-scratch everything</span></div></div>
-    <div class="ht"><div class="hi">🪁</div><div><strong>Kiteboarder</strong><span>Self-taught</span></div></div>
-    <div class="ht"><div class="hi">🏐</div><div><strong>Beach Volleyball</strong><span>San Diego has courts</span></div></div>
-    <div class="ht"><a href="https://www.chess.com/member/EthanRobertKelly" target="_blank" style="text-decoration:none;display:flex;align-items:center;gap:.75rem;color:inherit;width:100%"><div class="hi">♟</div><div><strong>Chess</strong><span>1600 Rapid ↗</span></div></a></div>
-    <div class="ht"><div class="hi">🎲</div><div><strong>Strategy Games</strong><span>The longer the better</span></div></div>
-    <div class="ht"><div class="hi">📚</div><div><strong>Voracious Reader</strong><span>Non-fiction, history</span></div></div>
-    <div class="ht"><div class="hi">🌎</div><div><strong>World Traveler</strong><span>ES + 中文 (intermediate)</span></div></div>
+  <div class="beyond-grid">
+    <!-- SURF — tall featured left -->
+    <div class="bt bt-tall">
+      <img src="/images/SURFING.JPEG" alt="Surfing">
+      <div class="bt-overlay">
+        <div class="bt-tag">Water</div>
+        <div class="bt-title">Surfer &amp; Board Shaper</div>
+        <div class="bt-sub">Baja to Taghazout. Shaped boards, not just rode them.</div>
+      </div>
+    </div>
+    <!-- IRONMAN -->
+    <div class="bt">
+      <img src="/images/Ironman.png" alt="Ironman">
+      <div class="bt-overlay">
+        <div class="bt-tag">Endurance</div>
+        <div class="bt-title">Ironman Triathlete</div>
+        <div class="bt-sub">140.6 mi. Multiple marathons.</div>
+      </div>
+    </div>
+    <!-- MUSIC — color block -->
+    <div class="bt bt-color" style="background:#3d2a5c">
+      <div class="bt-overlay">
+        <div class="bt-tag">Music</div>
+        <div class="bt-title">Classical Piano &amp; Guitar</div>
+        <div class="bt-sub">10+ years piano. Electric guitar because piano wasn't enough.</div>
+      </div>
+    </div>
+    <!-- FOOD -->
+    <div class="bt">
+      <img src="/images/SOURDOUGH.jpg" alt="Sourdough">
+      <div class="bt-overlay">
+        <div class="bt-tag">Craft</div>
+        <div class="bt-title">Baker · Cook · Cheese Maker</div>
+        <div class="bt-sub">Sourdough from scratch. The cheese too. Yes, actually.</div>
+      </div>
+    </div>
+    <!-- MIND — color block -->
+    <div class="bt bt-color" style="background:#1a3a5c">
+      <div class="bt-overlay">
+        <div class="bt-tag">Mind &amp; World</div>
+        <div class="bt-title">Chess · Travel · Languages</div>
+        <div class="bt-sub">1600 Rapid. Spanish &amp; 中文. The longer the game, the better.</div>
+      </div>
+    </div>
   </div>
 </div>
 
