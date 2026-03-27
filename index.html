@@ -196,13 +196,12 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .ht span{font-size:11px;color:var(--muted)}
 
 /* COLLAPSIBLE TIMELINE CARDS */
-.tv3-details{max-height:0;overflow:hidden;transition:max-height .48s ease,opacity .3s ease;opacity:0;transition-delay:.12s}
-.tv3-card:hover .tv3-details,.tv3-card.expanded .tv3-details{max-height:2500px;opacity:1;transition-delay:0s}
-.tv3-preview{font-size:12px;color:var(--muted);margin-top:.35rem;line-height:1.5;transition:opacity .2s,max-height .3s}
-.tv3-card:hover .tv3-preview,.tv3-card.expanded .tv3-preview{opacity:0;max-height:0;overflow:hidden;margin:0}
-.tv3-expand-hint{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);opacity:.5;margin-top:.55rem;transition:opacity .15s;pointer-events:none}
-.tv3-card:hover .tv3-expand-hint,.tv3-card.expanded .tv3-expand-hint{opacity:0}
-.tv3-card{cursor:pointer}
+.tv3-details{max-height:0;overflow:hidden;opacity:0;transition:max-height .48s cubic-bezier(.4,0,.2,1),opacity .3s ease}
+.tv3-card.expanded .tv3-details{max-height:var(--dh,4000px);opacity:1}
+.tv3-preview{font-size:12px;color:var(--muted);margin-top:.4rem;line-height:1.55;overflow:hidden;max-height:3em;transition:opacity .2s ease,max-height .25s ease}
+.tv3-card.expanded .tv3-preview{opacity:0;max-height:0;pointer-events:none;margin:0}
+.tv3-card.expanded{box-shadow:0 8px 28px rgba(28,23,18,.1);border-color:var(--faint)}
+.tv3-card{cursor:default;transition:box-shadow .3s ease,border-color .3s ease}
 
 /* FULL FEEDBACK CARDS */
 .fbgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
@@ -1438,6 +1437,83 @@ function downloadWorkingWithMe(){
   a.click()
   URL.revokeObjectURL(a.href)
 }
+
+// TIMELINE — mouse proximity + scroll auto-open, always one card expanded
+;(function(){
+  var cards = Array.from(document.querySelectorAll('#done .tv3-card'))
+  if(!cards.length) return
+  var alwaysVis = ['tl-period','tv3-title','tv3-org']
+
+  cards.forEach(function(card){
+    var snap = Array.from(card.children)
+    var wrapFrom = snap.length
+    for(var i=0;i<snap.length;i++){
+      var keep = alwaysVis.some(function(c){ return snap[i].classList.contains(c) })
+      if(!keep){ wrapFrom=i; break }
+    }
+
+    // Build preview from first body paragraph
+    var bodyEl = card.querySelector('.tv3-body')
+    if(bodyEl && wrapFrom < snap.length){
+      var prev = document.createElement('div')
+      prev.className = 'tv3-preview'
+      var t = bodyEl.textContent.trim()
+      prev.textContent = t.length > 140 ? t.slice(0,140).trimEnd()+'…' : t
+      card.insertBefore(prev, snap[wrapFrom])
+    }
+
+    // Wrap expandable content
+    var wrap = document.createElement('div')
+    wrap.className = 'tv3-details'
+    for(var j=wrapFrom;j<snap.length;j++) wrap.appendChild(snap[j])
+    card.appendChild(wrap)
+
+    // Measure actual height
+    wrap.style.cssText='max-height:none;opacity:1;overflow:visible'
+    card.style.setProperty('--dh', wrap.scrollHeight+'px')
+    wrap.style.cssText=''
+  })
+
+  var current = null
+  function openCard(card){
+    if(card===current) return
+    if(current) current.classList.remove('expanded')
+    current = card
+    if(card) card.classList.add('expanded')
+  }
+  openCard(cards[0])
+
+  var section = document.getElementById('done')
+  if(!section) return
+  var inSection = false, leaveTimer = null
+
+  section.addEventListener('mouseenter', function(){ inSection=true; clearTimeout(leaveTimer) })
+  section.addEventListener('mouseleave', function(){
+    leaveTimer = setTimeout(function(){ inSection=false; checkScroll() }, 400)
+  })
+  section.addEventListener('mousemove', function(e){
+    var best=null, bestD=Infinity
+    cards.forEach(function(card){
+      var r=card.getBoundingClientRect()
+      var d=Math.abs(e.clientY-(r.top+r.height*0.5))
+      if(d<bestD){ bestD=d; best=card }
+    })
+    if(best) openCard(best)
+  })
+
+  function checkScroll(){
+    if(inSection) return
+    var best=null, bestV=-Infinity, vh=window.innerHeight
+    cards.forEach(function(card){
+      var r=card.getBoundingClientRect()
+      var v=Math.min(r.bottom,vh)-Math.max(r.top,0)
+      if(v>bestV){ bestV=v; best=card }
+    })
+    if(best) openCard(best)
+  }
+  window.addEventListener('scroll', checkScroll, {passive:true})
+  checkScroll()
+})()
 
 // Init on page load
 assignIds()
