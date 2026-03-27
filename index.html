@@ -1365,11 +1365,9 @@ function exitEditMode(){
 // TYPEWRITER — hero intro with cadenced pauses
 ;(function(){
   var parts = [
-    { pre:"",         text:"Hi.",                                                                                                                                     pause:950 },
-    { pre:" ",        text:"I\u2019m Ethan Kelly.",                                                                                                                  pause:800 },
-    { pre:"<br><br>", text:"My degree says I\u2019m a Rice University Mechanical Engineer.",                                                                          pause:320 },
-    { pre:" ",        text:"My job says I\u2019m an Engineering Consultant.",                                                                                         pause:320 },
-    { pre:" ",        text:"My calendar says I\u2019m at an energy R&D facility teaching a PLC to pull lithium out of geothermal water with electricity.",  pause:0 },
+    { pre:"",  text:"My degree says Mechanical Engineer.",                                                   pause:320 },
+    { pre:" ", text:"My job title says Consultant.",                                                         pause:320 },
+    { pre:" ", text:"My calendar says I\u2019m at a Navy weapons facility debugging PLCs at 11pm.",          pause:0   },
   ]
   var el = document.getElementById('tw-text')
   if(!el) return
