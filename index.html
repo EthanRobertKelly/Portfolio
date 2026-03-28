@@ -194,7 +194,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .wm-dl-btn:hover{background:var(--accent2)}
 
 /* BEYOND */
-.beyond-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 240px;gap:10px}
+.beyond-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 240px 240px;gap:10px}
 .bt{position:relative;overflow:hidden;border-radius:10px;cursor:default}
 .bt-tall{grid-row:span 2}
 .bt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
@@ -348,7 +348,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
       <div class="hero-card-div"></div>
       <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:.6rem">Looking for the right problem next. Interested in high-ownership Startups, FDSE, Strategy roles — where the full toolkit gets used on a problem that matters. If you're working on something hard and need someone who can own it end-to-end, I'd like to hear about it.</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:.6rem">Startups · FDSE · Strategy — High Ownership — Hard Problems</div>
     </div>
   </div>
   <!-- Project cards -->
@@ -536,11 +536,13 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tl-period">2024 – 2025</div>
         <div class="tv3-title">Ballistic Missile Launch Simulation</div>
         <div class="tv3-org">Defense Contractor · via DMC</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
-          <p class="tv3-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Simulated pressure profiles, staged launch sequences, and validated the full transfer command without live ordnance. End-to-end simulation of a system that does not get a second chance.</p>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start">
+          <div>
+            <p class="tv3-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Simulated pressure profiles, staged launch sequences, and validated the full transfer command without live ordnance. End-to-end simulation of a system that does not get a second chance.</p>
+            <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">Defense</span><span class="tv3-tag">Simulation</span></div>
+          </div>
           <div class="tv3-img-wrap" style="margin:0"><img src="/images/Sub.png" alt="Submarine" style="max-height:none;object-fit:cover;width:100%"></div>
         </div>
-        <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">Defense</span><span class="tv3-tag">Simulation</span></div>
       </div>
     </div>
 
@@ -892,7 +894,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
     </div>
     <!-- CHESS -->
-    <div class="bt">
+    <div class="bt" style="grid-column:span 2">
       <img src="/images/Chess.jpg" alt="Chess">
       <div class="bt-overlay">
         <div class="bt-tag">Mind</div>
