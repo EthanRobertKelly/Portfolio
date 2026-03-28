@@ -36,7 +36,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 /* HERO */
 #hero{padding:calc(54px + 4rem) 4rem 5rem;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid var(--rule);gap:4rem}
 /* Split: typewriter left, contact card right */
-.hero-split{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start}
+.hero-split{display:grid;grid-template-columns:1fr 360px;gap:3rem;align-items:start}
 .hero-tw{font-size:clamp(1.3rem,2.3vw,2rem);font-weight:400;color:var(--ink);line-height:1.65}
 .tw-cursor{display:inline-block;color:var(--accent);font-weight:300;animation:blink .75s step-end infinite;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
@@ -825,7 +825,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="wi"><div class="wi-h">Communication</div><div class="wi-b">Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill — a technical advantage on complex projects.</div></div>
     </div>
     <div class="wm-card wm-dark">
-      <div class="wm-title w">Watch-Outs</div>
+      <div class="wm-title w">Weaknesses</div>
       <div class="wi"><div class="wi-h">Confidence Lull</div><div class="wi-b">Independence and output can make it look like oversight isn't needed. It is — everyone needs it. Multiple eyes on big projects matter.</div></div>
       <div class="wi"><div class="wi-h">Going at it Alone</div><div class="wi-b">Confident that with time and resources anything is achievable. Doesn't mean it'll be done right first, in time, or at the quality the constraints require.</div></div>
       <div class="wi"><div class="wi-h">Tunnel Vision</div><div class="wi-b">The closer to the critical path, the more narrowly the focus narrows. Stepping back and discussing is necessary overhead, not optional — and it tends to get neglected.</div></div>
@@ -1479,6 +1479,17 @@ function toggleFeedback(){
   openCard(cards[0])
   openByHash(window.location.hash)
   window.addEventListener('hashchange', function(){ openByHash(window.location.hash) })
+
+  // Remeasure --dh after fonts load so tags aren't clipped if font metrics differ from fallback
+  document.fonts.ready.then(function(){
+    cards.forEach(function(card){
+      var wrap = card.querySelector('.tv3-details')
+      if(!wrap) return
+      wrap.style.cssText = 'max-height:none;opacity:1;overflow:visible'
+      card.style.setProperty('--dh', wrap.scrollHeight + 'px')
+      wrap.style.cssText = ''
+    })
+  })
 })()
 
 // Init on page load
