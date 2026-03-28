@@ -37,7 +37,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 #hero{padding:calc(54px + 4rem) 4rem 5rem;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;border-bottom:1px solid var(--rule);gap:4rem}
 /* Split: typewriter left, contact card right */
 .hero-split{display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start}
-.hero-tw{font-size:clamp(1.15rem,2vw,1.7rem);font-weight:400;color:var(--ink);line-height:1.65}
+.hero-tw{font-size:clamp(1.3rem,2.3vw,2rem);font-weight:400;color:var(--ink);line-height:1.65}
 .tw-cursor{display:inline-block;color:var(--accent);font-weight:300;animation:blink .75s step-end infinite;margin-left:2px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 /* Contact panel — anchored with left border */
@@ -68,7 +68,7 @@ body{font-family:'DM Mono',monospace;background:var(--bg);color:var(--ink);line-
 .hero-proj-thumb{width:100%;height:190px;object-fit:cover;object-position:center;display:block;border-bottom:1px solid var(--rule)}
 .hero-proj-thumb-ph{background:linear-gradient(135deg,var(--bg2) 0%,var(--bg3) 100%)}
 .hero-proj-header{padding:.9rem 1.2rem .75rem;border-bottom:1px solid var(--rule)}
-.hero-proj-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.15;letter-spacing:-.02em}
+.hero-proj-name{font-size:11px;font-weight:500;color:var(--muted);line-height:1.15;letter-spacing:.1em;text-transform:uppercase}
 .hero-proj-body{padding:1rem 1.2rem 1.25rem;flex:1}
 .hero-proj-desc{font-size:13px;color:var(--muted);line-height:1.65}
 .hero-proj-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
@@ -281,7 +281,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
   <a href="#working-with" class="n-link hide-sm">Working With Me</a>
   <a href="#contact" class="n-link hide-sm">Contact</a>
   <div class="n-sep hide-sm"></div>
-  <a href="job-searcher.html" class="n-app">Job HQ</a>
+  <a href="job-searcher.html" class="n-app" id="nav-jobhq" style="display:none">Job HQ</a>
   <a href="Kitchen-Codex.html" class="n-app">Kitchen</a>
   <div class="n-spacer"></div>
   <a href="https://github.com/EthanRobertKelly" target="_blank" class="n-icon" title="GitHub" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg></a>
@@ -348,12 +348,12 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
       <div class="hero-card-div"></div>
       <div class="dot-row"><div class="dot"></div><span class="st">Open to new opportunities</span></div>
-      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:.6rem">FDSE or Strategy · high ownership · hard problems</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-top:.6rem">Looking for the right problem next. Interested in high-ownership Startups, FDSE, Strategy roles — where the full toolkit gets used on a problem that matters. If you're working on something hard and need someone who can own it end-to-end, I'd like to hear about it.</div>
     </div>
   </div>
   <!-- Project cards -->
   <div class="hero-proj-grid">
-    <a href="#done" class="hero-proj">
+    <a href="#proj-chinalake" class="hero-proj">
       <div class="hero-proj-header">
         <div class="hero-proj-name">NAWS China Lake</div>
       </div>
@@ -365,7 +365,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <p class="hero-proj-desc">Onsite technical lead for a $25B Navy weapons test facility modernization — walked into a failing FAT and delivered both accepted.</p>
       </div>
     </a>
-    <a href="#done" class="hero-proj">
+    <a href="#proj-seaplusplus" class="hero-proj">
       <div class="hero-proj-header">
         <div class="hero-proj-name">Sea++</div>
       </div>
@@ -374,7 +374,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <p class="hero-proj-desc">Led design and build of a Navy-commissioned autonomous catamaran that achieved self-navigation through 5-ft seas as Rice senior capstone.</p>
       </div>
     </a>
-    <a href="#done" class="hero-proj">
+    <a href="#proj-geothermal" class="hero-proj">
       <div class="hero-proj-header">
         <div class="hero-proj-name">Geothermal Lithium Extraction</div>
       </div>
@@ -419,8 +419,8 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
     </div>
 
-    <!-- China Lake — LEFT, featured -->
-    <div class="tv3-row left">
+    <!-- China Lake — RIGHT, featured -->
+    <div class="tv3-row right" id="proj-chinalake">
       <div class="tv3-dot"></div>
       <div class="tv3-card feat">
         <div class="tl-period">Mar 2025 – Present <span class="tl-badge live">Live</span></div>
@@ -444,22 +444,27 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       </div>
     </div>
 
-    <!-- Watsonville — RIGHT, featured -->
-    <div class="tv3-row right">
+    <!-- Watsonville — LEFT, featured -->
+    <div class="tv3-row left">
       <div class="tv3-dot"></div>
       <div class="tv3-card feat">
         <div class="tl-period">2025.09 – Present <span class="tl-badge live">Live</span></div>
         <div class="tv3-title">WPI: PLC System Rewrite</div>
         <div class="tv3-org">Food Manufacturing · WPI · via DMC</div>
-        <p class="tv3-body">Full rewrite of 6 PLC programs across a 100+ VFD system with 19,000 unnamed variables and zero documentation on a live production floor. This facility was built one piece at a time by essentially one controls engineer over 25 years, and the quality of the original work showed. Owned the client relationship end-to-end from discovery through commissioning. Built a bidirectional dictionary function and XML parser to rename all 19,000 variables in the HMI without losing any institutional knowledge. Sold additional scope after delivery, cementing DMC as an integrated partner the client now relies on for ongoing support and engineering questions well outside the original project scope.</p>
-        <div class="tv3-img-wrap">
-          <img src="/images/Spinach.jpg" alt="Representative: industrial leafy greens processing facility">
-          <span class="tv3-img-note">representative imagery*</span>
-        </div>
-        <div class="tv3-stats">
-          <div class="tv3-stat"><strong>19k</strong><span>variables renamed</span></div>
-          <div class="tv3-stat"><strong>6</strong><span>PLCs rewritten</span></div>
-          <div class="tv3-stat"><strong>100%</strong><span>CSAT</span></div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start">
+          <div>
+            <p class="tv3-body">Full rewrite of 6 PLC programs across a 100+ VFD system with 19,000 unnamed variables and zero documentation on a live production floor. This facility was built one piece at a time by essentially one controls engineer over 25 years, and the quality of the original work showed. Owned the client relationship end-to-end from discovery through commissioning. Built a bidirectional dictionary function and XML parser to rename all 19,000 variables in the HMI without losing any institutional knowledge. Sold additional scope after delivery, cementing DMC as an integrated partner the client now relies on for ongoing support and engineering questions well outside the original project scope.</p>
+            <div class="tv3-stats">
+              <div class="tv3-stat"><strong>19k</strong><span>variables renamed</span></div>
+              <div class="tv3-stat"><strong>6</strong><span>PLCs rewritten</span></div>
+              <div class="tv3-stat"><strong>100%</strong><span>CSAT</span></div>
+            </div>
+            <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">PLC/LAD</span><span class="tv3-tag">Python</span><span class="tv3-tag">XML</span><span class="tv3-tag">Client Ownership</span></div>
+          </div>
+          <div class="tv3-img-wrap" style="margin:0">
+            <img src="/images/Spinach.jpg" alt="Representative: industrial leafy greens processing facility" style="max-height:none">
+            <span class="tv3-img-note">representative imagery*</span>
+          </div>
         </div>
         <div class="tv3-quote">"Ethan is a rock star. He is entrepreneurial, focused, value-driven, and brilliant. He doesn't just take an answer at face value, he uncovers and challenges assumptions. He should have been a lawyer."
           <cite>Chris Cilino, PM and Senior Engineer, Mentor at DMC</cite>
@@ -473,47 +478,54 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tv3-quote">"Ethan is able to work fairly independently for his tenure and inspires confidence from both myself and the client. As a PM, it's comforting to have a team I can trust to produce good work and raise flags when needed."
           <cite>Nick Leisle, PM and Senior Engineer II</cite>
         </div>
-        <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">PLC/LAD</span><span class="tv3-tag">Python</span><span class="tv3-tag">XML</span><span class="tv3-tag">Client Ownership</span></div>
       </div>
     </div>
 
-    <!-- Kennicott — LEFT, featured -->
-    <div class="tv3-row left">
+    <!-- Kennicott — RIGHT, featured -->
+    <div class="tv3-row right">
       <div class="tv3-dot"></div>
       <div class="tv3-card feat">
         <div class="tl-period">2024 – 2025</div>
         <div class="tv3-title">MV Kennicott: IO Documentation &amp; Controls</div>
         <div class="tv3-org">Everett Ship Repair · Maritime · via DMC</div>
-        <p class="tv3-body">One of two ferries connecting remote Alaskan islands, the MV Kennicott carries cars, cargo, and people to communities with no other road access. The vessel came with dated, incorrect schematics and a legacy codebase using direct memory addressing with no variable names. No organized control system documentation existed. Reverse-architected the entire system from the ground up — named and organized 1,500+ IO points, translating a legacy codebase from illegible to a foundational document in natural language from which the FDS and AMCS was built.</p>
-        <div class="tv3-img-wrap">
-          <img src="/images/Kennicott.jpg" alt="MV Kennicott, Alaska Marine Highway ferry">
-        </div>
-        <div class="tv3-stats">
-          <div class="tv3-stat"><strong>1,500+</strong><span>IO points</span></div>
-          <div class="tv3-stat"><strong>0</strong><span>prior docs</span></div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start">
+          <div>
+            <p class="tv3-body">One of two ferries connecting remote Alaskan islands, the MV Kennicott carries cars, cargo, and people to communities with no other road access. The vessel came with dated, incorrect schematics and a legacy codebase using direct memory addressing with no variable names. No organized control system documentation existed. Reverse-architected the entire system from the ground up — named and organized 1,500+ IO points, translating a legacy codebase from illegible to a foundational document in natural language from which the FDS and AMCS was built.</p>
+            <div class="tv3-stats">
+              <div class="tv3-stat"><strong>1,500+</strong><span>IO points</span></div>
+              <div class="tv3-stat"><strong>0</strong><span>prior docs</span></div>
+            </div>
+            <div class="tv3-tags"><span class="tv3-tag">OPCUA</span><span class="tv3-tag">Aveva</span><span class="tv3-tag">IO Documentation</span><span class="tv3-tag">Maritime</span></div>
+          </div>
+          <div class="tv3-img-wrap" style="margin:0">
+            <img src="/images/Kennicott.jpg" alt="MV Kennicott, Alaska Marine Highway ferry" style="max-height:none">
+          </div>
         </div>
         <div class="tv3-quote">"Ethan has demonstrated that he can independently tackle large challenges and deliver exceptional results. The Kennicott IO list is well organized and usable. It will serve as the basis for the vessel's FDS." <cite>Keith Krotzer, PM and Technical Lead</cite></div>
         <div class="tv3-quote">"Ethan is like a venturi for internal communication. By modeling — asking questions, stating assumptions — he pulls others into the conversation and the written record." <cite>Keith Krotzer, PM and Technical Lead</cite></div>
-        <div class="tv3-tags"><span class="tv3-tag">OPCUA</span><span class="tv3-tag">Aveva</span><span class="tv3-tag">IO Documentation</span><span class="tv3-tag">Maritime</span></div>
       </div>
     </div>
 
-    <!-- Geothermal — RIGHT, featured -->
-    <div class="tv3-row right">
+    <!-- Geothermal — LEFT, featured -->
+    <div class="tv3-row left" id="proj-geothermal">
       <div class="tv3-dot"></div>
       <div class="tv3-card feat">
         <div class="tl-period">2024 – 2025</div>
         <div class="tv3-title">Geothermal Lithium Extraction: R&amp;D Pilot Plant</div>
         <div class="tv3-org">Energy · Direct Lithium Extraction · via DMC</div>
-        <p class="tv3-body">Controls engineer and commissioning lead for an $8M R&D pilot plant testing a novel process to extract lithium from geothermal brine via electrolysis — a direct challenge to conventional hard-rock lithium mining. If validated, the process scales to full commercial production and meaningfully changes the domestic lithium supply chain. Pulled in end-to-end through development, pulled out mid-project, brought back months later to own commissioning. Owned a complex multi-vendor integration schedule from a Gantt chart outward — identifying dependencies, driving decisions, and keeping the critical path moving when the system didn't cooperate.</p>
-        <div class="tv3-img-wrap">
-          <img src="/images/Oxy_Geothermal_LithiumExtraction.jpeg" alt="Geothermal lithium extraction pilot plant">
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start">
+          <div>
+            <p class="tv3-body">Controls engineer and commissioning lead for an $8M R&D pilot plant testing a novel process to extract lithium from geothermal brine via electrolysis — a direct challenge to conventional hard-rock lithium mining. If validated, the process scales to full commercial production and meaningfully changes the domestic lithium supply chain. Pulled in end-to-end through development, pulled out mid-project, brought back months later to own commissioning. Owned a complex multi-vendor integration schedule from a Gantt chart outward — identifying dependencies, driving decisions, and keeping the critical path moving when the system didn't cooperate.</p>
+            <div class="tv3-stats">
+              <div class="tv3-stat"><strong>$8M</strong><span>R&amp;D pilot plant</span></div>
+              <div class="tv3-stat"><strong>E2E</strong><span>dev → commissioning</span></div>
+            </div>
+            <div class="tv3-tags"><span class="tv3-tag">PID</span><span class="tv3-tag">LAD</span><span class="tv3-tag">P&amp;ID Reading</span><span class="tv3-tag">FT Historian</span><span class="tv3-tag">Windows Server</span><span class="tv3-tag">Gantt / Scheduling</span><span class="tv3-tag">Commissioning</span><span class="tv3-tag">Energy</span></div>
+          </div>
+          <div class="tv3-img-wrap" style="margin:0">
+            <img src="/images/Oxy_Geothermal_LithiumExtraction.jpeg" alt="Geothermal lithium extraction pilot plant" style="max-height:none">
+          </div>
         </div>
-        <div class="tv3-stats">
-          <div class="tv3-stat"><strong>$8M</strong><span>R&amp;D pilot plant</span></div>
-          <div class="tv3-stat"><strong>E2E</strong><span>dev → commissioning</span></div>
-        </div>
-        <div class="tv3-tags"><span class="tv3-tag">PID</span><span class="tv3-tag">LAD</span><span class="tv3-tag">P&amp;ID Reading</span><span class="tv3-tag">FT Historian</span><span class="tv3-tag">Windows Server</span><span class="tv3-tag">Gantt / Scheduling</span><span class="tv3-tag">Commissioning</span><span class="tv3-tag">Energy</span></div>
       </div>
     </div>
 
@@ -526,7 +538,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tv3-org">Defense Contractor · via DMC</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Built a test environment for the pressure system that transfers a ballistic missile through a submarine's launch tube. Simulated pressure profiles, staged launch sequences, and validated the full transfer command without live ordnance. End-to-end simulation of a system that does not get a second chance.</p>
-          <div class="tv3-img-wrap placeholder" style="margin:0;min-height:120px"><span class="tv3-img-lbl">Image pending</span></div>
+          <div class="tv3-img-wrap" style="margin:0"><img src="/images/Sub.png" alt="Submarine" style="max-height:none;object-fit:cover;width:100%"></div>
         </div>
         <div class="tv3-tags"><span class="tv3-tag">Rockwell</span><span class="tv3-tag">DAQ</span><span class="tv3-tag">Defense</span><span class="tv3-tag">Simulation</span></div>
       </div>
@@ -586,7 +598,7 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="tv3-org">Personal Project</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;margin-bottom:.75rem">
           <p class="tv3-body">Friends killed the plants. Twice. Building a modular automatic watering system with moisture sensors. In progress.</p>
-          <div class="tv3-img-wrap placeholder" style="margin:0;min-height:120px"><span class="tv3-img-lbl">Image pending</span></div>
+          <div class="tv3-img-wrap" style="margin:0"><img src="/images/Fernware Temp.png" alt="Fernware plant watering system" style="max-height:none;object-fit:cover;width:100%"></div>
         </div>
         <div class="tv3-tags"><span class="tv3-tag">Arduino</span><span class="tv3-tag">Sensors</span><span class="tv3-tag">In Progress</span></div>
       </div>
@@ -612,12 +624,12 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
       <div class="tv3-ch-bar"></div>
       <div>
         <div class="tv3-ch-title">Rice University</div>
-        <div class="tv3-ch-sub">B.S. Mechanical Engineering · Aug 2020 – May 2024 · Houston, TX</div>
+        <div class="tv3-ch-sub">B.S. Mechanical Engineering · Aug 2020 – May 2024 · Houston, TX · RCEL Cert.</div>
       </div>
     </div>
 
     <!-- Sea++ — RIGHT, featured -->
-    <div class="tv3-row right">
+    <div class="tv3-row right" id="proj-seaplusplus">
       <div class="tv3-dot"></div>
       <div class="tv3-card feat">
         <div class="tl-period">2023.08 – 2024.05</div>
@@ -870,12 +882,22 @@ footer{padding:1.25rem 3rem;border-top:1px solid var(--rule);display:flex;align-
         <div class="bt-sub">Sourdough from scratch. The cheese too. Yes, actually.</div>
       </div>
     </div>
-    <!-- MIND — color block -->
-    <div class="bt bt-color" style="background:#1a3a5c">
+    <!-- TRAVEL -->
+    <div class="bt">
+      <img src="/images/Travel.jpg" alt="Travel">
       <div class="bt-overlay">
-        <div class="bt-tag">Mind &amp; World</div>
-        <div class="bt-title">Chess · Travel · Languages</div>
-        <div class="bt-sub"><a href="https://www.chess.com/member/ekells" target="_blank" style="color:rgba(255,255,255,.75);text-decoration:none">~1500 Rapid ↗</a> · Spanish &amp; 中文 · 30+ countries.</div>
+        <div class="bt-tag">World</div>
+        <div class="bt-title">Travel · Languages</div>
+        <div class="bt-sub">Spanish &amp; 中文 · 30+ countries.</div>
+      </div>
+    </div>
+    <!-- CHESS -->
+    <div class="bt">
+      <img src="/images/Chess.jpg" alt="Chess">
+      <div class="bt-overlay">
+        <div class="bt-tag">Mind</div>
+        <div class="bt-title">Chess</div>
+        <div class="bt-sub"><a href="https://www.chess.com/member/ekells" target="_blank" style="color:rgba(255,255,255,.75);text-decoration:none">~1500 Rapid ↗</a></div>
       </div>
     </div>
   </div>
@@ -1323,6 +1345,7 @@ function bakeAndDownload(){
 var editMode=false
 function enterEditMode(){
   editMode=true
+  document.getElementById('nav-jobhq').style.display=''
   EDIT_SELECTORS.forEach(function(sel){
     document.querySelectorAll(sel).forEach(function(el){
       el.contentEditable='true'
@@ -1341,6 +1364,7 @@ function enterEditMode(){
 
 function exitEditMode(){
   editMode=false
+  document.getElementById('nav-jobhq').style.display='none'
   document.querySelectorAll('[contenteditable]').forEach(function(el){
     el.removeAttribute('contenteditable')
     el.style.outline=''
@@ -1379,55 +1403,12 @@ function exitEditMode(){
   setTimeout(function(){ typeSegment(0,0) }, 500)
 })()
 
-// WORKING WITH ME — downloadable Word doc
+// WORKING WITH ME — download actual docx
 function downloadWorkingWithMe(){
-  var html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>Working With Ethan Kelly</title><style>body{font-family:Calibri,sans-serif;font-size:11pt;color:#1c1712;margin:1in;line-height:1.5}h1{font-size:18pt;font-weight:400;margin:0 0 4pt}h2{font-size:10pt;letter-spacing:.08em;text-transform:uppercase;color:#7a7068;font-weight:400;margin:0 0 16pt;border-bottom:1pt solid #ddd6cb;padding-bottom:4pt}h3{font-size:11pt;font-weight:600;margin:14pt 0 3pt}p{margin:0 0 8pt;font-size:11pt;color:#3a3530}.section{margin-bottom:18pt}.tag{display:inline-block;font-size:9pt;color:#2a5c3a;background:#edf7f1;padding:1pt 5pt;border-radius:3pt;margin-right:4pt}.divider{border:none;border-top:1pt solid #ddd6cb;margin:16pt 0}.meta{font-size:9pt;color:#7a7068}.two-col{display:table;width:100%}.col{display:table-cell;width:50%;vertical-align:top;padding-right:16pt}</style></head><body>'
-  +'<h1>Ethan <i>Kelly</i></h1>'
-  +'<h2>Control Systems · Industrial Software · Test &amp; Measurement</h2>'
-  +'<p class="meta">Engineering Consultant · Dynamic Motion Control Inc. · Rice BSME · San Diego, CA</p>'
-  +'<p class="meta">ethanrobertkelly@gmail.com &nbsp;·&nbsp; 646-717-0861 &nbsp;·&nbsp; linkedin.com/in/EthanRobertKelly</p>'
-  +'<hr class="divider">'
-  +'<div class="section"><h3>What gets done</h3><p>Control systems engineer specializing in onsite commissioning — federal defense facilities, maritime vessels, and industrial manufacturing. Builds and fixes systems in environments that don\'t get second chances. Full technical delivery from discovery through commissioning, client relationship owned end-to-end.</p></div>'
-  +'<hr class="divider">'
-  +'<div class="section"><h3 style="color:#2a5c3a">Strengths</h3>'
-  +'<p><b>Grit.</b> Absorbs more than most. When people are looking for the exit, looking for the fix. Long hours, hard clients, failing systems — without making it a personality trait.</p>'
-  +'<p><b>Insightful.</b> Fast at identifying the actual problem — technical, process, or people. Multiple senior engineers have noted this independently, regardless of experience level.</p>'
-  +'<p><b>PM-Conscious.</b> Constantly evaluating the strategic "why" behind every task. Not just executing — thinking about what should be executed and whether the framing is right.</p>'
-  +'<p><b>Versatility.</b> Switches between deep technical execution and open strategic thinking without friction. Wide toolkit, all of it gets used.</p>'
-  +'<p><b>Fast on Feet.</b> Real-time thinking under pressure: live debugging in front of clients, path-finding when the plan breaks, staying useful when the situation changes.</p>'
-  +'<p><b>Communication.</b> Structured, direct, keeps the written record. Pulls others into the conversation. Not a soft skill — a technical advantage on complex projects.</p>'
-  +'</div>'
-  +'<hr class="divider">'
-  +'<div class="section"><h3 style="color:#c4683a">Watch-Outs</h3>'
-  +'<p><b>Don\'t let confidence lull you out of your own responsibilities.</b> Independence and output can make it look like oversight isn\'t needed. It is — everyone needs it. Multiple eyes on big projects matter.</p>'
-  +'<p><b>Going at it alone.</b> Confident that with time and resources anything is achievable. Doesn\'t mean it\'ll be done right first, in time, or at the quality the constraints require. Building systems that force mode switching matters.</p>'
-  +'<p><b>Tunnel vision.</b> The closer to the critical path, the more narrowly the focus narrows. Feature until it\'s a bug. Stepping back and discussing is necessary overhead, not optional.</p>'
-  +'<p><b>Pushing past the signal.</b> Takes more pressure than most. Sometimes means ignoring signals to step back. If you see it coming first, say so directly.</p>'
-  +'</div>'
-  +'<hr class="divider">'
-  +'<div class="section"><h3 style="color:#4a6fa5">How to Collaborate</h3>'
-  +'<p><b>Build in the challenge.</b> Confidence and quality output can make it look like due diligence isn\'t needed. It is. Often capable of being both confident AND correct — which makes systematic challenge more important, not less. Don\'t let the results talk you out of your process.</p>'
-  +'<p><b>Involve in the full process.</b> Full contribution comes from problem definition through iteration — not just the execution phase. That\'s where the full skill set gets used and where things don\'t get missed.</p>'
-  +'<p><b>Bring in early.</b> A thought partner, not a ticket-taker. Define the problem first, then execute — not the reverse.</p>'
-  +'<p><b>State your priorities.</b> The clearer the priorities — speed, stability, quality, cost — the better the output. If there\'s drift from what matters, say so directly. Early correction beats late discovery.</p>'
-  +'</div>'
-  +'<hr class="divider">'
-  +'<div class="section"><h3>How I\'m working on it</h3>'
-  +'<p><b>Confidence Lull.</b> Scheduled check-ins, made known to relevant peers. Systems catch what human intuition misses.</p>'
-  +'<p><b>Going at it Alone.</b> Scheduled support even when it doesn\'t feel needed, used religiously. Trusted peers in PM, engineering, and sales as standing references.</p>'
-  +'<p><b>Tunnel Vision.</b> A 30-minute step back every 4 hours on deep work. Not Pomodoro-level interruption — just enough to keep the full system in view.</p>'
-  +'<p><b>Pushing Past the Signal.</b> Ruthless self-awareness. Systemic mode-switching. Built into the schedule, not left to willpower.</p>'
-  +'</div>'
-  +'<hr class="divider">'
-  +'<p class="meta" style="font-style:italic">"Very insightful, much more so than most people I work with regardless of experience level. Really good at putting his finger on the problem, whether it\'s technical, process, or people." — Carl Remler, PM &amp; SE II, NAWS China Lake</p>'
-  +'<p class="meta" style="font-style:italic;margin-top:8pt">"A rock star. Entrepreneurial, focused, value-driven, and brilliant. Doesn\'t just take an answer at face value — uncovers and challenges assumptions. He should have been a lawyer." — Chris Cilino, PM &amp; SE, Mentor at DMC</p>'
-  +'</body></html>'
-  var blob=new Blob(['\ufeff',html],{type:'application/msword'})
   var a=document.createElement('a')
-  a.href=URL.createObjectURL(blob)
-  a.download='Working With Ethan Kelly.doc'
+  a.href='/Ethan Kelly - Working With Me.docx'
+  a.download='Ethan Kelly - Working With Me.docx'
   a.click()
-  URL.revokeObjectURL(a.href)
 }
 
 // PEER FEEDBACK TOGGLE
@@ -1484,7 +1465,7 @@ function toggleFeedback(){
     if(current) current.classList.remove('expanded')
     current = card
     card.classList.add('expanded')
-    setTimeout(drawSpine, 500)
+    triggerSpineAnim(600)
   }
   openCard(cards[0])
 })()
